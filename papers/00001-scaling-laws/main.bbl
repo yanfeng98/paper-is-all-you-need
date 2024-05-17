@@ -1,0 +1,345 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{RRBS19b}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname doi\endcsname\relax
+  \def\doi#1{\burlalt{doi:#1}{http://dx.doi.org/#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2}\fi
+\expandafter\ifx\csname burlalt\endcsname\relax
+  \def\burlalt#1#2{\href{#2}{#1}}\fi
+
+\bibitem[ACDE12]{altmann2012origin}
+Eduardo~G Altmann, Giampaolo Cristadoro, and Mirko Degli~Esposti.
+\newblock On the origin of long-range correlations in texts.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  109(29):11582--11587, 2012.
+
+\bibitem[AS17]{1710.03667}
+Madhu~S. Advani and Andrew~M. Saxe.
+\newblock High-dimensional dynamics of generalization error in neural networks.
+\newblock {\em arXiv}, 2017,
+  \burlalt{1710.03667}{http://arxiv.org/abs/1710.03667}.
+
+\bibitem[BB01]{banko2001scaling}
+Michele Banko and Eric Brill.
+\newblock Scaling to very very large corpora for natural language
+  disambiguation.
+\newblock In {\em Proceedings of the 39th annual meeting on association for
+  computational linguistics}, pages 26--33. Association for Computational
+  Linguistics, 2001.
+
+\bibitem[BHMM18]{1812.11118}
+Mikhail Belkin, Daniel Hsu, Siyuan Ma, and Soumik Mandal.
+\newblock Reconciling modern machine learning and the bias-variance trade-off.
+\newblock {\em arXiv}, 2018,
+  \burlalt{1812.11118}{http://arxiv.org/abs/1812.11118}.
+
+\bibitem[Bia12]{biau2012analysis}
+G{\~A}{\v{S}}rard Biau.
+\newblock Analysis of a random forests model.
+\newblock {\em Journal of Machine Learning Research}, 13(Apr):1063--1095, 2012.
+
+\bibitem[CGRS19]{DBLP:journals/corr/abs-1904-10509}
+Rewon Child, Scott Gray, Alec Radford, and Ilya Sutskever.
+\newblock Generating long sequences with sparse transformers.
+\newblock {\em CoRR}, abs/1904.10509, 2019,
+  \burlalt{1904.10509}{http://arxiv.org/abs/1904.10509}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1904.10509}.
+
+\bibitem[DCLT18]{1810.04805}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding, 2018,
+  \burlalt{arXiv:1810.04805}{http://arxiv.org/abs/arXiv:1810.04805}.
+
+\bibitem[DGV{\etalchar{+}}18]{DBLP:journals/corr/abs-1807-03819}
+Mostafa Dehghani, Stephan Gouws, Oriol Vinyals, Jakob Uszkoreit, and Lukasz
+  Kaiser.
+\newblock Universal transformers.
+\newblock {\em CoRR}, abs/1807.03819, 2018,
+  \burlalt{1807.03819}{http://arxiv.org/abs/1807.03819}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1807.03819}.
+
+\bibitem[EP94]{ebeling1994entropy}
+Werner Ebeling and Thorsten P{\"o}schel.
+\newblock Entropy and long-range correlations in literary english.
+\newblock {\em EPL (Europhysics Letters)}, 26(4):241, 1994.
+
+\bibitem[Fou]{commoncrawl}
+The Common~Crawl Foundation.
+\newblock Common crawl.
+\newblock \urlprefix\url{http://commoncrawl.org}.
+
+\bibitem[GARD18]{unpublished-grd}
+Guy Gur-Ari, Daniel~A. Roberts, and Ethan Dyer.
+\newblock Gradient descent happens in a tiny subspace.
+\newblock 2018,
+  \burlalt{arXiv:1812.04754}{http://arxiv.org/abs/arXiv:1812.04754}.
+
+\bibitem[GJS{\etalchar{+}}19]{1901.01608}
+Mario Geiger, Arthur Jacot, Stefano Spigler, Franck Gabriel, Levent Sagun,
+  St{\'e}phane d'Ascoli, Giulio Biroli, Cl{\'e}ment Hongler, and Matthieu
+  Wyart.
+\newblock Scaling description of generalization with number of parameters in
+  deep learning.
+\newblock {\em arXiv}, 2019,
+  \burlalt{1901.01608}{http://arxiv.org/abs/1901.01608}.
+
+\bibitem[GKX19]{DBLP:journals/corr/abs-1901-10159}
+Behrooz Ghorbani, Shankar Krishnan, and Ying Xiao.
+\newblock An investigation into neural net optimization via hessian eigenvalue
+  density.
+\newblock {\em CoRR}, abs/1901.10159, 2019,
+  \burlalt{1901.10159}{http://arxiv.org/abs/1901.10159}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1901.10159}.
+
+\bibitem[Goo01]{DBLP:journals/corr/cs-CL-0108005}
+Joshua Goodman.
+\newblock A bit of progress in language modeling.
+\newblock {\em CoRR}, cs.CL/0108005, 2001.
+\newblock \urlprefix\url{http://arxiv.org/abs/cs.CL/0108005}.
+
+\bibitem[GRK17]{gray2017gpu}
+Scott Gray, Alec Radford, and Diederik~P Kingma.
+\newblock Gpu kernels for block-sparse weights.
+\newblock {\em openai.com}, 2017.
+
+\bibitem[HAD19]{Hestness:2019:BHA:3293883.3295710}
+Joel Hestness, Newsha Ardalani, and Gregory Diamos.
+\newblock Beyond human-level accuracy: Computational challenges in deep
+  learning.
+\newblock In {\em Proceedings of the 24th Symposium on Principles and Practice
+  of Parallel Programming}, PPoPP '19, pages 1--14, New York, NY, USA, 2019.
+  ACM.
+\newblock \doi{10.1145/3293883.3295710}.
+
+\bibitem[HCC{\etalchar{+}}18]{DBLP:journals/corr/abs-1811-06965}
+Yanping Huang, Yonglong Cheng, Dehao Chen, HyoukJoong Lee, Jiquan Ngiam,
+  Quoc~V. Le, and Zhifeng Chen.
+\newblock Gpipe: Efficient training of giant neural networks using pipeline
+  parallelism.
+\newblock {\em CoRR}, abs/1811.06965, 2018,
+  \burlalt{1811.06965}{http://arxiv.org/abs/1811.06965}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1811.06965}.
+
+\bibitem[HNA{\etalchar{+}}17]{1712.00409}
+Joel Hestness, Sharan Narang, Newsha Ardalani, Gregory Diamos, Heewoo Jun,
+  Hassan Kianinejad, Md. Mostofa~Ali Patwary, Yang Yang, and Yanqi Zhou.
+\newblock Deep learning scaling is predictable, empirically, 2017,
+  \burlalt{1712.00409}{http://arxiv.org/abs/1712.00409}.
+
+\bibitem[JGH18]{jacot2018neural}
+Arthur Jacot, Franck Gabriel, and Cl{\'e}ment Hongler.
+\newblock Neural tangent kernel: Convergence and generalization in neural
+  networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  8571--8580, 2018.
+
+\bibitem[KB14]{kingma2014adam}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization, 2014,
+  \burlalt{1412.6980}{http://arxiv.org/abs/1412.6980}.
+
+\bibitem[Kom19]{1906.06669}
+Aran Komatsuzaki.
+\newblock One epoch is all you need, 2019,
+  \burlalt{arXiv:1906.06669}{http://arxiv.org/abs/arXiv:1906.06669}.
+
+\bibitem[KSH12]{Krizhevsky:2012:ICD:2999134.2999257}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E. Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Proceedings of the 25th International Conference on Neural
+  Information Processing Systems - Volume 1}, NIPS'12, pages 1097--1105, USA,
+  2012. Curran Associates Inc.
+\newblock \urlprefix\url{http://dl.acm.org/citation.cfm?id=2999134.2999257}.
+
+\bibitem[LCG{\etalchar{+}}19]{lan2019albert}
+Zhenzhong Lan, Mingda Chen, Sebastian Goodman, Kevin Gimpel, Piyush Sharma, and
+  Radu Soricut.
+\newblock Albert: A lite bert for self-supervised learning of language
+  representations, 2019, \burlalt{1909.11942}{http://arxiv.org/abs/1909.11942}.
+
+\bibitem[LOG{\etalchar{+}}19]{DBLP:journals/corr/abs-1907-11692}
+Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer
+  Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov.
+\newblock Roberta: {A} robustly optimized {BERT} pretraining approach.
+\newblock {\em CoRR}, abs/1907.11692, 2019,
+  \burlalt{1907.11692}{http://arxiv.org/abs/1907.11692}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1907.11692}.
+
+\bibitem[LSP{\etalchar{+}}18]{liu2018generating}
+Peter~J. Liu, Mohammad Saleh, Etienne Pot, Ben Goodrich, Ryan Sepassi, Lukasz
+  Kaiser, and Noam Shazeer.
+\newblock Generating wikipedia by summarizing long sequences.
+\newblock {\em {arXiv}:1801.10198 [cs]}, 2018,
+  \burlalt{1801.10198}{http://arxiv.org/abs/1801.10198}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1801.10198}.
+
+\bibitem[LT16]{lin2016criticality}
+Henry~W Lin and Max Tegmark.
+\newblock Criticality in formal languages and statistical physics.
+\newblock {\em arXiv preprint arXiv:1606.06737}, 2016.
+
+\bibitem[LXS{\etalchar{+}}19]{1902.06720}
+Jaehoon Lee, Lechao Xiao, Samuel~S. Schoenholz, Yasaman Bahri, Roman Novak,
+  Jascha Sohl-Dickstein, and Jeffrey Pennington.
+\newblock Wide neural networks of any depth evolve as linear models under
+  gradient descent, 2019,
+  \burlalt{arXiv:1902.06720}{http://arxiv.org/abs/arXiv:1902.06720}.
+
+\bibitem[MKAT18]{1812.06162}
+Sam McCandlish, Jared Kaplan, Dario Amodei, and OpenAI~Dota Team.
+\newblock An empirical model of large-batch training, 2018,
+  \burlalt{arXiv:1812.06162}{http://arxiv.org/abs/arXiv:1812.06162}.
+
+\bibitem[Pap18]{DBLP:journals/corr/abs-1811-07062}
+Vardan Papyan.
+\newblock The full spectrum of deep net hessians at scale: Dynamics with sample
+  size.
+\newblock {\em CoRR}, abs/1811.07062, 2018,
+  \burlalt{1811.07062}{http://arxiv.org/abs/1811.07062}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1811.07062}.
+
+\bibitem[RNSS18]{radford2018improving}
+Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever.
+\newblock Improving language understanding by generative pre-training.
+\newblock {\em URL https://s3-us-west-2. amazonaws.
+  com/openai-assets/research-covers/languageunsupervised/language understanding
+  paper. pdf}, 2018.
+
+\bibitem[RRBS19a]{rosenfeld2019constructive}
+Jonathan~S. Rosenfeld, Amir Rosenfeld, Yonatan Belinkov, and Nir Shavit.
+\newblock A constructive prediction of the generalization error across scales,
+  2019, \burlalt{1909.12673}{http://arxiv.org/abs/1909.12673}.
+
+\bibitem[RRBS19b]{1909.12673}
+Jonathan~S. Rosenfeld, Amir Rosenfeld, Yonatan Belinkov, and Nir Shavit.
+\newblock A constructive prediction of the generalization error across scales,
+  2019, \burlalt{arXiv:1909.12673}{http://arxiv.org/abs/arXiv:1909.12673}.
+
+\bibitem[RSR{\etalchar{+}}19]{1910.10683}
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael
+  Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text
+  transformer, 2019,
+  \burlalt{arXiv:1910.10683}{http://arxiv.org/abs/arXiv:1910.10683}.
+
+\bibitem[RWC{\etalchar{+}}19]{radford2019language}
+Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya
+  Sutskever.
+\newblock Language models are unsupervised multitask learners.
+\newblock {\em openai.com}, 2019.
+
+\bibitem[SCP{\etalchar{+}}18]{shazeer2018meshtensorflow}
+Noam Shazeer, Youlong Cheng, Niki Parmar, Dustin Tran, Ashish Vaswani, Penporn
+  Koanantakool, Peter Hawkins, HyoukJoong Lee, Mingsheng Hong, Cliff Young,
+  Ryan Sepassi, and Blake Hechtman.
+\newblock Mesh-tensorflow: Deep learning for supercomputers, 2018,
+  \burlalt{1811.02084}{http://arxiv.org/abs/1811.02084}.
+
+\bibitem[SHB15]{BPE}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Neural machine translation of rare words with subword units.
+\newblock {\em CoRR}, 2015,
+  \burlalt{1508.07909}{http://arxiv.org/abs/1508.07909}.
+
+\bibitem[SLA{\etalchar{+}}18]{1811.03600}
+Christopher~J. Shallue, Jaehoon Lee, Joe Antognini, Jascha Sohl-Dickstein, Roy
+  Frostig, and George~E. Dahl.
+\newblock Measuring the effects of data parallelism on neural network training,
+  2018, \burlalt{arXiv:1811.03600}{http://arxiv.org/abs/arXiv:1811.03600}.
+
+\bibitem[SS18]{DBLP:journals/corr/abs-1804-04235}
+Noam Shazeer and Mitchell Stern.
+\newblock Adafactor: Adaptive learning rates with sublinear memory cost.
+\newblock {\em CoRR}, abs/1804.04235, 2018,
+  \burlalt{1804.04235}{http://arxiv.org/abs/1804.04235}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1804.04235}.
+
+\bibitem[THK18]{thurner2018introduction}
+Stefan Thurner, Rudolf Hanel, and Peter Klimek.
+\newblock {\em Introduction to the theory of complex systems}.
+\newblock Oxford University Press, 2018.
+
+\bibitem[TL19]{DBLP:journals/corr/abs-1905-11946}
+Mingxing Tan and Quoc~V. Le.
+\newblock Efficientnet: Rethinking model scaling for convolutional neural
+  networks.
+\newblock {\em CoRR}, abs/1905.11946, 2019,
+  \burlalt{1905.11946}{http://arxiv.org/abs/1905.11946}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1905.11946}.
+
+\bibitem[VSP{\etalchar{+}}17]{OriginalTransformer}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, \L~ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In I.~Guyon, U.~V. Luxburg, S.~Bengio, H.~Wallach, R.~Fergus,
+  S.~Vishwanathan, and R.~Garnett, editors, {\em Advances in Neural Information
+  Processing Systems 30}, pages 5998--6008. Curran Associates, Inc., 2017.
+\newblock
+  \urlprefix\url{http://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf}.
+
+\bibitem[VWB16]{ResNetsEnsemblesShallow}
+Andreas Veit, Michael Wilber, and Serge Belongie.
+\newblock Residual networks behave like ensembles of relatively shallow
+  networks, 2016,
+  \burlalt{arXiv:1605.06431}{http://arxiv.org/abs/arXiv:1605.06431}.
+
+\bibitem[Was06]{wasserman2006all}
+Larry Wasserman.
+\newblock {\em All of nonparametric statistics}.
+\newblock Springer Science \& Business Media, 2006.
+
+\bibitem[WPN{\etalchar{+}}19]{wang2019superglue}
+Alex Wang, Yada Pruksachatkun, Nikita Nangia, Amanpreet Singh, Julian Michael,
+  Felix Hill, Omer Levy, and Samuel~R. Bowman.
+\newblock Superglue: A stickier benchmark for general-purpose language
+  understanding systems, 2019,
+  \burlalt{1905.00537}{http://arxiv.org/abs/1905.00537}.
+
+\bibitem[WRH17]{Wang_2017}
+Yu-Xiong Wang, Deva Ramanan, and Martial Hebert.
+\newblock Growing a brain: Fine-tuning by increasing model capacity.
+\newblock {\em 2017 IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, Jul 2017.
+\newblock \doi{10.1109/cvpr.2017.323}.
+
+\bibitem[WYL19]{wen2019autogrow}
+Wei Wen, Feng Yan, and Hai Li.
+\newblock Autogrow: Automatic layer growing in deep convolutional networks,
+  2019, \burlalt{1906.02909}{http://arxiv.org/abs/1906.02909}.
+
+\bibitem[YDY{\etalchar{+}}19]{1906.08237}
+Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Carbonell, Ruslan Salakhutdinov,
+  and Quoc~V. Le.
+\newblock Xlnet: Generalized autoregressive pretraining for language
+  understanding, 2019,
+  \burlalt{arXiv:1906.08237}{http://arxiv.org/abs/arXiv:1906.08237}.
+
+\bibitem[ZK16]{Zagoruyko_2016}
+Sergey Zagoruyko and Nikos Komodakis.
+\newblock Wide residual networks.
+\newblock {\em Procedings of the British Machine Vision Conference 2016}, 2016.
+\newblock \doi{10.5244/c.30.87}.
+
+\bibitem[ZKZ{\etalchar{+}}15]{Zhu_2015}
+Yukun Zhu, Ryan Kiros, Rich Zemel, Ruslan Salakhutdinov, Raquel Urtasun,
+  Antonio Torralba, and Sanja Fidler.
+\newblock Aligning books and movies: Towards story-like visual explanations by
+  watching movies and reading books.
+\newblock {\em 2015 IEEE International Conference on Computer Vision (ICCV)},
+  Dec 2015.
+\newblock \doi{10.1109/iccv.2015.11}.
+
+\bibitem[ZLN{\etalchar{+}}19]{DBLP:journals/corr/abs-1907-04164}
+Guodong Zhang, Lala Li, Zachary Nado, James Martens, Sushant Sachdeva,
+  George~E. Dahl, Christopher~J. Shallue, and Roger~B. Grosse.
+\newblock Which algorithmic choices matter at which batch sizes? insights from
+  a noisy quadratic model.
+\newblock {\em CoRR}, abs/1907.04164, 2019,
+  \burlalt{1907.04164}{http://arxiv.org/abs/1907.04164}.
+\newblock \urlprefix\url{http://arxiv.org/abs/1907.04164}.
+
+\end{thebibliography}
