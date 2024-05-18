@@ -45,78 +45,32 @@
 %%% Paper starts here %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \title{Scaling Laws for Neural Language Models}
 
 \author{
-    Jared Kaplan \thanks{Equal contribution. \newline \newline
-    Contributions: Jared Kaplan and Sam McCandlish led the research.  Tom Henighan contributed the LSTM experiments.  Tom Brown, Rewon Child, and Scott Gray, and Alec Radford developed the optimized Transformer implementation.  Jeff Wu, Benjamin Chess, and Alec Radford developed the text datasets.  Dario Amodei provided guidance throughout the project. \newline \newline
-   % {\blue Note: Author list, ordering, and contribution statement not yet finalized.}
-    }\\
-    Johns Hopkins University, OpenAI \\
-    \texttt{jaredk@jhu.edu} \\
-\And
-    Sam McCandlish$^{\ast}$\\
-    OpenAI \\
-    \texttt{sam@openai.com} \\
-\AND
-    Tom Henighan \\
-    OpenAI \\
-    \texttt{henighan@openai.com} \\
-\And
-    Tom B. Brown \\
-    OpenAI \\
-    \texttt{tom@openai.com} \\
-\And
-    Benjamin Chess\\
-    OpenAI \\
-    \texttt{bchess@openai.com} \\
-\And
-    Rewon Child\\
-    OpenAI \\
-    \texttt{rewon@openai.com} \\
-\And
-    Scott Gray\\
-    OpenAI \\
-    \texttt{scott@openai.com} \\
-\And
-    Alec Radford\\
-    OpenAI \\
-    \texttt{alec@openai.com} \\
-\And
-    Jeffrey Wu\\
-    OpenAI \\
-    \texttt{jeffwu@openai.com} \\
-\And
-    Dario Amodei \\
-    OpenAI \\
-    \texttt{damodei@openai.com} \\
+    XXX \thanks{The original paper is located at \url{https://arxiv.org/abs/2001.08361}. This version has been modified by LuYF-Lemon-love \url{luyanfeng_nlp@qq.com} for personal study.}\\
+    OpenAI
 }
-
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We study empirical scaling laws for language model performance on the cross-entropy loss.
-The loss scales as a power-law with model size, dataset size, and the amount of compute used for training, with some trends spanning more than seven orders of magnitude.
+\textbf{We study empirical scaling laws for language model performance on the cross-entropy loss.}
+The loss scales as a \textbf{power-law} with \textbf{model size}, \textbf{dataset size}, and \textbf{the amount of compute used for training}, with some trends spanning more than seven orders of magnitude.
 Other architectural details such as network width or depth have minimal effects within a wide range.
-Simple equations govern the dependence of overfitting on model/dataset size and the dependence of training speed on model size.
+\textbf{Simple equations govern the dependence of overfitting on model/dataset size and the dependence of training speed on model size.}
 These relationships allow us to determine the optimal allocation of a fixed compute budget.
-Larger models are significantly more sample-efficient, such that optimally compute-efficient training involves training very large models on a relatively modest amount of data and stopping significantly before convergence.
+\textbf{Larger models are significantly more sample-efficient, such that optimally compute-efficient training involves training very large models on a relatively modest amount of data and stopping significantly before convergence.}
 
 \end{abstract}
 
-\newpage\tableofcontents{}
+% \newpage\tableofcontents{}
+\tableofcontents{}
 
 \section{Introduction}
 
-
-Language provides a natural domain for the study of artificial intelligence, as the vast majority of reasoning tasks can be efficiently expressed and evaluated in language, and the world's text provides a wealth of data for unsupervised learning via generative modeling.  Deep learning has recently seen rapid progress in language modeling, with state of the art models \cite{radford2018improving,1810.04805,1906.08237,DBLP:journals/corr/abs-1907-11692, 1910.10683} approaching human-level performance on many specific tasks \cite{wang2019superglue}, including the composition of coherent multi-paragraph prompted text samples \cite{radford2019language}.
-
-One might expect language modeling performance to depend on model architecture, the size of neural models, the computing power used to train them, and the data available for this training process.  In this work we will empirically investigate the dependence of language modeling loss on all of these factors, focusing on the Transformer architecture \cite{OriginalTransformer,liu2018generating}.  The high ceiling and low floor for performance on language tasks allows us to study trends over more than seven orders of magnitude in scale.
-
-Throughout we will observe precise power-law scalings for performance as a function of training time, context length, dataset size, model size, and compute budget.  
+One might expect language modeling performance to depend on model architecture, the size of neural models, the computing power used to train them, and the data available for this training process.  In this work we will empirically investigate the dependence of language modeling loss on all of these factors, focusing on the Transformer architecture \cite{OriginalTransformer,liu2018generating}.
 
 \begin{figure}
 \noindent \centering{} 
@@ -136,13 +90,13 @@ Our key findings for Transformer language models are are as follows:
 
 \paragraph{Smooth power laws:} Performance has a power-law relationship with each of the three scale factors $N, D, C$ when not bottlenecked by the other two, with trends spanning more than six orders of magnitude (see Figure \ref{fig:BasicPowerLaws}). We observe no signs of deviation from these trends on the upper end, though performance must flatten out eventually before reaching zero loss. (Section \ref{sec:Empirical})
 
-\paragraph{Universality of overfitting:} Performance improves predictably as long as we scale up $N$ and $D$ in tandem, but enters a regime of diminishing returns if either $N$ or $D$ is held fixed while the other increases.  The performance penalty depends predictably on the ratio $N^{0.74}/D$, meaning that every time we increase the model size 8x, we only need to increase the data by roughly 5x to avoid a penalty. (Section \ref{sec:ChartingOverfitting})
+\paragraph{Universality of overfitting:} Performance improves predictably as long as we scale up $N$ and $D$ in tandem, but enters a regime of diminishing returns if either $N$ or $D$ is held fixed while the other increases.  \textbf{The performance penalty depends predictably on the ratio $N^{0.74}/D$, meaning that every time we increase the model size 8x, we only need to increase the data by roughly 5x to avoid a penalty.} (Section \ref{sec:ChartingOverfitting})
 
 \paragraph{Universality of training:} Training curves follow predictable power-laws whose parameters are roughly independent of the model size.  By extrapolating the early part of a training curve, we can roughly predict the loss that would be achieved if we trained for much longer. (Section \ref{sec:ScalingSizeandSteps})
 
 \paragraph{Transfer improves with test performance:} When we evaluate models on text with a different distribution than they were trained on, the results are strongly correlated to those on the training validation set with a roughly constant offset in the loss -- in other words, transfer to a different distribution incurs a constant penalty but otherwise improves roughly in line with performance on the training set. (Section \ref{sec:GeneralizationtoOtherDistributions})
 
-\paragraph{Sample efficiency:} Large models are  more sample-efficient than small models, reaching the same level of performance with fewer optimization steps (Figure \ref{fig:EfficiencyIllustration}) and using  fewer data points (Figure \ref{fig:LossvsModelDatasetSize}).
+\paragraph{Sample efficiency:} \textbf{Large models are  more sample-efficient than small models, reaching the same level of performance with fewer optimization steps (Figure \ref{fig:EfficiencyIllustration}) and using  fewer data points (Figure \ref{fig:LossvsModelDatasetSize}).}
 
 
 \begin{figure}
@@ -160,10 +114,6 @@ Our key findings for Transformer language models are are as follows:
 
 \paragraph{Optimal batch size:} The ideal batch size for training these models is roughly a power of the loss only, and continues to be determinable by measuring the gradient noise scale \cite{1812.06162}; it is roughly 1-2 million tokens at convergence for the largest models we can train. (Section \ref{sec:OptimalBatchSize})
 
-
-Taken together, these results show that language modeling performance improves smoothly and predictably as we appropriately scale up model size, data, and compute.  We expect that larger language models will perform better and be more sample efficient than current models.
-
-
 \subsection{Summary of Scaling Laws}
 
 The test loss of a Transformer trained to autoregressively model language can be predicted using a power-law  when performance is limited by only either the number of non-embedding parameters $N$, the dataset size $D$, or the optimally allocated compute budget $C_{\rm min}$ (see Figure \ref{fig:BasicPowerLaws}):
@@ -177,7 +127,9 @@ The test loss of a Transformer trained to autoregressively model language can be
 \be L(C_{\rm min}) = \left(C_{\mathrm{c}}^{\rm min} / C_{\rm min}\right)^{\alpha_C^{\rm min}};~~ \alpha_C^{\rm min} \sim 0.050, \quad C_{\mathrm{c}}^{\rm min} \sim 3.1 \times 10^{8}~\text{(PF-days)} \label{eq:crit_c} \ee
 \end{enumerate}
 
-These relations hold across eight orders of magnitude in $C_{\rm min}$, six orders of magnitude in $N$, and over two orders of magnitude in $D$.  They depend very weakly on model shape and other Transformer hyperparameters (depth, width, number of self-attention heads), with specific numerical values associated with the Webtext2 training set \cite{radford2019language}.   The power laws $\alpha_{\rm N}, \alpha_{\rm D}, \alpha_{C}^{\rm min}$ specify the degree of performance improvement expected as we scale up $N$, $D$, or $C_{\rm min}$; for example, doubling the number of parameters yields a loss that is smaller by a factor $2^{-\alpha_N}=0.95$. The precise numerical values of $N_{\mathrm{c}}, C_{\rm c}^{\rm min},$ and $D_{\mathrm{c}}$ depend on the vocabulary size and tokenization and hence do not have a fundamental meaning.  
+They depend very weakly on model shape and other Transformer hyperparameters (depth, width, number of self-attention heads), with specific numerical values associated with the Webtext2 training set \cite{radford2019language}.
+\textbf{The power laws $\alpha_{\rm N}, \alpha_{\rm D}, \alpha_{C}^{\rm min}$ specify the degree of performance improvement expected as we scale up $N$, $D$, or $C_{\rm min}$; for example, doubling the number of parameters yields a loss that is smaller by a factor $2^{-\alpha_N}=0.95$.}
+The precise numerical values of $N_{\mathrm{c}}, C_{\rm c}^{\rm min},$ and $D_{\mathrm{c}}$ depend on the vocabulary size and tokenization and hence do not have a fundamental meaning.  
 
 
 The critical batch size, which determines the speed/efficiency tradeoff for data parallelism (\cite{1812.06162}), also roughly obeys a power law in $L$:
@@ -203,7 +155,7 @@ Equation \eqref{eq:crit_n} and \eqref{eq:crit_d} together suggest that as we inc
 L(N, D) 
 = \left[ \left( \frac{N_c}{N} \right)^{\frac{\alpha_N}{\alpha_D}} + \frac{D_c}{D}  \right]^{\alpha_D}
 \ee
-with fits pictured on the left in figure \ref{fig:LossvsModelDatasetSize}.  We conjecture that this functional form may also parameterize the trained log-likelihood for other generative modeling tasks.
+with fits pictured on the left in figure \ref{fig:LossvsModelDatasetSize}.
 
 When training a given model for a finite number of parameter update steps $S$ in the infinite data limit, after an initial transient period, the learning curves can be accurately fit by  (see the right of figure \ref{fig:LearningCurveFitsandResiduals})
 \be
@@ -225,11 +177,8 @@ with
 \be
 \alpha_{C}^{\rm min} = 1/\left(1/\alpha_{S}+1/\alpha_{B}+1/\alpha_{N}\right) 
 \ee
-which closely matches the empirically optimal results $N \propto C_{\rm min}^{0.73}$, $B \propto C_{\rm min}^{0.24}$, and $S \propto C_{\rm min}^{0.03}$.  As the computational budget $C$ increases, it should be spent primarily on larger models, without dramatic increases in training time or dataset size (see Figure \ref{fig:ContributionIllustration}).  This also implies that as models grow larger, they  become increasingly sample efficient.  In practice, researchers typically train  smaller models for  longer than would be maximally compute-efficient because of  hardware constraints.
-Optimal performance depends on total compute as a power law (see Equation \eqref{eq:crit_c}).
-
-We  provide some basic theoretical motivation for Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}, an analysis of learning curve fits and their implications for training time, and a breakdown of our results per token.  We also make some brief comparisons to LSTMs and recurrent Transformers \cite{DBLP:journals/corr/abs-1807-03819}.
-
+which closely matches the empirically optimal results $N \propto C_{\rm min}^{0.73}$, $B \propto C_{\rm min}^{0.24}$, and $S \propto C_{\rm min}^{0.03}$.
+\textbf{As the computational budget $C$ increases, it should be spent primarily on larger models, without dramatic increases in training time or dataset size (see Figure \ref{fig:ContributionIllustration}).}
 
 \subsection{Notation}
 
@@ -240,8 +189,8 @@ We use the following notation:
 \item $C \approx 6 N B S$ -- an estimate of the total non-embedding training compute, where $B$ is the batch size, and $S$ is the number of training steps (ie parameter updates). We quote numerical values in PF-days, where one PF-day $ = 10^{15} \times 24 \times 3600 = 8.64 \times 10^{19}$ floating point operations.  
 \item $D$ -- the dataset size in tokens
 \item $B_{\rm crit}$ -- the critical batch size \cite{1812.06162}, defined and discussed in Section \ref{sec:OptimalBatchSize}.  Training at the critical batch size provides a roughly optimal compromise between time and compute efficiency.
-\item $C_{\rm min}$ -- an estimate of the minimum amount of non-embedding compute to reach a given value of the loss.  This is the training compute that would be used if the model were trained at a batch size much less than the critical batch size.  
-\item $S_{\rm min}$ -- an estimate of the minimal number of training steps needed to reach a given value of the loss.  This is also the number of training steps that would be used if the model were trained at a batch size much greater than the critical batch size.
+\item $C_{\rm min}$ -- an estimate of the minimum amount of non-embedding compute to reach a given value of the loss.  \textbf{This is the training compute that would be used if the model were trained at a batch size much less than the critical batch size.}  
+\item $S_{\rm min}$ -- an estimate of the minimal number of training steps needed to reach a given value of the loss.  \textbf{This is also the number of training steps that would be used if the model were trained at a batch size much greater than the critical batch size.}
 \item $\alpha_X$ -- power-law exponents for the scaling of the loss as $L(X) \propto 1/X^{\alpha_X}$ where $X$ can be any of $N, D, C, S, B, C^{\rm min}$.
 \end{itemize}
 
@@ -252,7 +201,7 @@ We use the following notation:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We train language models on WebText2, an extended version of the WebText \cite{radford2019language} dataset, tokenized using byte-pair encoding \cite{BPE} with a vocabulary size $n_{\rm vocab} = 50257$.  We optimize the autoregressive log-likelihood (i.e. cross-entropy loss) averaged over a 1024-token context, which is also our principal performance metric.  We record the loss on the WebText2 test distribution and on a selection of other text distributions.  We primarily train decoder-only \cite{liu2018generating, radford2018improving} Transformer \cite{OriginalTransformer} models, though we also train LSTM models and Universal Transformers \cite{DBLP:journals/corr/abs-1807-03819}  for comparison.
+We train language models on WebText2, an extended version of the WebText \cite{radford2019language} dataset, tokenized using byte-pair encoding \cite{BPE} with a vocabulary size $n_{\rm vocab} = 50257$.  We optimize the autoregressive log-likelihood (i.e. cross-entropy loss) averaged over a 1024-token context, which is also our principal performance metric.  We primarily train decoder-only \cite{liu2018generating, radford2018improving} Transformer \cite{OriginalTransformer} models.
 
 \subsection{Parameter and Compute Scaling of Transformers}
 \label{sec:ParameterComputeCounts}
