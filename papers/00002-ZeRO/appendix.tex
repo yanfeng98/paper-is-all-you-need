@@ -1,0 +1,124 @@
+% \subsection{Experiments}
+% In this appendix we outline all of the model parameters used for each of the corresponding figures in our paper.
+% Experiment details for Figure 2 in the paper can be seen in Tables~\ref{tab:fig2-tab}, \ref{tab:fig3-tab}, \ref{tab:fig7-tab}.
+
+\begin{table}[t!]
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{9}{|c|}{Figure 2} \\ \hline
+Model size & ZeRO/Baseline & Number of GPUs & MP & Layers & Hidden size & Attention head & Batch size & Total batch size \\ \hline
+1.5B & ZeRO & 400 & 1 & 48 & 1600 & 16 & 24 & 9600 \\ \hline
+1.5B & Baseline & 400 & 2 & 48 & 1600 & 16 & 16 & 3200 \\ \hline
+8B & ZeRO & 400 & 4 & 72 & 3072 & 24 & 64 & 6400 \\ \hline
+8B & Baseline & 400 & 8 & 72 & 3072 & 24 & 8 & 400 \\ \hline
+40B & ZeRO & 400 & 4 & 88 & 6144 & 32 & 12 & 1200 \\ \hline
+40B & Baseline & 384 & 32 & 88 & 6144 & 64 & 4 & 48 \\ \hline
+60B & ZeRO & 400 & 16 & 132 & 6144 & 32 & 64 & 1600 \\ \hline
+60B & Baseline & 384 & 64 & 132 & 6144 & 64 & 4 & 24 \\ \hline
+80B & ZeRO & 400 & 16 & 100 & 8192 & 64 & 32 & 800 \\ \hline
+80B & Baseline & 384 & 128 & 100 & 8192 & 128 & 4 & 12 \\ \hline
+100B & ZeRO & 400 & 16 & 125 & 8192 & 64 & 32 & 800 \\ \hline
+100B & Baseline & 384 & 128 & 125 & 8192 & 128 & 2 & 6 \\ \hline
+120B & ZeRO & 400 & 16 & 150 & 8192 & 64 & 24 & 600 \\ \hline
+120B & Baseline & 384 & 128 & 150 & 8192 & 128 & 2 & 6 \\ \hline
+140B & ZeRO & 400 & 16 & 175 & 8192 & 64 & 16 & 400 \\ \hline
+140B & Baseline & 384 & 128 & 175 & 8192 & 128 & 2 & 6 \\ \hline
+170B & ZeRO & 400 & 16 & 212 & 8192 & 64 & 12 & 300 \\ \hline
+170B & Baseline & 256 & 256 & 212 & 8192 & 256 & 2 & 2 \\ \hline
+\end{tabular}
+\caption{Model configurations for Figure 2 related to ZeRO throughput compared with baseline.} \label{tab:fig2-tab}
+\end{table}
+
+\begin{table}[t!]
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{9}{|c|}{Figure 3} \\ \hline
+Model size & ZeRO/Baseline & Number of GPUs & MP & Layers & Hidden size & Attention head & Batch size & Total batch size \\ \hline
+60B & ZeRO & 64 & 16 & 75 & 8192 & 32 & 16 & 64 \\ \hline
+60B & ZeRO & 128 & 16 & 75 & 8192 & 32 & 48 & 384 \\ \hline
+60B & ZeRO & 256 & 16 & 75 & 8192 & 32 & 48 & 768 \\ \hline
+60B & ZeRO & 400 & 16 & 75 & 8192 & 32 & 64 & 1600 \\ \hline
+\end{tabular}
+\caption{Model configurations for Figure 3 related to superlinear scalability.} \label{tab:fig3-tab}
+\end{table}
+
+\begin{table}[t!]
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{9}{|c|}{Figure 4} \\ \hline
+Model size & ZeRO/Baseline & Number of GPUs & MP & Layers & Hidden size & Attention head & Batch size & Total batch size \\ \hline
+40B & ZeRO & 400 & 16 & 50 & 8192 & 32 & 16 & 400 \\ \hline
+60B & ZeRO & 400 & 16 & 132 & 6144 & 64 & 16 & 400 \\ \hline
+140B & ZeRO & 400 & 16 & 175 & 8192 & 64 & 16 & 400 \\ \hline
+150B & ZeRO & 400 & 16 & 187 & 8192 & 64 & 16 & 400 \\ \hline
+50B & ZeRO & 400 & 16 & 62 & 8192 & 32 & 16 & 400 \\ \hline
+\end{tabular}
+\caption{Model configurations for Figure 4 related to max model size with different ZeRO configurations.} \label{tab:fig4-tab}
+\end{table}
+
+\begin{table}[t!]
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{9}{|c|}{Figure 5} \\ \hline
+Model size & ZeRO/Baseline & Number of GPUs & MP & Layers & Hidden size & Attention head & Batch size & Total batch size \\ \hline
+40B & ZeRO & 400 & 16 & 50 & 8192 & 32 & 16 & 400 \\ \hline
+40B & ZeRO & 400 & 16 & 50 & 8192 & 32 & 16 & 400 \\ \hline
+40B & ZeRO & 400 & 16 & 50 & 8192 & 32 & 16 & 400 \\ \hline
+40B & ZeRO & 400 & 16 & 50 & 8192 & 32 & 16 & 400 \\ \hline
+40B & ZeRO & 400 & 16 & 50 & 8192 & 32 & 16 & 400 \\ \hline
+100B & ZeRO & 400 & 16 & 125 & 8192 & 64 & 32 & 800 \\ \hline
+100B & ZeRO & 400 & 16 & 125 & 8192 & 64 & 32 & 800 \\ \hline
+\end{tabular}
+\caption{Model configurations for Figure 5 related to memory allocated with different ZeRO configurations.}
+\end{table}
+
+\begin{table}[t!]
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{9}{|c|}{Figure 6} \\ \hline
+Model size & ZeRO/Baseline & Number of GPUs & MP & Layers & Hidden size & Attention head & Batch size & Total batch size \\ \hline
+60B & ZeRO & 128 & 16 & 75 & 8192 & 64 & 2 & 16 \\ \hline
+60B & ZeRO & 128 & 16 & 75 & 8192 & 64 & 4 & 32 \\ \hline
+60B & ZeRO & 128 & 16 & 75 & 8192 & 64 & 32 & 256 \\ \hline
+60B & ZeRO & 128 & 16 & 75 & 8192 & 64 & 32 & 256 \\ \hline
+60B & ZeRO & 128 & 16 & 75 & 8192 & 64 & 8 & 64 \\ \hline
+170B & ZeRO & 400 & 16 & 212 & 8192 & 64 & 12 & 300 \\ \hline
+\end{tabular}
+\caption{Model configurations for Figure 6 related to throughput with different ZeRO configurations.}
+\end{table}
+.
+\newpage
+These tables contain all the model configurations and batch sizes used for the experiments presented in the paper. In Figure 2, notice that the total number of GPUs for some baseline experiment is 384 or 256 compared to 400 for ZeRO. This is because the total number of GPUs must be a product of the number of MP, and we only had access to a total of 400 GPUs. There exist a handful of additional constraints in model configuration values, such as hidden size must be divisible by attention heads, hidden size divisible by MP, and attention heads divisible by MP. For baseline we used the lowest number of GPUs that was a power of 2 that would fit the model. So for example, for 170B parameter model this was 256 for the baseline. Since we only had 400 GPUs, we could only run baseline with 256 GPUs. 
+
+We do want to point out that this gives the baseline an advantage over ZeRO because fewer GPUs means better communication throughput for the baseline. For example, in case of the 170B parameter model, DP=1 for the baseline so it in fact incurs no communication for DP. The results presented in this paper are despite this advantage for the baseline.
+
+Also, we want to point out that we are comparing the performance per GPU, not the aggregate performance, and therefore the results are still apples-to-apples while giving a slight advantage to the baseline.
+
+
+
+
+\begin{table}[]
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}    
+\hline
+\multicolumn{9}{|c|}{Figure 7} \\ \hline
+Model size & ZeRO/Baseline & Number of GPUs & MP & Layers & Hidden size & Attention head & Batch size & Total batch size \\ \hline
+1.5B & ZeRO & 128 & 1 & 34 & 1920 & 16 & 24 & 3072 \\ \hline
+2.5B & ZeRO & 128 & 1 & 54 & 1920 & 16 & 24 & 3072 \\ \hline
+4B & ZeRO & 128 & 1 & 64 & 2304 & 24 & 16 & 2048 \\ \hline
+6B & ZeRO & 128 & 1 & 52 & 3072 & 24 & 12 & 1536 \\ \hline
+8B & ZeRO & 128 & 1 & 72 & 3072 & 24 & 8 & 1024 \\ \hline
+10B & ZeRO & 128 & 1 & 50 & 4096 & 32 & 6 & 768 \\ \hline
+11B & ZeRO & 128 & 1 & 54 & 4096 & 32 & 4 & 512 \\ \hline
+12B & ZeRO & 128 & 1 & 58 & 4096 & 32 & 4 & 512 \\ \hline
+13B & ZeRO & 128 & 1 & 62 & 4096 & 32 & 2 & 256 \\ \hline
+1p16B & Baseline & 128 & 1 & 24 & 1920 & 16 & 8 & 1024 \\ \hline
+1p38B & Baseline & 128 & 1 & 40 & 1536 & 16 & 1 & 128 \\ \hline
+\end{tabular}
+\caption{Model configurations for Figure 7 related to evaluating maximum model sizes vs throughput while using only data-parallelism.} \label{tab:fig7-tab}
+\end{table}

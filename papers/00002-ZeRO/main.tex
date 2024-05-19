@@ -1,0 +1,59 @@
+\documentclass{article}
+%\documentclass[conference]{IEEEtran}
+%\usepackage[utf8]{inputenc}
+\usepackage[margin=1.4in]{geometry}
+\title{ZeRO: Memory Optimizations Toward Training Trillion Parameter Models}
+%\title{ZeRO: Towards Models with A Trillion Parameters}
+\author{Samyam Rajbhandari$^*$, Jeff Rasley\footnote{Equal Contributors}, Olatunji Ruwase, Yuxiong He \\ \tt{\small \{samyamr, jerasley, olruwase, yuxhe\}@microsoft.com} }
+
+\date{}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{comment}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+\usepackage{pifont}
+\usepackage{hyperref}
+\usepackage{subcaption}
+% \usepackage{balance}
+\renewcommand{\baselinestretch}{1.0}
+\usepackage[switch,columnwise]{lineno} %TODO add back for SC review
+
+\newcommand{\name}{\emph{ZeRO}\xspace}
+\newcommand{\nameos}{\emph{ZeRO-OS}\xspace}
+
+\newcommand{\mycheckmark}{\color{green} \ding{51}}
+\newcommand{\mycrossout}{\color{red} \ding{55}}
+
+\begin{document}
+
+% \linenumbers %TODO add back for SC review
+%\pagenumbering{Roman}
+\maketitle
+\input{abstract2}
+\input{introduction2}
+\input{background}
+\input{related_work}
+\input{where-did-memory-go}
+\input{overview}
+\input{deep-dive}
+\input{communication}
+%\input{zero-and-model-parallelism}
+\input{trillion}
+\input{evaluation-SC}
+\input{conclusion}
+\input{acknowledgement}
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+%TODO: remove below for submission
+\newpage
+\appendix
+\input{appendix}
+%TODO: remove above for submission
+
+\end{document}
+
