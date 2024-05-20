@@ -1,1 +1,1 @@
-del *.brf *.synctex.gz *.aux *.lof *.log *.lot *.out *.toc
+del *.brf *.synctex.gz *.aux *.lof *.log *.lot *.out

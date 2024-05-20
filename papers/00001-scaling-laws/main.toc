@@ -1,0 +1,53 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Summary}{2}{subsection.1.1}%
+\contentsline {paragraph}{Performance depends strongly on scale, weakly on model shape:}{2}{section*.3}%
+\contentsline {paragraph}{Smooth power laws:}{2}{section*.4}%
+\contentsline {paragraph}{Universality of overfitting:}{2}{section*.5}%
+\contentsline {paragraph}{Universality of training:}{2}{section*.6}%
+\contentsline {paragraph}{Transfer improves with test performance:}{3}{section*.7}%
+\contentsline {paragraph}{Sample efficiency:}{3}{section*.8}%
+\contentsline {paragraph}{Convergence is inefficient:}{3}{section*.11}%
+\contentsline {paragraph}{Optimal batch size:}{3}{section*.12}%
+\contentsline {subsection}{\numberline {1.2}Summary of Scaling Laws}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Notation}{5}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Background and Methods}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Parameter and Compute Scaling of Transformers}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Training Procedures}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Datasets}{6}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Empirical Results and Basic Power Laws}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Approximate Transformer Shape and Hyperparameter Independence}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Performance with Non-Embedding Parameter Count $N$}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Comparing to LSTMs and Universal Transformers}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Generalization Among Data Distributions}{8}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Performance with Dataset Size and Compute}{8}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Charting the Infinite Data Limit and Overfitting}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Proposed $L(N,D)$ Equation}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Results}{10}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Scaling Laws with Model Size and Training Time}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Adjustment for Training at $B_{\rm crit}(L)$}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Results for $L(N, S_{\rm min})$ and Performance with Model Size and Compute}{12}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Lower Bound on Early Stopping Step}{13}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Optimal Allocation of the Compute Budget}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Optimal Performance and Allocations}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Predictions from $L(N, S_{\rm min})$}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Contradictions and a Conjecture}{16}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Related Work}{17}{section.7}%
+\contentsline {section}{\numberline {8}Discussion}{18}{section.8}%
+\contentsline {section}{Appendices}{19}{section*.29}%
+\contentsline {section}{\numberline {A}Summary of Power Laws}{19}{appendix.A}%
+\contentsline {section}{\numberline {B}Empirical Model of Compute-Efficient Frontier}{19}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Defining Equations}{19}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Efficient Training}{20}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}Comparison to Inefficient}{21}{subsection.B.3}%
+\contentsline {subsection}{\numberline {B.4}Suboptimal Model Sizes}{21}{subsection.B.4}%
+\contentsline {section}{\numberline {C}Caveats}{21}{appendix.C}%
+\contentsline {section}{\numberline {D}Supplemental Figures}{22}{appendix.D}%
+\contentsline {subsection}{\numberline {D.1}Early Stopping and Test vs Train}{22}{subsection.D.1}%
+\contentsline {subsection}{\numberline {D.2}Universal Transformers}{22}{subsection.D.2}%
+\contentsline {subsection}{\numberline {D.3}Batch Size}{22}{subsection.D.3}%
+\contentsline {subsection}{\numberline {D.4}Sample Efficiency vs Model Size}{23}{subsection.D.4}%
+\contentsline {subsection}{\numberline {D.5}Context Dependence}{24}{subsection.D.5}%
+\contentsline {subsection}{\numberline {D.6}Learning Rate Schedules and Error Analysis}{24}{subsection.D.6}%
+\contentsline {subsection}{\numberline {D.7}Fit Details and Power Law Quality}{25}{subsection.D.7}%
+\contentsline {subsection}{\numberline {D.8}Generalization and Architecture}{25}{subsection.D.8}%
