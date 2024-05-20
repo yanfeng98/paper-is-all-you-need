@@ -260,7 +260,6 @@ Since we primarily study models where $d_{\rm model} \gg n_{\rm ctx}/12$, we do 
 
 Unless otherwise noted, we train  models with the Adam optimizer \cite{kingma2014adam} for a fixed $2.5 \times 10^5$  steps with a batch size of $512$ sequences of $1024$ tokens.
 Due to memory constraints, our largest models (more than 1B parameters) were trained with Adafactor \cite{DBLP:journals/corr/abs-1804-04235}.
-We experimented with a variety of learning rates and schedules, as discussed in Appendix \ref{app:OptimizationDetailsandErrorAnalysis}.
 We found that results at convergence were largely independent of learning rate schedule.  Unless otherwise noted, all training runs included in our data used a learning rate schedule with a 3000 step linear warmup followed by a cosine decay to zero.
 
 \subsection{Datasets}
@@ -281,9 +280,7 @@ To characterize language model scaling we train a wide variety of models, varyin
 \item Context length (1024 for most runs, though we also experiment with shorter contexts)
 \item Batch size ($2^{19}$ for most runs, but we also vary it to measure the critical batch size)
 \end{itemize}
-\endgroup
-
-In this section we will display data along with empirically-motivated fits, deferring theoretical analysis to later sections.  
+\endgroup 
 
 \subsection{Approximate Transformer Shape and Hyperparameter Independence}
 \label{sec:ShapeIndependence}
@@ -295,7 +292,7 @@ In this section we will display data along with empirically-motivated fits, defe
 \end{figure}
 
 Transformer performance depends very weakly on the shape parameters $n_{\rm layer}, n_{\rm heads}$, and $d_{\rm ff}$ when we hold the total non-embedding parameter count $N$ fixed.  
-To establish these results we  trained models with fixed size while varying a single hyperparameter. This was simplest for the case of $n_{\rm heads}$.  When varying $n_{\rm layer}$, we simultaneously varied $d_{{\rm model}}$ while keeping $N \approx 12 n_{\rm layer} d_{{\rm model}}^2$ fixed.  Similarly, to vary $d_{\rm ff}$ at fixed model size we also simultaneously varied the $d_{{\rm model}}$ parameter, as required by the parameter counts in Table \ref{tab:TableTransformerParamsFLOPs}.  Independence of $n_{\rm layers}$ would follow if deeper Transformers effectively behave as ensembles of shallower models, as has been suggested for ResNets \cite{ResNetsEnsemblesShallow}.  The results are shown in Figure \ref{fig:HeadsLayersIndependence}.
+The results are shown in Figure \ref{fig:HeadsLayersIndependence}.
 
 
 \subsection{Performance with Non-Embedding Parameter Count $N$} 
@@ -320,23 +317,6 @@ L(N) \approx \left( \frac{N_c}{N} \right)^{ \alpha_N }
 To observe these trends it is crucial to study performance as a function of $N$; if we instead use the total parameter count (including the embedding parameters) the trend is somewhat obscured (see Figure \ref{fig:PerformancevsModelSizeBody}).  This suggests that the embedding matrix can be made smaller without impacting performance, as has been seen in recent work \cite{lan2019albert}.
 
 Although these models have been trained on the WebText2 dataset, their test loss on a variety of other datasets is also a power-law in $N$ with nearly identical power, as shown in Figure \ref{fig:GeneralizationVsModelSize}.  
-
-
-
-\subsubsection{Comparing to LSTMs and Universal Transformers}
-
-\begin{figure}
-\begin{centering}
-\includegraphics[width=\columnwidth]{LSTMvsTransformerSummary}
-\caption[LSTM and Transformer performance comparison]{
-\label{fig:LSTMvsTransformers}}  
-\end{centering}
-\end{figure}
-
-
-In Figure \ref{fig:LSTMvsTransformers} we compare LSTM and Transformer performance as a function of non-embedding parameter count $N$. The LSTMs were trained with the same dataset and context length.  We see from these figures that the LSTMs perform as well as Transformers for tokens appearing early in the context, but cannot match the Transformer performance for later tokens.  We present power-law relationships between performance and context position Appendix \ref{sec:ContextDependence}, where increasingly large powers for larger models suggest improved ability to quickly recognize patterns.
-
-We also compare the performance of standard Transformers to recurrent Transformers \cite{DBLP:journals/corr/abs-1807-03819} in Figure \ref{fig:RecurrentTransformers} in the appendix.  These models re-use parameters, and so perform slightly better as a function of $N$, at the cost of additional compute per-parameter.
 
 \subsubsection{Generalization Among Data Distributions}
 \label{sec:GeneralizationtoOtherDistributions}
@@ -365,20 +345,15 @@ L(D) \approx \left( \frac{D_c}{D} \right)^{\alpha_D}
 \ee
 in the dataset size.  The data and fit appear in Figure \ref{fig:BasicPowerLaws}.
 
-The total amount of non-embedding compute used during training can be estimated as $C = 6 N B S$, where $B$ is the batch size, $S$ is the number of parameter updates, and the factor of $6$ accounts for the forward and backward passes.  Thus for a given value of $C$ we can scan over all models with various $N$ to find the model with the best performance on step $S = \frac{C}{6 B S}$.  Note that in these results \emph{the batch size $B$ remains fixed for all models}, which means that these empirical results are not truly optimal.  We will account for this in later sections using an adjusted $C_{\rm min}$ to produce cleaner trends.
+The total amount of non-embedding compute used during training can be estimated as $C = 6 N B S$, where $B$ is the batch size, $S$ is the number of parameter updates, and the factor of $6$ accounts for the forward and backward passes.  Thus for a given value of $C$ we can scan over all models with various $N$ to find the model with the best performance on step $S = \frac{C}{6 B S}$.  Note that in these results \emph{the batch size $B$ remains fixed for all models}, which means that these empirical results are not truly optimal.
 
 The result appears as the heavy black line on the left-hand plot in Figure \ref{fig:BasicPowerLaws}.  It can  be fit with 
 \be
 L(C) \approx \left( \frac{C_c}{C} \right)^{\alpha_C}
 \ee
-The figure also includes images of individual learning curves to clarify when individual models are optimal.  We will study the optimal allocation of compute more closely later on.
-The data strongly suggests that sample efficiency improves with model size, and we also illustrate this directly in Figure \ref{fig:SampleEfficiency} in the appendix.  
-
 
 \section{Charting the Infinite Data Limit and Overfitting}
 \label{sec:ChartingOverfitting}
-
-In Section \ref{sec:Empirical} we found a number of basic  scaling laws for language modeling performance.  Here we will study the performance of a model of size $N$ trained on a dataset with $D$ tokens while varying $N$ and $D$ simultaneously.  We will empirically demonstrate that the optimally trained test loss accords with the scaling law of Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}.  This  provides guidance on how much data we would need to train models of increasing size while keeping overfitting under control.
 
 \subsection{Proposed $L(N,D)$ Equation}
 
@@ -408,16 +383,6 @@ using three principles:
 
 Our choice of $L(N,D)$ satisfies the first requirement because we can rescale $N_c, D_c$ with changes in the vocabulary.  This also implies that the values of $N_c, D_c$ have no fundamental meaning.
 
-Since we stop training early when the test loss ceases to improve and optimize all models in the same way, we expect that larger models should always perform better than smaller models.  But with fixed finite $D$, we also do not expect any model to be capable of approaching the best possible loss (ie the entropy of text).  Similarly, a model with fixed size will be capacity-limited.  These considerations motivate our second principle.
-Note that knowledge of $L(N)$ at infinite $D$ and $L(D)$ at infinite $N$ fully determines all the parameters in $L(N,D)$.
-
-The third principle is more speculative.  There is a simple and general reason one might expect overfitting to scale $\propto 1/D$ at very large $D$.  Overfitting should be related to the variance or the signal-to-noise ratio of the dataset \cite{1710.03667}, and this scales as $1/D$.  This expectation should hold for any smooth loss function, since we expect to be able to expand the loss about the $D \to \infty$ limit.   However, this argument assumes that $1/D$ corrections dominate over other sources of variance, such as the finite batch size and  other limits on the efficacy of optimization.  Without empirical confirmation, we would not be very confident of its applicability.
-
-Our third principle explains the asymmetry between the roles of $N$ and $D$ in Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}.  Very similar symmetric expressions\footnote{For example, one might have used $L(N,D) =  \left[ \left( \frac{N_c}{N} \right)^{\alpha_N} + \left( \frac{D_c}{D} \right)^{\alpha_D}  \right]^\beta$, but this does not  have a $1/D$ expansion.} are possible, but they would not have a $1/D$ expansion with integer powers, and would require the introduction of an additional parameter.
-
-In any case, we will see that our equation for $L(N,D)$ fits the data  well, which is the most important justification for our $L(N,D)$ ansatz.
-
-
 \subsection{Results}
 
 We regularize all our models with 10\% dropout, and by tracking test loss and stopping once it is no longer decreasing.   The results are displayed in Figure \ref{fig:DatasetModelSizevsPerformance}, including a fit to the four parameters $\alpha_N, \alpha_D, N_c, D_c$ in Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}:
@@ -437,10 +402,6 @@ Value  & $0.076$ & $0.103$ & $6.4 \times 10^{13}$ & $1.8 \times 10^{13}$ \\
 \vspace{-1em}
 \end{table}
 
- We obtain an excellent fit, with the exception of the runs where the dataset has been reduced by a factor of $1024$, to about $2 \times 10^7$ tokens.  With such a small dataset, an epoch consists of only 40 parameter updates.  Perhaps such a tiny dataset represents a different regime for language modeling, as overfitting happens very early in training (see Figure \ref{fig:OverfittingandEarlyStopping}).  Also note that the parameters differ very slightly from those obtained in Section \ref{sec:Empirical}, as here we are fitting the full $L(N,D)$ rather than just $L(N, \infty)$ or $L(\infty, D)$.   
-
-
-
 To chart the borderlands of the infinite data limit, we can directly study the extent of overfitting.  For all but the largest models, we see no sign of overfitting when training with the full 22B token WebText2 dataset, so we can take it as representative of $D=\infty$.  Thus we can compare finite $D$ to the infinite data limit by defining
 \be
 \delta L(N, D) \equiv \frac{L(N, D)}{L(N, \infty)} - 1
@@ -456,13 +417,10 @@ We estimate that the variation in the loss with different random seeds is roughl
 \be
 D \gtrsim (5 \times 10^3) \, N^{0.74}
 \ee
-With this relation, models smaller than $10^9$ parameters can be trained with minimal overfitting on the 22B token WebText2 dataset, but our largest models will encounter some mild overfitting.  More generally, this relation shows that dataset size may grow sub-linearly in model size while avoiding overfitting.  Note however that this does not typically represent maximally compute-efficient training.  We should also emphasize that we have not optimized regularization (eg the dropout probability) while varying dataset and model size.
-
+More generally, this relation shows that dataset size may grow sub-linearly in model size while avoiding overfitting.  Note however that this does not typically represent maximally compute-efficient training.
 
 \section{Scaling Laws with Model Size and Training Time}
 \label{sec:ScalingSizeandSteps}
-
-In this section we will demonstrate that a simple scaling law provides a good description for the loss as a function of model size $N$ and training time.  First we will explain how to use the results of \cite{1812.06162}  to define a universal training step $S_{\rm min}$, which accounts for the fact that most of our models have not been trained at an optimal batch size.   Then we will demonstrate that we can fit the model size and training time dependence of the loss using Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps}.  Later we will use these results to predict the optimal allocation of training compute between model size and training time, and then confirm that prediction.
 
 \subsection{Adjustment for Training at $B_{\rm crit}(L)$}
 \label{sec:OptimalBatchSize}
@@ -473,7 +431,7 @@ In this section we will demonstrate that a simple scaling law provides a good de
 \caption[Critical batch size]{The critical batch size $B_{\rm crit}$ follows a power law in the loss as performance increase, and does not depend directly on the model size.  We find that the critical batch size approximately doubles for every $13\%$ decrease in loss.  $B_{\rm crit}$  is measured empirically from the data shown in Figure \ref{fig:BatchPareto}, but it is also roughly predicted by the gradient noise scale, as in \cite{1812.06162}.  \label{fig:OptimalBatchSize}}
 \end{figure}
 
-A simple empirical theory for the batch size dependence of training was developed in \cite{1812.06162} (see also \cite{1811.03600, DBLP:journals/corr/abs-1907-04164}).  It was argued that there is a critical batch size $B_{\rm crit}$ for training; for $B$ up to $B_{\rm crit}$  the batch size can be increased with very minimal degradation in compute-efficiency, whereas for $B > B_{\rm crit}$ increases in $B$ result in diminishing returns.  It was also argued that the gradient noise scale provides a simple prediction for $B_{\rm crit}$, and that neither depends directly on model size except through the value of the loss that has been attained.  These results can be used to predict how training time and compute will vary with the batch size.  To utilize both training time and compute as effectively as possible, it is best to train with a batch size $B \approx B_{\rm crit}$.  Training at $B \gg B_{\rm crit}$  minimizes the number of training steps, while $B \ll B_{\rm crit}$ minimizes the use of compute.
+A simple empirical theory for the batch size dependence of training was developed in \cite{1812.06162} (see also \cite{1811.03600, DBLP:journals/corr/abs-1907-04164}).  It was argued that there is a critical batch size $B_{\rm crit}$ for training; for $B$ up to $B_{\rm crit}$  the batch size can be increased with very minimal degradation in compute-efficiency, whereas for $B > B_{\rm crit}$ increases in $B$ result in diminishing returns.  To utilize both training time and compute as effectively as possible, it is best to train with a batch size $B \approx B_{\rm crit}$.  Training at $B \gg B_{\rm crit}$  minimizes the number of training steps, while $B \ll B_{\rm crit}$ minimizes the use of compute.
 
 More specifically, it was demonstrated that for a wide variety of neural network tasks, the number of training steps $S$ and the number of data examples processed $E = B S$ satisfy the simple relation
 \be
@@ -482,20 +440,18 @@ More specifically, it was demonstrated that for a wide variety of neural network
 \ee
 when training to any fixed value of the loss $L$.  Here $S_{\rm min}$ is the minimum number of steps necessary to reach $L$, while $E_{\rm min}$ is the minimum number of data examples that must be processed. 
 
-We demonstrate the relation \eqref{eq:TimeComputeTradeoff} for Transformers in Figure \ref{fig:BatchPareto} in the appendix. This relation defines the critical batch size 
+This relation defines the critical batch size 
 \be
 \label{eq:DefinitionBcrit}
 B_{\rm crit}(L) \equiv \frac{E_{\rm min}}{S_{\rm min}}
 \ee
 which is a function of the target value of the loss.  Training at the critical batch size makes a roughly optimal time/compute tradeoff, requiring $2 S_{\rm min}$ training steps and processing $E = 2 E_{\rm min}$ data examples.  
 
-In Figure \ref{fig:OptimalBatchSize} we have plotted the critical batch size and gradient noise scale\footnote{Although the critical batch size roughly matches the gradient noise scale, we are using a direct measurements of $B_{\rm crit}$ from Figures \ref{fig:BatchPareto} and \ref{fig:OptimalBatchSize} for all our later analyses.  } as a function of training loss for two different models.  We see that $B_{\rm crit}(L)$ is  independent of model size, and only depends on the loss $L$.  So the predictions of \cite{1812.06162} continue to hold for Transformer language models.  The critical batch size can be fit with a power-law in the loss
+In Figure \ref{fig:OptimalBatchSize} we have plotted the critical batch size and gradient noise scale as a function of training loss for two different models.  We see that $B_{\rm crit}(L)$ is  independent of model size, and only depends on the loss $L$.  The critical batch size can be fit with a power-law in the loss
 \be
 B_{\rm crit}(L) \approx \frac{B_*}{L^{1/\alpha_B}}
 \ee
-where $B_* \approx 2 \times 10^8$ and $\alpha_B \approx 0.21$.  
-
-We have chosen this parameterization for $B_{\rm crit}(L)$ because as the loss approaches its minimum value $L_{\rm min}$, the gradient noise scale is expected to diverge, and we expect $B_{\rm crit}$ to track this noise scale.  We do not know $L_{\rm min}$, as we see no sign that our models are approaching it, but $L_{\rm min} > 0$ since the entropy of natural language is non-zero.  Since apparently $L_{\rm min}$ is much smaller than the values of $L$ we have achieved, we used a parameterization where $B_{\rm crit}$ diverges as $L \to 0$. 
+where $B_* \approx 2 \times 10^8$ and $\alpha_B \approx 0.21$.   
 
 We will use $B_{\rm crit}(L)$ to estimate the relation between the number of training steps $S$ while training at batch size $B = 2^{19}$ tokens and the number of training steps while training at $B \gg B_{\rm crit}$.  This is simply
 \be
@@ -508,8 +464,6 @@ for any given target value $L$ for the loss.  This also defines a critical value
 C_{\rm min}(C) \equiv \frac{C  }{1 + B/B_{\rm crit}(L) } \qquad (\text{minimum compute, at } B \ll B_{\rm crit})
 \ee
 where $C = 6 N BS$ estimates the (non-embedding) compute used at batch size $B$.
-
-
 
 \subsection{Results for $L(N, S_{\rm min})$ and Performance with Model Size and Compute}
 
