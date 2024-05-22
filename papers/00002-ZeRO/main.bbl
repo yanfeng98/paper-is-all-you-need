@@ -1,27 +1,8 @@
 \begin{thebibliography}{10}
 
-\bibitem{DBLP:journals/corr/bert}
-Jacob Devlin, Ming{-}Wei Chang, Kenton Lee, and Kristina Toutanova.
-\newblock {BERT:} pre-training of deep bidirectional transformers for language understanding.
-\newblock {\em CoRR}, abs/1810.04805, 2018.
-
-\bibitem{gpt-2}
-Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever.
-\newblock Language models are unsupervised multitask learners.
-\newblock 2019.
-
 \bibitem{megatronlm}
 Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper, and Bryan Catanzaro.
 \newblock Megatron-lm: Training multi-billion parameter language models using model parallelism, 2019.
-
-\bibitem{T5}
-Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
-\newblock Exploring the limits of transfer learning with a unified text-to-text transformer, 2019.
-
-\bibitem{DBLP:journals/corr/mesh-tensor}
-Noam Shazeer, Youlong Cheng, Niki Parmar, Dustin Tran, Ashish Vaswani, Penporn Koanantakool, Peter Hawkins, HyoukJoong Lee, Mingsheng Hong, Cliff Young, Ryan Sepassi, and Blake~A. Hechtman.
-\newblock Mesh-tensorflow: Deep learning for supercomputers.
-\newblock {\em CoRR}, abs/1811.02084, 2018.
 
 \bibitem{DBLP:journals/corr/Adam}
 Diederik~P. Kingma and Jimmy Ba.
@@ -38,10 +19,10 @@ Sam McCandlish, Jared Kaplan, Dario Amodei, and OpenAI~Dota Team.
 \newblock An empirical model of large-batch training.
 \newblock {\em CoRR}, abs/1812.06162, 2018.
 
-\bibitem{t-nlg}
-Microsoft.
-\newblock Turing-nlg: A 17-billion-parameter language model by microsoft.
-\newblock \url{https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/}, 2020.
+\bibitem{DBLP:journals/corr/mesh-tensor}
+Noam Shazeer, Youlong Cheng, Niki Parmar, Dustin Tran, Ashish Vaswani, Penporn Koanantakool, Peter Hawkins, HyoukJoong Lee, Mingsheng Hong, Cliff Young, Ryan Sepassi, and Blake~A. Hechtman.
+\newblock Mesh-tensorflow: Deep learning for supercomputers.
+\newblock {\em CoRR}, abs/1811.02084, 2018.
 
 \bibitem{GPipe}
 Yanping Huang, Yonglong Cheng, Dehao Chen, HyoukJoong Lee, Jiquan Ngiam, Quoc~V. Le, and Zhifeng Chen.
@@ -127,5 +108,14 @@ Shar Narasimhan.
 \newblock {NVIDIA Clocks World’s Fastest BERT Training Time ...}
 \newblock \url{https://devblogs.nvidia.com/training-bert-with-gpus/}, 2019.
 \newblock [Online; accessed 25-September-2019].
+
+\bibitem{T5}
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text transformer, 2019.
+
+\bibitem{gpt-2}
+Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever.
+\newblock Language models are unsupervised multitask learners.
+\newblock 2019.
 
 \end{thebibliography}
