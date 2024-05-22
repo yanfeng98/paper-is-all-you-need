@@ -2,41 +2,31 @@
 
 \bibitem{DBLP:journals/corr/bert}
 Jacob Devlin, Ming{-}Wei Chang, Kenton Lee, and Kristina Toutanova.
-\newblock {BERT:} pre-training of deep bidirectional transformers for language
-  understanding.
+\newblock {BERT:} pre-training of deep bidirectional transformers for language understanding.
 \newblock {\em CoRR}, abs/1810.04805, 2018.
 
 \bibitem{gpt-2}
-Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya
-  Sutskever.
+Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever.
 \newblock Language models are unsupervised multitask learners.
 \newblock 2019.
 
 \bibitem{megatronlm}
-Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper,
-  and Bryan Catanzaro.
-\newblock Megatron-lm: Training multi-billion parameter language models using
-  model parallelism, 2019.
+Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper, and Bryan Catanzaro.
+\newblock Megatron-lm: Training multi-billion parameter language models using model parallelism, 2019.
 
 \bibitem{T5}
-Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael
-  Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
-\newblock Exploring the limits of transfer learning with a unified text-to-text
-  transformer, 2019.
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text transformer, 2019.
 
 \bibitem{DBLP:journals/corr/mesh-tensor}
-Noam Shazeer, Youlong Cheng, Niki Parmar, Dustin Tran, Ashish Vaswani, Penporn
-  Koanantakool, Peter Hawkins, HyoukJoong Lee, Mingsheng Hong, Cliff Young,
-  Ryan Sepassi, and Blake~A. Hechtman.
+Noam Shazeer, Youlong Cheng, Niki Parmar, Dustin Tran, Ashish Vaswani, Penporn Koanantakool, Peter Hawkins, HyoukJoong Lee, Mingsheng Hong, Cliff Young, Ryan Sepassi, and Blake~A. Hechtman.
 \newblock Mesh-tensorflow: Deep learning for supercomputers.
 \newblock {\em CoRR}, abs/1811.02084, 2018.
 
 \bibitem{DBLP:journals/corr/Adam}
 Diederik~P. Kingma and Jimmy Ba.
 \newblock Adam: {A} method for stochastic optimization.
-\newblock In Yoshua Bengio and Yann LeCun, editors, {\em 3rd International
-  Conference on Learning Representations, {ICLR} 2015, San Diego, CA, USA, May
-  7-9, 2015, Conference Track Proceedings}, 2015.
+\newblock In Yoshua Bengio and Yann LeCun, editors, {\em 3rd International Conference on Learning Representations, {ICLR} 2015, San Diego, CA, USA, May 7-9, 2015, Conference Track Proceedings}, 2015.
 
 \bibitem{DBLP:journals/corr/ChenXZG16}
 Tianqi Chen, Bing Xu, Chiyuan Zhang, and Carlos Guestrin.
@@ -51,63 +41,47 @@ Sam McCandlish, Jared Kaplan, Dario Amodei, and OpenAI~Dota Team.
 \bibitem{t-nlg}
 Microsoft.
 \newblock Turing-nlg: A 17-billion-parameter language model by microsoft.
-\newblock
-  \url{https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/},
-  2020.
+\newblock \url{https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/}, 2020.
 
 \bibitem{GPipe}
-Yanping Huang, Yonglong Cheng, Dehao Chen, HyoukJoong Lee, Jiquan Ngiam,
-  Quoc~V. Le, and Zhifeng Chen.
-\newblock Gpipe: Efficient training of giant neural networks using pipeline
-  parallelism.
+Yanping Huang, Yonglong Cheng, Dehao Chen, HyoukJoong Lee, Jiquan Ngiam, Quoc~V. Le, and Zhifeng Chen.
+\newblock Gpipe: Efficient training of giant neural networks using pipeline parallelism.
 \newblock {\em ArXiv}, abs/1811.06965, 2018.
 
 \bibitem{DBLP:journals/corr/pipedream}
-Aaron Harlap, Deepak Narayanan, Amar Phanishayee, Vivek Seshadri, Nikhil~R.
-  Devanur, Gregory~R. Ganger, and Phillip~B. Gibbons.
+Aaron Harlap, Deepak Narayanan, Amar Phanishayee, Vivek Seshadri, Nikhil~R. Devanur, Gregory~R. Ganger, and Phillip~B. Gibbons.
 \newblock Pipedream: Fast and efficient pipeline parallel {DNN} training.
 \newblock {\em CoRR}, abs/1806.03377, 2018.
 
 \bibitem{narayanan2019pipedream}
-Deepak Narayanan, Aaron Harlap, Amar Phanishayee, Vivek Seshadri, Nikhil
-  Devanur, Greg Granger, Phil Gibbons, and Matei Zaharia.
+Deepak Narayanan, Aaron Harlap, Amar Phanishayee, Vivek Seshadri, Nikhil Devanur, Greg Granger, Phil Gibbons, and Matei Zaharia.
 \newblock Pipedream: Generalized pipeline parallelism for dnn training.
-\newblock In {\em ACM Symposium on Operating Systems Principles (SOSP 2019)},
-  October 2019.
+\newblock In {\em ACM Symposium on Operating Systems Principles (SOSP 2019)}, October 2019.
 
 \bibitem{jain2018gist}
-Animesh Jain, Amar Phanishayee, Jason Mars, Lingjia Tang, and Gennady
-  Pekhimenko.
+Animesh Jain, Amar Phanishayee, Jason Mars, Lingjia Tang, and Gennady Pekhimenko.
 \newblock Gist: Efficient data encoding for deep neural network training.
-\newblock In {\em International Symposium on Computer Architecture (ISCA
-  2018)}, 2018.
+\newblock In {\em International Symposium on Computer Architecture (ISCA 2018)}, 2018.
 
 \bibitem{Jain2019CheckmateBT}
-Paras Jain, Ajay Jain, Aniruddha Nrusimha, Amir Gholami, Pieter Abbeel, Kurt
-  Keutzer, Ion Stoica, and Joseph~E. Gonzalez.
-\newblock Checkmate: Breaking the memory wall with optimal tensor
-  rematerialization.
+Paras Jain, Ajay Jain, Aniruddha Nrusimha, Amir Gholami, Pieter Abbeel, Kurt Keutzer, Ion Stoica, and Joseph~E. Gonzalez.
+\newblock Checkmate: Breaking the memory wall with optimal tensor rematerialization.
 \newblock {\em ArXiv}, abs/1910.02653, 2019.
 
 \bibitem{DBLP:journals/corr/abs-1801-04380}
-Linnan Wang, Jinmian Ye, Yiyang Zhao, Wei Wu, Ang Li, Shuaiwen~Leon Song,
-  Zenglin Xu, and Tim Kraska.
-\newblock Superneurons: Dynamic {GPU} memory management for training deep
-  neural networks.
+Linnan Wang, Jinmian Ye, Yiyang Zhao, Wei Wu, Ang Li, Shuaiwen~Leon Song, Zenglin Xu, and Tim Kraska.
+\newblock Superneurons: Dynamic {GPU} memory management for training deep neural networks.
 \newblock {\em CoRR}, abs/1801.04380, 2018.
 
 \bibitem{layer2layer}
 Bharadwaj Pudipeddi, Maral Mesmakhosroshahi, Jinwen Xi, and Sujeeth Bharadwaj.
-\newblock Training large neural networks with constant memory using a new
-  execution algorithm.
+\newblock Training large neural networks with constant memory using a new execution algorithm.
 \newblock {\em ArXiv}, abs/2002.05645, 2020.
 
 \bibitem{7783721}
 M.~{Rhu}, N.~{Gimelshein}, J.~{Clemons}, A.~{Zulfiqar}, and S.~W. {Keckler}.
-\newblock vdnn: Virtualized deep neural networks for scalable, memory-efficient
-  neural network design.
-\newblock In {\em 2016 49th Annual IEEE/ACM International Symposium on
-  Microarchitecture (MICRO)}, pages 1--13, 2016.
+\newblock vdnn: Virtualized deep neural networks for scalable, memory-efficient neural network design.
+\newblock In {\em 2016 49th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)}, pages 1--13, 2016.
 
 \bibitem{DBLP:journals/corr/adafactor}
 Noam Shazeer and Mitchell Stern.
@@ -121,8 +95,7 @@ Rohan Anil, Vineet Gupta, Tomer Koren, and Yoram Singer.
 
 \bibitem{10.5555/Adagrad}
 John Duchi, Elad Hazan, and Yoram Singer.
-\newblock Adaptive subgradient methods for online learning and stochastic
-  optimization.
+\newblock Adaptive subgradient methods for online learning and stochastic optimization.
 \newblock {\em J. Mach. Learn. Res.}, 12(null):2121–2159, July 2011.
 
 \bibitem{DBLP:journals/corr/You-LARS}
@@ -131,22 +104,17 @@ Yang You, Igor Gitman, and Boris Ginsburg.
 \newblock {\em CoRR}, abs/1708.03888, 2017.
 
 \bibitem{DBLP:journals/corr/You-LAMB}
-Yang You, Jing Li, Jonathan Hseu, Xiaodan Song, James Demmel, and Cho{-}Jui
-  Hsieh.
+Yang You, Jing Li, Jonathan Hseu, Xiaodan Song, James Demmel, and Cho{-}Jui Hsieh.
 \newblock Reducing {BERT} pre-training time from 3 days to 76 minutes.
 \newblock {\em CoRR}, abs/1904.00962, 2019.
 
 \bibitem{micikevicius2017mixed}
-Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen,
-  David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaiev, Ganesh
-  Venkatesh, and Hao Wu.
+Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen, David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaiev, Ganesh Venkatesh, and Hao Wu.
 \newblock Mixed precision training, 2017.
 
 \bibitem{nvidia-volta-arch}
 {NVIDIA Tesla V100 GPU architecture}.
-\newblock
-  \url{http://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf},
-  2017.
+\newblock \url{http://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf}, 2017.
 \newblock [Online, accessed 22-April-2020].
 
 \bibitem{nvidia-apex}
