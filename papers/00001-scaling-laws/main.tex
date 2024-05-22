@@ -500,8 +500,6 @@ With these parameters, we obtain the learning curve fits in Figure \ref{fig:Lear
 
 The data and fits can be visualized in a different and more interesting way, as shown in Figure \ref{fig:ComputevsParamsvsPerformance}.  There we study the test loss as a function of model size while fixing either the total non-embedding compute $C$ used in training, or the number of steps $S$.  For the fits we use Equation \eqref{eq:AdjustedCompute} and \eqref{eq:AdjustedSteps} along with the parameters above and Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps2}.
 
-The power-law dependence of the loss on $S_{\rm min}$ reflects the interplay of optimizer dynamics and the loss landscape.    Since the fits are best late in training, when the loss may be approximately quadratic, the power-law should provide information about the spectrum of the Hessian of the loss.  Its universality suggests that the Hessian eigenvalue density is roughly independent of model size.  
-
 \subsection{Lower Bound on Early Stopping Step}
 \label{sec:EarlyStop}
 
@@ -525,8 +523,6 @@ where $L(N, \infty)$ is the converged loss, evaluated with infinite available da
 \section{Optimal Allocation of the Compute Budget}
 \label{sec:OptimalCompute}
 
-We displayed the \emph{empirical} trend of performance as a function of the computation used during training in the top-right of Figure \ref{fig:BasicPowerLaws}.  However, this result involved training at a fixed batch size $B$, whereas we know that in fact we could train more efficiently\footnote{One might ask why we did not simply train at $B_{\rm crit}$ in the first place.  The reason is that it depends not only on the model but also on the target value of the loss we wish to achieve, and so is a moving target.} by training at the batch size $B_{\rm crit}$ discussed in Section \ref{sec:OptimalBatchSize}. Large and small values of the loss could have been achieved with fewer samples or fewer steps, respectively, and correcting for this inefficiency by standardizing to the critical batch size results in cleaner and more predictable trends.
-
 \begin{figure}
 \centering{}
 \includegraphics[width=0.5\textwidth]{ComputeEfficientFrontierWithAdjustment}  
@@ -534,8 +530,6 @@ We displayed the \emph{empirical} trend of performance as a function of the comp
 When adjusting performance to simulate training far below the critical batch size, we find a somewhat altered power law for $L(C_{\rm min})$ when compared with the fully empirical results.  The conspicuous lump at $10^{-5}$ PF-days marks the transition from 1-layer to 2-layer networks; we exclude 1-layer networks in the power-law fits.  It is the $L(C_{\rm min})$ trend that we expect to provide a reliable extrapolation for larger compute.
 \label{fig:ComputeEfficientAdjusted}}
 \end{figure}
-
-In this section we will adjust for this oversight. More importantly, we will use the results of Section \ref{sec:ScalingSizeandSteps} to determine the optimal \emph{allocation} of compute between model size $N$ and the quantity of data processed during training, namely $2 B_{\rm crit}  S_{\rm min}$.  We will determine this allocation both empirically and theoretically, by using the equation for $L(N, S_{\rm min})$, and we will demonstrate that these methods agree.
 
 \subsection{Optimal Performance and Allocations}
 
@@ -568,9 +562,6 @@ Thus we conclude that as we scale up language modeling with an optimal allocatio
 
 \subsection{Predictions from $L(N, S_{\rm min})$}
 
-The results for $L(C_{\rm min})$ and the allocations can be predicted  from the $L(N, S_{\rm min})$ equation obtained in Section \ref{sec:ScalingSizeandSteps}.  Given our  equation for $L(N, S_{\rm min})$, we can substitute $S_{\rm min} = \frac{C_{\rm min}}{6 N B}$ and then find the minimum of the loss as a function of $N$, while fixing the training compute.  
-We carry out this procedure in detail  in Appendix \ref{app:ComputeEfficientTraining}, where we also provide some additional predictions.  
-
 For the loss as a function of training compute, we predict that
 \be
 L(C_{\rm min}) = \left( \frac{C_c^{\rm min}}{C_{\rm min}} \right)^{\alpha_C^{\rm min}}
@@ -583,7 +574,7 @@ in excellent agreement with the exponent of Figure \ref{fig:ComputeEfficientAdju
 \be
 N(C_{\rm min}) \propto (C_{\rm min})^{\alpha_C^{\rm min} / \alpha_N} \approx  (C_{\rm min})^{0.71}
 \ee
-which also matches the scaling of Figure \ref{fig:ComputevsPerformance} to within a few percent.  Our scaling laws provide a predictive framework for the performance of language modeling.
+which also matches the scaling of Figure \ref{fig:ComputevsPerformance} to within a few percent.
 
 \subsection{Contradictions and a Conjecture}
 \begin{figure}
@@ -630,38 +621,18 @@ though the numerical values are highly uncertain, varying by an order or magnitu
 
 One might also conjecture that this intersection point has a deeper meaning.  If we cannot increase the model size beyond $N^*$ without qualitatively different data requirements, perhaps this means that once we reach $C_{\rm min}^*$ and $N^*$, we have extracted all of the reliable information available in natural language data.  In this interpretation, $L^*$ would provide a rough estimate for the entropy-per-token\footnote{Defining words using the \texttt{wc} utility, the WebText2 dataset has $1.4$ tokens per word and $4.3$ characters per token. } of natural language.  In this scenario, we would expect the loss trend to level off at or before $L^*$.
 
-We can guess at the functional form of $L(C_{\rm min})$ as it levels off by considering a version of our training dataset with added noise.  For example, we could append a random string of tokens to each context shown to the model to artificially boost the loss by a constant additive factor. Then, the distance from the noise floor $L-L_{\rm noise}$ would be a more meaningful performance metric, with even a small decrease in this distance potentially representing a significant boost in qualitative performance. Since the artificial noise would affect all of our trends equally, the critical point of \ref{eq:SpecialPoint} would not change (aside from the absolute value of $L^*$), and may be meaningful even if it occurs after the leveling off.
-
 \section{Related Work}
 
-Power laws can arise from a wide variety of sources \cite{thurner2018introduction}.  Power-law scalings with model and dataset size in density estimation \cite{wasserman2006all} and  in random forest models \cite{biau2012analysis} may be connected with our results. These models suggest that power-law exponents may have a very rough interpretation as the inverse of the number of relevant features in the data.
-
-Some early \cite{banko2001scaling, DBLP:journals/corr/cs-CL-0108005}   work found power-law scalings between performance and dataset size.  More recent work \cite{1712.00409, Hestness:2019:BHA:3293883.3295710} also investigated scaling between model size and data size; their work is perhaps the closest to ours in the literature\footnote{After this work was completed, \cite{rosenfeld2019constructive} also appeared, which makes similar predictions for the dependence of loss on both model and dataset size.}.  Note, however, that \cite{1712.00409} found super-linear scaling of dataset size with model size, whereas  we find a sub-linear scaling.  There are some parallels between our findings on optimal allocation of compute and \cite{1906.06669}, including power-law learning curves.  EfficientNets \cite{DBLP:journals/corr/abs-1905-11946} also appear to obey an approximate power-law relation between accuracy and model size.  Very recent work \cite{1909.12673} studies scaling with both dataset size and model size for a variety of datasets, and fits an ansatz similar to ours.
-
-EfficientNet \cite{DBLP:journals/corr/abs-1905-11946}   advocates scaling depth and width exponentially (with different coefficients) for optimal performance of image models, resulting in a power-law scaling of width as a function of depth.    We find that for language models this power should be roughly one when scaling up (as width/depth should remain fixed). But more importantly, we find that the precise architectural hyperparameters are unimportant compared to the overall scale of the language model.  In \cite{ResNetsEnsemblesShallow} it was argued that deep models can function as ensembles of shallower models, which could potentially explain this finding.  Earlier work  \cite{Zagoruyko_2016} has compared width and depth, and found that wide ResNets can outperform deep ResNets on image classification.  
-Some studies fix computation per data example, which tends to scale in proportion to the number of model parameters, whereas we investigate scaling with both model size and the quantity of training computation. 
-
-Various works \cite{1710.03667,1812.11118} have investigated generalization in highly overparameterized models, finding a ``jamming transition'' \cite{1901.01608} when the model size reaches the dataset size (this may  require training many orders of magnitude beyond typical practice, and in particular does not use early stopping).  We do not observe such a transition, and find that the necessary training data scales sublinearly in the model size.
-Expansions in the model size, particularly at large width \cite{jacot2018neural, 1902.06720}, may provide a useful framework for thinking about some of our scaling relations.  Our results on optimization, such as the shape of learning curves, can likely be explained using a noisy quadratic model, which can provide quite accurate predictions \cite{DBLP:journals/corr/abs-1907-04164} in realistic settings.  Making this connection quantitative will require a characterization of the Hessian spectrum \cite{DBLP:journals/corr/abs-1811-07062, DBLP:journals/corr/abs-1901-10159, unpublished-grd}.
+EfficientNet \cite{DBLP:journals/corr/abs-1905-11946}   advocates scaling depth and width exponentially (with different coefficients) for optimal performance of image models, resulting in a power-law scaling of width as a function of depth.    We find that for language models this power should be roughly one when scaling up (as width/depth should remain fixed). But more importantly, we find that the precise architectural hyperparameters are unimportant compared to the overall scale of the language model.
 
 \section{Discussion}
 
 
 We have observed consistent scalings of language model log-likelihood loss with non-embedding parameter count $N$, dataset size $D$, and optimized training computation $C_{\rm min}$, as encapsulated in Equations \eqref{eq:FundamentalLikelihioodvsModelandDataSize} and \eqref{eq:FundamentalLikelihioodvsModelandSteps}.  Conversely, we find very weak dependence on many architectural and optimization hyperparameters.  Since scalings with $N, D, C_{\rm min}$ are power-laws, there are diminishing returns with increasing scale.
 
-We were able to precisely model the dependence of the loss on $N$ and $D$, and alternatively on $N$ and $S$, when these parameters are varied simultaneously.  We used these relations to derive the compute scaling, magnitude of overfitting, early stopping step, and data requirements when training large language models. So our scaling relations go beyond mere observation to provide a predictive framework.  One might interpret these relations as analogues of the ideal gas law, which relates the macroscopic properties of a gas in a universal way, independent of most of the details of its microscopic consituents.
+In the domain of natural language, it will be important to investigate whether continued improvement on the loss translates into improvement on relevant language tasks.  Smooth quantitative change can mask major qualitative improvements: ``more is different''.  The smooth improvements in language model loss may hide seemingly qualitative changes in capability.
 
-It is natural to conjecture that the scaling relations will apply to other generative modeling tasks with a maximum likelihood loss, and perhaps in other settings as well.    To this purpose, it will be  interesting to test these relations on other domains, such as images, audio, and video models, and perhaps also for random network distillation.  At this point we do not know which of our results depend on the structure of natural language data, and which are universal.  It would also be exciting to find a theoretical framework from which the scaling relations can be derived: a `statistical mechanics' underlying the `thermodynamics' we have observed.  Such a theory might make it possible to derive other more precise predictions, and provide a systematic understanding of the limitations of the scaling laws.
-
-In the domain of natural language, it will be important to investigate whether continued improvement on the loss translates into improvement on relevant language tasks.  Smooth quantitative change can mask major qualitative improvements: ``more is different''.  For example, the smooth aggregate growth of the economy provides no indication of the specific technological developments that underwrite it. Similarly, the smooth improvements in language model loss may hide seemingly qualitative changes in capability.
-
-Our results strongly suggest that larger models will continue to perform better, and will also be much more sample efficient than has been previously appreciated.  Big models may be more important than big data.  In this context, further investigation into model parallelism is warranted. Deep models can be trained using pipelining \cite{DBLP:journals/corr/abs-1811-06965}, which splits parameters depth-wise between devices, but eventually requires increased batch sizes as more devices are used.  Wide networks on the other hand are more amenable to parallelization \cite{shazeer2018meshtensorflow}, since large layers can be split between multiple workers with less serial dependency.  Sparsity \cite{DBLP:journals/corr/abs-1904-10509,gray2017gpu} or branching (e.g. \cite{Krizhevsky:2012:ICD:2999134.2999257}) may allow for even faster training of large networks through increased model parallelism.  And using methods like \cite{Wang_2017,wen2019autogrow}, which grow networks as they train, it might be possible to remain on the compute-efficient frontier for an entire training run.
-
-
-\section*{Acknowledgements}
-
-We would like to thank Shan Carter, Paul Christiano, Jack Clark, Ajeya Cotra, Ethan Dyer, Jason Eisner, Danny Hernandez, Jacob Hilton, Brice Menard, Chris Olah, and Ilya Sutskever for discussions and for feedback on drafts of this work.
-
+Our results strongly suggest that larger models will continue to perform better, and will also be much more sample efficient than has been previously appreciated.  Big models may be more important than big data.  In this context, further investigation into model parallelism is warranted.
 
 \newpage
 \appendix
@@ -759,36 +730,8 @@ $D_{{\rm opt}}=D_{e}\cdot C_{{\rm min}}^{p_{D}}$ (1 epoch) & $p_{D}=0.27$ & $D_{
 \section{Empirical Model of Compute-Efficient Frontier}
 \label{app:ComputeEfficientTraining}
 
-Throughout this appendix all values of $C, S,$ and $\alpha_C$ are adjusted for training at the critical batch size $B_{\rm crit}$.  We have left off the `adj' label to avoid cluttering the notation. 
-
-\subsection{Defining Equations}
-The power-law fit to the learning curves implies a simple prescription for compute-efficient training.
-In this appendix, we will derive the optimal performance, model size, and number of training steps as a function of the compute budget.
-We start with the Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps}, repeated here for convenience:
-\begin{equation}
-L\left(N,S\right)=\left(\frac{N_{c}}{N}\right)^{\alpha_{N}}+\left(\frac{S_{c}}{S}\right)^{\alpha_{S}}.
-\end{equation}
-Here, $S$ represents the number of parameter updates when training \textbf{at the critical batch size} \cite{1812.06162}, which was defined in Equation \eqref{eq:DefinitionBcrit}\footnote{There is a slight ambiguity here: we can imagine training either at a constant batch size $B\left(L_{{\rm target}}\right)$, or we could instead train at a variable batch size $\tilde{B}\left(L\right)$, where $\tilde{B}$ is the instantaneous critical batch size (as opposed to $B$, which is the averaged version). These two prescriptions result in the same number of steps, so we can ignore this subtlety (see \cite{1812.06162}).}:
-\begin{equation}
-B\left(L\right)=\frac{B_{\ast}}{L^{1/\alpha_{B}}}.
-\end{equation}
-We would like to determine optimal training parameters for a fixed compute budget, so we replace $S=C/\left(6NB\left(L\right)\right)$, where $C$ is the number of FLOPs used in the training run:
-\begin{equation}
-L\left(N,C\right)=\left(\frac{N_{c}}{N}\right)^{\alpha_{N}}+\left(6B_{\ast}S_{c}\frac{N}{L^{1/\alpha_{B}}C}\right)^{\alpha_{S}}.\label{eq:loss-params-compute}
-\end{equation}
-Now, we set $\partial_{N}L\big|_{C}=0$ to find the condition for optimality:
-\begin{align}
-0 & =\frac{\partial L}{\partial N}\big|_{C}\nonumber \\
- & =-\frac{\alpha_{N}}{N}\left(\frac{N_{c}}{N}\right)^{\alpha_{N}}+\frac{\alpha_{S}}{N}\left(6B_{\ast}S_{c}\frac{N}{L^{1/\alpha_{B}}C}\right)^{\alpha_{S}}\left(1-5\frac{N}{L}\cancel{\frac{\partial L}{\partial N}\big|_{C}}\right)\nonumber \\
-\implies\frac{\alpha_{N}}{\alpha_{S}}\left(\frac{N_{c}}{N}\right)^{\alpha_{N}} & =\left(6B_{\ast}S_{c}\frac{N}{L^{1/\alpha_{B}}C}\right)^{\alpha_{S}}\label{eq:compute-optimality}
-\end{align}
-Equation \eqref{eq:loss-params-compute} and \eqref{eq:compute-optimality} together determine the compute-efficient frontier.
-
-
-
 \subsection{Efficient Training}
-Now we assemble the implications of \eqref{eq:loss-params-compute} and \eqref{eq:compute-optimality}.
-First, note that inserting \eqref{eq:compute-optimality} into \eqref{eq:loss-params-compute} yields
+
 \begin{equation}
 L\left(N_{{\rm eff}}\left(C\right),C\right)=\left(1+\frac{\alpha_{N}}{\alpha_{S}}\right)L\left(N_{{\rm eff}},\infty\right),
 \end{equation}
@@ -840,27 +783,7 @@ The result is shown in Figure X. Models between 0.6x and 2.2x the optimal size c
 \be
 \frac{S\left(N,N_{{\rm eff}}\right)}{S\left(N_{{\rm eff}},N_{{\rm eff}}\right)}=\left[1+\frac{\alpha_{S}}{\alpha_{N}}\left(1-\left(\frac{N_{{\rm eff}}}{N}\right)^{\alpha_{N}}\right)\right]^{-1/\alpha_{S}}.
 \ee
-A 2.2x larger model requires 45\% fewer steps at a cost of 20\% more training compute. Note that this equation should not be trusted for very large models, as it is only valid in the power-law region of the learning curve after initial transient effects.
-
-
-
-\section{Caveats}
-
-In this section we list some potential caveats to our analysis.
-
-\begin{itemize}
-\item At present we do not have a solid theoretical understanding for any of our proposed scaling laws.  The scaling relations with model size and compute are especially mysterious.  It may be possible to understand scaling at very large $D$ holding model size fixed \cite{1710.03667}, and also the shape of learning curves late in training, by modeling the loss with a noisy quadratic.  But the scaling with $D$ at very large model size still remains mysterious.  Without a theory or a systematic understanding of the corrections to our scaling laws, it's difficult to determine in what circumstances they can be trusted.  
-
-\item  We are not especially confident in the prediction of $B_{\rm crit}(L)$ for values of the loss far outside the range we have explored.  Changes in $B_{\rm crit}$ could have a significant impact on trade-offs between data parallelism and the number of serial training steps required, which would have a major impact on training time.
-
-\item We did not thoroughly investigate the small data regime, and our fits for $L(N,D)$ were poor for the smallest values of $D$ (where an epoch corresponded to only $40$ steps). Furthermore, we did not experiment with regularization and data augmentation. Improvements in these could alter our results,  quantitatively or qualitatively. 
-
-\item We used the estimated training compute $C \approx 6 N B S$, which did not include contributions proportional to  $n_{\rm ctx}$ (see Section \ref{sec:ParameterComputeCounts}).  So our scalings with compute may be confounded in practice in the regime of very large $n_{\rm ctx}$, specifically where $n_{\rm ctx} \gtrsim 12 d_{\rm model}$.
-
-\item We tuned learning rates, and we experimented with learning rate schedules.  But we may have neglected to tune some hyperparameter (e.g. intialization scale or  momentum) that have an important effect on scaling.
-
-\item The optimal choice of learning rate is sensitive to the target loss. When training close to convergence, it may be necessary to use a smaller learning rate to avoid divergences.  But when conducting a short training run (eg due to compute limitations), it may be possible to use a larger learning rate.  We did not experiment with higher learning rates for training runs that did not proceed to convergence.
-\end{itemize}
+A 2.2x larger model requires 45\% fewer steps at a cost of 20\% more training compute.
 
 \section{Supplemental  Figures}
 
@@ -873,40 +796,10 @@ In this section we list some potential caveats to our analysis.
 
 \begin{figure}
 \noindent \centering{} 
-\includegraphics[width=0.48\textwidth]{ComputeVsParamswithUTNoReuse}\hfill
-\includegraphics[width=0.48\textwidth]{ComputeVsParamswithUTWithReuse}
-\caption[Universal transformers]{We compare recurrent Transformers \cite{DBLP:journals/corr/abs-1807-03819}, which re-use parameters, to standard Transformers. Recurrent Transformers perform slightly better when comparing models with equal parameter count, but slightly worse when accounting for reuse and comparing per FLOP. \label{fig:RecurrentTransformers}}
-\end{figure}
-
-
-
-\subsection{Early Stopping and Test vs Train}
-\label{sec:OverfittingandEarlyStopping}
-
-In section \ref{sec:EarlyStop} we described the result shown in Figure \ref{fig:OverfittingandEarlyStopping}, which provides a prediction for a lower bound on the early stopping step.  We also show the train and test loss for a given model size when training on different sized datasets.  
-
-
-\subsection{Universal Transformers}
-
-We  compare the performance of standard Transformers  to recurrent Transformers \cite{DBLP:journals/corr/abs-1807-03819} in Figure \ref{fig:RecurrentTransformers}.  These models re-use parameters, and so perform slightly better as a function of $N$, but slightly worse as a function of compute $C$.  We include several different different possibilities for parameter re-use.
-
-
-
-
-\subsection{Batch Size}
-
-We measure the critical batch size using the data displayed in figure \ref{fig:BatchPareto}.  This made it possible to estimate $B_{\rm crit}(L)$ in figure \ref{fig:OptimalBatchSize}.
-
-\begin{figure}
-\noindent \centering{} 
 \includegraphics[width=0.48\textwidth]{BatchParetoFronts3M} 
 \includegraphics[width=0.48\textwidth]{BatchParetoFronts85M}
  \caption[Batch size scans]{These figures demonstrate fits to Equation \eqref{eq:TimeComputeTradeoff} for a large number of values of the loss $L$, and for two different Transformer model sizes.  These fits were used to measure $B_{\rm crit}(L)$ for Figure \ref{fig:OptimalBatchSize}.  \label{fig:BatchPareto}}
 \end{figure}
-
-\subsection{Sample Efficiency vs Model Size}
-
-It is easy to see from figure \ref{fig:EfficiencyIllustration} that larger models train faster, and are therefore more sample efficient.  We provide another way of looking at this phenomenon in figure \ref{fig:SampleEfficiency}, which shows when different models reach various fixed values of the loss.
 
 \begin{figure}
 \noindent \centering{}
