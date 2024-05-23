@@ -70,25 +70,19 @@ These relationships allow us to determine the optimal allocation of a fixed comp
 
 \section{Introduction}
 
-One might expect language modeling performance to depend on model architecture, the size of neural models, the computing power used to train them, and the data available for this training process.  In this work we will empirically investigate the dependence of language modeling loss on all of these factors, focusing on the Transformer architecture \cite{OriginalTransformer,liu2018generating}.
-
-\begin{figure}
-\noindent \centering{} 
-\includegraphics[width=\textwidth]{SimplePowerLaws}
-
-\caption[Summary of simple power laws.]{Language modeling performance improves smoothly as we increase the model size, datasetset size, and amount of compute\footnotemark~used for training.  For optimal performance all three factors must be scaled up in tandem. Empirical performance has a power-law relationship with each individual factor when not bottlenecked by the other two.  \label{fig:BasicPowerLaws}}
-\end{figure}
-
-
 \subsection{Summary}
-
-\footnotetext{Here we display predicted compute when using a sufficiently small batch size.  See Figure \ref{fig:ComputeEfficientAdjusted} for comparison to the purely empirical data.}
 
 Our key findings for Transformer language models are are as follows:
 
 \paragraph{Performance depends strongly on scale, weakly on model shape:} Model performance depends most strongly on scale, which consists of three factors: the number of model parameters $N$ (excluding embeddings), the size of the dataset $D$, and the amount of compute $C$ used for training.  Within reasonable limits, performance depends very weakly on other architectural hyperparameters such as depth vs.~width. (Section \ref{sec:Empirical})
 
 \paragraph{Smooth power laws:} Performance has a power-law relationship with each of the three scale factors $N, D, C$ when not bottlenecked by the other two, with trends spanning more than six orders of magnitude (see Figure \ref{fig:BasicPowerLaws}). We observe no signs of deviation from these trends on the upper end, though performance must flatten out eventually before reaching zero loss. (Section \ref{sec:Empirical})
+
+\begin{figure}
+\includegraphics[width=\textwidth]{SimplePowerLaws}
+
+\caption[Summary of simple power laws.]{Language modeling performance improves smoothly as we increase the model size, datasetset size, and amount of compute used for training.  For optimal performance all three factors must be scaled up in tandem. Empirical performance has a power-law relationship with each individual factor when not bottlenecked by the other two.  \label{fig:BasicPowerLaws}}
+\end{figure}
 
 \paragraph{Universality of overfitting:} Performance improves predictably as long as we scale up $N$ and $D$ in tandem, but enters a regime of diminishing returns if either $N$ or $D$ is held fixed while the other increases.  \textbf{The performance penalty depends predictably on the ratio $N^{0.74}/D$, meaning that every time we increase the model size 8x, we only need to increase the data by roughly 5x to avoid a penalty.} (Section \ref{sec:ChartingOverfitting})
 
@@ -105,14 +99,23 @@ Our key findings for Transformer language models are are as follows:
 \end{figure}
 
 \begin{figure}
+\noindent \centering{} 
+\includegraphics[width=0.48\textwidth]{LossvsModelDatasetSize}
+\includegraphics[width=0.48\textwidth]{LearningCurveFitComparisonIntro}
+\caption[Performance when varying model and data size, or model and training steps, simultaneously]{
+{\bf Left}: The early-stopped test loss $L(N, D)$ varies predictably with the dataset size $D$ and model size $N$ according to Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}.  
+{\bf Right}:  After an initial transient period, learning curves for all model sizes $N$ can be fit with Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps}, which is parameterized in terms of $S_{\rm min}$, the number of steps when training at large batch size (details in Section \ref{sec:OptimalBatchSize}).  \label{fig:LearningCurveFitsandResiduals}
+\label{fig:LossvsModelDatasetSize}}
+\end{figure}
+
+\paragraph{Convergence is inefficient:} When working within a fixed compute budget $C$ but without any other restrictions on the model size $N$ or available data $D$, we attain optimal performance by training \emph{very large models} and stopping \emph{significantly short of convergence} (see Figure \ref{fig:ContributionIllustration}).  Maximally compute-efficient training would therefore be far more sample efficient than one might expect based on training small models to convergence, with data requirements growing very slowly as $D \sim C^{0.27}$ with training compute. (Section \ref{sec:OptimalCompute})
+
+\begin{figure}
 \noindent \centering{} \includegraphics[height=0.32\textwidth]{ContributionIllustration}
 \caption[How to scale up model size, batch size, and serial steps]{As more compute becomes available, we can choose how much to allocate towards training larger models, using larger batches, and training for more steps.  We illustrate this for a billion-fold increase in compute.  For optimally compute-efficient training, most of the increase should go towards increased model size.  A relatively small increase in data is needed to avoid reuse.  Of the increase in data, most can be used to increase parallelism through larger batch sizes, with only a very small increase in serial training time required.  \label{fig:ContributionIllustration} }
 \end{figure}
 
-
-\paragraph{Convergence is inefficient:} When working within a fixed compute budget $C$ but without any other restrictions on the model size $N$ or available data $D$, we attain optimal performance by training \emph{very large models} and stopping \emph{significantly short of convergence} (see Figure \ref{fig:ContributionIllustration}).  Maximally compute-efficient training would therefore be far more sample efficient than one might expect based on training small models to convergence, with data requirements growing very slowly as $D \sim C^{0.27}$ with training compute. (Section \ref{sec:OptimalCompute})
-
-\paragraph{Optimal batch size:} The ideal batch size for training these models is roughly a power of the loss only, and continues to be determinable by measuring the gradient noise scale \cite{1812.06162}; it is roughly 1-2 million tokens at convergence for the largest models we can train. (Section \ref{sec:OptimalBatchSize})
+\paragraph{Optimal batch size:} The ideal batch size for training these models is roughly a power of the loss only, and continues to be determinable by measuring the gradient noise scale \cite{1812.06162}. (Section \ref{sec:OptimalBatchSize})
 
 \subsection{Summary of Scaling Laws}
 
@@ -137,17 +140,6 @@ The critical batch size, which determines the speed/efficiency tradeoff for data
 B_{\rm crit}\left(L\right)=\frac{B_{\ast}}{L^{1/\alpha_{B}}},\qquad B_{\ast} \sim 2\cdot 10^8 \text{ tokens},\ \ \alpha_{B} \sim 0.21
 \label{eq:critical-batch-size}
 \end{equation}
-
-\begin{figure}
-\noindent \centering{} 
-\includegraphics[width=0.48\textwidth]{LossvsModelDatasetSize}
-\includegraphics[width=0.48\textwidth]{LearningCurveFitComparisonIntro}
-\caption[Performance when varying model and data size, or model and training steps, simultaneously]{
-{\bf Left}: The early-stopped test loss $L(N, D)$ varies predictably with the dataset size $D$ and model size $N$ according to Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}.  
-{\bf Right}:  After an initial transient period, learning curves for all model sizes $N$ can be fit with Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps}, which is parameterized in terms of $S_{\rm min}$, the number of steps when training at large batch size (details in Section \ref{sec:OptimalBatchSize}).  \label{fig:LearningCurveFitsandResiduals}
-\label{fig:LossvsModelDatasetSize}}
-\end{figure}
-
 
 Equation \eqref{eq:crit_n} and \eqref{eq:crit_d} together suggest that as we increase the model size, we should increase the dataset size sublinearly according to $D \propto N^{\frac{\alpha_N}{\alpha_D}} \sim N^{0.74}$. In fact, we find that there is a single equation combining \eqref{eq:crit_n} and \eqref{eq:crit_d} that governs the simultaneous dependence on $N$ and $D$ and governs the degree of overfitting:
 \be
@@ -206,6 +198,23 @@ We train language models on WebText2, an extended version of the WebText \cite{r
 \subsection{Parameter and Compute Scaling of Transformers}
 \label{sec:ParameterComputeCounts}
 
+We parameterize the Transformer architecture using hyperparameters $n_{\rm layer}$ (number of layers), $d_{{\rm model}}$ (dimension of the residual stream), $d_{\rm ff}$ (dimension of the intermediate feed-forward layer), $d_{\rm attn}$ (dimension of the attention output), and $n_{\rm heads}$ (number of attention heads per layer).  We include $n_{\rm ctx}$ tokens in the input context, with $n_{\rm ctx} = 1024$ except where otherwise noted.
+
+We use $N$ to denote the model size, which we define as the number of \emph{non-embedding} parameters
+\begin{align}
+\label{eq:ModelSizeDefinition}
+N & \approx  2d_{{\rm model}}n_{{\rm layer}}\left(2d_{{\rm attn}}+d_{{\rm ff}}\right) & \nonumber \\
+& = 12 n_{\rm layer} d_{{\rm model}}^2 \quad \text{ with the standard } \quad d_{\rm attn} = d_{\rm ff}/4 = d_{{\rm model}} &
+\end{align}
+where we have excluded biases and other sub-leading terms.
+Our models also have $n_{\rm vocab} d_{{\rm model}}$ parameters in an embedding matrix, and use $n_{\rm ctx} d_{{\rm model}}$ parameters for positional embeddings, but we do not include these when discussing the `model size' $N$; we will see that this produces significantly cleaner scaling laws.
+
+Evaluating a forward pass of the Transformer involves roughly
+\be
+\label{eq:ApproximateTotalCompute}
+C_{\rm forward} \approx 2N + 2n_{{\rm layer}}n_{{\rm ctx}}d_{{\rm model}}
+\ee
+add-multiply operations, where the factor of two comes from the multiply-accumulate operation used in matrix multiplication.  A more detailed per-operation parameter and compute count is included in Table \ref{tab:TableTransformerParamsFLOPs}.
 
 \begin{table}[t!]
 \centering
@@ -233,24 +242,6 @@ De-embed  & ---  & $2d_{{\rm model}}n_{{\rm vocab}}$\tabularnewline
 \vspace{1em}
 \caption[Parameter and compute counts for Transformer]{Parameter counts and compute (forward pass) estimates for a Transformer model.  Sub-leading terms such as nonlinearities, biases, and layer normalization are omitted. \label{tab:TableTransformerParamsFLOPs}}
 \end{table}
-
- We parameterize the Transformer architecture using hyperparameters $n_{\rm layer}$ (number of layers), $d_{{\rm model}}$ (dimension of the residual stream), $d_{\rm ff}$ (dimension of the intermediate feed-forward layer), $d_{\rm attn}$ (dimension of the attention output), and $n_{\rm heads}$ (number of attention heads per layer).  We include $n_{\rm ctx}$ tokens in the input context, with $n_{\rm ctx} = 1024$ except where otherwise noted.
-
-We use $N$ to denote the model size, which we define as the number of \emph{non-embedding} parameters
-\begin{align}
-\label{eq:ModelSizeDefinition}
-N & \approx  2d_{{\rm model}}n_{{\rm layer}}\left(2d_{{\rm attn}}+d_{{\rm ff}}\right) & \nonumber \\
-& = 12 n_{\rm layer} d_{{\rm model}}^2 \quad \text{ with the standard } \quad d_{\rm attn} = d_{\rm ff}/4 = d_{{\rm model}} &
-\end{align}
-where we have excluded biases and other sub-leading terms.
-Our models also have $n_{\rm vocab} d_{{\rm model}}$ parameters in an embedding matrix, and use $n_{\rm ctx} d_{{\rm model}}$ parameters for positional embeddings, but we do not include these when discussing the `model size' $N$; we will see that this produces significantly cleaner scaling laws.
-
-Evaluating a forward pass of the Transformer involves roughly
-\be
-\label{eq:ApproximateTotalCompute}
-C_{\rm forward} \approx 2N + 2n_{{\rm layer}}n_{{\rm ctx}}d_{{\rm model}}
-\ee
-add-multiply operations, where the factor of two comes from the multiply-accumulate operation used in matrix multiplication.  A more detailed per-operation parameter and compute count is included in Table \ref{tab:TableTransformerParamsFLOPs}.
 
 For contexts and models with $d_{{\rm model}} > n_{\rm ctx} / 12$, the context-dependent computational cost per token is a relatively small fraction of the total compute.
 Since we primarily study models where $d_{\rm model} \gg n_{\rm ctx}/12$, we do not include context-dependent terms in our training compute estimate.  Accounting for the backwards pass (approximately twice the compute as the forwards pass), we then define the estimated non-embedding compute as $C \approx 6 N$ floating point operators per training token.
@@ -285,18 +276,22 @@ To characterize language model scaling we train a wide variety of models, varyin
 \subsection{Approximate Transformer Shape and Hyperparameter Independence}
 \label{sec:ShapeIndependence}
 
+Transformer performance depends very weakly on the shape parameters $n_{\rm layer}, n_{\rm heads}$, and $d_{\rm ff}$ when we hold the total non-embedding parameter count $N$ fixed.  
+The results are shown in Figure \ref{fig:HeadsLayersIndependence}.
+
 \begin{figure}
-\noindent \centering{} 
 \includegraphics[width=\textwidth]{HyperparameterTuning}
  \caption[Weak dependence of performance on hyperparameter tuning]{Performance depends very mildly on model shape when the total number of non-embedding parameters $N$ is held fixed.  The loss varies only a few percent over a wide range of shapes.  Small differences in parameter counts are compensated for by using the fit to $L(N)$ as a baseline.  Aspect ratio in particular can vary by a factor of 40 while only slightly impacting performance; an $(n_{\mathrm{layer}}, d_{\mathrm{model}}) = (6, 4288)$ reaches a loss within 3\% of the $(48, 1600)$ model used in \cite{radford2019language}.  \label{fig:HeadsLayersIndependence}}
 \end{figure}
 
-Transformer performance depends very weakly on the shape parameters $n_{\rm layer}, n_{\rm heads}$, and $d_{\rm ff}$ when we hold the total non-embedding parameter count $N$ fixed.  
-The results are shown in Figure \ref{fig:HeadsLayersIndependence}.
-
-
 \subsection{Performance with Non-Embedding Parameter Count $N$} 
 \label{sec:PerformancevsModelSize}
+
+As shown in  Figure \ref{fig:BasicPowerLaws}, we find a steady trend with non-embedding parameter count $N$, which can be fit to the first term of Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}, so that
+\be
+L(N) \approx \left( \frac{N_c}{N} \right)^{ \alpha_N }
+\ee  
+To observe these trends it is crucial to study performance as a function of $N$; if we instead use the total parameter count (including the embedding parameters) the trend is somewhat obscured (see Figure \ref{fig:PerformancevsModelSizeBody}).  This suggests that the embedding matrix can be made smaller without impacting performance, as has been seen in recent work \cite{lan2019albert}.
 
 \begin{figure}
 \noindent \centering{}
@@ -307,22 +302,7 @@ The results are shown in Figure \ref{fig:HeadsLayersIndependence}.
 {\bf Right:} When we exclude embedding parameters, the performance of models with different depths converge to a single trend. Only models with fewer than 2 layers or with extreme depth-to-width ratios deviate significantly from the trend.  \label{fig:PerformancevsModelSizeBody}}
 \end{figure}
 
-
-In Figure \ref{fig:PerformancevsModelSizeBody} we display the performance of a wide variety of models, ranging from small models with shape $(n_{\rm layer}, d_{{\rm model}}) = (2, 128)$ through billion-parameter models, ranging in shape from $(6, 4288)$ through $(207, 768)$.  Here we have trained to near convergence on the full WebText2 dataset and observe no overfitting (except possibly for the very largest models).
-
-As shown in  Figure \ref{fig:BasicPowerLaws}, we find a steady trend with non-embedding parameter count $N$, which can be fit to the first term of Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}, so that
-\be
-L(N) \approx \left( \frac{N_c}{N} \right)^{ \alpha_N }
-\ee  
-To observe these trends it is crucial to study performance as a function of $N$; if we instead use the total parameter count (including the embedding parameters) the trend is somewhat obscured (see Figure \ref{fig:PerformancevsModelSizeBody}).  This suggests that the embedding matrix can be made smaller without impacting performance, as has been seen in recent work \cite{lan2019albert}.
-
-Although these models have been trained on the WebText2 dataset, their test loss on a variety of other datasets is also a power-law in $N$ with nearly identical power, as shown in Figure \ref{fig:GeneralizationVsModelSize}.  
-
-\subsubsection{Generalization Among Data Distributions}
-\label{sec:GeneralizationtoOtherDistributions}
-
-
-We have also tested our models on a set of additional text data distributions.  The test loss on these datasets as a function of model size is shown in Figure \ref{fig:GeneralizationVsModelSize}; in all cases the models were trained only on the WebText2 dataset.  We see that the loss on these other data distributions improves smoothly with model size, in direct parallel with the improvement on WebText2.  We find that generalization depends almost exclusively on the in-distribution validation loss, and does not depend on the duration of training or proximity to convergence. We also observe no dependence on model depth (see Appendix \ref{sec:DepthVsGeneralization}).
+Although these models have been trained on the WebText2 dataset, their test loss on a variety of other datasets is also a power-law in $N$ with nearly identical power, as shown in Figure \ref{fig:GeneralizationVsModelSize}.
 
 \begin{figure}
 \noindent \centering{} \includegraphics[width=0.48\textwidth]{GeneralizationVsModelSize}\hfill
@@ -333,13 +313,23 @@ We have also tested our models on a set of additional text data distributions.  
 \label{fig:GeneralizationVsModelSize}}
 \end{figure}
 
+\subsubsection{Generalization Among Data Distributions}
+\label{sec:GeneralizationtoOtherDistributions}
 
+
+We have also tested our models on a set of additional text data distributions.  The test loss on these datasets as a function of model size is shown in Figure \ref{fig:GeneralizationVsModelSize}; in all cases the models were trained only on the WebText2 dataset.  We see that the loss on these other data distributions improves smoothly with model size, in direct parallel with the improvement on WebText2.  We find that generalization depends almost exclusively on the in-distribution validation loss, and does not depend on the duration of training or proximity to convergence. We also observe no dependence on model depth (see Figure \ref{fig:DepthVsGeneralization}).
+
+\begin{figure}
+\noindent \centering{}
+\includegraphics[width=0.5\textwidth]{DepthVsGeneralization}
+\caption[Generalization versus depth]{We show evaluations on a series of datasets for models with approximately 1.5 Billion parameters.  We observe no effect of depth on generalization; generalization performance depends primarily on training distribution performance. The 12-layer model overfit the Internet Books dataset and we show the early-stopped performance; we have not seen this surprising result in other experiments. \label{fig:DepthVsGeneralization}}
+\end{figure}
 
 \subsection{Performance with Dataset Size and Compute}
 
 We display empirical trends for the test loss as a function of dataset size $D$ (in tokens) and training compute $C$ in Figure \ref{fig:BasicPowerLaws}.    
 
-For the trend with $D$ we trained a model with $(n_{\rm layer}, n_{\rm embd}) = (36, 1280)$ on fixed subsets of the WebText2 dataset.  We stopped training once the test loss ceased to decrease.  We see that the resulting test losses can be fit with simple power-law
+We stopped training once the test loss ceased to decrease.  We see that the resulting test losses can be fit with simple power-law
 \be
 L(D) \approx \left( \frac{D_c}{D} \right)^{\alpha_D}
 \ee
@@ -356,18 +346,6 @@ L(C) \approx \left( \frac{C_c}{C} \right)^{\alpha_C}
 \label{sec:ChartingOverfitting}
 
 \subsection{Proposed $L(N,D)$ Equation}
-
-\begin{figure}
-\noindent \centering{} 
-\includegraphics[width=0.48\textwidth]{DatasetModelSizevsPerformance}\hfill
-\includegraphics[width=0.48\textwidth]{DatasetModelSizevsChangePerformance}
-\caption[Universality of overfitting]{
-The early-stopped test loss $L(N, D)$ depends predictably on the dataset size $D$ and model size $N$ according to Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}.
-{\bf Left}:
-For large $D$, performance is a straight power law in $N$. For a smaller fixed $D$, performance stops improving as $N$ increases and the model begins to overfit. (The reverse is also true, see Figure \ref{fig:LossvsModelDatasetSize}.)
-{\bf Right}:  The extent of overfitting depends predominantly on the ratio $N^{\frac{\alpha_N}{\alpha_D}}/D$, as predicted in equation (\ref{eq:OverfittingPrediction}).  The line is our fit to that equation.
-\label{fig:DatasetModelSizevsPerformance}}
-\end{figure}
 
 We have chosen the parameterization \eqref{eq:FundamentalLikelihioodvsModelandDataSize} (repeated here for convenience):
 \be
@@ -386,6 +364,18 @@ Our choice of $L(N,D)$ satisfies the first requirement because we can rescale $N
 \subsection{Results}
 
 We regularize all our models with 10\% dropout, and by tracking test loss and stopping once it is no longer decreasing.   The results are displayed in Figure \ref{fig:DatasetModelSizevsPerformance}, including a fit to the four parameters $\alpha_N, \alpha_D, N_c, D_c$ in Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}:
+
+\begin{figure}
+\noindent \centering{} 
+\includegraphics[width=0.48\textwidth]{DatasetModelSizevsPerformance}\hfill
+\includegraphics[width=0.48\textwidth]{DatasetModelSizevsChangePerformance}
+\caption[Universality of overfitting]{
+The early-stopped test loss $L(N, D)$ depends predictably on the dataset size $D$ and model size $N$ according to Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}.
+{\bf Left}:
+For large $D$, performance is a straight power law in $N$. For a smaller fixed $D$, performance stops improving as $N$ increases and the model begins to overfit. (The reverse is also true, see Figure \ref{fig:LossvsModelDatasetSize}.)
+{\bf Right}:  The extent of overfitting depends predominantly on the ratio $N^{\frac{\alpha_N}{\alpha_D}}/D$, as predicted in equation (\ref{eq:OverfittingPrediction}).  The line is our fit to that equation.
+\label{fig:DatasetModelSizevsPerformance}}
+\end{figure}
 
 \begin{table}[h!]
 \centering
@@ -407,6 +397,14 @@ To chart the borderlands of the infinite data limit, we can directly study the e
 \delta L(N, D) \equiv \frac{L(N, D)}{L(N, \infty)} - 1
 \ee
 and studying it as a function of $N, D$.   In fact, we see empirically that $\delta L$ depends only a specific combination of $N$ and $D$, as shown in Figure \ref{fig:OverfittingandEarlyStopping}.  This follows from the scaling law of Equation \eqref{eq:FundamentalLikelihioodvsModelandDataSize}, which implies
+
+\begin{figure}
+\noindent \centering{} 
+\includegraphics[width=0.48\textwidth]{EarlyStoppingvsNandD}\hfill
+\includegraphics[width=0.48\textwidth]{TrainVsTestMedium}
+\caption[Early stopping lower bound and training curves for overfit models]{ {\bf Left:}  We characterize the step on which early stopping occurs, as a function of the extent of overfitting.  The red line indicates a {lower bound} for early stopping that is derived in Section \ref{sec:EarlyStop}.  {\bf Right:} We display train and test loss for a series of 300M parameter models trained on different sized dataset sub-samples.  The test loss typically follows that of a run done with unrestricted data until diverging. Note that the degree of overfitting (as compared to the infinite data limit) is significantly overestimated by $L_{\rm test} - L_{\rm train}$ (denoted by a black bar for each run). \label{fig:OverfittingandEarlyStopping}}
+\end{figure}
+
 \be
 \label{eq:OverfittingPrediction}
 \delta L \approx  \left( 1 +  \left(\frac{N}{N_c} \right)^{\frac{\alpha_N}{\alpha_D}} \frac{D_c}{D} \right)^{\alpha_D} - 1 
@@ -425,12 +423,6 @@ More generally, this relation shows that dataset size may grow sub-linearly in m
 \subsection{Adjustment for Training at $B_{\rm crit}(L)$}
 \label{sec:OptimalBatchSize}
 
-\begin{figure}
-\noindent \centering{} 
-\includegraphics[width=0.60\textwidth]{CriticalBatchSizeVsPerf}
-\caption[Critical batch size]{The critical batch size $B_{\rm crit}$ follows a power law in the loss as performance increase, and does not depend directly on the model size.  We find that the critical batch size approximately doubles for every $13\%$ decrease in loss.  $B_{\rm crit}$  is measured empirically from the data shown in Figure \ref{fig:BatchPareto}, but it is also roughly predicted by the gradient noise scale, as in \cite{1812.06162}.  \label{fig:OptimalBatchSize}}
-\end{figure}
-
 A simple empirical theory for the batch size dependence of training was developed in \cite{1812.06162} (see also \cite{1811.03600, DBLP:journals/corr/abs-1907-04164}).  It was argued that there is a critical batch size $B_{\rm crit}$ for training; for $B$ up to $B_{\rm crit}$  the batch size can be increased with very minimal degradation in compute-efficiency, whereas for $B > B_{\rm crit}$ increases in $B$ result in diminishing returns.  To utilize both training time and compute as effectively as possible, it is best to train with a batch size $B \approx B_{\rm crit}$.  Training at $B \gg B_{\rm crit}$  minimizes the number of training steps, while $B \ll B_{\rm crit}$ minimizes the use of compute.
 
 More specifically, it was demonstrated that for a wide variety of neural network tasks, the number of training steps $S$ and the number of data examples processed $E = B S$ satisfy the simple relation
@@ -448,6 +440,13 @@ B_{\rm crit}(L) \equiv \frac{E_{\rm min}}{S_{\rm min}}
 which is a function of the target value of the loss.  Training at the critical batch size makes a roughly optimal time/compute tradeoff, requiring $2 S_{\rm min}$ training steps and processing $E = 2 E_{\rm min}$ data examples.  
 
 In Figure \ref{fig:OptimalBatchSize} we have plotted the critical batch size and gradient noise scale as a function of training loss for two different models.  We see that $B_{\rm crit}(L)$ is  independent of model size, and only depends on the loss $L$.  The critical batch size can be fit with a power-law in the loss
+
+\begin{figure}
+\noindent \centering{} 
+\includegraphics[width=0.60\textwidth]{CriticalBatchSizeVsPerf}
+\caption[Critical batch size]{The critical batch size $B_{\rm crit}$ follows a power law in the loss as performance increase, and does not depend directly on the model size.  We find that the critical batch size approximately doubles for every $13\%$ decrease in loss.  $B_{\rm crit}$  is measured empirically from the data shown in Figure \ref{fig:BatchPareto}, but it is also roughly predicted by the gradient noise scale, as in \cite{1812.06162}.  \label{fig:OptimalBatchSize}}
+\end{figure}
+
 \be
 B_{\rm crit}(L) \approx \frac{B_*}{L^{1/\alpha_B}}
 \ee
@@ -466,14 +465,6 @@ C_{\rm min}(C) \equiv \frac{C  }{1 + B/B_{\rm crit}(L) } \qquad (\text{minimum c
 where $C = 6 N BS$ estimates the (non-embedding) compute used at batch size $B$.
 
 \subsection{Results for $L(N, S_{\rm min})$ and Performance with Model Size and Compute}
-
-\begin{figure}
-\noindent \centering{}
-\includegraphics[width=0.47\textwidth]{PerfVsParams-ComputeBudget}\hfill
-\includegraphics[width=0.47\textwidth]{PerfVsParams-StepBudget} 
-\caption[Performance versus compute budget or number of parameter updates]{
-When we hold either total compute or number of training steps fixed, performance follows $L(N,S)$ from Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps2}.  Each value of compute budget has an associated optimal model size that maximizes performance.  Mediocre fits at small $S$ are unsurprising, as the power-law equation for the learning curves breaks down very early in training. \label{fig:ComputevsParamsvsPerformance}}
-\end{figure}
 
 Now we will use $S_{\rm min}$ defined in Equation \eqref{eq:AdjustedSteps} to obtain a  simple and universal fit for the dependence of the loss on model size and training time in the infinite data limit.  We will fit the stable, Adam-optimized training runs using Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps}, repeated here for convenience:
 \be
@@ -500,6 +491,14 @@ With these parameters, we obtain the learning curve fits in Figure \ref{fig:Lear
 
 The data and fits can be visualized in a different and more interesting way, as shown in Figure \ref{fig:ComputevsParamsvsPerformance}.  There we study the test loss as a function of model size while fixing either the total non-embedding compute $C$ used in training, or the number of steps $S$.  For the fits we use Equation \eqref{eq:AdjustedCompute} and \eqref{eq:AdjustedSteps} along with the parameters above and Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps2}.
 
+\begin{figure}
+\noindent \centering{}
+\includegraphics[width=0.47\textwidth]{PerfVsParams-ComputeBudget}\hfill
+\includegraphics[width=0.47\textwidth]{PerfVsParams-StepBudget} 
+\caption[Performance versus compute budget or number of parameter updates]{
+When we hold either total compute or number of training steps fixed, performance follows $L(N,S)$ from Equation \eqref{eq:FundamentalLikelihioodvsModelandSteps2}.  Each value of compute budget has an associated optimal model size that maximizes performance.  Mediocre fits at small $S$ are unsurprising, as the power-law equation for the learning curves breaks down very early in training. \label{fig:ComputevsParamsvsPerformance}}
+\end{figure}
+
 \subsection{Lower Bound on Early Stopping Step}
 \label{sec:EarlyStop}
 
@@ -512,16 +511,12 @@ S_{\rm stop}(N,D)  \gtrsim \frac{S_c}{\left[ L(N,D) - L(N, \infty) \right]^{1 / 
 \ee
 where $L(N, \infty)$ is the converged loss, evaluated with infinite available data.  This inequality and its comparison to the empirical data is displayed in Figure \ref{fig:OverfittingandEarlyStopping} in the appendix.  In that figure, the values of $S_{\rm stop}$ and $L(N,D)$ are empirical (though $S_{\rm stop}$ is adjusted to mimic training at $B \gg B_{\rm crit}$), while $L(N, \infty)$ is computed from the fit to $L(N,D)$ evaluated at $D=\infty$.
 
-
-\begin{figure}
-\noindent \centering{}
-\includegraphics[width=0.98\textwidth]{SuboptimalModels}\
-\caption[Training on suboptimal models]{\textbf{Left:} Given a fixed compute budget, a particular model size is optimal, though somewhat larger or smaller models can be trained with minimal additional compute. \textbf{Right:} Models larger than the compute-efficient size require fewer steps to train, allowing for potentially faster training if sufficient additional parallelism is possible. Note that this equation should not be trusted for very large models, as it is only valid in the power-law region of the learning curve, after initial transient effects.  \label{fig:SubOptimalModels}}
-\end{figure}
-
-
 \section{Optimal Allocation of the Compute Budget}
 \label{sec:OptimalCompute}
+
+\subsection{Optimal Performance and Allocations}
+
+Let us first study the loss as a function of the optimally allocated compute from Equation \eqref{eq:AdjustedCompute}.  The result is plotted in Figure \ref{fig:ComputeEfficientAdjusted}, along with a power-law fit.  We see that as compared to the compute plot of Figure \ref{fig:BasicPowerLaws}, the new fit with $C_{\rm min}$ is somewhat improved.
 
 \begin{figure}
 \centering{}
@@ -531,24 +526,7 @@ When adjusting performance to simulate training far below the critical batch siz
 \label{fig:ComputeEfficientAdjusted}}
 \end{figure}
 
-\subsection{Optimal Performance and Allocations}
-
-Let us first study the loss as a function of the optimally allocated compute from Equation \eqref{eq:AdjustedCompute}.  The result is plotted in Figure \ref{fig:ComputeEfficientAdjusted}, along with a power-law fit.  We see that as compared to the compute plot of Figure \ref{fig:BasicPowerLaws}, the new fit with $C_{\rm min}$ is somewhat improved.  
-
 Given $L(C_{\rm min})$, it is natural to ask for the optimal model size $N(C_{\rm min})$ that provides the minimal loss with a given quantity of training compute.  The optimal model size is shown in Figure \ref{fig:ComputevsPerformance}.  We observe that $N(C_{\rm min})$ can be fit very well with a power-law
-\be
-N(C_{\rm min}) \propto (C_{\rm min})^{0.73}.
-\ee
-In Figure \ref{fig:SubOptimalModels}, we show the effect of training models of sub-optimal sizes (see Appendix \ref{sec:suboptimal-models}).
-
-By definition $C_{\rm min} \equiv 6 N B_{\rm crit} S$, and so we can use $N(C_{\rm min})$ to extract further results.  In particular, since prior fits show $B \propto L^{-4.8}$ and $L \propto C_{\rm min}^{-0.05}$, we can conclude that $B_{\rm crit} \propto C_{\rm min}^{0.24}$.  This leads us to conclude that the optimal number of steps will only grow very slowly with compute, as
-\be
-S_{\rm min} \propto (C_{\rm min})^{0.03},
-\ee
-matching the empirical results in Figure \ref{fig:ComputevsPerformance}.  In fact the measured exponent is sufficiently small that our results may even be consistent with an exponent of zero.  
-
-Thus we conclude that as we scale up language modeling with an optimal allocation of computation, we should predominantly increase the model size $N$, while simultaneously scaling up the batch size  via $B \propto B_{\rm crit}$ with negligible increase in the number of serial steps.  Since compute-efficient training uses relatively few optimization steps, additional work on speeding up early training dynamics may be warranted.
-
 
 \begin{figure}
 \noindent \centering{}
@@ -559,6 +537,25 @@ Thus we conclude that as we scale up language modeling with an optimal allocatio
 \textbf{Right:} The batch-adjusted number of optimization steps also grows very slowly, if at all, meaning that most of the growth in data examples processed can be used for increased batch sizes.
 \label{fig:ComputevsPerformance}}
 \end{figure}
+
+\be
+N(C_{\rm min}) \propto (C_{\rm min})^{0.73}.
+\ee
+In Figure \ref{fig:SubOptimalModels}, we show the effect of training models of sub-optimal sizes (see Appendix \ref{sec:suboptimal-models}).
+
+\begin{figure}
+\noindent \centering{}
+\includegraphics[width=0.98\textwidth]{SuboptimalModels}\
+\caption[Training on suboptimal models]{\textbf{Left:} Given a fixed compute budget, a particular model size is optimal, though somewhat larger or smaller models can be trained with minimal additional compute. \textbf{Right:} Models larger than the compute-efficient size require fewer steps to train, allowing for potentially faster training if sufficient additional parallelism is possible. Note that this equation should not be trusted for very large models, as it is only valid in the power-law region of the learning curve, after initial transient effects.  \label{fig:SubOptimalModels}}
+\end{figure}
+
+By definition $C_{\rm min} \equiv 6 N B_{\rm crit} S$, and so we can use $N(C_{\rm min})$ to extract further results.  In particular, since prior fits show $B \propto L^{-4.8}$ and $L \propto C_{\rm min}^{-0.05}$, we can conclude that $B_{\rm crit} \propto C_{\rm min}^{0.24}$.  This leads us to conclude that the optimal number of steps will only grow very slowly with compute, as
+\be
+S_{\rm min} \propto (C_{\rm min})^{0.03},
+\ee
+matching the empirical results in Figure \ref{fig:ComputevsPerformance}.  In fact the measured exponent is sufficiently small that our results may even be consistent with an exponent of zero.  
+
+Thus we conclude that as we scale up language modeling with an optimal allocation of computation, we should predominantly increase the model size $N$, while simultaneously scaling up the batch size  via $B \propto B_{\rm crit}$ with negligible increase in the number of serial steps.
 
 \subsection{Predictions from $L(N, S_{\rm min})$}
 
@@ -577,17 +574,18 @@ N(C_{\rm min}) \propto (C_{\rm min})^{\alpha_C^{\rm min} / \alpha_N} \approx  (C
 which also matches the scaling of Figure \ref{fig:ComputevsPerformance} to within a few percent.
 
 \subsection{Contradictions and a Conjecture}
-\begin{figure}
-\noindent \centering{}
-\includegraphics[width=0.8\textwidth]{Contradiction}
-\caption[Contradiction between compute and data trends]{Far beyond the model sizes we study empirically, we find a contradiction between our equations for $L(C_{\rm min})$ and $L(D)$ due to the slow growth of data needed for compute-efficient training.  The intersection marks the point before which we expect our predictions to break down.  The location of this point is highly sensitive to the precise exponents from our power-law fits. \label{fig:Contradiction}}
-\end{figure}
 
 We observe no signs of deviation from straight power-law trends at large values of compute, data, or model size. Our trends must eventually level off, though, since natural language has non-zero entropy. 
 
 Indeed, the trends for compute-efficient training described in this section already contain an apparent contradiction. At scales several orders of magnitude above those documented here, the performance predicted by the $L(C_{\rm min})$ scaling law decreases below what should be possible given the slow growth in training data with compute.  This implies that our scaling laws must break down before this point, but we conjecture that the intersection point has a deeper meaning: it provides an estimate of the point at which Transformer language models reach maximal performance.
 
 Since the amount of data used by compute-efficient training grows  slowly with the compute budget, the performance predicted by $L(C_{\rm min})$ eventually hits a lower bound set by the $L(D)$ power law (see Figure \ref{fig:Contradiction}).  Let us work this out in more detail.
+
+\begin{figure}
+\noindent \centering{}
+\includegraphics[width=0.8\textwidth]{Contradiction}
+\caption[Contradiction between compute and data trends]{Far beyond the model sizes we study empirically, we find a contradiction between our equations for $L(C_{\rm min})$ and $L(D)$ due to the slow growth of data needed for compute-efficient training.  The intersection marks the point before which we expect our predictions to break down.  The location of this point is highly sensitive to the precise exponents from our power-law fits. \label{fig:Contradiction}}
+\end{figure}
 
 To keep overfitting under control, the results of Section \ref{sec:ChartingOverfitting} imply that we should scale the dataset size as
 \be
@@ -619,11 +617,7 @@ L^* \sim 1.7~\text{nats/token}
 \ee
 though the numerical values are highly uncertain, varying by an order or magnitude in either direction depending on the precise values of the exponents from the power-law fits.  The most obvious interpretation is that our scaling laws break down at or before we reach this point, which is still many orders of magnitude away in both compute and model size.  
 
-One might also conjecture that this intersection point has a deeper meaning.  If we cannot increase the model size beyond $N^*$ without qualitatively different data requirements, perhaps this means that once we reach $C_{\rm min}^*$ and $N^*$, we have extracted all of the reliable information available in natural language data.  In this interpretation, $L^*$ would provide a rough estimate for the entropy-per-token\footnote{Defining words using the \texttt{wc} utility, the WebText2 dataset has $1.4$ tokens per word and $4.3$ characters per token. } of natural language.  In this scenario, we would expect the loss trend to level off at or before $L^*$.
-
-\section{Related Work}
-
-EfficientNet \cite{DBLP:journals/corr/abs-1905-11946}   advocates scaling depth and width exponentially (with different coefficients) for optimal performance of image models, resulting in a power-law scaling of width as a function of depth.    We find that for language models this power should be roughly one when scaling up (as width/depth should remain fixed). But more importantly, we find that the precise architectural hyperparameters are unimportant compared to the overall scale of the language model.
+One might also conjecture that this intersection point has a deeper meaning.  If we cannot increase the model size beyond $N^*$ without qualitatively different data requirements, perhaps this means that once we reach $C_{\rm min}^*$ and $N^*$, we have extracted all of the reliable information available in natural language data.  In this interpretation, $L^*$ would provide a rough estimate for the entropy-per-token of natural language.  In this scenario, we would expect the loss trend to level off at or before $L^*$.
 
 \section{Discussion}
 
@@ -787,13 +781,6 @@ A 2.2x larger model requires 45\% fewer steps at a cost of 20\% more training co
 
 \section{Supplemental  Figures}
 
- \begin{figure}
-\noindent \centering{} 
-\includegraphics[width=0.48\textwidth]{EarlyStoppingvsNandD}\hfill
-\includegraphics[width=0.48\textwidth]{TrainVsTestMedium}
-\caption[Early stopping lower bound and training curves for overfit models]{ {\bf Left:}  We characterize the step on which early stopping occurs, as a function of the extent of overfitting.  The red line indicates a {lower bound} for early stopping that is derived in Section \ref{sec:EarlyStop}.  {\bf Right:} We display train and test loss for a series of 300M parameter models trained on different sized dataset sub-samples.  The test loss typically follows that of a run done with unrestricted data until diverging. Note that the degree of overfitting (as compared to the infinite data limit) is significantly overestimated by $L_{\rm test} - L_{\rm train}$ (denoted by a black bar for each run). \label{fig:OverfittingandEarlyStopping}}
-\end{figure}
-
 \begin{figure}
 \noindent \centering{} 
 \includegraphics[width=0.48\textwidth]{BatchParetoFronts3M} 
@@ -848,12 +835,6 @@ We found that larger models require a smaller learning rate to prevent divergenc
 \noindent \centering{} 
 \includegraphics[width=0.40\textwidth]{PoorLogFit}
 \caption[Comparison of Power-Law and Logarithmic Fits]{The trend for performance as a function of parameter count, $L(N)$, is fit better by a power law than by other functions such as a logarithm at a qualitative level.  \label{fig:PoorLogFit}}
-\end{figure}
-
-\begin{figure}
-\noindent \centering{}
-\includegraphics[width=0.5\textwidth]{DepthVsGeneralization}
-\caption[Generalization versus depth]{We show evaluations on a series of datasets for models with approximately 1.5 Billion parameters.  We observe no effect of depth on generalization; generalization performance depends primarily on training distribution performance. The 12-layer model overfit the Internet Books dataset and we show the early-stopped performance; we have not seen this surprising result in other experiments. \label{fig:DepthVsGeneralization}}
 \end{figure}
 
 \listoffigures
