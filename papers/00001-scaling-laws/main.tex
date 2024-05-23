@@ -822,14 +822,7 @@ A 2.2x larger model requires 45\% fewer steps at a cost of 20\% more training co
 \noindent \centering{}  \includegraphics[width=0.54\textwidth]{PerformancevsModelSizevsContext}  \caption[Performance at different context positions versus model size]{In addition to the averaged loss, individual tokens within the 1024-token context also improve smoothly as model size increases.  Training runs with shorter context $n_{\rm ctx} = 8$ (dashed lines) perform better on early tokens, since they can allocate all of their capacity to them.  \label{fig:PerformancevsModelSizevsContext}}
 \end{figure}
 
-
-
-
-The trends for loss as a function of model size are displayed for different tokens in the context in Figure \ref{fig:PerformancevsModelSizevsContext}.  We see that models trained on $n_{\rm ctx} = 1024$ show steady improvement with model size on all but the first token.  
-
-Fixing model size, it appears that the loss scales as a power-law as a function of position $T$ in the context, see Figure \ref{fig:MoreTokenAnalysis}.  This may be a consequence of underlying power-law correlations in language \cite{ebeling1994entropy, altmann2012origin, lin2016criticality}, or a more general feature of the model architecture and optimization.  It provides some suggestion for the potential benefits (or lack thereof) from training on larger contexts.  Not only do larger models converge to better performance at $T=1024$, but they also improve more quickly at early tokens, suggesting that larger models are more efficient at detecting patterns with less contextual information.  In the right-hand plot we show how per-token performance varies for a fixed model as a function of the training step.  The model begins by learning short-range information, and only learns longer-range correlations later in training.   
-
-We have also included models trained with a tiny context $n_{\rm ctx} = 8$ in order  to compare with our longer context models.  Even modestly sized models trained on $n_{\rm ctx} = 8$ can dominate our largest $n_{\rm ctx} = 1024$ models on very early tokens.  This also suggests that further improvements should be possible with much larger models trained on large contexts.
+Fixing model size, it appears that the loss scales as a power-law as a function of position $T$ in the context, see Figure \ref{fig:MoreTokenAnalysis}.  It provides some suggestion for the potential benefits (or lack thereof) from training on larger contexts.  Not only do larger models converge to better performance at $T=1024$, but they also improve more quickly at early tokens, suggesting that larger models are more efficient at detecting patterns with less contextual information.  In the right-hand plot we show how per-token performance varies for a fixed model as a function of the training step.  The model begins by learning short-range information, and only learns longer-range correlations later in training.
 
 \begin{figure}
 \noindent \centering{} 
@@ -846,16 +839,10 @@ We have also included models trained with a tiny context $n_{\rm ctx} = 8$ in or
 \subsection{Learning Rate Schedules and Error Analysis}
 \label{app:OptimizationDetailsandErrorAnalysis}
 
-We experimented with a variety of learning rates and schedules.  A host of schedules and resulting test performances for a small language model are plotted in Figure \ref{fig:LearningRateSchedules}. We conclude that the choice of learning rate schedule is mostly irrelevant, as long as the total summed learning rate is sufficiently large, and the schedule includes a warmup period and a final decay to near-vanishing learning rate.  Variations among schedules appear to be statistical noise, and provide a rough gauge for the scale of variation between different training runs.  Experiments on larger models suggest that the variation in the final test loss between different random seeds is roughly constant in magnitude for different model sizes.
-
 We found that larger models require a smaller learning rate to prevent divergence, while smaller models can tolerate a larger learning rate.  To implement this, the following rule of thumb was used for most runs:
 \begin{equation}
 \mathrm{LR}(N) \approx 0.003239 + -0.0001395  \log(N)
 \end{equation}
-We expect that this formula could be improved.  There may be a dependence on network width, likely set by the initialization scale.  The formula also breaks down for $N>10^{10}$ parameters.  Nevertheless, we found that it works sufficiently well for the models we considered.
-
-
-\subsection{Fit Details and Power Law Quality}
 
 \begin{figure}
 \noindent \centering{} 
@@ -868,18 +855,6 @@ We expect that this formula could be improved.  There may be a dependence on net
 \includegraphics[width=0.5\textwidth]{DepthVsGeneralization}
 \caption[Generalization versus depth]{We show evaluations on a series of datasets for models with approximately 1.5 Billion parameters.  We observe no effect of depth on generalization; generalization performance depends primarily on training distribution performance. The 12-layer model overfit the Internet Books dataset and we show the early-stopped performance; we have not seen this surprising result in other experiments. \label{fig:DepthVsGeneralization}}
 \end{figure}
-
-
-We experimented with a number of functional forms for the fits to $L(N), L(C)$, and $L(D)$; the power-law fits were qualitatively much more accurate than other functions such as logarithms (see Figure \ref{fig:PoorLogFit}).
-
-For $L(C)$, we do not include small models with only 1 layer in the fit, as the transition from 1 to 2 layers causes a noticable lump in the data. For $L(N)$ we also do not include very small models with only 1 layer in the fit, and we exclude the largest models that have not trained fully to convergence.  Fit parameters change marginally if we do include them, and the trend extrapolates well in both directions regardless.
-
-
-
-\subsection{Generalization and Architecture}
-\label{sec:DepthVsGeneralization}
-
-In figure \ref{fig:DepthVsGeneralization} we show that generalization to other data distributions does not depend on network depth when we hold the total parameter count fixed.  It seems to depend only on the performance on the training distribution.
 
 \listoffigures
 \listoftables
