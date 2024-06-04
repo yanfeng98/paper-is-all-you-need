@@ -605,9 +605,7 @@ One might also conjecture that this intersection point has a deeper meaning.  If
 
 We have observed consistent scalings of language model log-likelihood loss with non-embedding parameter count $N$, dataset size $D$, and optimized training computation $C_{\rm min}$, as encapsulated in Equations \eqref{eq:FundamentalLikelihioodvsModelandDataSize} and \eqref{eq:FundamentalLikelihioodvsModelandSteps}.  Conversely, we find very weak dependence on many architectural and optimization hyperparameters.  Since scalings with $N, D, C_{\rm min}$ are power-laws, there are diminishing returns with increasing scale.
 
-In the domain of natural language, it will be important to investigate whether continued improvement on the loss translates into improvement on relevant language tasks.  Smooth quantitative change can mask major qualitative improvements: ``more is different''.  The smooth improvements in language model loss may hide seemingly qualitative changes in capability.
-
-Our results strongly suggest that larger models will continue to perform better, and will also be much more sample efficient than has been previously appreciated.  Big models may be more important than big data.  In this context, further investigation into model parallelism is warranted.
+Our results strongly suggest that larger models will continue to perform better, and will also be much more sample efficient than has been previously appreciated.  Big models may be more important than big data.
 
 \newpage
 \appendix
@@ -742,7 +740,8 @@ For a fixed value of the loss, we predict:
 \frac{S_{f}}{S_{f^{\prime}}} & =\left(\frac{1+\frac{1}{f}}{1+\frac{1}{f^{\prime}}}\right)^{1/\alpha_{S}}\approx0.13\\
 \frac{C_{f}}{C_{f^{\prime}}} & =\frac{N_{f}}{N_{f^{\prime}}}\frac{S_{f}}{S_{f^{\prime}}}\approx0.35
 \end{align}
-So that compute-efficient training uses 7.7x fewer parameter updates, 2.7x more parameters, and 65\% less compute to reach the same loss.
+
+\textbf{So that compute-efficient training uses 7.7x fewer parameter updates, 2.7x more parameters, and 65\% less compute to reach the same loss.}
 
 \subsection{Suboptimal Model Sizes}
 \label{sec:suboptimal-models}
@@ -754,7 +753,7 @@ Using A.6 and A.9, we can eliminate $L$ in favor of $N_{{\rm eff}}\left(L\right)
 \be
 \frac{C\left(N,N_{{\rm eff}}\right)}{C\left(N_{{\rm eff}},N_{{\rm eff}}\right)}=\frac{N}{N_{{\rm eff}}}\left[1+\frac{\alpha_{S}}{\alpha_{N}}\left(1-\left(\frac{N_{{\rm eff}}}{N}\right)^{\alpha_{N}}\right)\right]^{-1/\alpha_{S}}.
 \ee
-The result is shown in Figure X. Models between 0.6x and 2.2x the optimal size can be used with only a 20\% increase in compute budget. Using a smaller model is useful when accounting for the cost inference. A larger model can be trained the the same level of performance in fewer steps, allowing for more parallelism and faster training if sufficient harware is available (see Figure Y):
+The result is shown in Figure \ref{fig:SubOptimalModels}. Models between 0.6x and 2.2x the optimal size can be used with only a 20\% increase in compute budget. Using a smaller model is useful when accounting for the cost inference. A larger model can be trained the the same level of performance in fewer steps, allowing for more parallelism and faster training if sufficient harware is available (see Figure \ref{fig:SubOptimalModels}):
 \be
 \frac{S\left(N,N_{{\rm eff}}\right)}{S\left(N_{{\rm eff}},N_{{\rm eff}}\right)}=\left[1+\frac{\alpha_{S}}{\alpha_{N}}\left(1-\left(\frac{N_{{\rm eff}}}{N}\right)^{\alpha_{N}}\right)\right]^{-1/\alpha_{S}}.
 \ee
