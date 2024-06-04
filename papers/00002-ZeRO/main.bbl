@@ -89,15 +89,6 @@ Yang You, Jing Li, Jonathan Hseu, Xiaodan Song, James Demmel, and Cho{-}Jui Hsie
 \newblock Reducing {BERT} pre-training time from 3 days to 76 minutes.
 \newblock {\em CoRR}, abs/1904.00962, 2019.
 
-\bibitem{micikevicius2017mixed}
-Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen, David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaiev, Ganesh Venkatesh, and Hao Wu.
-\newblock Mixed precision training, 2017.
-
-\bibitem{nvidia-volta-arch}
-{NVIDIA Tesla V100 GPU architecture}.
-\newblock \url{http://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf}, 2017.
-\newblock [Online, accessed 22-April-2020].
-
 \bibitem{nvidia-apex}
 NVIDIA.
 \newblock Automatic mixed-precision.

@@ -1,47 +1,34 @@
 \section{Related Work}
 \label{sec:related-work}
 \subsection{Data, Model and Pipeline Parallelism}
-Parallelization is a key strategy on training large models at scale. For a model that fits in the device memory for training, data parallelism (DP) is used to scale training to multiple devices. In DP, model parameters are replicated on each device. At each step, a mini-batch is divided evenly across all the data parallel processes, such that each process executes the forward and backward propagation on a different subset of data samples, and uses averaged gradients across processes to update the model locally.  
+For a model that fits in the device memory for training, data parallelism (DP) is used to scale training to multiple devices. \uline{In DP, model parameters are replicated on each device. At each step, a mini-batch is divided evenly across all the data parallel processes, such that each process executes the forward and backward propagation on a different subset of data samples, and uses averaged gradients across processes to update the model locally.}
 
-When a model does not fit in the device memory, model parallelism (MP) \cite{DBLP:journals/corr/mesh-tensor, megatronlm} and pipeline parallelism (PP) \cite{GPipe, DBLP:journals/corr/pipedream} split the model among processes, in vertical and horizontal way respectively. Sec.~\ref{sec:introduction} discussed how \name relates to DP and MP. We now discuss PP and how it relates to reducing memory consumption.
+When a model does not fit in the device memory, model parallelism (MP) \cite{DBLP:journals/corr/mesh-tensor, megatronlm} and pipeline parallelism (PP) \cite{GPipe, DBLP:journals/corr/pipedream} split the model among processes, in vertical and horizontal way respectively.
 
-PP splits a model horizontally across layers running each partition on a different device and use micro-batching to hide the pipeline bubble \cite{GPipe,DBLP:journals/corr/pipedream}. Model functionalities such as tied-weights and batch-normalization are difficult to implement due to horizontal splitting and micro-batching, respectively. Popular PP implementation such as G-pipe \cite{GPipe} partitions both model parameters and total activations but requires a batch size proportional to number of pipeline partitions to hide the pipeline bubble. The large batch size can affect the convergence rate, while also requiring significant memory to store activations. A different implementation of PP in PipeDream \cite{narayanan2019pipedream} keeps multiple copies of stale parameters to hide the pipeline bubble without increasing the batch size significantly, making it less memory efficient. Additionally, the implementation is not equivalent to the standard DL training and has implications on training convergence. 
-\begin{comment}
-Similar to MP, PP is not easily accessible to model scientists: It either requires them to re-write their model using a PP framework, or it requires complex static and run-time analysis support to split a model graph into load balanced pipeline stages.  This requires altering the core of deep learning framework itself (e.g., PyTorch, TensorFlow) \cite{DBLP:journals/corr/pipedream}.  {\color{red} [Not sure if the later is a problem for model scientist]} Furthermore, PP requires a significant increase in batch size to hide the pipeline bubble overhead compared to DP.  Large batch size can lead to slower convergence as discussed in many studies \cite{}.  Alternately, PP requires keeping multiple model states \cite{DBLP:journals/corr/pipedream} to avoid the increase in batch size which not only increases memory but also has convergence implications.  Furthermore, activation memory consumption in PP is inherently imbalanced, as the pipeline stages between forward and backward propagation vary depending on the pipeline stage in between, i.e., initial stages require more memory than the latter stages since the lifetime of activations in the initial stage are longer. 
-\end{comment}
-In contrast, \name obtains the same or better memory efficiency than PP without incurring functionality, performance and convergence related restrictions of PP.
+PP splits a model horizontally across layers running each partition on a different device and use micro-batching to hide the pipeline bubble \cite{GPipe,DBLP:journals/corr/pipedream}.
+\uline{Model functionalities such as tied-weights and batch-normalization are difficult to implement due to horizontal splitting and micro-batching, respectively.}
 
-\begin{comment}
-\name addresses the limitations of DP, MP and PP.  \name can scale across multiple nodes without impact on efficiency, while MP can only scale efficiently within a node. \name does not have any load balancing issues or bubble overhead found in PP. Additionally, \name does not require any changes to the model making it as easy to use as pure DP.
-\end{comment}
+Popular PP implementation such as G-pipe \cite{GPipe} partitions both model parameters and total activations but requires a batch size proportional to number of pipeline partitions to hide the pipeline bubble.
+\uline{The large batch size can affect the convergence rate, while also requiring significant memory to store activations.}
+
+A different implementation of PP in PipeDream \cite{narayanan2019pipedream} keeps multiple copies of stale parameters to hide the pipeline bubble without increasing the batch size significantly, making it less memory efficient.
+\uline{Additionally, the implementation is not equivalent to the standard DL training and has implications on training convergence.}
 
 \subsection{Non-parallelism based approach to reduce memory}
-In addition to MP and PP, there are multiple lines of work that target reducing memory overheads of DL training. 
+
 \subsubsection{Reducing Activation Memory}
-Multiple efforts have focused on reducing the memory footprint of activations through compression~\cite{jain2018gist}, activation checkpointing~\cite{DBLP:journals/corr/ChenXZG16, Jain2019CheckmateBT}, or live analysis \cite{DBLP:journals/corr/abs-1801-04380}. These efforts are complimentary and can work together with \name. In fact, activation memory reduction in \name-R works in parallel with activation checkpointing. 
+
+Multiple efforts have focused on reducing the memory footprint of activations through compression~\cite{jain2018gist}, activation checkpointing~\cite{DBLP:journals/corr/ChenXZG16, Jain2019CheckmateBT}, or live analysis \cite{DBLP:journals/corr/abs-1801-04380}. \uline{These efforts are complimentary and can work together with \name.} \uline{In fact, activation memory reduction in \name-R works in parallel with activation checkpointing.}
+
 \subsubsection{CPU Offload}
-\cite{layer2layer, 7783721} exploit heterogeneous nature of today's compute nodes, offloading model states to CPU memory through algorithmic design or virtualized memory, respectively. Up to $50\%$ of training time can be spent on GPU-CPU-GPU transfers \cite{layer2layer}. \name differs in that it reduces the memory consumption significantly without storing the model states to CPU memory whose bandwidth is severely constrained due to PCI-E. On rare cases, \name-R may offload just the activation checkpoints for very large models to improve performance (see Sec.~\ref{sec:p_a} for details). 
+
+\cite{layer2layer, 7783721} exploit heterogeneous nature of today's compute nodes, offloading model states to CPU memory through algorithmic design or virtualized memory, respectively. Up to $50\%$ of training time can be spent on GPU-CPU-GPU transfers \cite{layer2layer}. \uline{\name differs in that it reduces the memory consumption significantly without storing the model states to CPU memory whose bandwidth is severely constrained due to PCI-E.} \uline{On rare cases, \name-R may offload just the activation checkpoints for very large models to improve performance (see Sec.~\ref{sec:p_a} for details).}
+
 \subsubsection{Memory Efficient Optimizer}
-\cite{DBLP:journals/corr/adafactor,Anil2019MemoryEfficientAO} focus on reducing memory consumption of adaptive optimization methods by maintaining coarser-grained statistics of model parameters and gradients, with potential impact on model convergence guarantees. \name is orthogonal to these efforts, and its optimizations 
-do not change the model optimization method or affect model convergence, but effectively reduce memory footprint of optimizer states and gradients per device.
+
+\cite{DBLP:journals/corr/adafactor,Anil2019MemoryEfficientAO} focus on reducing memory consumption of adaptive optimization methods by maintaining coarser-grained statistics of model parameters and gradients, with potential impact on model convergence guarantees. \uline{\name is orthogonal to these efforts, and its optimizations 
+do not change the model optimization method or affect model convergence, but effectively reduce memory footprint of optimizer states and gradients per device.}
+
 \subsection{Training Optimizers }
-Adaptive optimization methods~\cite{10.5555/Adagrad,DBLP:journals/corr/Adam,DBLP:journals/corr/You-LARS,DBLP:journals/corr/You-LAMB} are crucial to achieving SOTA performance and accuracy for effective model training of large models.  Compared to SGD, by maintaining fine-grained first-order and second-order statistics for each model parameter and gradient at the cost of significant memory footprint. \name can reduce the memory footprint of these optimizers by orders of magnitude, making these sophisticated optimization methods practical for training large models on hardware with modest device memory. It also makes it possible to develop and use even more complex and memory hungry optimizers that may have better convergence.  
 
-
-\begin{comment}
-Furthermore, \name may have major implication in the development of future optimizers. 
-
-
-Limited GPU memory is a big motivation 
-
-
-In contrast, \name{} avoids re-materialization overheads by using aggregate memory on distributed hardware to partition model state. 
-\name{} intersects with three directions of work in the general area of large-scale training for deep learning models. 
-
-First, \name{} is related to the use of parallelism, namely data parallelism and model parallelism~\cite{narayanan2019pipedream,DBLP:journals/corr/mesh-tensor,megatronlm}, to scale deep learning to larger models (e.g., with billions of parameters), and larger data sets (e.g., with trillions of examples). \name{} addresses a key limitation of data parallelism by making it possible to train models (and/or batch sizes) that are otherwise too larger to fit into the memory of each compute unit (e.g., GPU or CPU). \name{} eliminates this limitation of data parallelism without incurring the performance and code restructuring overheads of model parallelism. Moreover, \name{} can be combined with model parallelism to train even larger models on a given hardware budget. 
-
-Second, \name{} is related to adaptive optimization methods~\cite{10.5555/Adagrad,DBLP:journals/corr/Adam,DBLP:journals/corr/You-LARS,DBLP:journals/corr/You-LAMB}, which are crucial to achieving state-of-the-art performance for effective large-batch training of large models. These methods achieve superior model performance, compared to SGD, by maintaining fine-grained first-order and second-order statistics for each model parameter and gradient at the cost of significant memory footprint. \name{}'s memory saving techniques makes these sophisticated optimization methods practical for training large models on hardware with modest memory capacity. 
-
-Third, 
-
-\end{comment}
+Adaptive optimization methods~\cite{10.5555/Adagrad,DBLP:journals/corr/Adam,DBLP:journals/corr/You-LARS,DBLP:journals/corr/You-LAMB} are crucial to achieving SOTA performance and accuracy for effective model training of large models. \uline{Compared to SGD, by maintaining fine-grained first-order and second-order statistics for each model parameter and gradient at the cost of significant memory footprint.}
