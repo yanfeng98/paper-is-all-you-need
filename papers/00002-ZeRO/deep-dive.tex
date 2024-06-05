@@ -1,31 +1,22 @@
-
 \section{Deep Dive into \name-DP}\label{sec:memoryoptimization}
-%\name primarily reduces the training memory consumption by removing memory redundancies across data parallel process. As described in Sec. \ref{data-parallel}, each data parallel process keeps a copy of the optimizer states and the parameters, and uses the averaged gradients to compute the updates to its copy of the parameters. Therefore, the optimizer states, averaged gradients and the parameters themselves are redundant across the data parallel processes. \name partitions these aforementioned tenors across data parallel process to reduce the memory requirements by eliminating the redundancy. \name further optimizes the memory consumption via communication and computation re-scheduling such that the size of the temporary buffers required for these operations is significantly reduced.
-While the existing DP approach replicates the model states at each device and introduces significant memory overhead, \name-DP eliminates this memory redundancy by partitioning them --- optimizer states, gradients and parameters --- across data parallel processes.  
-Figure \ref{fig:memory-consumption} quantifies and visualizes the memory requirement with and without \name-DP. The figure shows the memory footprint after partitioning (1) optimizer state, (2) gradient and (3) parameter redundancies accumulatively.  We refer to them as the three optimization phases of \name-DP: $P_{os}$, $P_g$, and $P_p$, which we elaborate below. 
-\begin{comment}
-Furthermore, \name removes large buffers proportional to model size with performance-efficient constant-size buffers (Section \ref{sec:buffer}) to address the memory overhead of large temporary buffers.  The memory optimizations require careful computation, communication rescheduling and mapping across data parallel process. 
-Next we go through each of these techniques in details.
-\end{comment}
-\subsection{P$_{os}$ : Optimizer State Partitioning }\label{sec:pos}
-For a DP degree of $N_d$, we group the optimizer states into $N_d$ equal partitions, such that the $i^{th}$ data parallel process only updates the optimizer states corresponding to the $i^{th}$ partition. Thus, each data parallel process only needs to store and update $\frac{1}{N_d}$ of the total optimizer states and then only update $\frac{1}{N_d}$ of the parameters.
-%Note that here we only eliminate the optimizer state redundancy, but not the parameter redundancy. Since each process only has $\frac{1}{N_d}$ of the overall optimizer state, it can only update $\frac{1}{N_d}$ of the parameters. 
-We perform an all-gather across the data parallel process at the end of each training step to get the fully updated parameters across all data parallel process. %We will refer to this optimization as $P_{os}$.
 
-\textbf{Memory Savings: } As shown in Figure 1, the memory consumption after optimizing state partition reduces from $4\Psi+K\Psi$ to $4\Psi + \frac{K\Psi}{N_d}$.  As the concrete example depicted in Figure \ref{fig:memory-consumption}, a 7.5 B parameter model requires 31.4GB of memory using $P_{os}$ with 64-way DP ($N_d = 64$), while requiring 120 GB with standard DP.
-%lets take the 1.5B GPT-2 model training on 8 GPUs ($N_d = 8$) using mixed precision training with the ADAM optimizer. As discussed in Sec.~\ref{memory-requirements}, this requires at least $ 4M  + 12M = 6 + 18 = 24\ gb$ of memory to store the parameters, gradients and the optimizer states. By eliminating optimizer state redundancy, the memory requirement reduces to $6+\frac{18}{N_d} = 8.25\ gb$. 
-Furthermore, when $N_d$ is large, the memory requirement on model states reduces from $4\Psi+12\Psi=16\Psi$ bytes to $ 4 \Psi + \frac{12 \Psi}{N_d} \approx 4 \Psi$ bytes, leading to a 4x reduction. 
+Figure \ref{fig:memory-consumption} quantifies and visualizes the memory requirement with and without \name-DP. The figure shows the memory footprint after partitioning (1) optimizer state, (2) gradient and (3) parameter redundancies accumulatively.
+
+\subsection{P$_{os}$ : Optimizer State Partitioning }\label{sec:pos}
+
+For a DP degree of $N_d$, we group the optimizer states into $N_d$ equal partitions, such that the $i^{th}$ data parallel process only updates the optimizer states corresponding to the $i^{th}$ partition. \uline{Thus, each data parallel process only needs to store and update $\frac{1}{N_d}$ of the total optimizer states and then only update $\frac{1}{N_d}$ of the parameters.} 
+\uline{We perform an all-gather across the data parallel process at the end of each training step to get the fully updated parameters across all data parallel process.}
+
+\textbf{Memory Savings: } As shown in Figure \ref{fig:memory-consumption}, the memory consumption after optimizing state partition reduces from \uline{$4\Psi+K\Psi$ to $4\Psi + \frac{K\Psi}{N_d}$}.
 
 \subsection{P$_g$: Gradient Partitioning}\label{sec:pg}
-As each data parallel process only updates its corresponding parameter partition, it only needs the reduced gradients for the corresponding parameters. Therefore, as each gradient of each layer becomes available during the backward propagation, we only reduce them on the data parallel process responsible for updating the corresponding parameters. After the reduction we no longer need the gradients and their memory can be released. This reduces the memory footprint required to hold the gradients from $2\Psi$ bytes to $\frac{2\Psi}{N_d}$. 
 
-Effectively this is a Reduce-Scatter operation, where gradients corresponding to different parameters are reduced to different process. To make this more efficient in practice, we use a bucketization strategy, where we bucketize all the gradients corresponding to a particular partition, and perform reduction on the entire bucket at once. 
-This is similar in spirit to how NVIDIA's AMP \cite{nvidia-apex} optimizer bucketizes the all-reduce gradient computation to overlap communication and computation. In our case we perform a reduction instead of an all-reduce at the partition boundaries to reduce memory footprint and overlap computation and communication. %We refer to this optimization as P$_g$.
+As each data parallel process only updates its corresponding parameter partition, it only needs the reduced gradients for the corresponding parameters. \uline{Therefore, as each gradient of each layer becomes available during the backward propagation, we only reduce them on the data parallel process responsible for updating the corresponding parameters. After the reduction we no longer need the gradients and their memory can be released.} This reduces the memory footprint required to hold the gradients from \uline{$2\Psi$ bytes to $\frac{2\Psi}{N_d}$}. 
 
-\textbf{Memory Savings:} By removing both gradient and optimizer state redundancy, we reduce the memory footprint further down to $ 2 \Psi + \frac{14\Psi}{N_d} \approx 2 \Psi$. 
-%In case of GPT-2, this reduces the memory footprint down to meager $3 gb$ to store a single copy of the parameters in fp16.
-As the example in Figure 1, a 7.5 B parameter model requires only 16.6 GB of memory using $P_{os+g}$ with 64-way DP ($N_d = 64$), while requiring 120 GB with standard DP.
-When $N_d$ is large,  the memory requirement of model states reduces from $2\Psi+14\Psi=16\Psi$ bytes to $ 2 \Psi + \frac{14 \Psi}{N_d} \approx 2 \Psi$ bytes, leading to a 8x reduction.
+Effectively this is a Reduce-Scatter operation, where gradients corresponding to different parameters are reduced to different process. \uline{To make this more efficient in practice, we use a bucketization strategy, where we bucketize all the gradients corresponding to a particular partition, and perform reduction on the entire bucket at once.} In our case we perform a reduction instead of an all-reduce at the partition boundaries to reduce memory footprint and overlap computation and communication.
+
+\textbf{Memory Savings:} By removing both gradient and optimizer state redundancy, we reduce the memory footprint further down to \uline{$ 2 \Psi + \frac{14\Psi}{N_d} \approx 2 \Psi$}.
+
   \begin{table*}
         \centering
         %\resizebox{2*\columnwidth}{!}{
@@ -49,15 +40,15 @@ When $N_d$ is large,  the memory requirement of model states reduces from $2\Psi
  \end{table*}
 
 \subsection{P$_p$: Parameter Partitioning}\label{sec:pp}
-Just as with the optimizer states, and the gradients, each process only stores the parameters corresponding to its partition. When the parameters outside of its partition are required for forward and backward propagation, they are received from the appropriate data parallel process through broadcast. While this may seem to incur significant communication overhead at first glance, we show that this approach only increases the total communication volume of a baseline DP system to $1.5$x, while enabling memory reduction proportional to $N_d$.
 
-\textbf{Memory Savings:} With parameter partitioning, we reduce the memory consumption of an $\Psi$ parameter model from $16\Psi$ to $\frac{16\Psi}{N_d}$.  As the example in Figure 1, a 7.5 B parameter model requires 1.9 GB  of model-state memory using $P_{os+p+g}$ with 64-way DP ($N_d = 64$), while requiring 120 GB with standard DP.  This has a profound implication: \emph{\name powers DP to fit models with arbitrary size— as long as there are sufficient number of devices to share the model states}. \begin{comment}
-For example, on 32 GPU cluster with 32-way DP, we can run a 64B parameter model per GPU without any MP, while on a cluster of 512 GPU with 16-way MP and 32-way DP, we can train a $64 * 16B = 1T$ parameter model.  {\color{green} [Same example as in Figure 1 please]}
-\end{comment}
+Just as with the optimizer states, and the gradients, each process only stores the parameters corresponding to its partition. When the parameters outside of its partition are required for forward and backward propagation, they are received from the appropriate data parallel process through broadcast. \uline{While this may seem to incur significant communication overhead at first glance, we show that this approach only increases the total communication volume of a baseline DP system to $1.5$x, while enabling memory reduction proportional to $N_d$.}
+
+\textbf{Memory Savings:} With parameter partitioning, we reduce the memory consumption of an $\Psi$ parameter model from \uline{$16\Psi$ to $\frac{16\Psi}{N_d}$}.  This has a profound implication: \uline{\name powers DP to fit models with arbitrary size— as long as there are sufficient number of devices to share the model states}.
+
 \subsection{Implication on Model Size}\label{sec:summarymemoryoptimization}
-The three phases of partitioning $P_{os}$, $P_{os+g}$, and $P_{os+g+p}$ reduces the memory consumption of each data parallel process on model states by up to 4x, 8x, and $N_d$ respectively.  
-%$C_b$ allows us to use constant-size buffers instead of growing buffer size linearly with the increase of model size.
-  Table \ref{tab:memory-consumption} analyzes model-state memory consumption of a few example models under the 3 stages of \name-DP optimizations for varying DP degree.  Without \name, the memory consumption is equal to the first row in the table, regardless of the DP degree. Note that, with $N_d=64$, \name can train models with up to 7.5B, 14B, and 128B parameters using $P_{os}$, $P_{os+g}$, and $P_{os+g+p}$, respectively.  When $N_d=1024$, \name with all of its optimizations enabled ($P_{os+g+p}$) could train models with 1 {\sc{Trillion}} parameters!  Or potentially, models with {\sc{Arbitrary}} size!  Without \name, the largest model DP alone can run has less than 1.5 Billion parameters.
+
+The three phases of partitioning $P_{os}$, $P_{os+g}$, and $P_{os+g+p}$ reduces the memory consumption of each data parallel process on model states by up to 4x, 8x, and $N_d$ respectively.
+Table \ref{tab:memory-consumption} analyzes model-state memory consumption of a few example models under the 3 stages of \name-DP optimizations for varying DP degree.
   
 
 \section{Deep Dive into \name-R}

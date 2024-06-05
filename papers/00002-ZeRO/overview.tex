@@ -1,57 +1,35 @@
 
 \section{\name: Insights and Overview}
-%[Transition: the scaling limitation of MP and memory inefficiency of DP motivates \name: Can we overcome the memory inefficiency of DP but still] 
- \name has two sets of optimizations: i) \name-DP aimed at reducing the memory footprint of the model states, and ii) \name-R targeted towards reducing the residual memory consumption.  We present an overview of the optimizations and the insights behind, which allows \name to reduce memory footprint while remaining efficient. Please note efficiency is a key here: without this constraint, trivial solutions like moving all the parameter states to the CPU memory, or  increasing the MP degree arbitrarily can reduce memory footprint.   
-\begin{comment}Now that we know where all the memory goes, how can we reduce the memory footprint and use it effectively without sacrificing efficiency?  Our solution, for reducing memory footprint without sacrificing efficiency is based on three sets of insights. 
-\end{comment}
+\name has two sets of optimizations: i) \name-DP aimed at reducing the memory footprint of the model states, and ii) \name-R targeted towards reducing the residual memory consumption.
 
 \subsection{Insights and Overview: \name-DP}
 \name powered DP is based on three key insights:
 
-{\it a)} DP has better scaling efficiency than MP because MP reduces the granularity of the computation while also increasing the communication overhead. Beyond a certain point, lower computational granularity reduces the efficiency per GPU, while the increased communication overhead, hiders the scalability across GPUs, especially when crossing node boundaries. On the contrary, DP has both higher computational granularity and lower communication volume, allowing for much higher efficiency.
+{\it a)} DP has better scaling efficiency than MP because MP reduces the granularity of the computation while also increasing the communication overhead. \uline{Beyond a certain point, lower computational granularity reduces the efficiency per GPU, while the increased communication overhead, hiders the scalability across GPUs, especially when crossing node boundaries.} On the contrary, DP has both higher computational granularity and lower communication volume, allowing for much higher efficiency.
 
-{\it b)} DP is memory inefficient as model states are stored redundantly across all data-parallel processes. On the contrary, MP partitions the model states to obtain memory efficiency.
+{\it b)} \uline{DP is memory inefficient as model states are stored redundantly across all data-parallel processes. On the contrary, MP partitions the model states to obtain memory efficiency.}
 
-{\it c)} Both DP and MP keep all the model states needed over the entire training process, but not everything is required all the time.  For example, parameters corresponding to each layer is only needed during the forward propagation and backward propagation of the layer. %At all other times, these parameters are not needed.  
+{\it c)} \uline{Both DP and MP keep all the model states needed over the entire training process, but not everything is required all the time.}  For example, parameters corresponding to each layer is only needed during the forward propagation and backward propagation of the layer.  
 
-Based on these insights, \name-DP retains the training efficiency of DP while achieving the memory efficiency of MP. \name-DP \emph{partitions} the model states instead of replicating them (Section \ref{sec:memoryoptimization}) and uses a dynamic communication schedule that exploits the intrinsically temporal nature of the model states while minimizing the communication volume (Section \ref{sec:communication}). By doing so, \name-DP reduces per-device memory footprint of a model \emph{linearly} with the increased DP degree while maintaining the communication volume close to that of the default DP, retaining the efficiency.
+Based on these insights, \name-DP retains the training efficiency of DP while achieving the memory efficiency of MP. \uline{\name-DP \textbf{partitions} the model states instead of replicating them (Section \ref{sec:memoryoptimization}) and uses a dynamic communication schedule that exploits the intrinsically temporal nature of the model states while minimizing the communication volume (Section \ref{sec:communication}).} By doing so, \name-DP reduces per-device memory footprint of a model \textbf{linearly} with the increased DP degree while maintaining the communication volume close to that of the default DP, retaining the efficiency.
+
 \subsection{Insights and Overview: \name-R}
+
 \label{sec:mp_activation_replication}
 \subsubsection{Reducing Activation Memory}
-%Memory optimizations for reducing the memory footprint for activation states is based on two key insights:
+
 Two key insights are:
 
-{\it a)} MP partitions the model states but often requires replication of the activation memory. For example, if we split the parameters of a linear layer vertically and compute them in parallel across two GPUs, each GPU requires the entire activation to compute its partition
+{\it a)} \uline{MP partitions the model states but often requires replication of the activation memory.} For example, if we split the parameters of a linear layer vertically and compute them in parallel across two GPUs, each GPU requires the entire activation to compute its partition
 
 {\it b)} For models such as GPT-2 or larger, the arithmetic intensity (ratio of the amount of computation per iteration to amount of activation checkpoints per iteration) is very large ($\ge 10K$) and increases linearly with hidden dimension making it possible to hide the data-movement cost for the activation checkpoints, even when the bandwidth is low.
 
-\name removes the memory redundancies in MP by \emph{partitioning} the activations checkpoints across GPUs, and uses allgather to reconstruct them on demand. The activation memory footprint is reduced proportional to the MP degree. For very large models, \name can even choose to move the activation partitions to the CPU memory, while still achieving good efficiency due to large arithmetic intensity in these models. 
+\uline{\name removes the memory redundancies in MP by \emph{partitioning} the activations checkpoints across GPUs, and uses allgather to reconstruct them on demand.} The activation memory footprint is reduced proportional to the MP degree. \uline{For very large models, \name can even choose to move the activation partitions to the CPU memory, while still achieving good efficiency due to large arithmetic intensity in these models.}
+
 \subsubsection{Managing Temporary buffers}
-\name-R uses constant size buffers to avoid temporary buffers from blowing up as the model size increases, while making them large enough to remain efficient. 
 
-\subsubsection{Managing fragmented Memory} Memory fragmentation is a result of interleaving between short lived and long lived memory objects. During the forward propagation activation checkpoints are long lived but the activations that recomputed are short lived. Similarly, the backward computation, the activation gradients are short lived while the parameter gradients are long lived. Based on this insight, \name performs on-the-fly memory defragmentation by moving activation checkpoints and gradients to pre-allocated contiguous memory buffers. This not only increases memory availability but also improves efficiency by reducing the time it takes for the memory allocator to find free contiguous memory.  
-\begin{comment}
-Based on these insights, we develop \name --- Zero Redundancy Optimizer --- which overcomes the limitations of both data and MP still retaining their merits.   
+\uline{\name-R uses constant size buffers to avoid temporary buffers from blowing up as the model size increases, while making them large enough to remain efficient.}
 
+\subsubsection{Managing fragmented Memory}
 
-
-
-%Based on these insights, we reduce the memory footprint without requiring an increase in MP degree, or significant increase in communication volume to achieve good efficiency. More specifically, our Zero Redundancy Optimizer (\name) removes the memory redundancies across data-parallel processes by partitioning the parameter-related states instead of replicating them (Section \ref{}), and it retains and often improves the compute/communication efficiency by reducing MP degree to increase coarse grained parallelism, and carefully moving the parameter related states around (Section \ref{}) to reduce the communication volume. 
-
-\name powers DP to reduce memory consumption and boost runnable model size. Additionally, it can be used in parallel with any MP approach.  When a training job uses both MP and \name-powered DP, its memory saving (per device) is the product of the saving from MP and that from \name (Section \ref{sec:modelparallelism}).
-\end{comment}
-
-\begin{comment}
-As for the relationship of \name with data and MP, \name optimizes the memory usage during DP process while retaining compute/communication efficiency, and it can be used in parallel . 
-\end{comment}
-
-\begin{comment}
-Please note that efficiency is a key requirement,
-Now we know where the memory goes, but how can we optimize them - the pros and cons of model and DPs inspired us.  MP is memory efficient by partitioning the parameter-related model states across devices, but it is scaling inefficient towards large scale as it conducts computation on the fine-grained partitions (less efficient computation) and perform fine-grained communication across them (less efficient communication).
-On the contrary, DP is very memory inefficient by replicating the entire parameter-related states across devices, but it is more computation/communication efficient because it can then carry the entire computation over a minibatch of samples on a single device and follow by one round of coarse-grained communication.
-The fundamental limitation of model and DP is that both of them closely couple the computation with the parameter-related model states over the entire training process.  This has two consequences.  (a) They compute based on what they store - less memory results in (less efficient) fine-grained computation/communication - it is hard to get memory efficiency and compute/communication efficiency together.  (b) The parameter-related states each device stores does not change during training and thus it requires storing the accumulated states over the entire course of training --- memory usage is suboptimal.     
-
-We conquer their limitations and achieve the merits of both by (1) decoupling the computation with the parameter-related model states, and (2) keeping a minimal and dynamic set of the states during training.
-More specifically, our Zero Redundancy Optimizer (\name) removes the memory redundancies across data-parallel processes by partitioning the parameter-related states instead of replicating them (Section \ref{}), and it retains the compute/communication efficiency by dynamically and smartly moving the states around (Section \ref{}). 
-
-\end{comment}
+\uline{Memory fragmentation is a result of interleaving between short lived and long lived memory objects.} During the forward propagation activation checkpoints are long lived but the activations that recomputed are short lived. Similarly, the backward computation, the activation gradients are short lived while the parameter gradients are long lived. Based on this insight, \uline{\name performs on-the-fly memory defragmentation by moving activation checkpoints and gradients to pre-allocated contiguous memory buffers.} \uline{This not only increases memory availability but also improves efficiency by reducing the time it takes for the memory allocator to find free contiguous memory.}
