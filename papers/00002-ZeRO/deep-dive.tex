@@ -17,28 +17,6 @@ Effectively this is a Reduce-Scatter operation, where gradients corresponding to
 
 \textbf{Memory Savings:} By removing both gradient and optimizer state redundancy, we reduce the memory footprint further down to \uline{$ 2 \Psi + \frac{14\Psi}{N_d} \approx 2 \Psi$}.
 
-  \begin{table*}
-        \centering
-        %\resizebox{2*\columnwidth}{!}{
-        \begin{tabular}{|c||c|c|c||c|c|c||c|c|c|}
-        \hline
-        \multicolumn{1}{|c}{\multirow{2}{*}{DP}}&\multicolumn{3}{||c}{\textbf{7.5B Model} (GB)} &\multicolumn{3}{||c}{\textbf{128B Model} (GB)} & \multicolumn{3}{||c|}{\textbf {1T Model} (GB)} \\
-        \hhline{~---------}
-        &P$_{os}$&P$_{os+g}$&P$_{os+g+p}$&P$_{os}$&P$_{os+g}$&P$_{os+g+p}$&P$_{os}$&P$_{os+g}$&P$_{os+g+p}$\\
-        \hline
-        1&120&120&120&2048&2048&2048&16000&16000&16000\\
-        4&52.5&41.3&\textbf{30}&896&704&512&7000&5500&4000\\
-        16&35.6&\textbf{21.6}&7.5&608&368&128&4750&2875&1000\\
-        64&\textbf{31.4}&16.6&1.88&536&284&\textbf{32}&4187&2218&250\\
-        256&30.4&15.4&0.47&518&263&8&4046&2054&62.5\\
-        1024&30.1&15.1&0.12&513&257&2&4011&2013&\textbf{15.6}\\
-        \hline
-        \end{tabular}
-        %}
-     \caption{Per-device memory consumption of different optimizations in \name-DP as a function of DP degree . Bold-faced text are the combinations for which the model can fit into a cluster of 32GB V100 GPUs.}
-     \label{tab:memory-consumption}
- \end{table*}
-
 \subsection{P$_p$: Parameter Partitioning}\label{sec:pp}
 
 Just as with the optimizer states, and the gradients, each process only stores the parameters corresponding to its partition. When the parameters outside of its partition are required for forward and backward propagation, they are received from the appropriate data parallel process through broadcast. \uline{While this may seem to incur significant communication overhead at first glance, we show that this approach only increases the total communication volume of a baseline DP system to $1.5$x, while enabling memory reduction proportional to $N_d$.}
@@ -50,30 +28,56 @@ Just as with the optimizer states, and the gradients, each process only stores t
 The three phases of partitioning $P_{os}$, $P_{os+g}$, and $P_{os+g+p}$ reduces the memory consumption of each data parallel process on model states by up to 4x, 8x, and $N_d$ respectively.
 Table \ref{tab:memory-consumption} analyzes model-state memory consumption of a few example models under the 3 stages of \name-DP optimizations for varying DP degree.
   
+\begin{table*}
+  \centering
+  %\resizebox{2*\columnwidth}{!}{
+  \begin{tabular}{|c||c|c|c||c|c|c||c|c|c|}
+  \hline
+  \multicolumn{1}{|c}{\multirow{2}{*}{DP}}&\multicolumn{3}{||c}{\textbf{7.5B Model} (GB)} &\multicolumn{3}{||c}{\textbf{128B Model} (GB)} & \multicolumn{3}{||c|}{\textbf {1T Model} (GB)} \\
+  \hhline{~---------}
+  &P$_{os}$&P$_{os+g}$&P$_{os+g+p}$&P$_{os}$&P$_{os+g}$&P$_{os+g+p}$&P$_{os}$&P$_{os+g}$&P$_{os+g+p}$\\
+  \hline
+  1&120&120&120&2048&2048&2048&16000&16000&16000\\
+  4&52.5&41.3&\textbf{30}&896&704&512&7000&5500&4000\\
+  16&35.6&\textbf{21.6}&7.5&608&368&128&4750&2875&1000\\
+  64&\textbf{31.4}&16.6&1.88&536&284&\textbf{32}&4187&2218&250\\
+  256&30.4&15.4&0.47&518&263&8&4046&2054&62.5\\
+  1024&30.1&15.1&0.12&513&257&2&4011&2013&\textbf{15.6}\\
+  \hline
+  \end{tabular}
+  %}
+\caption{Per-device memory consumption of different optimizations in \name-DP as a function of DP degree . Bold-faced text are the combinations for which the model can fit into a cluster of 32GB V100 GPUs.}
+\label{tab:memory-consumption}
+\end{table*}
 
 \section{Deep Dive into \name-R}
+
 \subsection{$P_a$: Partitioned Activation Checkpointing}
 \label{sec:p_a}
-As discussed in \ref{sec:mp_activation_replication}, MP by design requires a replication of the activations, resulting in redundant copies of the activations across model parallel GPUs. \name eliminates this redundancy by partitioning the activations, and only materializes them in a replicated form one activation layer at a time, right before the activation is used in computation. More specifically, once the forward propagation for a layer of a model is computed, the input activations are partitioned across all the model parallel process, until it is needed again during the backprogation. At this point, \name uses an all-gather operation to re-materialize a replicated copy of the activations. We refer to this optimization as $P_a$. It works in conjunction with activation checkpointing \cite{DBLP:journals/corr/ChenXZG16}, storing partitioned activation checkpoints only instead of replicated copies. Furthermore, in the case of very large models and very limited device memory, these partitioned activation checkpoints can also be offloaded to the CPU reducing the activation memory overhead to nearly zero at an additional communication cost, which we will discuss in \ref{sec:communication}. We refer to this as $P_{a+cpu}$. 
-\begin{comment}
-\name: $P_a$ reduces the memory footprint of the activations by removes memory redundancy from MP by partitioning the activations instead of replicating them
-P$_{a+cpu}$: Activation partitioning and CPU Checkpointing\label{sec:pa}
-Activation checkpointing \cite{DBLP:journals/corr/ChenXZG16} can significantly reduce the memory footprint of the activations by storing only a few activations during the forward propagation and re-computing the remaining during the backward propagation as needed. However, for large models, the memory footprint of checkpointed activations is still quite significant. In presence of MP, it is possible to reduce the memory footprint by a factor proportional to the model paralleism degree by what we will refer to as activation partitioning.
 
-In tensor-slicing based MP, such as the one implemented in Megatron, parameters are partitioned across model parallel process, while the activations are generally replicated. For example, consider a linear layer, where the parameters are partitioned across the hidden dimension and store across multiple GPUs. Each GPU will compute a part of the output, but to do so, the entire input must be present on each GPU. After the output is computed, it must again be all-gathered on each GPU before the next linear layer can be computed, therefore requiring replication of the activations. This replication of activation is found all across Megatron-LM.
+As discussed in \ref{sec:mp_activation_replication}, MP by design requires a replication of the activations, resulting in redundant copies of the activations across model parallel GPUs.
 
-During the training with activation checkpointing, each GPU is keeping a replicated copy of the checkpointed activations. \name removes this replication by partitioning the activation checkpoint across the GPUs. Then during backward propagation, when the activations are needed for re-computation, \name performs an allgather operation to reconstruct the full activation. 
-\end{comment}
+\uline{\name eliminates this redundancy by partitioning the activations, and only materializes them in a replicated form one activation layer at a time, right before the activation is used in computation.}
+More specifically, once the forward propagation for a layer of a model is computed, the input activations are partitioned across all the model parallel process, until it is needed again during the backprogation. At this point, \name uses an all-gather operation to re-materialize a replicated copy of the activations. We refer to this optimization as \uline{$P_a$}.
 
-\textbf{Memory Saving} With partitioned activation checkpointing, \name reduces the activation footprint by a factor proportional to the MP degree. Consider training a 100B model shown in Table~\ref{tab:model-configuration} with a batch size of 32, sequence length of 1024 and a MP degree of 16. If we checkpoint a single activation for each transformer layer, it would require about 33 GB of memory per GPU just to store the activation checkpoints. But with P$_a$ in \name, it can be reduced to about 2 GB per GPU. Furthermore, this 2GB can be offloaded  to the CPU reducing the memory footprint for activations to nearly zero.
+It works in conjunction with \uline{activation checkpointing} \cite{DBLP:journals/corr/ChenXZG16}, storing partitioned activation checkpoints only instead of replicated copies.
+
+Furthermore, in the case of very large models and very limited device memory, these partitioned activation checkpoints can also be offloaded to the CPU reducing the activation memory overhead to nearly zero at an additional communication cost, which we will discuss in \ref{sec:communication}. We refer to this as \uline{$P_{a+cpu}$}.
+
+\textbf{Memory Saving} \uline{With partitioned activation checkpointing, \name reduces the activation footprint by a factor proportional to the MP degree.} 
+
 \subsection{C$_B$: Constant Size Buffers}\label{sec:buffer}
+
 \name carefully selects the sizes of the temporal-data buffers to balance memory and compute efficiency.
-During training, the computational efficiency of some operations can be highly dependent on the input size, with larger inputs achieving higher efficiency. For example, a large all-reduce operation achieves much higher bandwidth than a smaller one. Hence, to get better efficiency, high performance libraries such as NVIDIA Apex or Megatron fuses all the parameters into a single buffer before applying these operations. However, the memory overhead of the fused buffers is proportional to the model size, and can become inhibiting. For example, for a 3B parameter model, a 32-bit fused buffer will require 12 GB of memory. To address this issue, we simply use a performance-efficient constant-size fused buffer when the model becomes too large. By doing so, the buffer size does not depend on the model size, and by keeping the buffer size large enough, we can still achieve good efficiency.
+
+\uline{During training, the computational efficiency of some operations can be highly dependent on the input size, with larger inputs achieving higher efficiency.} For example, a large all-reduce operation achieves much higher bandwidth than a smaller one. Hence, to get better efficiency, high performance libraries such as NVIDIA Apex or Megatron fuses all the parameters into a single buffer before applying these operations. However, the memory overhead of the fused buffers is proportional to the model size, and can become inhibiting. \uline{To address this issue, we simply use a performance-efficient constant-size fused buffer when the model becomes too large.} By doing so, the buffer size does not depend on the model size, and by keeping the buffer size large enough, we can still achieve good efficiency.
 
 \subsection{M$_D$: Memory Defragmentation}
-Memory fragmentation in model training occurs as a result of activation checkpointing and gradient computation. During the forward propagation with activation checkpointing, only selected activations are stored for back propagation while most activations are discarded as they can be recomputed again during the back propagation. This creates an interleaving of short lived memory (discarded activations) and long lived memory (checkpointed activation), leading to memory fragmentation. Similarly, during the backward propagation, the parameter gradients are long lived, while activation gradients and any other buffers required to compute the parameter gradients are short lived. Once again, this interleaving of short term and long term memory causes memory fragmentation.
 
-Limited memory fragmentation is generally not an issue, when there is plenty of memory to spare, but for large model training running with limited memory, memory fragmentation leads to two issues, i) OOM due to lack of contiguous memory even when there is enough available memory, ii) poor efficiency as a result of the memory allocator spending significant time to search for a contiguous piece of memory to satisfy a memory request.
+\uline{Memory fragmentation in model training occurs as a result of activation checkpointing and gradient computation.}
 
-\name does memory defragmentation on-the-fly by pre-allocating contiguous memory chunks for activation checkpoints and gradients, and copying them over to the pre-allocated memory as they are produced. M$_D$ not only enables \name to train larger models with larger batch sizes, but also improves efficiency when training with limited memory.  
-  
+During the forward propagation with activation checkpointing, only selected activations are stored for back propagation while most activations are discarded as they can be recomputed again during the back propagation. This creates an interleaving of short lived memory (discarded activations) and long lived memory (checkpointed activation), leading to memory fragmentation. Similarly, during the backward propagation, the parameter gradients are long lived, while activation gradients and any other buffers required to compute the parameter gradients are short lived. Once again, this interleaving of short term and long term memory causes memory fragmentation.
+
+Limited memory fragmentation is generally not an issue, when there is plenty of memory to spare, but for large model training running with limited memory, memory fragmentation leads to two issues, i) \uline{OOM due to lack of contiguous memory even when there is enough available memory}, ii) \uline{poor efficiency as a result of the memory allocator spending significant time to search for a contiguous piece of memory to satisfy a memory request.}
+
+\uline{\name does memory defragmentation on-the-fly by pre-allocating contiguous memory chunks for activation checkpoints and gradients, and copying them over to the pre-allocated memory as they are produced.} M$_D$ not only enables \name to train larger models with larger batch sizes, but also improves efficiency when training with limited memory.

@@ -1,22 +1,22 @@
 \section{Communication Analysis of \name-DP}\label{sec:communication}
-%{\color{green} [a figure on when/how communication is conducted could help this section, but optional for the time being.]}
 
-%\name can enable training up to a  128 B   parameter model with 64-way data parallelism ($16 \times 128 / 64 = 32 GB$), compared to 2B parameter model ($16 \times 2 =32 GB$) without \name. This is 64x increase in the model size compared to what is currently possible (without model parallelism), and the size continues to grow with data parallelism. 
+What is the communication volume of \name-powered DP approach compared to a baseline DP approach?
+The answer is in two parts:
 
-As \name boosts model size by removing memory redundancy, it is only natural to ask if we are trading communication volume for memory efficiency. In other words, what is the communication volume of \name-powered DP approach compared to a baseline DP approach?
-The answer is in two parts: i) \name-DP incurs no additional communication using $P_{os}$ and $P_g$, while enabling up to 8x memory reduction,
-%, resulting in a total memory footprint of $2\Psi + \frac{14\Psi}{N_d}$ 
-ii) \name-DP incurs a maximum of $1.5$x communication when using $P_p$ in addition to $P_{os}$ and $P_{g}$, while further reducing the memory footprint by $N_d$ times.
-%, resulting in a total memory foot print of $\frac{16\Psi}{N_d}$. 
-We present the analysis in this section.  
-We begin by first presenting a brief overview of the communication volume for standard DP. 
+i) \uline{\name-DP incurs no additional communication using $P_{os}$ and $P_g$, while enabling up to 8x memory reduction},
+
+ii) \uline{\name-DP incurs a maximum of $1.5$x communication when using $P_p$ in addition to $P_{os}$ and $P_{g}$, while further reducing the memory footprint by $N_d$ times.}
 
 \subsection{Data Parallel Communication Volume}
-During data parallel training, gradients across all data parallel processes are averaged at the end of the backward propagation before computing the updates for the next step. The averaging is performed using an all-reduce communication collective. For a large model size, the all-reduce communication is entirely communication bandwidth bound, and therefore, we limit our analysis to the total communication volume send to and from each data parallel process.
 
-State-of-art implementation of all-reduce uses a two-step approach, where the first step is a reduce-scatter operation, which reduces different part of the data on different process. The next step is an all-gather operation where each process gathers the reduced data on all the process. The result of these two steps is an all-reduce.
-Both reduce-scatter and all-gather are implemented using a pipelined approach, that results in a total data movement of $\Psi$ elements (for a data with $\Psi$ elements) for each. Therefore, the standard DP incurs 2$\Psi$ data movement during each training step.
-%{\color{green} [Discuss and summarize the properties of \name corresponding to those mentioned in the overview.]}
+During data parallel training, gradients across all data parallel processes are averaged at the end of the backward propagation before computing the updates for the next step. The averaging is performed using an all-reduce communication collective.
+
+For a large model size, the all-reduce communication is entirely communication bandwidth bound, and therefore, we limit our analysis to the total communication volume send to and from each data parallel process.
+
+\uline{State-of-art implementation of all-reduce uses a two-step approach, where the first step is a reduce-scatter operation, which reduces different part of the data on different process. The next step is an all-gather operation where each process gathers the reduced data on all the process. The result of these two steps is an all-reduce.}
+
+Both reduce-scatter and all-gather are implemented using a pipelined approach, that results in a total data movement of $\Psi$ elements (for a data with $\Psi$ elements) for each. \uline{Therefore, the standard DP incurs 2$\Psi$ data movement during each training step.}
+
  \begin{table*}
         \centering
         %\resizebox{\columnwidth}{!}{
@@ -42,19 +42,25 @@ Both reduce-scatter and all-gather are implemented using a pipelined approach, t
      \caption{Maximum model size through memory analysis (left) and the measured model size when running with \nameos (right). The measured model size with $P_{os}$ matches the theoretical maximum, demonstrating that our memory analysis provides realistic upper bounds on model sizes.}
      \label{tab:largest-model}
  \end{table*}
+
 \subsection{\name-DP Communication Volume}
-\subsubsection{Communication Volume with $P_{os+g}$} 
-With gradient partitioning, each process only stores the portion of the gradients, that is required to update its corresponding parameter partition. As such, instead of an all-reduce, \name only requires a scatter-reduce operation on the gradients, incurring communication volume of $\Psi$.  After each process updates the partition of the parameters that it is responsible for, an all-gather is performed to collect all the updated parameters from all the data parallel process. This also incurs a communication volume of $\Psi$. So the total communication volume per training step is $\Psi+\Psi= 2\Psi$, exactly the same as the baseline DP.
+\subsubsection{Communication Volume with $P_{os+g}$}
 
-\subsubsection{Communication Volume with $P_{os+g+p}$ } 
-After parameter partitioning, each data parallel process only stores the parameters that it updates. Therefore, during the forward propagation it needs to receives the parameters for all the other partitions. However, this can be pipelined to avoid the memory overhead. Before computing the forward propagation on the part of the model corresponding to a particular partition, the data parallel process responsible for that partition can broadcast the weights to all the data parallel processes. Once the forward propagation for that partition is done, the parameters can be discarded. The total communication volume is thus $\frac{\Psi \times N_d}{N_d} = \Psi$. In other words, we reschedule the parameter all-gather by spreading it across the entire forward propagation, and discarding the parameters once they have been used. Note however that this all-gather needs to happen once again for the backward propagation in the reverse order. 
+\uline{With gradient partitioning, each process only stores the portion of the gradients, that is required to update its corresponding parameter partition. As such, instead of an all-reduce, \name only requires a scatter-reduce operation on the gradients, incurring communication volume of $\Psi$.}
 
-The total communication volume is therefore the sum of the communication volumes incurred by these all-gathers in addition to the communication volume incurred by the reduce-scatter of the gradients. The total volume is therefore $3\Psi$ which is 1.5x compared to the baseline.   Both gradient and parameter partitioning leverage the insight that --- not all states of gradients and parameters are needed all the time --- to optimize memory by communicating the states judiciously. 
+\uline{After each process updates the partition of the parameters that it is responsible for, an all-gather is performed to collect all the updated parameters from all the data parallel process. This also incurs a communication volume of $\Psi$.}
 
-\begin{comment}
-\subsection{Communication Latency}
-Here we want to point out that while our optimizations impact communication latency, its impact to overall performance is likely small. Note that $P_g$ implements a reduce-scatter as a sequential series of reduce operations, and $P_p$ implements all-gather as a sequential series of broadcast operations.  Furthermore, $C_b$ can partition a large communication collective into multiple smaller ones to avoid memory overhead. Clearly, these sequential operations increases the communication latency. However, for large models with hundreds of billions of parameters, even with a large enough constant buffer size $C_B$, message sizes are large enough, that the communication time is bounded by the communication volume and communication bandwidth, and not by latency.
-\end{comment}
+So the total communication volume per training step is $\Psi+\Psi= 2\Psi$, exactly the same as the baseline DP.
+
+\subsubsection{Communication Volume with $P_{os+g+p}$ }
+
+After parameter partitioning, each data parallel process only stores the parameters that it updates. Therefore, during the forward propagation it needs to receives the parameters for all the other partitions.
+
+However, this can be pipelined to avoid the memory overhead. \uline{Before computing the forward propagation on the part of the model corresponding to a particular partition, the data parallel process responsible for that partition can broadcast the weights to all the data parallel processes. Once the forward propagation for that partition is done, the parameters can be discarded. The total communication volume is thus $\frac{\Psi \times N_d}{N_d} = \Psi$.}
+
+\uline{In other words, we reschedule the parameter all-gather by spreading it across the entire forward propagation, and discarding the parameters once they have been used.} \uline{Note however that this all-gather needs to happen once again for the backward propagation in the reverse order.}
+
+The total communication volume is therefore the sum of the communication volumes incurred by these all-gathers in addition to the communication volume incurred by the reduce-scatter of the gradients. \uline{The total volume is therefore $3\Psi$ which is 1.5x compared to the baseline.}
 
 \section{Communication Analysis of \name-R}
 We compare the communication volume of partitioned activation checkpointing ($P_a$) in \name-R with baseline MP, and show that $P_a$ incurs a communication volume increase that is in general less than one tenth of the baseline MP. Furthermore, we analyze the communication overhead of $P_a$ in relation to DP communication volume to identify scenarios when $P_a$ improves efficiency by allowing for a larger batch size and reducing DP communication.  We leverage such analysis to decide if and when to apply  $P_a$ as well as $P_{a+cpu}$.  
@@ -69,9 +75,7 @@ When MP is used in conjunction with DP, $P_a$ can be used to reduce the data-par
 
 Finally if $P_{a+cpu}$ is applied, partitioned activation checkpoints are offloaded to CPU, reducing the activation memory requirement to nearly zero at the expense of 2x added data movement to and from CPU memory compared to $P_a$. In extreme cases where DP communication volume is the major bottleneck due to a small batch size even with $P_a$, $P_{a+cpu}$ can improve efficiency by increasing the batch size as long as the CPU data transfer overhead is less than the DP communication volume overhead, which is generally true for small batch sizes.  
 
-Given model and hardware characteristics, we leverage the above analysis to decide if and when to apply $P_a$ and $P_{a+cpu}$.  
-
- 
+Given model and hardware characteristics, we leverage the above analysis to decide if and when to apply $P_a$ and $P_{a+cpu}$.
 
 \begin{comment}Activation partitioning and cpu checkpointing can significantly improve efficiency by increasing the training batch size. The increase in training batch size increases computation effieciency while also reducing the data parallel communication volume. Therefore, conservatively these techniques are effective as long as the reduction in data parallel communication volume is not out weighted by the communication overhead required by these optimizations. Here, we show the exact criteria, when $P_{a+cpu}$ improves efficiency via a communication volume analysis.
 
