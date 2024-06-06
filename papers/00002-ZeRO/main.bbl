@@ -89,19 +89,4 @@ Yang You, Jing Li, Jonathan Hseu, Xiaodan Song, James Demmel, and Cho{-}Jui Hsie
 \newblock Reducing {BERT} pre-training time from 3 days to 76 minutes.
 \newblock {\em CoRR}, abs/1904.00962, 2019.
 
-\bibitem{nvidia-bert-training-with-gpus}
-Shar Narasimhan.
-\newblock {NVIDIA Clocks World’s Fastest BERT Training Time ...}
-\newblock \url{https://devblogs.nvidia.com/training-bert-with-gpus/}, 2019.
-\newblock [Online; accessed 25-September-2019].
-
-\bibitem{T5}
-Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
-\newblock Exploring the limits of transfer learning with a unified text-to-text transformer, 2019.
-
-\bibitem{gpt-2}
-Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever.
-\newblock Language models are unsupervised multitask learners.
-\newblock 2019.
-
 \end{thebibliography}

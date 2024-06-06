@@ -63,38 +63,8 @@ However, this can be pipelined to avoid the memory overhead. \uline{Before compu
 The total communication volume is therefore the sum of the communication volumes incurred by these all-gathers in addition to the communication volume incurred by the reduce-scatter of the gradients. \uline{The total volume is therefore $3\Psi$ which is 1.5x compared to the baseline.}
 
 \section{Communication Analysis of \name-R}
-We compare the communication volume of partitioned activation checkpointing ($P_a$) in \name-R with baseline MP, and show that $P_a$ incurs a communication volume increase that is in general less than one tenth of the baseline MP. Furthermore, we analyze the communication overhead of $P_a$ in relation to DP communication volume to identify scenarios when $P_a$ improves efficiency by allowing for a larger batch size and reducing DP communication.  We leverage such analysis to decide if and when to apply  $P_a$ as well as $P_{a+cpu}$.  
+We compare the communication volume of partitioned activation checkpointing ($P_a$) in \name-R with baseline MP, and show that $P_a$ incurs a communication volume increase that is in general \uline{less than one tenth} of the baseline MP.
 
-Communication volume trade-off of partitioning activation checkpoints depends on the model size, checkpointing strategy and the MP strategy.  To share concrete insights, we perform the analysis in the context of transformer based models implemented using SOTA MP approach, Megatron-LM.
+Furthermore, we analyze the communication overhead of $P_a$ in relation to DP communication volume to identify scenarios when $P_a$ improves efficiency by \uline{allowing for a larger batch size} and reducing DP communication.
 
-In Megatron-LM with activation checkpointing, each transformer block performs two all-reduce operations of size $batch \times seq\_length \times hidden\_dim$ in the forward propagation, two all-reduce for forward re-computation and two more in the backward propagation.  The total communication per block is $12 \times seq\_length \times hidden\_dim$ since communication volume of an all-reduce is $2 \times message\_size$. 
-
-When \name-R partitions activation checkpoints, it requires an additional all-gather operation before the forward recomputation of the back-propagation on each activation checkpoint. In general, we checkpoint the input activation for each transformer block, requiring one all-gather per transformer block. The communication overhead $P_a$ is therefore $seq\_length * hidden\_dim$, since the communication volume of an all-gather is $message\_size$. Therefore, the total communication overhead of $P_a$ is less than $10\%$ of the original communication volume for model parallelism.
-
-When MP is used in conjunction with DP, $P_a$ can be used to reduce the data-parallel communication volume by an order of magnitude at the expense of a $10\%$ increase in model-parallel communication volume, and significantly boost efficiency when data-parallel communication is a performance bottleneck. Notice that $P_a$ reduces the activation memory consumption by the MP degree allowing for a proportional increase in batch size. For large models, MP can be as large as 16 (\#GPUs on a DGX-2 node), allowing for up to 16x increase in the batch size. The communication volume of a data-parallel training is inversely proportional to the batch size. Therefore, an order of magnitude increase in batch size due to $P_a$ could result in an order-of-magnitude decrease in data-parallel communication volume. 
-
-Finally if $P_{a+cpu}$ is applied, partitioned activation checkpoints are offloaded to CPU, reducing the activation memory requirement to nearly zero at the expense of 2x added data movement to and from CPU memory compared to $P_a$. In extreme cases where DP communication volume is the major bottleneck due to a small batch size even with $P_a$, $P_{a+cpu}$ can improve efficiency by increasing the batch size as long as the CPU data transfer overhead is less than the DP communication volume overhead, which is generally true for small batch sizes.  
-
-Given model and hardware characteristics, we leverage the above analysis to decide if and when to apply $P_a$ and $P_{a+cpu}$.
-
-\begin{comment}Activation partitioning and cpu checkpointing can significantly improve efficiency by increasing the training batch size. The increase in training batch size increases computation effieciency while also reducing the data parallel communication volume. Therefore, conservatively these techniques are effective as long as the reduction in data parallel communication volume is not out weighted by the communication overhead required by these optimizations. Here, we show the exact criteria, when $P_{a+cpu}$ improves efficiency via a communication volume analysis.
-
-If we assume that the size of the checkpointed activations is $C_A$, then activation partitioning will incur a communication volume of $C_A$, since the communication volume of all-gather is equal to the message size. Similarly, CPU checkpointing will also incur a communication volume of $C_A$, as we need to transfer $C_A$ activations from CPU to the GPU memory.
-
-With optimal activation checkpointing, $C_A$ is approximately equal to the square root of the total model activations \cite{optimal-checkpointing}, where the total model activation is highly model dependent, which makes it difficult to identify the exact communication volume overhead of $P_{a+cpu}$. However, we can come up with an exact communication volume in the context of transformer based language models.
-
-For transformer based models such as the Bert or GPT, we generally checkpoint activations at the transformer layer boundary. Therefore, $C_A = batch \times seq\_length \times n \times h$ for a model  with $n$ layers, and $h$ hidden dimension. Comparatively, the data parallel communication volume for this model is $2 \Psi$ as described before, where $\Psi$ is the model size, which would be approximately $12 \times n \times h^2$ for a transformer based model such as the GPT-2. 
-$C_A$ can become much larger than $2 \Psi$ for very large batch sizes. However, for modest batch size, $C_A$ can be much smaller than $2 \Psi$. If we consider $B_{data}$, $B_{gpu}$ and $B_{cpu}$ as the data-parallel bandwidth, gpu-gpu bandwidth and cpu-gpu memory bandwidth, $P_a$ improves efficiency as long as the following holds:
-
-\begin{equation}
-    \frac{batch \times seq\_length \times n \times h}{B_{gpu}} \leq \frac{24 \times n \times h^2}{B_{data}}  
-\end{equation}
-
-A similar equation can be derived for $P_{a+cpu}$. The above equation holds true for training very large models where the parameters and optimizer states occupy most of the memory, and the batch size we can fit is very small. Under such scenarios, $P_{a+cpu}$ offers significant efficiency improvement by allowing us to run larger batch sizes.
-\end{comment}
-
-
- 
- 
- 
- 
+Finally if $P_{a+cpu}$ is applied, partitioned activation checkpoints are offloaded to CPU, reducing the activation memory requirement to nearly zero at the expense of 2x added data movement to and from CPU memory compared to $P_a$. \uline{In extreme cases where DP communication volume is the major bottleneck due to a small batch size even with $P_a$, $P_{a+cpu}$ can improve efficiency by increasing the batch size as long as the CPU data transfer overhead is less than the DP communication volume overhead, which is generally true for small batch sizes.}

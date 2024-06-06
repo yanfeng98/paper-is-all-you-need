@@ -16,10 +16,6 @@
 \end{figure}
 \section{Implementation and Evaluation}\label{sec:evaluation}
 
-We focus our implementation on supporting efficient training of models with {$\sim$}100B parameters, which are an order-of-magnitude larger than the largest published models today (e.g., T5-11B~\cite{T5}) while trainable within a reasonable time frame on current hardware (e.g., with 1K V100 GPUs).  We implement and evaluate a subset of optimizations in \name --- $P_{os+g}$ in \name-DP plus ZeRO-R --- that allows us to achieve this goal. We will refer to this implementation as \name-100B.  Our results show that \name-100B can efficiently train models with up to 170B parameters, 8x bigger than SOTA, up to 10x faster and with improved usability. \name-100B powers Turing-NLG, the largest published model in the world with new SOTA accuracy.   
-
-%Here, we demonstrate the performance of \name for models with up to 170B parameters. We show that \name-100B achieves better than perfect scalability in the regime that we tested. We show how \name democratizes large model training by providing data scientist the freedom to experiment without constraints, and making large model training feasible on lower end clusters. Furthermore, we discuss the impact of different optimization in \name-100B on model size, memory consumption and performance. We also present the \name-100B powered Model-\name, a 17.2B parameter transformer based model which is not only the SOTA for language models but is also the largest model in the world. We begin by presenting a brief discussion of our implementation and methodology.
-
 \begin{table}
 \centering
    \begin{minipage}[b]{0.30\columnwidth}
@@ -40,77 +36,8 @@ We focus our implementation on supporting efficient training of models with {$\s
   
 \subsection{Implementation and Methodology}
 
-%\paragraph{\name and MP} 
-
 \paragraph{Implementation}
-We implemented \name-100B in PyTorch including the full set of optimizations in $P_{os+g}$ and \name-R.  Its interface is compatible with any model implemented as an {\tt torch.nn.module}. Users can simply wrap their models using this interface and leverage \name-powered DP as they use classic DP. Users do not need to modify their model.  \name-powered DP can be combined with any form of MP including Megatron-LM.
-
-\paragraph{Hardware}
-We conducted our experiments on a cluster of 400 V100 GPUs ($25$ DGX-2 nodes) with 800 Gbps internode communication bandwidth.
-%Details of our hardware environment are summarized in Table~\ref{tab:hardware_environment}. 
-
-\paragraph{Baseline}
-For experiments without MP, we use torch's distributed data parallel (DDP) as baseline. For experiments with MP, we use Megatron-LM because it is, to our knowledge, the state-of-art. We use the open-source version of Megatron-LM from NVIDIA~\footnote{https://github.com/nvidia/Megatron-LM} with a date of September 2019. The most recent Megatron-LM results report the ability to scale up to 16B parameter models using 32 DGX-2 nodes (total of 512 32GB V100 GPUs) \cite{megatronlm}. %Megatron-LM also comes with its own data-parallel implementation.
-
-\paragraph{\name}
-Experiments without MP, use the \name-powered DP implementation in \name-100B. 
-%As discussed in Sec.~\ref{sec:intro}, \name can be combined with MP to achieve a multiplicative effect in memory reduction. We use \name in conjunction with MP to efficiently train very large model sizes. 
-Experiments with MP, combine \name-powered DP with MP of Megatron-LM.
-
-\paragraph{Model Configurations}
-The models presented in this section are GPT-2 \cite{gpt-2} like transformer based models. We vary the hidden dimension and the number of layers to obtain models with different number of parameters. Table~\ref{tab:model-configuration} shows the configuration parameters used in our experiments with additional details in AE Appendix.
-
-\begin{comment}
-While 1T parameter model requires exa-flop supercomputers, 80B-100B parameter models may be trained in a few weeks on a 1024 GPU system which already exists (once again assuming the same sequence length and data size, and similar computational efficiency). As such, for the first step of the evaluation, we implemented optimizer state partitioning ($P_{os}$) and demonstrated its capability to support such models, which would hopefully address the near-term growth on model size.  We call this implementation \nameos.   The full implementation of \name and its support for trillion parameters will come later.  
-
-\subsection{\nameos Implementation}
-We implemented \nameos for PyTorch as a wrapper class of torch optimizer. To use \nameos, torch users can simply swap out their favourite optimizer with \name wrapped version of the same optimizer, requiring just a few lines of code change.
-
-\nameos implements $P_{os}$ to eliminate optimizer state redundancy, and $C_B$ to reduce the all-reduce buffer sizes. The all-gather required by $P_{os}$ can be performed either as all-gather or as a sequence of broadcast operations. 
-The former has less latency impact, but the later has less memory overhead (using smaller buffers).  
-%The latter has much lower memory overhead, and is handy to avoid running out of memory when running largest trainable models with $P_{os}$.
-
-\nameos incurs 1.5x communication volume compared to baseline data-parallel, as we are currently using all-reduce instead of reduce-scatter. 
-It is straightforward to eliminate the additional communication by switching to reduce-scatter.
-We observe when the batch size per device is moderate (e.g., 16), this 1.5x of communication volume is not really a bottleneck.
-%But even with 1.5x overhead, communication is not really a bottleneck on our systems. 
-It also serves the purpose of emulating the communication volume when we enable all optimizations $P_{os + g + p}$ for \name.
-%, the 1.5x communication volume is less of a concern for system scalability.
-
-%In fact, while it is straight forward to avoid the communication overhead by switching to reduce-scatter, we used all-reduce on purpose to demonstrate that even with 1.5x communication overhead, communication is not a major bottleneck on the current generation state-of-art hardware systems. This demonstrates the practical value of $P_{os + g + p}$ for \name-1T, when capacity becomes available.
-
-
-\begin{figure*}
-   \centering
-   \begin{minipage}[b]{0.3\textwidth}
-       \centering
-       \includegraphics[width=\textwidth]{max_data_parallel_throughput.PNG}
-        \caption{Max \name throughput with data parallelism only. \label{fig:dp_tput}}
-   \end{minipage}
-   \quad
-   \begin{minipage}[b]{0.65\textwidth}
-   \centering
-   \begin{subfigure}[b]{0.3\textwidth}
-       \centering
-       \includegraphics[width=\textwidth]{max_model_size.PNG}
-        \caption{Max model size. \label{fig:max-model-size}}
-   \end{subfigure}
-   \quad
-   \begin{subfigure}[b]{0.3\textwidth}
-       \centering
-       \includegraphics[width=\textwidth]{cache_allocated.PNG}
-       \caption{Max cache allocated. \label{fig:max-cached-memory}}
-   \end{subfigure}
-   \quad
-   \begin{subfigure}[b]{0.3\textwidth}
-       \centering
-       \includegraphics[width=\textwidth]{tput_vs_config.PNG}
-        \caption{Throughput per GPU. \label{fig:max-performance}}
-   \end{subfigure}
-   \caption{Comparing ZeRO configurations.} \label{fig:zero-config-compare}
-   \end{minipage}
-\end{figure*}
-\end{comment}
+Its interface is compatible with any model implemented as an {\tt torch.nn.module}. Users can simply wrap their models using this interface and leverage \name-powered DP as they use classic DP. Users do not need to modify their model.  \name-powered DP can be combined with any form of MP including Megatron-LM~\footnote{https://github.com/nvidia/Megatron-LM}.
 
 \subsection{Speed and Model Size}
 \name-100B efficiently run models with up to 170B parameters on 400 GPUs, more than 8x bigger than Megatron-LM. Figure~\ref{fig:billion_parameter_speedup} shows throughput per GPU for varying model sizes using \name-100B with MP versus using Megatron MP alone. \name-100B achieves a sustained throughput of 15 PetaFlops (over 30\% of the peak) on average for models with 8B to 100B parameters. In comparison, the baseline MP performance degrades quickly with the increase in model size: MP incurs high communication volume between GPUs, and going beyond a single node to fit larger models causes a communication bandwidth drop from 300GB/sec per link (NVSwitch) to 12.5 GB/sec per link (Infiniband EDR), resulting in a significant performance drop. \name-100B achieves up to 10x speedup over baseline, significantly outperforming on large models.
