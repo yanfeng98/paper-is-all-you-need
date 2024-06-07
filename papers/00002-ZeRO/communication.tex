@@ -17,32 +17,6 @@ For a large model size, the all-reduce communication is entirely communication b
 
 Both reduce-scatter and all-gather are implemented using a pipelined approach, that results in a total data movement of $\Psi$ elements (for a data with $\Psi$ elements) for each. \uline{Therefore, the standard DP incurs 2$\Psi$ data movement during each training step.}
 
- \begin{table*}
-        \centering
-        %\resizebox{\columnwidth}{!}{
-            \begin{tabular}{|c|c||c|c|c|c||c|c|}
-            \hline
-            \multicolumn{1}{|c}{\multirow{2}{*}{MP}}&\multicolumn{1}{|c}{\multirow{2}{*}{GPUs}}  & \multicolumn{4}{||c|}{\bf Max Theoretical Model Size}&\multicolumn{2}{|c|}{\bf Measured Model Size} \\
-            \hhline{~~------}
-            &&Baseline&P$_{os}$&P$_{os+g}$&P$_{os+g+p}$&Baseline&\name-DP (P$_{os}$)\\
-            \hline
-            1&64&2B&\bf{7.6B}&14.4B&128B&1.3B&\bf{6.2B}\\
-            \hline
-            2&128&4B&\bf{15.2B}&28.8B&256B&2.5B&\bf{12.5B}\\
-            \hline
-            4&256&8B&\bf{30.4B}&57.6B&0.5T&5B&\bf{25B}\\
-            \hline
-            8&512&16B&\bf{60.8B}&115.2B&1T&\it{10B}&\bf{50B}\\
-            \hline
-            16&1024&32B&\bf{121.6B}&230.4B&\it{2T}&20B&\bf{100B}\\
-            \hline
-            \end{tabular}
-        %}
-        
-     \caption{Maximum model size through memory analysis (left) and the measured model size when running with \nameos (right). The measured model size with $P_{os}$ matches the theoretical maximum, demonstrating that our memory analysis provides realistic upper bounds on model sizes.}
-     \label{tab:largest-model}
- \end{table*}
-
 \subsection{\name-DP Communication Volume}
 \subsubsection{Communication Volume with $P_{os+g}$}
 

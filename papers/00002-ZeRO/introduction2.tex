@@ -27,11 +27,11 @@ the training.
  \end{center}
 \end{figure}
 
-1) \uline{Optimizer State Partitioning ($P_{os}$): 4x memory reduction, same communication volume as DP;}
+1) Optimizer State Partitioning ($P_{os}$): \uline{4x memory reduction, same communication volume as DP;}
 
-2) \uline{Add Gradient Partitioning ($P_{os+g}$): 8x memory reduction, same communication volume as DP;} 
+2) Add Gradient Partitioning ($P_{os+g}$): \uline{8x memory reduction, same communication volume as DP;} 
 
-3) \uline{Add Parameter Partitioning ($P_{os+g+p}$): Memory reduction is linear with DP degree $N_d$.} For example, splitting across 64 GPUs ($N_d$ = 64) will yield a 64x memory reduction. \uline{There is a modest 50\% increase in communication volume.}
+3) Add Parameter Partitioning ($P_{os+g+p}$): \uline{Memory reduction is linear with DP degree $N_d$.} For example, splitting across 64 GPUs ($N_d$ = 64) will yield a 64x memory reduction. \uline{There is a modest 50\% increase in communication volume.}
 
 {\bf Optimizing Residual State Memory:}
 We develop \name-R to optimize the residual memory consumed by these three factors respectively.  
@@ -45,6 +45,10 @@ We develop \name-R to optimize the residual memory consumed by these three facto
 
 \name-DP and \name-R combined together forms a powerful system of memory optimizations for DL training that we collectively refer to as \name.
 
-There are still cases where we want to leverage MP: i) When used with \name-R, MP can reduce activation memory footprint for very large models. ii) For smaller models where activation memory is not an issue, MP can also have benefits when aggregated batch size using DP alone is too big to have good convergence.\footnote{Prior work \cite{DBLP:journals/corr/batch-scaling} shows, very large batch size could slow down convergence.  For given model and data, there is a measure of critical-batch size, where increasing batch size further slows down convergence.}  In those case, one can combine \name with MP to fit the model with an acceptable aggregated batch size.
+There are still cases where we want to leverage MP:
 
-We share \name as a part of our open source DL training optimization library called DeepSpeed\footnote{https://github.com/microsoft/deepspeed}.
+i) \uline{When used with \name-R, MP can reduce activation memory footprint for very large models.}
+
+ii) For smaller models where activation memory is not an issue, MP can also have benefits when aggregated batch size using DP alone is too big to have good convergence.\footnote{Prior work \cite{DBLP:journals/corr/batch-scaling} shows, very large batch size could slow down convergence.  For given model and data, there is a measure of critical-batch size, where increasing batch size further slows down convergence.}  \uline{In those case, one can combine \name with MP to fit the model with an acceptable aggregated batch size.}
+
+We share \name as a part of our open source DL training optimization library called DeepSpeed\footnote{\url{https://github.com/microsoft/deepspeed}}.

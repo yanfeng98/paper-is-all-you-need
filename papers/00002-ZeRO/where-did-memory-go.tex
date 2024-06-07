@@ -1,6 +1,6 @@
 \section{Where Did All the Memory Go?}
 
-During model training, most of the memory is consumed by {\it model states}, i.e., tensors comprising of pptimizer states, gradients, and parameters. Besides these model states, the rest of the memory is consumed by activations, temporary buffers and fragmented memory which we call \emph{residual states}.
+During model training, most of the memory is consumed by \textbf{model states}, i.e., tensors comprising of pptimizer states, gradients, and parameters. Besides these model states, the rest of the memory is consumed by activations, temporary buffers and fragmented memory which we call \textbf{residual states}.
 
 \subsection{Model States: Optimizer States, Gradients and Parameters}
 
@@ -10,9 +10,7 @@ Consider for instance, Adam~\cite{DBLP:journals/corr/Adam}, one of the most popu
 
 \uline{Of these three types of the parameter-related tensors, the optimizer states usually consume the most memory, specially when mixed-precision training is applied.}
 
-\textbf{Mixed-Precision Training}
-
-During mixed-precision training, both the forward and backward propagation are performed using fp16 weights and activations. However, to effectively compute and apply the updates at the end of the backward propagation, the mixed-precision optimizer keeps an fp32 copy of the parameters as well as an fp32 copy of all the other optimizer states.
+\textbf{Mixed-Precision Training} During mixed-precision training, both the forward and backward propagation are performed using fp16 weights and activations. However, to effectively compute and apply the updates at the end of the backward propagation, the mixed-precision optimizer keeps an fp32 copy of the parameters as well as an fp32 copy of all the other optimizer states.
 
 \uline{Mixed precision training of a model with $\Psi$ parameters using Adam requires enough memory to hold an $fp16$ copy of the parameters and the gradients, with memory requirements of $2\Psi$ and $2\Psi$ bytes respectively.} \uline{In addition, it needs to hold the optimizer states: an $fp32$ copy of the parameters, momentum and variance, with memory requirements of $4\Psi$, $4\Psi$, and $4\Psi$ bytes, respectively.}
 

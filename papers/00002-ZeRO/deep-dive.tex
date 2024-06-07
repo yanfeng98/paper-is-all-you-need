@@ -30,7 +30,6 @@ Table \ref{tab:memory-consumption} analyzes model-state memory consumption of a 
   
 \begin{table*}
   \centering
-  %\resizebox{2*\columnwidth}{!}{
   \begin{tabular}{|c||c|c|c||c|c|c||c|c|c|}
   \hline
   \multicolumn{1}{|c}{\multirow{2}{*}{DP}}&\multicolumn{3}{||c}{\textbf{7.5B Model} (GB)} &\multicolumn{3}{||c}{\textbf{128B Model} (GB)} & \multicolumn{3}{||c|}{\textbf {1T Model} (GB)} \\
@@ -45,7 +44,6 @@ Table \ref{tab:memory-consumption} analyzes model-state memory consumption of a 
   1024&30.1&15.1&0.12&513&257&2&4011&2013&\textbf{15.6}\\
   \hline
   \end{tabular}
-  %}
 \caption{Per-device memory consumption of different optimizations in \name-DP as a function of DP degree . Bold-faced text are the combinations for which the model can fit into a cluster of 32GB V100 GPUs.}
 \label{tab:memory-consumption}
 \end{table*}

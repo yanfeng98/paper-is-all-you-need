@@ -2,8 +2,7 @@
   
 \subsection{Implementation and Methodology}
 
-\paragraph{Implementation}
-Its interface is compatible with any model implemented as an {\tt torch.nn.module}. Users can simply wrap their models using this interface and leverage \name-powered DP as they use classic DP. Users do not need to modify their model.  \name-powered DP can be combined with any form of MP including Megatron-LM~\footnote{https://github.com/nvidia/Megatron-LM}.
+Its interface is compatible with any model implemented as an {\tt torch.nn.module}. Users can simply wrap their models using this interface and leverage \name-powered DP as they use classic DP. Users do not need to modify their model.  \name-powered DP can be combined with any form of MP including Megatron-LM~\footnote{\url{https://github.com/nvidia/Megatron-LM}}.
 
 \subsection{Speed and Model Size}
 Figure~\ref{fig:billion_parameter_speedup} shows throughput per GPU for varying model sizes using \name-100B with MP versus using Megatron MP alone.
@@ -32,9 +31,6 @@ For \name-100B, the slight reduction in performance beyond 100B is due to lack o
 \subsection{Democratizing Large Model Training}
 Figure~\ref{fig:dp_tput} shows that \name-100B can train models with up to 13B parameters without MP on 128 GPUs, achieving throughput over 40\,TFlops per GPU on average.
 
-\subsection{Turing-NLG, the SOTA language model with 17B parameters}
-Turing-NLG was trained end-to-end using \name-100B and Figure~\ref{fig:turing_nlg_17B} shows the validation perplexity over 300K iterations compared to previous SOTA, Megatron-LM 8.3B parameter model.
-
 \begin{figure}
    \begin{minipage}[b]{0.55\columnwidth}
     \centering
@@ -50,3 +46,6 @@ Turing-NLG was trained end-to-end using \name-100B and Figure~\ref{fig:turing_nl
       \vspace{0.08in}
    \end{minipage}
 \end{figure}
+
+\subsection{Turing-NLG, the SOTA language model with 17B parameters}
+Turing-NLG was trained end-to-end using \name-100B and Figure~\ref{fig:turing_nlg_17B} shows the validation perplexity over 300K iterations compared to previous SOTA, Megatron-LM 8.3B parameter model.
