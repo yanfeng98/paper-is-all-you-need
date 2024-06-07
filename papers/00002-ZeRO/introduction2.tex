@@ -47,20 +47,4 @@ We develop \name-R to optimize the residual memory consumed by these three facto
 
 There are still cases where we want to leverage MP: i) When used with \name-R, MP can reduce activation memory footprint for very large models. ii) For smaller models where activation memory is not an issue, MP can also have benefits when aggregated batch size using DP alone is too big to have good convergence.\footnote{Prior work \cite{DBLP:journals/corr/batch-scaling} shows, very large batch size could slow down convergence.  For given model and data, there is a measure of critical-batch size, where increasing batch size further slows down convergence.}  In those case, one can combine \name with MP to fit the model with an acceptable aggregated batch size.
 
-\begin{figure}[t!]
- \begin{center}
- \includegraphics[width=1.0\columnwidth]{model_size_and_speedup.PNG}
- \caption{\name training throughput and speedup w.r.t SOTA baseline for varying model sizes.  For \name, the MP always fit in a node, while for baseline, models larger than 40B require MP across nodes.} 
- \label{fig:billion_parameter_speedup}
- \end{center}
- \end{figure}
-
-\begin{figure}[t!]
- \begin{center}
- \includegraphics[width=1.0\columnwidth]{hyperscale_60B_model_v2.PNG}
- \caption{Superlinear scalability and per GPU training throughput of a 60B parameter model using \name-100B.} 
- \label{fig:hyperscale_60B}
- \end{center}
- \end{figure}
-
 We share \name as a part of our open source DL training optimization library called DeepSpeed\footnote{https://github.com/microsoft/deepspeed}.
