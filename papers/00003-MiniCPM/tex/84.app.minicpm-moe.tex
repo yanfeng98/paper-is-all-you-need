@@ -1,0 +1,39 @@
+
+\vspace{-2mm}
+\subsection{MiniCPM-MoE}
+We further extend the ability of MiniCPM using Mixture-of-Expert. 
+
+\textbf{Initialization.}
+MiniCPM-MoE is initialized utilizing Sparse Upcycling~\citep{komatsuzaki2022sparse}. The dense model checkpoint, derived from the stable phase of MiniCPM, undergoes a transformation wherein each MLP layer is substituted by an MoE layer. These new MoE layers are exact replicas of the original MLP layers from the dense checkpoint. The router parameters are randomly initialized following a normal distribution with a mean of 0 and a variance of 0.01.
+
+
+\textbf{Routing Mechanism.}
+The number of total non-embedding parameters of MiniCPM-MoE is 13.6B. 
+During training and inference, two out of eight experts are activated for each token, resulting in the number of activated parameters being approximately 4B. To prevent training from collapsing, an additional load balancing loss~\citep{fedus2022switch} is applied to the final training objective. This auxiliary loss is multiplied by 0.01 which is large enough to ensure a balanced distribution of tokens assigned to different experts.
+
+\textbf{Training.}
+ Similar to MiniCPM, we employ WSD as our learning rate scheduler. Regarding the training data, we adhere strictly to the distribution specified in Section \ref{sec:appdatadistrbution}. The training batch size is maintained at 4M tokens during the stable training and decay stages and is reduced to 2M tokens during the SFT stage. The pre-training phase (including continue pre-train and decay stage) spans 130K steps, after which we notice diminishing improvement. The benchmark results are detailed in Table \ref{tab:a4_moe_benchmark}.
+
+
+\begin{table}[htbp]
+    \centering
+\scalebox{0.80}{
+    \begin{tabular}{l|cccccccc}
+\toprule
+    \textbf{Model} &  \textbf{C-Eval} & \textbf{CMMLU} & \textbf{MMLU} & \textbf{HumanEval} & \textbf{MBPP} & \textbf{GSM8K} & \textbf{MATH} &\textbf{BBH}  \\
+\midrule
+    Llama2-34B & - & - & 62.6 & 22.6 & 33.0$^\dag$ & 42.2 & 6.24 & \textbf{44.1} \\
+    Deepseek-MoE (16B) & 40.6 & 42.5 & 45.0 & 26.8 & 39.2 & 18.8 & 4.3 &  - \\
+    Mistral-7B & 46.12 & 42.96 & \textbf{62.69} & 27.44 & 45.20 & 33.13 & 5.0 & {41.06 }\\
+    Gemma-7B & 42.57 & 44.20 & 60.83 & 38.41 & 50.12 & 47.31 & 6.18 & 39.19 \\
+\midrule
+    MiniCPM-2.4B & 51.13 & 51.07 & 53.46 & 50.00 & 47.31 & 53.83 & 10.24 & 36.87 \\
+   \textbf{MiniCPM-MoE (13.6B)} & \textbf{58.11} & \textbf{58.80} & 58.90 & \textbf{56.71} & \textbf{51.05} & \textbf{61.56} & \textbf{10.52} & 39.22 \\
+\bottomrule
+
+    \end{tabular}
+}
+    \caption{Benchmark results of MiniCPM-MoE. $^\dag$ means evaluation results on the full set of MBPP, instead of the hand-verified set~\citep{austin2021program}. The evaluation results of Llama2-34B and Qwen1.5-7B are taken from their technical reports.}
+    \label{tab:a4_moe_benchmark}
+
+\end{table}

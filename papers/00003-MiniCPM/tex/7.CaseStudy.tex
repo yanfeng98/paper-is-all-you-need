@@ -1,0 +1,181 @@
+
+\section{Case Demonstration}
+\label{app:cases}
+A notable feature distinguishing the MiniCPM series from other robust SLMs like Phi~\citep{li2023textbooks} by Microsoft is that we train MiniCPM on general-purpose corpora, which guarantees the models' versatility and generalization across a variety of tasks. In this section, we present several intriguing generation instances, typically achievable only by larger models, to demonstrate the capabilities of MiniCPM. Although we do not conduct extensive checks on whether specific cases exist in the training set, due to the diverse ways they can be expressed, we ensure that no data similar to the test cases is intentionally added.
+
+
+\begin{figure}[!h]
+\centering
+\scalebox{0.95}{
+\begin{AIbox}{Translation}
+{\bf Prompt:} 
+{\scriptsize
+Translate this sentence into French: "I am a freshman on Chinese, do you know how this sentence is translated: \chinese{如何用Python创建一个简单的网页爬虫？" (\textcolor{darkgreen}{How to create a simple web crawler in Python?})
+}}\\\ \\
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-1.2B:}\\
+\scriptsize
+Je suis un homme nouveau en chinois, vous êtes-vous au courant de la manière dont cette phrase est traduite : Comment créer un petit scraper web simple à Python ?
+}\hspace{0.02\linewidth}%
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-2.4B-DPO:} \\
+\scriptsize
+Je suis un nouveau-né en chinois, sais-tu comment on crée un simple web crawler en Python ?
+Translation: "Je suis un nouveau-né en chinois, sais-tu comment on crée un simple web crawler en Python ?"
+}
+\hspace{0.01\linewidth}
+\end{AIbox}
+}
+\caption{Examples on translation. We notice that MiniCPM-2.4B-DPO performs better in translating the technical part, but both models are unnatural in expressing "just starting to learn Chinese.". However, both models successfully understand the instruction with traps and generate French despite we do not include French corpus intentionally.}
+\label{fig:translation_example}
+\end{figure}
+
+
+\begin{figure}[!h]
+\centering
+\scalebox{0.95}{
+\begin{AIbox}{Math and Reasoning}
+{\bf Prompt:} 
+{\scriptsize
+\chinese{如果以下算式中减号均表示加号，而加号实际上是减号，给出算式的计算结果15-25-12+34=
+}\\ (\textcolor{darkgreen}{If in the following equation, minus signs represent addition, and plus signs represent subtraction, give the result of the calculation: 15-25-12+34=})}\\\ \\
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-1.2B:}\\
+\scriptsize
+\chinese{如果减号表示加号，那么我们可以将算式改写为：15 + 25 + 12 - 34 \\ \\
+首先计算前两个数的和：15 + 25 = 40\\
+然后计算前三个数的和：40 + 12 = 52\\
+最后计算最后一个数减去前三个数的和：52 - 34 = 18\\ \\
+所以，算式的计算结果为18。}\\(\textcolor{darkgreen}{If the minus sign represents a plus sign, then we can rewrite the equation as: 15 + 25 + 12 - 34.\\ \\
+First, calculate the sum of the first two numbers: 15 + 25 = 40. \\
+Then, calculate the sum of the first three numbers: 40 + 12 = 52. \\
+Finally, calculate the difference between the last number and the sum of the first three numbers: 52 - 34 = 18. \\ \\
+Therefore, the result of the equation is 18.})
+}
+\hspace{0.02\linewidth}%
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-2.4B-DPO:} \\
+\scriptsize
+\chinese{如果减号均表示加号，而加号实际上是减号，那么算式可以重新表示为：\\
+15+25+12-34\\ \\
+现在我们可以按照加减法的顺序进行计算：\\
+(15+25)+12-34=40+12-34=52-34=18\\ \\
+所以，最终的计算结果是 18。}\\(\textcolor{darkgreen}{If minus signs all represent addition, and plus signs actually represent subtraction, then the equation can be re-expressed as:\\
+15+25+12-34.\\ \\
+Now we can calculate according to the order of addition and subtraction:\\
+(15+25)+12-34 = 40+12-34 = 52-34 = 18\\ \\
+So, the final result of the calculation is 18.})
+}
+\hspace{0.01\linewidth}
+\end{AIbox}
+}
+\caption{Examples on math and reasoning. Both models are successful in symbolic substitution and math calculation.}
+\label{fig:math}
+\end{figure}
+
+\begin{figure}[!b]
+\centering
+\scalebox{0.95}{
+\begin{AIbox}{Instruction Following}
+{\bf Prompt:} 
+{\scriptsize
+\chinese{写藏头诗，藏头是龙年大吉
+}\\ (\textcolor{darkgreen}{Writing an acrostic poem, with the hidden message "Good luck in the Year of the Dragon."})}\\\ \\
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-1.2B:}\\
+\scriptsize
+\chinese{龙池春水涨，\\凤阙日初长。\\吉庆何时至，\\太平有象藏。}\\(\textcolor{darkgreen}{The spring water in the dragon's pool rises,\\
+The sun rises at the phoenix gate.\\
+When will good fortune arrive,\\
+Peace and prosperity are hidden in signs.})
+}
+\hspace{0.02\linewidth}%
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-2.4B-DPO:} \\
+\scriptsize
+\chinese{龙腾万里气如虹，\\
+年岁新来乐事浓。\\
+大吉良辰堪共赏，\\
+吉祥如意笑颜红。} \\(\textcolor{darkgreen}{Dragons soar for thousands of miles, their energy like a rainbow,\\
+As the new year begins, joyous occasions abound.\\
+Auspicious days are worth enjoying together,\\
+Good fortune and happiness bring rosy smiles.})
+}
+\hspace{0.01\linewidth}
+\end{AIbox}
+}
+\caption{Examples on instruction following. MiniCPM-2.4B-DPO successfully follows the instructions and generates a poem with the correct tonal pattern and the first character of each sentence. However, MiniCPM-1.2B only generates the correct tonal pattern.}
+\label{fig:instruction}
+\end{figure}
+
+
+
+\begin{figure}[]
+\centering
+\scalebox{0.95}{
+\begin{AIbox}{Emoji}
+{\bf Prompt:} 
+{\scriptsize
+\chinese{请给我一个json，每个key是一个emoji， 每个value是这个emoji对应的意思，给出10个左右
+}\\ (\textcolor{darkgreen}{Please give me a JSON object where each key is an emoji and each value is the meaning of that emoji, providing around 10 examples.})}\\\ \\
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-1.2B:}\\
+\scriptsize
+\chinese{当然可以，这是一个包含10个左右emoji及其含义的JSON：\\
+\{\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-smiling-eyes_1f60a.png}": "笑容", \\
+"\includegraphics[height=10pt]{Fig/face-with-tears-of-joy_1f602.png}": "笑", \\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-heart-eyes_1f60d.png}": "惊叹", \\
+"\includegraphics[height=10pt]{Fig/face-blowing-a-kiss_1f618.png}": "亲吻", \\
+"\includegraphics[height=10pt]{Fig/winking-face-with-tongue_1f61c.png}": "恶作剧",\\
+"\includegraphics[height=10pt]{Fig/pensive-face_1f614.png}": "失望", \\
+"\includegraphics[height=10pt]{Fig/thinking-face_1f914.png}":"思考", \\
+"\includegraphics[height=10pt]{Fig/money-mouth-face_1f911.png}": "金钱",\\
+"\includegraphics[height=10pt]{Fig/folded-hands_1f64f.png}": "帮助",\\
+"\includegraphics[height=10pt]{Fig/pile-of-poo_1f4a9.png}": "废物"\\
+\} \\
+希望这个JSON对你有帮助！} \\ (\textcolor{darkgreen}{Of course, this is a JSON file containing around 10 emojis and their meanings:\\
+\{\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-smiling-eyes_1f60a.png}": "smiling", \\
+"\includegraphics[height=10pt]{Fig/face-with-tears-of-joy_1f602.png}": "laughing", \\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-heart-eyes_1f60d.png}": "amazing", \\
+"\includegraphics[height=10pt]{Fig/face-blowing-a-kiss_1f618.png}": "kissing", \\
+"\includegraphics[height=10pt]{Fig/winking-face-with-tongue_1f61c.png}": "mischief",\\
+"\includegraphics[height=10pt]{Fig/pensive-face_1f614.png}": "disappointment", \\
+"\includegraphics[height=10pt]{Fig/thinking-face_1f914.png}":"thinking", \\
+"\includegraphics[height=10pt]{Fig/money-mouth-face_1f911.png}": "money",\\
+"\includegraphics[height=10pt]{Fig/folded-hands_1f64f.png}": "help",\\
+"\includegraphics[height=10pt]{Fig/pile-of-poo_1f4a9.png}": "rubbish"\\
+\} \\
+Hope you found this JSON useful!})
+}
+\hspace{0.02\linewidth}%
+\parbox[t]{0.49\linewidth}{{\bf MiniCPM-2.4B-DPO:} \\
+\scriptsize
+\chinese{当然可以！以下是一个包含10个emoi及其对应意义的JSON对象：\\
+\{\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-smiling-eyes_1f60a.png}": "表示愉快或满意，通常用于表达微笑和喜悦。", \\
+"\includegraphics[height=10pt]{Fig/pouting-face_1f621.png}": "表示愤怒或不满，通常用于表达情绪的激动。", \\
+"\includegraphics[height=10pt]{Fig/face-with-tears-of-joy_1f602.png}": "表示大笑或开心，通常用于表达笑声和欢乐。", \\
+"\includegraphics[height=10pt]{Fig/rolling-on-the-floor-laughing_1f923.png}": "表示搞笑或尴尬，通常用于表达搞笑的场景或尴尬的情况。", \\
+"\includegraphics[height=10pt]{Fig/exploding-head_1f92f.png}": "表示惊讶或震惊，通常用于表达对某个事件或情況的强烈反应。",\\
+"\includegraphics[height=10pt]{Fig/pensive-face_1f614.png}": "表示失望或沮丧，通常用于表达对某事或某人失去兴趣或信心的情绪。", \\
+"\includegraphics[height=10pt]{Fig/broken-heart_1f494.png}":"表示心痛或伤心，通常用于表达对某事或某人造成痛苦的强烈感受。", \\
+"\includegraphics[height=10pt]{Fig/light-bulb_1f4a1.png}": "表示惊喜或兴奋，通常用于表达对某事或某人的发现或发现的情绪。",\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-smiling-eyes_1f60a.png}": "表示酷或时髦，通常用于表达自信、独立和潮流的态度。",\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-heart-eyes_1f60d.png}": "表示喜欢或欣赏，通常用于表达对某物或某人的喜爱之情。"\\
+\} \\
+希望这个JSON对象能满足您的需求！如果您有任何问题，请随时告诉我。} \\(\textcolor{darkgreen}{Of course! Here is a JSON object containing 10 emojis and their corresponding meanings:\\
+\{\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-smiling-eyes_1f60a.png}": "It means happy or satisfied, typically used to express smiling and joy.", \\
+"\includegraphics[height=10pt]{Fig/pouting-face_1f621.png}": "It means anger or dissatisfaction, typically used to express intense emotions.", \\
+"\includegraphics[height=10pt]{Fig/face-with-tears-of-joy_1f602.png}": "It means laughing or happy, typically used to express laughter and joy.", \\
+"\includegraphics[height=10pt]{Fig/rolling-on-the-floor-laughing_1f923.png}": "It means funny or awkward, typically used to express humorous situations or awkwardness.", \\
+"\includegraphics[height=10pt]{Fig/exploding-head_1f92f.png}": "It means surprise or shock, typically used to express a strong reaction to an event or situation.",\\
+"\includegraphics[height=10pt]{Fig/pensive-face_1f614.png}": "It means disappointment or discouragement, typically used to express a loss of interest or confidence in something or someone.", \\
+"\includegraphics[height=10pt]{Fig/broken-heart_1f494.png}": "It means heartache or sadness, typically used to express intense feelings of pain caused by something or someone.", \\
+"\includegraphics[height=10pt]{Fig/light-bulb_1f4a1.png}": "It means surprise or excitement, typically used to express the emotion of discovery or finding something or someone.",\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-smiling-eyes_1f60a.png}": "It means cool or stylish, typically used to express a confident, independent, and trendy attitude.",\\
+"\includegraphics[height=10pt]{Fig/smiling-face-with-heart-eyes_1f60d.png}": "It means like or appreciate, typically used to express affection or admiration for something or someone."\\
+\} \\
+I hope this JSON object meets your needs! If you have any questions, please feel free to let me know.})
+}
+\hspace{0.01\linewidth}
+\end{AIbox}
+}
+\caption{Examples on emoji. Both models understand emojis and structured data well, and accurately control the number of items implicitly. The DPO model tends to generate more words. }
+\label{fig:emoji}
+\end{figure}

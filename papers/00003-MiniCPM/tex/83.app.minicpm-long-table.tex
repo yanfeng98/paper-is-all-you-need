@@ -1,0 +1,37 @@
+\begin{table}[htpb]
+\centering
+\scalebox{0.82}{
+\begin{tabular}
+{m{4cm}m{1.2cm}m{1.2cm}m{1.2cm}m{1.2cm}m{1.2cm}m{1.2cm}m{1.2cm}}
+\toprule
+\textbf{Model}                               & \textbf{Passkey} & \textbf{Number String} & \textbf{KV Retrieval} & \textbf{Long Book Choice Eng} & \textbf{Long Book QA Chn} & \textbf{Long Book QA Eng }& \textbf{Long Book Sum Eng} \\
+\midrule
+LWM-Text-128K                       & 100     & 97.8           & 0.6           & 28.82                 & 15.93             & 14.31             & 9.99               \\
+Yarn-Mistral-7b-128K                & 92.71   & 56.61          & 0             & 27.95                 & 15.49             & 9.55              & 9.06               \\
+Mistral-7B-Instruct-v0.2(ABF 1000w) & 100     & 78.98          & 3.6           & 37.12                 & 11.74             & 17.37             & 21.12              \\
+Yi-6B-200K                          & 100     & 94.92          & 0             & 36.68                 & 15.07             & 9.2               & 0.92               \\
+ChatGLM3-6B-128K                    & 89.93   & 99.66          & 5.2           & 46.29                 & 10.7              & 8.38              & 25.91              \\
+\midrule
+\textbf{MiniCPM-2.4B-128K }                & 98.31   & 99.83          & 9             & 29.69                 & 23.06             & 16.33             & 15.73              \\
+\bottomrule
+\end{tabular}
+}
+\scalebox{0.83}{
+\centering
+\begin{tabular}{m{4cm}m{1.4cm}m{1.0cm}m{1.0cm}m{1.2cm}m{1.2cm}m{1.2cm}m{1.2cm}}
+\toprule
+\textbf{Model}                               & \textbf{Long Dialogue QA Eng} & \textbf{Math Calc} & \textbf{Math Find} & \textbf{Code Debug} & \textbf{Code Run} & \textbf{Avg} & \textbf{Avg w/o Code \& Math} \\
+\midrule
+LWM-Text-128k                       & 1.5                   & 0          & 3.43       & 20.05       & 1         & 24.45 & 33.62              \\
+Yarn-Mistral-7b-128k                & 7.5                   & 0          & 17.14      & 0.76        & 1.25      & 19.84 & 27.36              \\
+Mistral-7B-Instruct-v0.2(ABF 1000w) & 9.5                   & 0          & 29.43      & 17.51       & 0         & 27.75 & 36.9               \\
+Yi-6B-200K                          & 3.5                   & 0          & 4.29       & 0.51        & 0.75      & 22.15 & 32.54              \\
+ChatGLM3-6B-128K                    & 6.5                   & 0          & 8          & 5.33        & 1         & 25.58 & 36.57              \\
+\midrule
+\textbf{MiniCPM-2.4B-128K}                   & 9.5                   & 0          & 4.29       & 22.08       & 0         & 27.32 & 37.68              \\
+\bottomrule
+\end{tabular}
+}
+\caption{MiniCPM-2.4B-128K result in $\infty$Bench~\citep{zhang2024infty} }
+\label{tab:longcontext}
+\end{table}

@@ -1,0 +1,133 @@
+
+\documentclass[dvipsnames]{article} % For LaTeX2e
+\usepackage{colm2024_conference}
+
+\usepackage{microtype}
+% \usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{caption} 
+\usepackage{longtable} 
+\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage[frozencache=true, finalizecache=false, cachedir=./minted-cache]{minted} 
+
+\usepackage[colorlinks, linkcolor=RoyalBlue, anchorcolor=BrickRed, citecolor=RoyalBlue, urlcolor=RoyalBlue]{hyperref}
+\usepackage{CJKutf8}
+\usepackage{cleveref}
+\usepackage{fontawesome}
+\usepackage{array}
+\crefname{section}{§}{§§}
+\Crefname{section}{§}{§§}
+
+%\newcommand\refsec[1]{\hyperref[sec:#1]{§\ref{sec:#1}:~\textsc{#1}}}
+\newcommand{\chinese}[1]{\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+\newcommand\refsec[1]{Section~\hyperref[sec:#1]{\ref{sec:#1}}}
+\newcommand\refsecs[2]{\hyperref[sec:#1]{§\ref{sec:#1}:~\textsc{#1}}, \hyperref[sec:#2]{§\ref{sec:#2}:~\textsc{#2}}}
+
+\usepackage[most]{tcolorbox}
+
+\tcbset{
+  aibox/.style={
+    width=390pt,
+    top=10pt,
+    colback=white,
+    colframe=black,
+    colbacktitle=black,
+    enhanced,
+    center,
+    attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
+    boxed title style={boxrule=0pt,colframe=white,},
+  }
+}
+\newtcolorbox{AIbox}[2][]{aibox,title=#2,#1}
+
+% 表格内容换行
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true
+}
+
+
+\newcommand{\OURS}{MiniCPM\xspace}
+
+
+
+% \title{MiniCPM: Unveiling the Potential of Small Language Models}
+\title{MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies}
+
+
+\colmfinalcopy
+% Authors must not appear in the submitted version. They should be hidden
+% as long as the \colmfinalcopy macro remains commented out below.
+% Non-anonymous submissions will be rejected without review.
+
+\author{Shengding Hu$^1$, Yuge Tu$^2$, Xu Han$^1$\thanks{Corresponding Authors.}, Chaoqun He$^1$, Ganqu Cui$^1$, Xiang Long$^2$,\\ \textbf{Zhi Zheng$^2$, Yewei Fang$^2$, Yuxiang Huang$^1$, Weilin Zhao$^1$, Xinrong Zhang$^1$,   } \\ \textbf{Zheng Leng Thai$^1$,Kaihuo Zhang$^2$, Chongyi Wang$^2$, Yuan Yao$^1$, } \\\textbf{ Chenyang Zhao$^1$, Jie Zhou$^2$, Jie Cai$^2$, , Zhongwu Zhai$^2$, Ning Ding$^1$, } \\\textbf{Chao Jia$^2$, Guoyang Zeng$^2$, Dahai Li$^2$, Zhiyuan Liu$^1$*, Maosong Sun$^1$*} \\
+$^1$Department of Computer Science and Technology, Tsinghua University. \quad 
+\\ 
+$^2$Modelbest Inc.\\
+\texttt{shengdinghu@gmail.com}
+}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+% \colmfinalcopy % Uncomment for camera-ready version, but NOT for submission.
+\begin{document}
+
+
+\maketitle
+\begin{abstract}
+The burgeoning interest in developing Large Language Models (LLMs) with up to trillion parameters has been met with concerns regarding resource efficiency and practical expense, particularly given the immense cost of experimentation. This scenario underscores the importance of exploring the potential of Small Language Models (SLMs) as a resource-efficient alternative. In this context, we introduce MiniCPM, specifically the 1.2B and 2.4B non-embedding parameter variants, not only excel in their respective categories but also demonstrate capabilities on par with 7B-13B LLMs. While focusing on SLMs, our approach exhibits scalability in both model and data dimensions for future LLM research. Regarding model scaling, we employ extensive model wind tunnel experiments for stable and optimal scaling. For data scaling, we introduce a Warmup-Stable-Decay (WSD) learning rate scheduler (LRS), conducive to continuous training and domain adaptation. We present an in-depth analysis of the intriguing training dynamics that occurred in the WSD LRS. With WSD LRS, we are now able to efficiently study data-model scaling law without extensive retraining experiments on both axes of model and data, from which we derive the much higher compute optimal data-model ratio than Chinchilla Optimal. Additionally, we introduce MiniCPM family, including MiniCPM-DPO, MiniCPM-MoE and MiniCPM-128K, whose excellent performance further cementing MiniCPM's foundation in diverse SLM applications. MiniCPM models are available publicly~\footnote{\url{https://github.com/OpenBMB/MiniCPM}}.
+
+\end{abstract}
+
+% COLM requires electronic submissions, processed by
+% \url{https://openreview.net/}. See COLM's website for more instructions.
+
+% If your paper is ultimately accepted, the statement {\tt
+%   {\textbackslash}colmfinalcopy} should be inserted to adjust the
+% format to the camera ready requirements.
+
+% The format for the submissions is a variant of the NeurIPS format.
+% Please read carefully the instructions below, and follow them
+% faithfully.
+
+\input{tex/1.introduction}
+\input{tex/1.relatedwork}
+\input{tex/2.architecture}
+\input{tex/3.lrs}
+\input{tex/4.training_strategy}
+\input{tex/5.modelperformance}
+\input{tex/6.conclusion}
+\input{tex/Acknowledgement}
+
+\newpage
+% \input{blog}
+\bibliography{colm2024_conference}
+\bibliographystyle{colm2024_conference}
+
+\newpage
+
+\appendix
+
+\input{tex/80.app.Bayesian}
+% \input{tex/80.1.app.minicpm-dpo}
+\input{tex/81.app.quantization}
+% \input{tex/83.app.minicpm-long}
+% \input{tex/84.app.minicpm-moe}
+\input{tex/85.app.minicpm-speed}
+% \input{tex/82.app.minicpmv}
+\input{tex/7.CaseStudy}
+
+
+
+
+\end{document}
