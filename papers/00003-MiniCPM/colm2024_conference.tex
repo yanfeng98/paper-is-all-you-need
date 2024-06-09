@@ -1,9 +1,7 @@
-
 \documentclass[dvipsnames]{article} % For LaTeX2e
 \usepackage{colm2024_conference}
 
 \usepackage{microtype}
-% \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{xspace}
@@ -24,6 +22,7 @@
 \usepackage{cleveref}
 \usepackage{fontawesome}
 \usepackage{array}
+\usepackage{ulem}
 \crefname{section}{§}{§§}
 \Crefname{section}{§}{§§}
 
@@ -69,11 +68,9 @@
 % as long as the \colmfinalcopy macro remains commented out below.
 % Non-anonymous submissions will be rejected without review.
 
-\author{Shengding Hu$^1$, Yuge Tu$^2$, Xu Han$^1$\thanks{Corresponding Authors.}, Chaoqun He$^1$, Ganqu Cui$^1$, Xiang Long$^2$,\\ \textbf{Zhi Zheng$^2$, Yewei Fang$^2$, Yuxiang Huang$^1$, Weilin Zhao$^1$, Xinrong Zhang$^1$,   } \\ \textbf{Zheng Leng Thai$^1$,Kaihuo Zhang$^2$, Chongyi Wang$^2$, Yuan Yao$^1$, } \\\textbf{ Chenyang Zhao$^1$, Jie Zhou$^2$, Jie Cai$^2$, , Zhongwu Zhai$^2$, Ning Ding$^1$, } \\\textbf{Chao Jia$^2$, Guoyang Zeng$^2$, Dahai Li$^2$, Zhiyuan Liu$^1$*, Maosong Sun$^1$*} \\
-$^1$Department of Computer Science and Technology, Tsinghua University. \quad 
-\\ 
-$^2$Modelbest Inc.\\
-\texttt{shengdinghu@gmail.com}
+\author{
+    XXX \thanks{The original paper is located at \url{https://arxiv.org/abs/2404.06395}. This version has been modified by LuYF-Lemon-love <\url{luyanfeng_nlp@qq.com}> for personal study.}\\
+    Tsinghua University
 }
 
 \newcommand{\fix}{\marginpar{FIX}}
@@ -85,7 +82,7 @@ $^2$Modelbest Inc.\\
 
 \maketitle
 \begin{abstract}
-The burgeoning interest in developing Large Language Models (LLMs) with up to trillion parameters has been met with concerns regarding resource efficiency and practical expense, particularly given the immense cost of experimentation. This scenario underscores the importance of exploring the potential of Small Language Models (SLMs) as a resource-efficient alternative. In this context, we introduce MiniCPM, specifically the 1.2B and 2.4B non-embedding parameter variants, not only excel in their respective categories but also demonstrate capabilities on par with 7B-13B LLMs. While focusing on SLMs, our approach exhibits scalability in both model and data dimensions for future LLM research. Regarding model scaling, we employ extensive model wind tunnel experiments for stable and optimal scaling. For data scaling, we introduce a Warmup-Stable-Decay (WSD) learning rate scheduler (LRS), conducive to continuous training and domain adaptation. We present an in-depth analysis of the intriguing training dynamics that occurred in the WSD LRS. With WSD LRS, we are now able to efficiently study data-model scaling law without extensive retraining experiments on both axes of model and data, from which we derive the much higher compute optimal data-model ratio than Chinchilla Optimal. Additionally, we introduce MiniCPM family, including MiniCPM-DPO, MiniCPM-MoE and MiniCPM-128K, whose excellent performance further cementing MiniCPM's foundation in diverse SLM applications. MiniCPM models are available publicly~\footnote{\url{https://github.com/OpenBMB/MiniCPM}}.
+In this context, we introduce MiniCPM, specifically the 1.2B and 2.4B non-embedding parameter variants, not only excel in their respective categories but also demonstrate capabilities on par with 7B-13B LLMs. Regarding model scaling, we employ extensive model wind tunnel experiments for stable and optimal scaling. \uline{For data scaling, we introduce a Warmup-Stable-Decay (WSD) learning rate scheduler (LRS), conducive to continuous training and domain adaptation.} With WSD LRS, we are now able to efficiently study data-model scaling law without extensive retraining experiments on both axes of model and data, from which \uline{we derive the much higher compute optimal data-model ratio than Chinchilla Optimal}. MiniCPM models are available publicly~\footnote{\url{https://github.com/OpenBMB/MiniCPM}}.
 
 \end{abstract}
 
