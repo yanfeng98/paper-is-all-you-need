@@ -4,14 +4,17 @@
 
 The current commonly used learning rate strategy is the Cosine LRS~\citep{kaplan2020scaling, hoffmann2022training, rae2021scaling, touvron2023llama, bai2023qwen, almazrouei2023falcon}, which gradually decreases the learning rate following a cosine curve after it reaches its maximum after the warmup stage. 
 
-A key hyper-parameter in the Cosine LRS is the step $T$ at which Cosine decreases to the minimum for the first time. Typically, $T$ is set to the total training step $S$ for training with a predefined training step. Generally, it is believed that the learning rate should be high to enable sufficient exploration. For example, ~\cite{kaplan2020scaling} demonstrate that the loss decreases  when the summed learning rate over the entire training increases (see Figure 22 in their paper). This indicates setting $T < S$ is not optimal. On the other hand,~\cite{hoffmann2022training} make a key observation that setting $T > S$ results in dropped performance while setting $S = T$ results in improved training efficiency, confirming that the learning rate shouldn't be kept high throughout the training. To reproduce these observations, we conduct experiments on the 0.036B model. We try $Cosine(T)$ and $CosineLoop(T)$ LRS, following the formula shown in Appendix~\ref{app:lrsequ}. The result can be seen in Figure~\ref{fig:cosine_lr}. We can see that when the training step is $S=20N, 40N, 60N, 80N$, the lowest loss is always achieved by the $Cosine(T)$ where $T = S$. Both $T<S$ and $T>S$ are not optimal. 
+A key hyper-parameter in the Cosine LRS is the step $T$ at which Cosine decreases to the minimum for the first time. \uline{Typically, $T$ is set to the total training step $S$ for training with a predefined training step.} Generally, it is believed that the learning rate should be high to enable sufficient exploration. We try $Cosine(T)$ and $CosineLoop(T)$ LRS, following the formula shown in Appendix~\ref{app:lrsequ}. The result can be seen in Figure~\ref{fig:cosine_lr}. We can see that when the training step is $S=20N, 40N, 60N, 80N$, the lowest loss is always achieved by the $Cosine(T)$ where $T = S$. Both $T<S$ and $T>S$ are not optimal. 
 
-We hypothesize that the Cosine LR performs exceptionally well when $T = S$ because of the following two reasons: (1) Cosine LRS with $T = S$ has a longer duration of \textit{high learning rate} training compared to $T < S$ and other LRS such as Linear LRS. This high learning rate might help the model find a better global optimum.
-(2) Cosine LRS with $T = S$ has a more thorough learning rate decay phase compared to Cosine LRS with $T > S$ and Constant LRS. This learning rate decay may involve unique training dynamics that enable the model to find a better local optimum.
+We hypothesize that the Cosine LR performs exceptionally well when $T = S$ because of the following two reasons: 
 
+(1) Cosine LRS with $T = S$ has a longer duration of \textit{high learning rate} training compared to $T < S$ and other LRS such as Linear LRS. \uline{This high learning rate might help the model find a better global optimum.}
+
+(2) \uline{Cosine LRS with $T = S$ has a more thorough learning rate decay phase compared to Cosine LRS with $T > S$ and Constant LRS.} This learning rate decay may involve unique training dynamics that enable the model to find a better local optimum.
 
 \subsection{WSD LRS}
-In light of the above perspective, we propose to explicitly divide the training stage into the high learning rate stage and learning rate decay stage. We name it as the Warmup-Stable-Decay (WSD) LRS.  Especially, the WSD LRS contains three stages: the warmup stage (whose end step is denoted by $W$), the stable training stage (whose end step is denoted by $T$), and the remaining decay stage. The function form of WSD is:
+
+\uline{In light of the above perspective, we propose to explicitly divide the training stage into the high learning rate stage and learning rate decay stage.} We name it as the Warmup-Stable-Decay (WSD) LRS.  Especially, the WSD LRS contains three stages: \uline{the warmup stage} (whose end step is denoted by $W$), \uline{the stable training stage} (whose end step is denoted by $T$), and \uline{the remaining decay stage}. The function form of WSD is:
 
 \vspace{-2mm}
 \begin{equation}
@@ -21,12 +24,16 @@ In light of the above perspective, we propose to explicitly divide the training 
        & f(s-T)\eta,\quad T < s < S\\
     \end{cases}
 \end{equation}
-where $0< f(s-T)\leq 1$ is a decreasing function about $s$, $\eta$ is the maximum learning rate. Typically, as long as the warmup stage is enough, it affects little performance, therefore, we omit $W$ in the subsequent discussion. With an abuse of notation, we will denote  WSD with a clear stop point 
 
-\vspace{-2mm}
+where $0< f(s-T)\leq 1$ is a decreasing function about $s$, $\eta$ is the maximum learning rate.
+
+\subsection{Experiments}
+\label{sec:wsd_experiments_continoustrain}
+
+\textbf{Loss Decreases Dramatically in Decay Stage. } As shown in Figure~\ref{fig:wsd_diff_dcay}, in the decay stage, as the learning rate begins to decrease, the loss experiences a significant rapid decline and quickly decreases to be equal to or lower than the Cosine LRS at step $T=S$. \uline{At the same time, we can reuse the model before decay and continue training with the previous high learning rate.} \uline{After more steps of training $S'$, we can also perform annealing to achieve the same loss as the Cosine LRS at $Cosine(S')$.} This verifies our assumption that the training stage can be explicitly split into the stable training and decay stages.
+
 \begin{figure}[htbp]
     \centering
-    % First minipage for the first figure
     \begin{minipage}{0.48\linewidth}
         \centering
         \includegraphics[width=1.05\linewidth]{Fig/WSD_diff_dcay.pdf}
@@ -35,7 +42,6 @@ where $0< f(s-T)\leq 1$ is a decreasing function about $s$, $\eta$ is the maximu
         \vspace{0.47cm}
     \end{minipage}
     \hfill % This adds a little space between the two figures
-    % Second minipage for the second figure
     \begin{minipage}{0.48\linewidth}
         \centering
     \includegraphics[width=1.05\linewidth]{Fig/continuous_train.pdf}
@@ -44,19 +50,9 @@ where $0< f(s-T)\leq 1$ is a decreasing function about $s$, $\eta$ is the maximu
     \end{minipage}
 \end{figure}
 
+\textbf{10\% Steps are Enough.} \uline{From the two-stage training perspective, shortening the decay stage will greatly benefit the fast test of different model checkpoints of stable training.} Also shown in Figure~\ref{fig:wsd_diff_dcay}, among all three stable training checkpoints in 40N, 60N, and 80N training data, having a decay of 10\% of the total tokens is sufficient to achieve the best results, while a decay of 2.5\% of total tokens falls short. \uline{Therefore, in the subsequent training experiments, we use a decay of about 10\% to ensure full convergence.}
 
-
-\vspace{-6mm}
-\subsection{Experiments}
-\label{sec:wsd_experiments_continoustrain}
-Next, we present several experimental findings of WSD LRS.
-
-\textbf{Loss Decreases Dramatically in Decay Stage. } We try WSD LRS on 0.036B models. As shown in Figure~\ref{fig:wsd_diff_dcay}, in the decay stage, as the learning rate begins to decrease, the loss experiences a significant rapid decline and quickly decreases to be equal to or lower than the Cosine LRS at step $T=S$. At the same time, we can reuse the model before decay and continue training with the previous high learning rate. After more steps of training $S'$, we can also perform annealing to achieve the same loss as the Cosine LRS at $Cosine(S')$. This verifies our assumption that the training stage can be explicitly split into the stable training and decay stages.
-
-\textbf{10\% Steps are Enough.} From the two-stage training perspective, shortening the decay stage will greatly benefit the fast test of different model checkpoints of stable training. Therefore, we conduct experiments that start from the same stable training checkpoints and have different decay steps. Also shown in Figure~\ref{fig:wsd_diff_dcay}, among all three stable training checkpoints in 40N, 60N, and 80N training data, having a decay of 10\% of the total tokens is sufficient to achieve the best results, while a decay of 2.5\% of total tokens falls short. Therefore, in the subsequent training experiments, we use a decay of about 10\% to ensure full convergence. 
-
-\textbf{Effective Data Scaling with WSD LRS.} With WSD LRS, we can continuously train the LM to extreme convergence. To further demonstrate the potential of training a fixed-sized model to convergence, we compare continuously training a 0.036B LM with a 0.17B model with 40N data. 
-In Figure~\ref{fig:continuoustrain}, the green lines represent 0.036B models trained with different stable training tokens. Despite the last point of the 0.036B series being trained with many more tokens than Chinchilla Optimal~\citep{hoffmann2022training}, it still has space for performance improvement. 
+\textbf{Effective Data Scaling with WSD LRS.} With WSD LRS, we can continuously train the LM to extreme convergence. In Figure~\ref{fig:continuoustrain}, the green lines represent 0.036B models trained with different stable training tokens. Despite the last point of the 0.036B series being trained with many more tokens than Chinchilla Optimal~\citep{hoffmann2022training}, it still has space for performance improvement. 
 
 \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
 
