@@ -1,4 +1,4 @@
-\begin{thebibliography}{80}
+\begin{thebibliography}{77}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -95,11 +95,6 @@ Nolan Dey, Gurpreet Gosal, Hemant Khachane, William Marshall, Ribhu Pathria, Mar
 \bibitem[Ding et~al.(2023)Ding, Chen, Xu, Qin, Zheng, Hu, Liu, Sun, and Zhou]{ding2023enhancing}
 Ning Ding, Yulin Chen, Bokai Xu, Yujia Qin, Zhi Zheng, Shengding Hu, Zhiyuan Liu, Maosong Sun, and Bowen Zhou.
 \newblock Enhancing chat language models by scaling high-quality instructional conversations, 2023.
-
-\bibitem[Du et~al.(2021)Du, Qian, Liu, Ding, Qiu, Yang, and Tang]{du2021glm}
-Zhengxiao Du, Yujie Qian, Xiao Liu, Ming Ding, Jiezhong Qiu, Zhilin Yang, and Jie Tang.
-\newblock Glm: General language model pretraining with autoregressive blank infilling.
-\newblock \emph{arXiv preprint arXiv:2103.10360}, 2021.
 
 \bibitem[Du et~al.(2024)Du, Zeng, Dong, and Tang]{du2024understanding}
 Zhengxiao Du, Aohan Zeng, Yuxiao Dong, and Jie Tang.
@@ -250,11 +245,6 @@ Ilya Loshchilov and Frank Hutter.
 \newblock Decoupled weight decay regularization.
 \newblock \emph{arXiv preprint arXiv:1711.05101}, 2017.
 
-\bibitem[Peng et~al.(2023)Peng, Quesnelle, Fan, and Shippole]{peng2023yarn}
-Bowen Peng, Jeffrey Quesnelle, Honglu Fan, and Enrico Shippole.
-\newblock Yarn: Efficient context window extension of large language models.
-\newblock \emph{arXiv preprint arXiv:2309.00071}, 2023.
-
 \bibitem[Rae et~al.(2021)Rae, Borgeaud, Cai, Millican, Hoffmann, Song, Aslanides, Henderson, Ring, Young, et~al.]{rae2021scaling}
 Jack~W Rae, Sebastian Borgeaud, Trevor Cai, Katie Millican, Jordan Hoffmann, Francis Song, John Aslanides, Sarah Henderson, Roman Ring, Susannah Young, et~al.
 \newblock Scaling language models: Methods, analysis \& insights from training gopher.
@@ -326,10 +316,6 @@ MLC team.
 Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timoth{\'e}e Lacroix, Baptiste Rozi{\`e}re, Naman Goyal, Eric Hambro, Faisal Azhar, et~al.
 \newblock Llama: Open and efficient foundation language models.
 \newblock \emph{arXiv preprint arXiv:2302.13971}, 2023.
-
-\bibitem[Tunstall et~al.(2023)Tunstall, Beeching, Lambert, Rajani, Rasul, Belkada, Huang, von Werra, Fourrier, Habib, Sarrazin, Sanseviero, Rush, and Wolf]{tunstall2023zephyr}
-Lewis Tunstall, Edward Beeching, Nathan Lambert, Nazneen Rajani, Kashif Rasul, Younes Belkada, Shengyi Huang, Leandro von Werra, Clémentine Fourrier, Nathan Habib, Nathan Sarrazin, Omar Sanseviero, Alexander~M. Rush, and Thomas Wolf.
-\newblock Zephyr: Direct distillation of lm alignment, 2023.
 
 \bibitem[Wei et~al.(2021)Wei, Bosma, Zhao, Guu, Yu, Lester, Du, Dai, and Le]{wei2021finetuned}
 Jason Wei, Maarten Bosma, Vincent~Y Zhao, Kelvin Guu, Adams~Wei Yu, Brian Lester, Nan Du, Andrew~M Dai, and Quoc~V Le.

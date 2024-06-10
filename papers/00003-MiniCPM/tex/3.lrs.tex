@@ -1,8 +1,8 @@
-
 \section{WSD Learning Rate Scheduler}
 \label{sec:wsdlrs}
 \subsection{Analysing Cosine LRS}
-The learning rate scheduler (LRS), which adjusts the learning rate used in different stages of training, is crucial for model performance. The current commonly used learning rate strategy is the Cosine LRS~\citep{kaplan2020scaling, hoffmann2022training, rae2021scaling, touvron2023llama, bai2023qwen, almazrouei2023falcon}, which gradually decreases the learning rate following a cosine curve after it reaches its maximum after the warmup stage. 
+
+The current commonly used learning rate strategy is the Cosine LRS~\citep{kaplan2020scaling, hoffmann2022training, rae2021scaling, touvron2023llama, bai2023qwen, almazrouei2023falcon}, which gradually decreases the learning rate following a cosine curve after it reaches its maximum after the warmup stage. 
 
 A key hyper-parameter in the Cosine LRS is the step $T$ at which Cosine decreases to the minimum for the first time. Typically, $T$ is set to the total training step $S$ for training with a predefined training step. Generally, it is believed that the learning rate should be high to enable sufficient exploration. For example, ~\cite{kaplan2020scaling} demonstrate that the loss decreases  when the summed learning rate over the entire training increases (see Figure 22 in their paper). This indicates setting $T < S$ is not optimal. On the other hand,~\cite{hoffmann2022training} make a key observation that setting $T > S$ results in dropped performance while setting $S = T$ results in improved training efficiency, confirming that the learning rate shouldn't be kept high throughout the training. To reproduce these observations, we conduct experiments on the 0.036B model. We try $Cosine(T)$ and $CosineLoop(T)$ LRS, following the formula shown in Appendix~\ref{app:lrsequ}. The result can be seen in Figure~\ref{fig:cosine_lr}. We can see that when the training step is $S=20N, 40N, 60N, 80N$, the lowest loss is always achieved by the $Cosine(T)$ where $T = S$. Both $T<S$ and $T>S$ are not optimal. 
 

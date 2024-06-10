@@ -1,15 +1,11 @@
-
-
 \section{Model Wind Tunnel Experiments}
 \label{MWTE}
-Although we target at training SLMs that can be quickly deployed onto end devices, we envision that many aspects of model training are universal across scales. Extensive experiments should be conducted through an SLM to explore the limit of SLM before transferring the experience into LLMs. These experiments take the spirit of wind tunnel testing in developing an aircraft, thus we name it Model Wind Tunnel Experiments (MWTE). In this paper, the MWTE contains three parts: (1) Hyper-parameters; (2) Optimal Batch-size Scaling; and (3) Optimal Learning Rate Stability.
 
 \subsection{Scaling Hyper-parameters Invariant LM}
-Hyper-parameters have a significant impact on the performance of a model. However, adjusting hyper-parameters for each model in traditional training is not feasible for LLMs. Even for SLM like MiniCPM, extensive experiments on hyper-parameters search take a lot of resources. Tensor Program~\citep{yang2022tensor, yang2023tensor} proposes a framework to stabilize the hyper-parameters for models with different scales. The main part of the Tensor Program is the width scaling~\citep{yang2022tensor} and the depth scaling~\citep{yang2023tensor}. The former technique supports CerebrasGPT~\citep{dey2023cerebras} to predict the loss of LLMs more accurately. In MiniCPM, we use both two scaling techniques. The specific scaling operations are listed in Table~\ref{tab:mup}. We do not apply the attention softmax scaling techniques~\citep{yang2022tensor}. Despite ~\cite{yang2023tensor} observing that depth scaling for a network with block depth larger than two is not satisfying, we find the resulting optimal learning rate is stable empirically. Details of the hyper-parameters and Tensor Program Operations are in Appendix~\ref{app:bayesiansearch}.
-
+Tensor Program~\citep{yang2022tensor, yang2023tensor} proposes a framework to stabilize the hyper-parameters for models with different scales. The main part of the Tensor Program is the width scaling~\citep{yang2022tensor} and the depth scaling~\citep{yang2023tensor}. The former technique supports CerebrasGPT~\citep{dey2023cerebras} to predict the loss of LLMs more accurately. In MiniCPM, we use both two scaling techniques. The specific scaling operations are listed in Table~\ref{tab:mup}. We do not apply the attention softmax scaling techniques~\citep{yang2022tensor}. Despite ~\cite{yang2023tensor} observing that depth scaling for a network with block depth larger than two is not satisfying, we find the resulting optimal learning rate is stable empirically.
 
 \subsection{Optimal Batch Size}
-Batch size determines the balance between the convergence speed of the model and the consumption of computational resources. If the batch size is too large, it will result in a significant amount of data and computation costs. On the other hand, if the batch size is too small, it will require a large number of training steps and may result in a limited decrease in the loss function. We follow ~\cite{kaplan2020scaling} to determine the batchsize from expected loss, with a slight modification from their setting (see Appendix~\ref{app:batchsize}). We conduct experiments on 0.009B, 0.03B, and 0.17B models, respectively, toward this goal. Each model size is trained on 6 batch sizes with a global learning rate of $0.01$ and cosine learning rate scheduler. We observe the trend of the optimal batch size with loss on the C4~\citep{2019t5} dataset (red line in the Figure~\ref{fig:optimalbatchsize}).
+We follow ~\cite{kaplan2020scaling} to determine the batchsize from expected loss, with a slight modification from their setting (see Appendix~\ref{app:batchsize}). We conduct experiments on 0.009B, 0.03B, and 0.17B models, respectively, toward this goal. Each model size is trained on 6 batch sizes with a global learning rate of $0.01$ and cosine learning rate scheduler. We observe the trend of the optimal batch size with loss on the C4~\citep{2019t5} dataset (red line in the Figure~\ref{fig:optimalbatchsize}).
 
 \begin{figure}[!htbp]
     \centering
@@ -27,16 +23,14 @@ Batch size determines the balance between the convergence speed of the model and
     \end{minipage}
 \end{figure}
 
-
-As shown in Figure~\ref{fig:optimalbatchsize}, we plot the batch size in the x-axis, and token consumption in the y-axis, the color of the points represents a loss. Thus a horizontal line formed by the color points denotes a training curve. we use parabolas to fit the equal-loss points and connect the minima of the parabolas with red lines. The lines demonstrate the optimal batch size shifts large as the loss decreases. We then connect the three lines (see Figure~\ref{fig:optimalbatchsizeconnect}) and find that the lines connect each other well into a linear relationship in the log space, from which we obtain the following relationship between batch size $bs$ and C4 Loss $L$: $ bs = \frac{1.21\times10^9}{L^{6.24}}$. We note that it might seem strange that the batch size should be estimated from a rough loss prediction that we can only have after training. We provide our comment in Appendix~\ref{app:batchsize}.
+As shown in Figure~\ref{fig:optimalbatchsize}, we plot the batch size in the x-axis, and token consumption in the y-axis, the color of the points represents a loss. Thus a horizontal line formed by the color points denotes a training curve. we use parabolas to fit the equal-loss points and connect the minima of the parabolas with red lines. \uline{The lines demonstrate the optimal batch size shifts large as the loss decreases.} We then connect the three lines (see Figure~\ref{fig:optimalbatchsizeconnect}) and find that the lines connect each other well into a linear relationship in the log space, from which we obtain the following relationship between batch size $bs$ and C4 Loss $L$: $ bs = \frac{1.21\times10^9}{L^{6.24}}$. \uline{We note that it might seem strange that the batch size should be estimated from a rough loss prediction that we can only have after training.}
 
 \subsection{Optimal Learning Rate}
-Due to our use of Tensor Program~\citep{yang2022tensor, yang2023tensor}, we anticipate that the learning rate, will not undergo significant changes during model scaling. To verify this, we conduct six sets of learning rate experiments at 0.04B, 0.1B, 0.3B, and 0.5B. In Figure~\ref{fig:loss_vs_lr}, we find that although the model size has increased by ten times, the optimal base learning rate~\footnote{The actual learning rate of 2-D tensors will be scaled according to Tensor Program.} does not show a noticeable shift and remains around 0.01. We further conduct a simple validation on a scale of 2.1B and confirm that a learning rate of 0.01 indeed achieves the lowest loss.
+Due to our use of Tensor Program~\citep{yang2022tensor, yang2023tensor}, we anticipate that the learning rate, will not undergo significant changes during model scaling. In Figure~\ref{fig:loss_vs_lr}, we find that although the model size has increased by ten times, the optimal base learning rate~\footnote{The actual learning rate of 2-D tensors will be scaled according to Tensor Program.} does not show a noticeable shift and remains around 0.01.
 
 \vspace{-3mm}
 \begin{figure}[htbp]
     \centering
-    % First minipage for the first figure
     \begin{minipage}{0.46\linewidth}
         \centering
         \includegraphics[width=0.9\linewidth]{Fig/loss_vs_lr.png}
@@ -44,8 +38,6 @@ Due to our use of Tensor Program~\citep{yang2022tensor, yang2023tensor}, we anti
         \label{fig:loss_vs_lr}
     \end{minipage}
     \hfill % This adds a little space between the two figures
-    % \vspace{cm}
-    % Second minipage for the second figure
     \begin{minipage}{0.46\linewidth}
         \centering
         \includegraphics[width=1.0\linewidth]{Fig/cosine_2024-03-26_15-36-16.pdf}
