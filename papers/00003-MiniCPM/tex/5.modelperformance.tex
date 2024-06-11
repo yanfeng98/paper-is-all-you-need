@@ -31,17 +31,7 @@ For SLM, the embedding takes up a large parameter space. To make the model param
 \subsection{Training Stages} 
 
 \textbf{Stable Training Stage.}
-We utilize around 1T data (see Section~\ref{fig:appdatamixture} for data distribution), with the majority of the data sourced from open datasets. We use the optimal configuration discovered during the model wind tunnel experiments, WSD LRS, with a batch size of 3.93 million and a max learning rate of 0.01.
-
-\textbf{Decay Stage.} We use a mixture of the pretraining data and high-quality SFT data.
-For the specific annealing form of the WSD scheduler, we employ exponential annealing, i.e. $f(s-T)=  0.5^{(s-S)/T}$, in which $T$ is set to be 5000 steps (20B tokens).
-
-\textbf{SFT Stage.} We find it still necessary to conduct a separate SFT phase. We utilize SFT data similar to the annealing phase excluding pre-training data and train with approximately 6 billion tokens. The learning rate for SFT is aligned with the one at the end of annealing, and a WSD Scheduler with exponential decay is also employed.
-
-
-\subsection{Training Data Distribution}
-\label{sec:appdatadistrbution}
-
+We utilize \uline{around 1T data} (see Figure~\ref{fig:appdatamixture} for data distribution), with the majority of the data sourced from open datasets. We use the optimal configuration discovered during the model wind tunnel experiments, WSD LRS, with \uline{a batch size of 3.93 million} and \uline{a max learning rate of 0.01}.
 
 \begin{figure}[htbp]
     \centering
@@ -55,61 +45,56 @@ For the specific annealing form of the WSD scheduler, we employ exponential anne
         \includegraphics[width=1.0\linewidth]{Fig/decay_data_mixture.pdf}
     \end{minipage}
     \caption{Data mixture of different training stages. The stable stage is shown on the left and the decay stage is shown on the right.}
-        \label{fig:appdatamixture}
+    \label{fig:appdatamixture}
 \end{figure}
 
+\textbf{Decay Stage.}
+\uline{We use a mixture of the pretraining data and high-quality SFT data.} For the specific annealing form of the WSD scheduler, we employ exponential annealing, i.e. $f(s-T)=  0.5^{(s-S)/T}$, in which $T$ is set to be 5000 steps (20B tokens).
 
-We introduce our training data distribution in Figure~\ref{fig:appdatamixture}. In the figure, CommonCrawl\_Chn in a Chinese Corpus is derived from CommonCrawl raw corpus and goes through thorough cleaning. Dolma~\citep{dolma}, C4~\citep{2019t5}, and Pile~\citep{gao2020pile, biderman2022datasheet} are English corpora. They are deduplicated inner corpus and across corpus using MinHash algorithms~\citep{broder1997resemblance}. The Code Pre-train data contains the stack~\citep{Kocetkov2022TheStack} and StarCoder~\cite{li2023starcoder}, with inner deduplication and cross deduplication. In the decay stage, the data mixture contains more diverse data and proprietary data, including UltraChat~\citep{ding2023enhancing}, SlimOrca~\citep{SlimOrca, SlimOrcaDedup}, OssInstruct~\citep{wei2023magicoder}, EvolInstruct~\citep{xu2023wizardlm}. The data with the suffix SFT is our proprietary data including LeetCode questions, Kindergarten through 12th grade (K12) textbooks and questions, etc. 
+\textbf{SFT Stage.} We find it still necessary to conduct a separate SFT phase. We utilize SFT data similar to the annealing phase excluding pre-training data and train with approximately 6 billion tokens. \uline{The learning rate for SFT is aligned with the one at the end of annealing, and a WSD Scheduler with exponential decay is also employed.}
 
+\subsection{Training Data Distribution}
+\label{sec:appdatadistrbution}
+
+We introduce our training data distribution in Figure~\ref{fig:appdatamixture}. In the figure, \uline{CommonCrawl\_Chn} in a Chinese Corpus is derived from CommonCrawl raw corpus and goes through thorough cleaning. \uline{Dolma}~\citep{dolma}, \uline{C4}~\citep{2019t5}, and \uline{Pile}~\citep{gao2020pile, biderman2022datasheet} are English corpora. They are deduplicated inner corpus and across corpus using MinHash algorithms~\citep{broder1997resemblance}. The Code Pre-train data contains the \uline{stack}~\citep{Kocetkov2022TheStack} and \uline{StarCoder}~\cite{li2023starcoder}, with inner deduplication and cross deduplication. In the decay stage, the data mixture contains more diverse data and proprietary data, including \uline{UltraChat}~\citep{ding2023enhancing}, \uline{SlimOrca}~\citep{SlimOrca, SlimOrcaDedup}, \uline{OssInstruct}~\citep{wei2023magicoder}, \uline{EvolInstruct}~\citep{xu2023wizardlm}. The data with the suffix SFT is our proprietary data including LeetCode questions, Kindergarten through 12th grade (K12) textbooks and questions, etc. 
 
 \subsection{Training Loss}
 
 \definecolor{darkgreen}{HTML}{476E6B}
 
-The overall training loss on the C4 dataset is shown in Figure~\ref{fig:loss_c4}. We can see that as expected in the preliminary experiments, the loss decreases sharply in the decay stage. Since we use the exponential decay, the loss still drops after the learning rate drops below 10\% of the max learning rate. However, since we continue to SFT the model after the decay stage, we do not utilize the final checkpoints. The checkpoints we finetune from are shown in the last checkpoint of \textcolor{darkgreen}{dark green} segment. The first drop in MiniCPM-1.2B is the result of enlarging batch size, which might have a similar effect as decreasing learning rate~\citep{smith2017don}.
-
+The overall training loss on the C4 dataset is shown in Figure~\ref{fig:loss_c4}. We can see that as expected in the preliminary experiments, \uline{the loss decreases sharply in the decay stage}. Since we use the exponential decay, the loss still drops after the learning rate drops below 10\% of the max learning rate. However, since we continue to SFT the model after the decay stage, we do not utilize the final checkpoints. \uline{The checkpoints we finetune from are shown in the last checkpoint of \textcolor{darkgreen}{dark green} segment.} The first drop in MiniCPM-1.2B is the result of enlarging batch size, which might have a similar effect as decreasing learning rate~\citep{smith2017don}.
 
 \definecolor{orange}{HTML}{FFA500}
 
-
-
 \begin{figure}[htbp]
     \centering
-    % First minipage for the first figure
     \begin{minipage}{0.48\linewidth}
         \centering
         \includegraphics[width=0.9\linewidth]{Fig/1.2B_c4_loss_smoothed.pdf}
     \end{minipage}
     \hfill % This adds a little space between the two figures
-    % Second minipage for the second figure
     \begin{minipage}{0.48\linewidth}
         \centering
         \includegraphics[width=0.9\linewidth]{Fig/2.4B_c4_loss_smoothed.pdf}
     \end{minipage}
      \caption{Loss curve on C4 dataset for MiniCPM-1.2B (Left) and MiniCPM-2.4B (Right). The  \textcolor{orange}{orange} segment at the tail of the loss curve represents the remaining decay process, which is not utilized in the released version of MiniCPM.}
-        \label{fig:loss_c4}
+    \label{fig:loss_c4}
 \end{figure}
-
-\input{tex/5.resulttable}
 
 \subsection{Evaluation}
 \label{sec:evaluation}
-The overall evaluation utilizes our open-source tool UltraEval\footnote{https://ultraeval.openbmb.cn/home}. UltraEval is an open-source framework for assessing the capabilities of foundation models. It provides a lightweight and user-friendly evaluation system, supporting performance assessment for mainstream large models, and catering to the rapid evaluation needs of model training teams. The underlying inference and acceleration use the open-source framework vLLM~\citep{kwon2023efficient}, and the dataset includes commonly used datasets: MMLU~\citep{hendrycks2020measuring} for English knowledge, CMMLU~\citep{li2024cmmlu} and C-Eval~\citep{huang2024c} for Chinese knowledge, HumanEval~\citep{chen2021evaluating} and MBPP~\citep{austin2021program} for coding, GSM8K~\citep{cobbe2021training} and MATH~\citep{hendrycks2021measuring} for mathematics, and HellaSwag~\citep{zellers2019hellaswag}, ARC-e~\citep{clark2018think}, ARC-c~\citep{clark2018think} for commonsense reasoning, and BBH~\citep{suzgun2022challenging} for logic reasoning. 
 
-Due to the difficulty of standardizing evaluations for large models and the lack of publicly available prompts and test codes for many models' evaluations, we try our best to adapt the evaluation methods to suit various model types. Specifically, we start from a standardized input prompt during testing and adjust it according to each model's appropriate input-output template. The \textbf{evaluation scripts and prompts are also open-source} in our repository, and we welcome developers to continually improve our evaluation methods.
+The overall evaluation utilizes our open-source tool UltraEval\footnote{https://ultraeval.openbmb.cn/home}. UltraEval is an open-source framework for assessing the capabilities of foundation models. The underlying inference and acceleration use the open-source framework \uline{vLLM}~\citep{kwon2023efficient}, and the dataset includes commonly used datasets: \uline{MMLU}~\citep{hendrycks2020measuring} for English knowledge, \uline{CMMLU}~\citep{li2024cmmlu} and \uline{C-Eval}~\citep{huang2024c} for Chinese knowledge, \uline{HumanEval}~\citep{chen2021evaluating} and \uline{MBPP}~\citep{austin2021program} for coding, \uline{GSM8K}~\citep{cobbe2021training} and \uline{MATH}~\citep{hendrycks2021measuring} for mathematics, and \uline{HellaSwag}~\citep{zellers2019hellaswag}, \uline{ARC-e}~\citep{clark2018think}, \uline{ARC-c}~\citep{clark2018think} for commonsense reasoning, and \uline{BBH}~\citep{suzgun2022challenging} for logic reasoning.
 
-When testing QA tasks (ARC-e, ARC-c, HellaSwag), two approaches are typically employed. The first involves using Perplexity (PPL): we extend each option as the continuation of the question and use the PPL of the option as the selection criterion. The second is direct generation, where the model directly outputs answer options. We observe significant differences in results obtained using these two methods.  MiniCPM performs similarly in direct generation and PPL tests, with better performance in direct generation. On the other hand, Mistral-7B-v0.1 performs better in PPL tests but exhibits poorer performance in direct generation. To address this phenomenon, when reporting the scores for each model, we adopt the score from the evaluation method that yields the highest score, ensuring fairness in comparison.
+When testing QA tasks (ARC-e, ARC-c, HellaSwag), two approaches are typically employed. The first involves using Perplexity (PPL): \uline{we extend each option as the continuation of the question and use the PPL of the option as the selection criterion.} The second is direct generation, where \uline{the model directly outputs answer options}. We observe significant differences in results obtained using these two methods. \uline{To address this phenomenon, when reporting the scores for each model, we adopt the score from the evaluation method that yields the highest score, ensuring fairness in comparison.}
 
-The overall evaluation results are in Table~\ref{tab:benchmark}. Overall, on the mentioned datasets, we have several observations. (1) On average, MiniCPM-2.4B ranks the highest among all the SLMs. (2) MiniCPM-2.4B performs similarly to Mistral-7B-v0.1 in English but significantly outperforms Mistral-7B-v0.1 in Chinese. (3) MiniCPM-2.4B outperforms Llama2-13B except in MMLU, BBH, and HellaSwag, while MiniCPM-1.2B outperforms Llama2-7B except in HellaSwag. (4)Generally, BBH is harder for SLMs than LLMs compared to another knowledge-oriented dataset, demonstrating that reasoning ability might be more dependent on model size than knowledge. (5) Among SLMs, Phi-2 performance is on par with MiniCPM on academic-oriented datasets. This might be because their training data mostly involves textbook-style data that emphasize educational and academic scenarios. Since our pre-training data covers more distribution, we think MiniCPM is better at knowledge and ability coverage, which can be seen in Appendix~\ref{app:cases}.
+The overall evaluation results are in Table~\ref{tab:benchmark_without_rlhf}. \uline{Generally, BBH is harder for SLMs than LLMs compared to another knowledge-oriented dataset, demonstrating that reasoning ability might be more dependent on model size than knowledge.}
 
-
-
+\input{tex/5.resulttable}
 
 \section{MiniCPM Family}
-In this section, we introduce the other models that build on MiniCPM base models. Specifically, we trained the aligned model, long-context model, and MoE model for MiniCPM 2.4B.
 
 \input{tex/80.1.app.minicpm-dpo}
 \input{tex/83.app.minicpm-long}
 \input{tex/83.app.minicpm-long-table}
 \input{tex/84.app.minicpm-moe}
-

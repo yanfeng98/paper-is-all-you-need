@@ -1,10 +1,6 @@
-
 \subsection{MiniCPM-DPO}
 \label{app:rlhf}
-After SFT, we employ DPO~\citep{rafailov2024direct} for human preference alignment of the
-model. During this stage, UltraFeedback~\citep{cui2023ultrafeedback} is utilized as the primary alignment dataset, and a proprietary preference dataset is constructed to enhance the model's code and mathematical capabilities. We conduct one epoch of DPO training with a learning rate of $1\times 10^{-5}$ and utilize a Cosine LRS since we have a pre-defined training step.
- 
-After applying DPO for preference alignment, the model's score on MTBench~\citep{zheng2024judging} increased from 6.89 after SFT to 7.25, surpassing even large models such as Llama2-70B-Chat (see Figure~\ref{fig:mtbenchscore}). However, we also noticed that the performance on benchmarks is slightly compromised, which is known as the alignment tax~\citep{askell2021general}.
+After SFT, we employ \uline{DPO}~\citep{rafailov2024direct} for human preference alignment of the model. During this stage, \uline{UltraFeedback}~\citep{cui2023ultrafeedback} is utilized as the primary alignment dataset, and a proprietary preference dataset is constructed to enhance the model's code and mathematical capabilities. We conduct one epoch of DPO training with \uline{a learning rate of $1\times 10^{-5}$} and utilize a Cosine LRS since we have a pre-defined training step.
 
 \begin{table}[htbp]
     \centering
@@ -50,7 +46,6 @@ Llama2-7B-Chat  & 35.54 & 74.28 & 54.78 & 75.65$^{\dag}$ & 38.16 & 39.17 & 33.59
 \label{tab:benchmark}
 \end{table}
 
-
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{Fig/mtbench_graph.jpg}
@@ -58,5 +53,3 @@ Llama2-7B-Chat  & 35.54 & 74.28 & 54.78 & 75.65$^{\dag}$ & 38.16 & 39.17 & 33.59
     \label{fig:mtbenchscore}
     \vspace{-5mm}
 \end{figure}
-
-

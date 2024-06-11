@@ -1,4 +1,4 @@
-\begin{thebibliography}{74}
+\begin{thebibliography}{72}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -26,11 +26,6 @@ Joshua Ainslie, James Lee-Thorp, Michiel de~Jong, Yury Zemlyanskiy, Federico Leb
 Ebtesam Almazrouei, Hamza Alobeidli, Abdulaziz Alshamsi, Alessandro Cappelli, Ruxandra Cojocaru, M{\'e}rouane Debbah, {\'E}tienne Goffinet, Daniel Hesslow, Julien Launay, Quentin Malartic, et~al.
 \newblock The falcon series of open language models.
 \newblock \emph{arXiv preprint arXiv:2311.16867}, 2023.
-
-\bibitem[Askell et~al.(2021)Askell, Bai, Chen, Drain, Ganguli, Henighan, Jones, Joseph, Mann, DasSarma, et~al.]{askell2021general}
-Amanda Askell, Yuntao Bai, Anna Chen, Dawn Drain, Deep Ganguli, Tom Henighan, Andy Jones, Nicholas Joseph, Ben Mann, Nova DasSarma, et~al.
-\newblock A general language assistant as a laboratory for alignment.
-\newblock \emph{arXiv preprint arXiv:2112.00861}, 2021.
 
 \bibitem[Austin et~al.(2021)Austin, Odena, Nye, Bosma, Michalewski, Dohan, Jiang, Cai, Terry, Le, and Sutton]{austin2021program}
 Jacob Austin, Augustus Odena, Maxwell Nye, Maarten Bosma, Henryk Michalewski, David Dohan, Ellen Jiang, Carrie Cai, Michael Terry, Quoc Le, and Charles Sutton.
@@ -376,10 +371,5 @@ Peiyuan Zhang, Guangtao Zeng, Tianduo Wang, and Wei Lu.
 Xinrong Zhang, Yingfa Chen, Shengding Hu, Zihang Xu, Junhao Chen, Moo~Khai Hao, Xu~Han, Zhen~Leng Thai, Shuo Wang, Zhiyuan Liu, et~al.
 \newblock $\infty$bench: Extending long context evaluation beyond 100k tokens.
 \newblock \emph{arXiv preprint arXiv:2402.13718}, 2024{\natexlab{b}}.
-
-\bibitem[Zheng et~al.(2024)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li, Li, Xing, et~al.]{zheng2024judging}
-Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi~Lin, Zhuohan Li, Dacheng Li, Eric Xing, et~al.
-\newblock Judging llm-as-a-judge with mt-bench and chatbot arena.
-\newblock \emph{Advances in Neural Information Processing Systems}, 36, 2024.
 
 \end{thebibliography}

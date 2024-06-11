@@ -1,11 +1,7 @@
-
-\vspace{-2mm}
 \subsection{MiniCPM-MoE}
-We further extend the ability of MiniCPM using Mixture-of-Expert. 
 
 \textbf{Initialization.}
-MiniCPM-MoE is initialized utilizing Sparse Upcycling~\citep{komatsuzaki2022sparse}. The dense model checkpoint, derived from the stable phase of MiniCPM, undergoes a transformation wherein each MLP layer is substituted by an MoE layer. These new MoE layers are exact replicas of the original MLP layers from the dense checkpoint. The router parameters are randomly initialized following a normal distribution with a mean of 0 and a variance of 0.01.
-
+MiniCPM-MoE is initialized utilizing Sparse Upcycling~\citep{komatsuzaki2022sparse}. \uline{The dense model checkpoint, derived from the stable phase of MiniCPM, undergoes a transformation wherein each MLP layer is substituted by an MoE layer.} \uline{These new MoE layers are exact replicas of the original MLP layers from the dense checkpoint.} \uline{The router parameters are randomly initialized following a normal distribution with a mean of 0 and a variance of 0.01.}
 
 \textbf{Routing Mechanism.}
 The number of total non-embedding parameters of MiniCPM-MoE is 13.6B. 
