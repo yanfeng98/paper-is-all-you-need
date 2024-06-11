@@ -1,4 +1,4 @@
-\begin{thebibliography}{77}
+\begin{thebibliography}{74}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -186,11 +186,6 @@ Jared Kaplan, Sam McCandlish, Tom Henighan, Tom~B Brown, Benjamin Chess, Rewon C
 \newblock Scaling laws for neural language models.
 \newblock \emph{arXiv preprint arXiv:2001.08361}, 2020.
 
-\bibitem[Kingma \& Ba(2014)Kingma and Ba]{kingma2014adam}
-Diederik~P Kingma and Jimmy Ba.
-\newblock Adam: A method for stochastic optimization.
-\newblock \emph{arXiv preprint arXiv:1412.6980}, 2014.
-
 \bibitem[Kocetkov et~al.(2022)Kocetkov, Li, Ben~Allal, Li, Mou, Muñoz~Ferrandis, Jernite, Mitchell, Hughes, Wolf, Bahdanau, von Werra, and de~Vries]{Kocetkov2022TheStack}
 Denis Kocetkov, Raymond Li, Loubna Ben~Allal, Jia Li, Chenghao Mou, Carlos Muñoz~Ferrandis, Yacine Jernite, Margaret Mitchell, Sean Hughes, Thomas Wolf, Dzmitry Bahdanau, Leandro von Werra, and Harm de~Vries.
 \newblock The stack: 3 tb of permissively licensed source code.
@@ -317,11 +312,6 @@ Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lacha
 \newblock Llama: Open and efficient foundation language models.
 \newblock \emph{arXiv preprint arXiv:2302.13971}, 2023.
 
-\bibitem[Wei et~al.(2021)Wei, Bosma, Zhao, Guu, Yu, Lester, Du, Dai, and Le]{wei2021finetuned}
-Jason Wei, Maarten Bosma, Vincent~Y Zhao, Kelvin Guu, Adams~Wei Yu, Brian Lester, Nan Du, Andrew~M Dai, and Quoc~V Le.
-\newblock Finetuned language models are zero-shot learners.
-\newblock \emph{arXiv preprint arXiv:2109.01652}, 2021.
-
 \bibitem[Wei et~al.(2023)Wei, Wang, Liu, Ding, and Zhang]{wei2023magicoder}
 Yuxiang Wei, Zhe Wang, Jiawei Liu, Yifeng Ding, and Lingming Zhang.
 \newblock Magicoder: Source code is all you need.
@@ -381,11 +371,6 @@ Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi.
 Peiyuan Zhang, Guangtao Zeng, Tianduo Wang, and Wei Lu.
 \newblock Tinyllama: An open-source small language model.
 \newblock \emph{arXiv preprint arXiv:2401.02385}, 2024{\natexlab{a}}.
-
-\bibitem[Zhang et~al.(2023)Zhang, Dong, Li, Zhang, Sun, Wang, Li, Hu, Zhang, Wu, et~al.]{zhang2023instruction}
-Shengyu Zhang, Linfeng Dong, Xiaoya Li, Sen Zhang, Xiaofei Sun, Shuhe Wang, Jiwei Li, Runyi Hu, Tianwei Zhang, Fei Wu, et~al.
-\newblock Instruction tuning for large language models: A survey.
-\newblock \emph{arXiv preprint arXiv:2308.10792}, 2023.
 
 \bibitem[Zhang et~al.(2024{\natexlab{b}})Zhang, Chen, Hu, Xu, Chen, Hao, Han, Thai, Wang, Liu, et~al.]{zhang2024infty}
 Xinrong Zhang, Yingfa Chen, Shengding Hu, Zihang Xu, Junhao Chen, Moo~Khai Hao, Xu~Han, Zhen~Leng Thai, Shuo Wang, Zhiyuan Liu, et~al.

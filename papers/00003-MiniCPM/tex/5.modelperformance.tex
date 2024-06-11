@@ -1,5 +1,5 @@
 \section{Model}
-In this section, we begin to introduce the MiniCPM model that aggregates the aforementioned observations and techniques. 
+ 
 \label{sec:model}
 \begin{table}[htbp]
     \centering
@@ -19,21 +19,16 @@ In this section, we begin to introduce the MiniCPM model that aggregates the afo
 % \vspace{-5mm}
 
 \subsection{Model Details}
-\noindent\textbf{Vocabulary.} We use two tokenizers of 122,753 vocabulary size for MiniCPM-2.4B and 73,440 vocabulary for MiniCPM-1.2B. A small vocabulary for 1.2B favors efficiency without harming much performance. Details of the tokenizers are in Appendix~\ref{app:tokenizer}. Including the embedding parameters increases total parameters by 0.3B and 0.2B respectively. 
-
+\noindent\textbf{Vocabulary.} We use two tokenizers of 122,753 vocabulary size for MiniCPM-2.4B and 73,440 vocabulary for MiniCPM-1.2B.
 
 \noindent\textbf{Shared Input-output Layer.}
-For SLM, the embedding takes up a large parameter space. To make the model parameters smaller, we use the Embedding Sharing techniques for both MiniCPM-2.4B and MiniCPM-1.2B.
- % The resulting embedding parameters is $2304 \times 122753 = 0.28B$ for 2.4B and $1536 \times  \sim 0.11B$ for 1.2B. 
+For SLM, the embedding takes up a large parameter space. To make the model parameters smaller, we use the Embedding Sharing techniques for both MiniCPM-2.4B and MiniCPM-1.2B. 
 
 \noindent\textbf{Deep-and-thin Network.} We train MiniCPM-2.4B before training MiniCPM-1.2B. When training MiniCPM-2.4B, we adopt a deeper and thinner architecture compared to Phi-2~\citep{Javaheripi2023Phi2} (40 layers compared to 32 layers). Recently, ~\cite{liu2024mobilellm} propose to train deep and thin networks for SLMs, which aligns with our perspective. Therefore, we further make the architecture deeper and thinner for MiniCPM-1.2B. 
 
 \noindent\textbf{Group Query Attention.} We train MiniCPM-2.4B without modification on the attention layer. Whereas we apply Group Query Attention~\citep{ainslie-etal-2023-gqa} to MiniCPM-1.2B, inspired by~\cite{liu2024mobilellm}, to further reduce the parameters number.
 
-
-
-\subsection{Training Stages}
-The overall training of the MiniCPM base model includes three stages: stable training stage, decay stage, SFT stage~\citep{zhang2023instruction,wei2021finetuned}. Throughout the stages, we use Adam Optimizer~\citep{kingma2014adam}. 
+\subsection{Training Stages} 
 
 \textbf{Stable Training Stage.}
 We utilize around 1T data (see Section~\ref{fig:appdatamixture} for data distribution), with the majority of the data sourced from open datasets. We use the optimal configuration discovered during the model wind tunnel experiments, WSD LRS, with a batch size of 3.93 million and a max learning rate of 0.01.

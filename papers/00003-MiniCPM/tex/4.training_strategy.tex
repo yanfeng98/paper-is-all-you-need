@@ -1,14 +1,18 @@
-
 \section{Two Stage Pre-training Strategy}
 \label{sec:trainingstrategy}
-Typically, the training of instruction following LLMs contains the pre-training stage and the supervised fine-tuning (SFT) stage~\citep{zhang2023instruction,wei2021finetuned}. In the pre-training stage, the data is composed of large-scale unlabeled data, while in the SFT stage, high-quality labeled data becomes the optimization target. 
+
 In light of the pronounced loss decrease observed during the decay stage of the WSD LRS, we postulate that the integration of high-quality labeled data in this phase presents dual advantages:
 \begin{itemize}
-    \item Introducing this data during the annealing phase, in addition to the SFT stage, fosters a more comprehensive model learning. Specifically, it facilitates a more pronounced loss reduction in relation to the SFT data distribution, rather than the pre-training data distribution. This approach is more congruent with actual user scenarios.
-    \item In contrast to a uniform distribution of high-quality data throughout the entire pre-training process, this method enhances training by concentrating on data and sustaining continuous pre-training. If we do not predetermine a training step, we will repeat a small dataset throughout an ongoing pre-training process, which could lead to negative effects.
+    \item Introducing this data during the annealing phase, in addition to the SFT stage, fosters a more comprehensive model learning. \uline{Specifically, it facilitates a more pronounced loss reduction in relation to the SFT data distribution, rather than the pre-training data distribution.}
+    \item In contrast to a uniform distribution of high-quality data throughout the entire pre-training process, this method enhances training by concentrating on data and sustaining continuous pre-training. \uline{If we do not predetermine a training step, we will repeat a small dataset throughout an ongoing pre-training process, which could lead to negative effects.}
 \end{itemize}
 
-Based on these two hypotheses, we propose the following training strategy: during the pre-training phase, only use large-scale coarse-quality pre-training data, which is abundant and can support continuous training when provided with more computational resources. During the annealing phase, we use diverse and high-quality knowledge and ability-oriented SFT data, mixed into the pre-training data.
+Based on these two hypotheses, we propose the following training strategy:
+
+\begin{itemize}
+    \item \uline{During the pre-training phase, only use large-scale coarse-quality pre-training data, which is abundant and can support continuous training when provided with more computational resources.}
+    \item \uline{During the annealing phase, we use diverse and high-quality knowledge and ability-oriented SFT data, mixed into the pre-training data.}
+\end{itemize}
 
 To validate the advantages of our training strategy, we conduct comparison experiments using (A) MiniCPM-2.4B's intermediate checkpoint in the stable stage; and (B) MiniCPM-1.2B's last checkpoints in the stable stage. Specifically, we compare the following:
 
@@ -20,10 +24,7 @@ To validate the advantages of our training strategy, we conduct comparison exper
     \item B-3: 1.2B model, annealing using the aforementioned high-quality data + SFT data mixed into pre-training data, also followed by 6B token SFT. 
 \end{enumerate}
 
-
-The results of the experiments are shown in Table~\ref{tab:dataexperiments}. We can see that, despite the  
-A-2 and A-1 have undergone the same SFT distribution, adding SFT data to the decay stage pushes the boundary 
-. Comparison between B-2 and B-3 demonstrate that the deficiency of only SFT is not due to the insufficient training tokens in SFT stage. 
+The results of the experiments are shown in Table~\ref{tab:dataexperiments}. We can see that, despite the A-2 and A-1 have undergone the same SFT distribution, \uline{adding SFT data to the decay stage pushes the boundary}. Comparison between B-2 and B-3 demonstrate that \uline{the deficiency of only SFT is not due to the insufficient training tokens in SFT stage.}
 
 \begin{table}[h]
 \centering
@@ -37,7 +38,6 @@ A-2 & \textbf{52.6}  & \textbf{51.1} & \textbf{50.9} & \textbf{42.3 } & \textbf{
 B-1 &   40.9  & 41.5 & 47.9 &  34.2 & 7.9   &  43.9 & 30.5 \\
 B-2 &  41.2 &  42.0 &    47.9  & \textbf{34.4} & 7.3 &  43.9 & 29.8  \\ 
 B-3 & \textbf{49.1}  & \textbf{46.8}  & \textbf{49.6} & 31.8  & \textbf{10.5}  & \textbf{44.5}  & \textbf{32.8}\\
-% B-4 & 43.9 & 45.3 &  50.1 & 39.3 & 10.1 & 45.1 & 33.5 \\
 \bottomrule
 \end{tabular}
 \caption{The ablation study of different training strategies.
@@ -45,11 +45,4 @@ B-3 & \textbf{49.1}  & \textbf{46.8}  & \textbf{49.6} & 31.8  & \textbf{10.5}  &
 \label{tab:dataexperiments}
 \end{table}
 
-The results indicate that the benefits of introducing high-quality data at the beginning of the decay stage are much higher than simply adding it during the SFT phase. Therefore, we recommend that specialization and enhancement of model capabilities should start from the decay phase. 
-
-
-
-
-
-
-
+\uline{The results indicate that the benefits of introducing high-quality data at the beginning of the decay stage are much higher than simply adding it during the SFT phase.}
