@@ -1,14 +1,8 @@
-
-
-
-
 \section{Additional Results in Model Wind Tunnel Experiments}
 
 \subsection{$\mu$P hyper-parameter search}
 \label{app:bayesiansearch}
-We conduct an extensive Bayesian search over a set of predefined parametric spaces. For efficiency, we search for the $N=0.009B$ model. In our pilot experiments, we confirm that when hyper-parameter optimization is conducted using datasets scaled at magnitudes of 10N and 20N, there is a consistency observed in the efficacy of hyper-parameters. Therefore, we train the models with $|D| = 10N = 0.09B$ tokens.
-Meanwhile, we also try QK-Norm~\citep{henry-etal-2020-query} and independent weight decay~\citep{loshchilov2017decoupled} as well to stabilize the learning rate. The overall results are shown in Figure~\ref{fig:mupsearch_app}. After applying the QK-norm, we observe a significant decrease in the learning rate sensitivity similar to~\cite{wortsman2023small}. However, as the MiniCPM project itself is an SLM, we do not require low learning rate sensitivity as long as we find the best learning rate with TensorProgram~\citep{yang2022tensor, yang2023tensor}. Therefore, we do not introduce QK-norm and independent weight decay in later experiments of MiniCPM. In Figure~\ref{fig:mupsearch_app}, we identify the best hyper-parameters for $scale\_depth=1.4$, $scale\_emb=12$, $init\_std=0.1$, and $lr=0.01$. 
-
+Meanwhile, we also try QK-Norm~\citep{henry-etal-2020-query} and independent weight decay~\citep{loshchilov2017decoupled} as well to stabilize the learning rate. The overall results are shown in Figure~\ref{fig:mupsearch_app}. After applying the QK-norm, we observe a significant decrease in the learning rate sensitivity similar to~\cite{wortsman2023small}. In Figure~\ref{fig:mupsearch_app}, we identify the best hyper-parameters for $scale\_depth=1.4$, $scale\_emb=12$, $init\_std=0.1$, and $lr=0.01$. 
 
 \begin{figure}[htbp]
     \centering
@@ -16,7 +10,6 @@ Meanwhile, we also try QK-Norm~\citep{henry-etal-2020-query} and independent wei
     \caption{Grid search over the $\mu$P parameterization spaces.}
     \label{fig:mupsearch_app}
 \end{figure}
-
 
 \begin{table}[h]
 \centering
@@ -34,17 +27,8 @@ LM Head Scaling                    & Adjust the output logits to $1/(d_m/d_{base
 \label{tab:mup}
 \end{table}
 
-\subsection{Comment on Optimal Batchsize}
-\label{app:batchsize}
-In~\cite{kaplan2020scaling}, OpenAI studies the relationship between the loss function and the number of tokens. In their experiments, they assume that consuming more steps is equivalent to consuming more time. Under this assumption, OpenAI defines a critical batch size that achieves a certain loss without consuming too many steps or tokens. This rationale is valid if the experiments are provided with unlimited GPUs (at least within the scope of the experiments). Since GPUs are unlimited, enlarging batch size will not increase the single-step duration but will decrease the total number of steps. However, in our experiment, since we have a fixed resource (number of GPUs), we observe that doubling the batch size almost equals doubling the single-step time. Therefore, enlarging batch size to decrease total training steps has minimal effect on the total training time. In light of this observation, we drop the goal of ``not consuming too many steps'' and turn towards minimizing the token quantity to achieve the lowest loss, instead.
-
-The observation regarding the estimation of optimal batch size in relation to loss resembles the "Chicken-and-egg" paradox. Practically, there's often a preliminary estimate of the achievable loss for a given model size, informed by prior knowledge of preliminary experiments. However, there is potential for the development of more refined estimation procedures in the future.
-
-The optimal batch size and optimal learning rate are likely to be not independent. To overcome this correlation, we do a preliminary study on the learning rate first, then choose an optimal learning rate to do a batch size experiment, and use batch size scaling to do the learning rate again. This is a bit like the Coordinate Descent optimization method. However, more rigorous methods are welcomed in future work.
-
-
 \subsection{Model Architecture in Model Wind Tunnel Experiments}
-We list the model configuration used in the model wind tunnel experiments in Table~\ref{tab:appmodel_configs}. The ``shape'' of the model, i.e., model width compared to model depth is kept as similar as possible to avoid any potential performance variation.
+We list the model configuration used in the model wind tunnel experiments in Table~\ref{tab:appmodel_configs}.
 
 \begin{table}[htbp]
     \centering
@@ -61,12 +45,10 @@ We list the model configuration used in the model wind tunnel experiments in Tab
         0.5B& 0.499 & 1344 & 3360 & 64 & 21 & 24 \\
     \bottomrule
     \end{tabular}
-    \caption{Model configurations and training configurations of the models in the scaling curve. N(B) represents the number of non-embedding parameters of the models, measured in billions. 
-    % BS(M) indicates the number of tokens in a batch (i.e., batch size) used to train the model, measured in millions. TS denotes the training steps. Tokens(B) refers to the total number of tokens used to train the model.
+    \caption{Model configurations and training configurations of the models in the scaling curve. N(B) represents the number of non-embedding parameters of the models, measured in billions.
     }
     \label{tab:appmodel_configs}
 \end{table}
-
 
 \section{Additional Illustration on WSD LRS}
 \subsection{Learning Rate Paradigm for Different LRSs}
@@ -128,18 +110,9 @@ An illustrative learning rate diagram for WSD and Cosine Scheduler is shown in F
 \label{app:fittingdatascaling}
 In this section, we describe the fitted data scaling law for continue training with WSD LRS. 
 Each point in Figure~\ref{fig:fit_continue_train} is the end of the decay stage in WSD LRS with a different end step. We try two function forms: exponential and polynomial. The fitted result shows that the polynomial scaling law is still the best for continue training.
-% \begin{figure}[!htbp]
-%     \centering
-%     \includegraphics[width=0.7\linewidth]{Fig/fit_continuetrain.png}
-%     \caption{We use two different function forms to fit the data scaling law achieved by WSD LRS and choose power law as the best fit.}
-%     \label{fig:continue_train}
-% \end{figure}
 
 \subsection{Individual Figure for Model-Data Scaling Law}
 For each task and model, the scaling law $L(N, D)$'s fitness with real loss values along the data axis is plotted in Figure~\ref{fig:individual_task_datascalinglaw}.
-
-\subsection{Analysis of Llama2's Data-to-Model Ratio}
-As mentioned in Section~\ref{scalinglawwsdlrs}, we analyze Llama2's Data-to-Model Ratio based on their training loss curve. The extracted loss is plotted on the left of Figure~\ref{fig:llamascaling}. We convert the x-axis to computation Flops to compare the computed optimal regime on the right part of the Figure. 
 
 \begin{figure}
     \centering
@@ -148,26 +121,14 @@ As mentioned in Section~\ref{scalinglawwsdlrs}, we analyze Llama2's Data-to-Mode
     \label{fig:individual_task_datascalinglaw}
 \end{figure}
 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth]{Fig/llama2_scaling.pdf}
-    \caption{We extract the training loss data from Llama2 paper (left part) and estimate the compute optimal $\frac{D_{opt}}{N_{opt}}$ in their paper using the right part. The straight lines are plotted to estimate the optimal loss envelope assuming using WSD Scheduler.}
-    \label{fig:llamascaling}
-\end{figure}
-
-
-
 \section{MiniCPM's Vocabulary}
 \label{app:tokenizer}
 
-Despite being small in parameter size, MiniCPM targets modeling diverse data distribution, excelling in English and Chinese. Therefore, our vocabulary is relatively large. For the 2.4B model, we use a tokenizer consisting of 122,753 tokens (denoted by MiniCPMTokenizer-120K). This vocabulary is constructed from extensive and diverse language data, utilizing the sentencepiece library~\footnote{\url{https://github.com/google/sentencepiece}} for Byte Pair Encoding (BPE)~\citep{sennrich-etal-2016-neural}, and includes special symbols like traditional Chinese characters, rare characters, emojis, and special symbols such as Greek letters, Cyrillic letters, etc.
+For the 2.4B model, we use a tokenizer consisting of 122,753 tokens (denoted by MiniCPMTokenizer-120K). This vocabulary is constructed from extensive and diverse language data, utilizing the sentencepiece library~\footnote{\url{https://github.com/google/sentencepiece}} for Byte Pair Encoding (BPE)~\citep{sennrich-etal-2016-neural}, and includes special symbols like \uline{traditional Chinese characters}, \uline{rare characters}, \uline{emojis}, and special symbols such as \uline{Greek letters}, \uline{Cyrillic letters}, etc.
 
-For the SLM, the embedding parameters will take up a lot of parameter space if the vocabulary is large. Therefore, for our 1.2B model, we use a smaller vocab MiniCPMTokenizer-70K. Compared to the MiniCPMTokenizer-120K tokenizer, we have re-trained the tokenization on the same documents, while setting the max number of vocabs to 64,000. For the special characters, we only add the traditional Chinese characters, emojis, and special symbols, but leave out the rare characters in Chinese. 
+For our 1.2B model, we use a smaller vocab MiniCPMTokenizer-70K. Compared to the MiniCPMTokenizer-120K tokenizer, we have re-trained the tokenization on the same documents, while setting the max number of vocabs to \uline{64,000}. For the special characters, we only add the \uline{traditional Chinese characters}, \uline{emojis}, and \uline{special symbols}, but leave out the rare characters in Chinese. 
 
-We conduct evaluations on 300,000 documents in Chinese, English, code, and academic papers that are not in the training set of the Tokenizer. The MiniCPM-120K tokenizer achieves the highest compression ratio (Bytes/Tokens).
-
-
+We conduct evaluations on 300,000 documents in Chinese, English, code, and academic papers that are not in the training set of the Tokenizer. \uline{The MiniCPM-120K tokenizer achieves the highest compression ratio (Bytes/Tokens).}
 
 \begin{table}[htbp]
 \centering
@@ -190,4 +151,3 @@ Average & 3.30   & 3.29  & 2.84  & \textbf{3.40}  & 3.31 \\
 \caption{Compression ratio comparison.}
 \label{tab:compression_ratio}
 \end{table}
-

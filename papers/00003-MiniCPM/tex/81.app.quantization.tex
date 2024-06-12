@@ -1,16 +1,15 @@
-
 \section{Quantization}
 \label{app:quantization}
-We conduct 4-bit quantization on our model. We do not quantize the parameters of embedding and layer normalization, since the performance of the model is sensitive to these parameters. Therefore, we only need to quantify each weight matrix. Denote the weight matrix as $\mathbf{W}\in \mathbb{R}^{d_{out}\times d_{in}}$. We group every $G$ consecutive parameter at the $d_{in}$ dimension and form $d_{in}/G$ group. Then we quantize each group of the parameters separately. For each group parameter $\mathbf{w}$, we calculate the quantization scale and zero point as follows:
+
+We conduct \uline{4-bit quantization} on our model. \uline{We do not quantize the parameters of embedding and layer normalization, since the performance of the model is sensitive to these parameters.} Therefore, we only need to quantify \uline{each weight matrix}. \uline{Denote the weight matrix as $\mathbf{W}\in \mathbb{R}^{d_{out}\times d_{in}}$. We group every $G$ consecutive parameter at the $d_{in}$ dimension and form $d_{in}/G$ group. Then we quantize each group of the parameters separately.} For each group parameter $\mathbf{w}$, we calculate the \uline{quantization scale} and \uline{zero point} as follows:
 
 $$
 \text{scale}= {\max(\mathbf{w}) - \min(\mathbf{w}) \over {2^4-1}}, \text{zero} = - {\min(\mathbf{w}) \over scale} - 2^3.
 $$
 
-Group parameter $\mathbf{w}$ are then quantized to $$\hat w = quant(w) = round({w\over \text{scale}}+\text{zero}),$$ where $round$ operation round a floating point to nearest integer. The dequantization operation is approximately the reverse of the quantization method, which is $$dequant(\hat w) = \text{scale}(\hat w - \text{zero}).$$ Finally, matrix $\mathbf{W}\in \mathbb{R}^{d_{out}\times d_{in}}$ is quantized to int4 $\mathbf{\hat{W}}\in \mathbb{R}^{d_{out}\times d_{in}}$, float $\textbf{scale}\in \mathbb{R}^{d_{out}\times {d_{in}\over G}}$ and float $\textbf{zero}\in \mathbb{R}^{d_{out}\times {d_{in}\over G}}$.
+Group parameter $\mathbf{w}$ are then quantized to $$\hat w = quant(w) = round({w\over \text{scale}}+\text{zero}),$$ where \uline{$round$ operation round a floating point to nearest integer}. \uline{The dequantization operation is approximately the reverse of the quantization method}, which is $$dequant(\hat w) = \text{scale}(\hat w - \text{zero}).$$ Finally, matrix $\mathbf{W}\in \mathbb{R}^{d_{out}\times d_{in}}$ is quantized to int4 $\mathbf{\hat{W}}\in \mathbb{R}^{d_{out}\times d_{in}}$, float $\textbf{scale}\in \mathbb{R}^{d_{out}\times {d_{in}\over G}}$ and float $\textbf{zero}\in \mathbb{R}^{d_{out}\times {d_{in}\over G}}$.
 
-
-To reduce the quantization loss, we adopt GPTQ~\citep{DBLP:journals/corr/abs-2210-17323} to apply weight calibration.
+\uline{To reduce the quantization loss, we adopt GPTQ}~\citep{DBLP:journals/corr/abs-2210-17323} \uline{to apply weight calibration.}
 We sample calibration data $\mathbf{X}$ from a similar distribution of SFT data. 
 The quantization objective is to minimize the disturbance of the quantization $\|\mathbf{W}\mathbf{X}-dequant(\mathbf{\hat W})\mathbf{X}\|_2^2$.
 We follow GPTQ to quantize weight iteratively and update the remaining non-quantized weight by

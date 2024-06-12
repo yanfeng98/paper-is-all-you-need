@@ -1,12 +1,8 @@
-
 \section{Edge Device Benchmarking}
 
-After Int4 quantization in Appendix~\ref{app:quantization}, MiniCPM-2.4B's footprint is reduced to 2GB, facilitating deployment on mobile edge devices. We adapted the model for Android and HarmonyOS using MLC-LLM~\citep{mlc-llm} and employed LLMFarm~\citep{llmfarm} for adaptation to the iPhone system. This adaptation was tested on various edge mobile devices.
+After Int4 quantization in Appendix~\ref{app:quantization}, MiniCPM-2.4B's footprint is reduced to 2GB, facilitating deployment on mobile edge devices. We adapted the model for Android and HarmonyOS using \uline{MLC-LLM}~\citep{mlc-llm} and employed \uline{LLMFarm}~\citep{llmfarm} for adaptation to the iPhone system. This adaptation was tested on various edge mobile devices.
 
-It is important to emphasize that our efforts did not focus on optimization for mobile deployment, but rather on demonstrating the practicality of MiniCPM's inference capabilities on mobile platforms. We encourage further optimization and updates by the developer community to enhance the performance of large models like MiniCPM in mobile contexts. 
-
-The result is shown in Table~\ref{table:phone_specs}, we can see that on the most advanced smartphone iPhone 15 Pro, the inference throughput is as high as 18 tokens per second. In other devices, the inference throughput is also acceptable. 
-
+The result is shown in Table~\ref{table:phone_specs}, we can see that on the most advanced smartphone iPhone 15 Pro, \uline{the inference throughput is as high as 18 tokens per second.} In other devices, the inference throughput is also acceptable.
 
 \begin{table}[]
 \centering
