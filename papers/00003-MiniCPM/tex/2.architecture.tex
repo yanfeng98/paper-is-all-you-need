@@ -2,10 +2,26 @@
 \label{MWTE}
 
 \subsection{Scaling Hyper-parameters Invariant LM}
-Tensor Program~\citep{yang2022tensor, yang2023tensor} proposes a framework to stabilize the hyper-parameters for models with different scales. The main part of the Tensor Program is the width scaling~\citep{yang2022tensor} and the depth scaling~\citep{yang2023tensor}. The former technique supports CerebrasGPT~\citep{dey2023cerebras} to predict the loss of LLMs more accurately. In MiniCPM, we use both two scaling techniques. The specific scaling operations are listed in Table~\ref{tab:mup}. We do not apply the attention softmax scaling techniques~\citep{yang2022tensor}. Despite ~\cite{yang2023tensor} observing that depth scaling for a network with block depth larger than two is not satisfying, we find the resulting optimal learning rate is stable empirically.
+\uline{Tensor Program}~\citep{yang2022tensor, yang2023tensor} proposes a framework to stabilize the hyper-parameters for models with different scales. The main part of the Tensor Program is the \uline{width scaling}~\citep{yang2022tensor} and the \uline{depth scaling}~\citep{yang2023tensor}. The former technique supports CerebrasGPT~\citep{dey2023cerebras} to predict the loss of LLMs more accurately. In MiniCPM, we use both two scaling techniques. The specific scaling operations are listed in Table~\ref{tab:mup}. We do not apply the attention softmax scaling techniques~\citep{yang2022tensor}. Despite ~\cite{yang2023tensor} observing that depth scaling for a network with block depth larger than two is not satisfying, we find the resulting optimal learning rate is stable empirically.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|p{8cm}}
+\toprule
+\textbf{Name}                       & \textbf{Specific Operation}                                                                                                                 \\ \midrule
+Embedding Output Scaling            & Multiply the output of the embedding by $scale\_{emb}$                                                                                                                                                     \\ \hline
+Residual Connection Scaling         & Scale the output tensor of a block before adding to each residual connection in each layer by $scale\_{depth}/\sqrt{\text{num\_layers}}$ 
+\\ \hline
+Initialization of Tensors           & Set the initialization standard deviation of each two-dimensional tensor parameter to $init\_std/\sqrt{d_m/d_{base}}$, and set other parameters' initialization to 0.1                  \\ \hline
+Learning Rate Scaling of Tensors    & Adjust the learning rate of each two-dimensional tensor parameter to $1/({d_m/d_{base}}) $ times the learning rate of other parts (or the overall learning rate)                    \\ \hline
+LM Head Scaling                    & Adjust the output logits to $1/(d_m/d_{base})$ times the original value                                                                                                           \\ \bottomrule
+\end{tabular}
+\caption{List of operations used when applying tensor program techniques.}
+\label{tab:mup}
+\end{table}
 
 \subsection{Optimal Batch Size}
-We follow ~\cite{kaplan2020scaling} to determine the batchsize from expected loss, with a slight modification from their setting (see Appendix~\ref{app:batchsize}). We conduct experiments on 0.009B, 0.03B, and 0.17B models, respectively, toward this goal. Each model size is trained on 6 batch sizes with a global learning rate of $0.01$ and cosine learning rate scheduler. We observe the trend of the optimal batch size with loss on the C4~\citep{2019t5} dataset (red line in the Figure~\ref{fig:optimalbatchsize}).
+We follow ~\cite{kaplan2020scaling} to determine the batchsize from expected loss, with a slight modification from their setting. We conduct experiments on 0.009B, 0.03B, and 0.17B models, respectively, toward this goal. Each model size is trained on 6 batch sizes with a global learning rate of $0.01$ and cosine learning rate scheduler. We observe the trend of the optimal batch size with loss on the C4~\citep{2019t5} dataset (red line in the Figure~\ref{fig:optimalbatchsize}).
 
 \begin{figure}[!htbp]
     \centering

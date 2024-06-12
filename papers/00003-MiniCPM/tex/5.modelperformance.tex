@@ -1,5 +1,15 @@
 \section{Model}
- 
+
+\subsection{Model Details}
+\noindent\textbf{Vocabulary.} We use two tokenizers of \uline{122,753} vocabulary size for MiniCPM-2.4B and \uline{73,440} vocabulary for MiniCPM-1.2B.
+
+\noindent\textbf{Shared Input-output Layer.}
+For SLM, the embedding takes up a large parameter space. To make the model parameters smaller, we use the Embedding Sharing techniques for both MiniCPM-2.4B and MiniCPM-1.2B. 
+
+\noindent\textbf{Deep-and-thin Network.} We train MiniCPM-2.4B before training MiniCPM-1.2B. When training MiniCPM-2.4B, we adopt \uline{a deeper and thinner architecture} compared to Phi-2~\citep{Javaheripi2023Phi2} (40 layers compared to 32 layers). Recently, ~\cite{liu2024mobilellm} propose to train deep and thin networks for SLMs, which aligns with our perspective. Therefore, we further make the architecture deeper and thinner for MiniCPM-1.2B. 
+
+\noindent\textbf{Group Query Attention.} We train MiniCPM-2.4B without modification on the attention layer. Whereas we apply \uline{Group Query Attention}~\citep{ainslie-etal-2023-gqa} to MiniCPM-1.2B, inspired by~\cite{liu2024mobilellm}, to further reduce the parameters number.
+
 \label{sec:model}
 \begin{table}[htbp]
     \centering
@@ -16,17 +26,6 @@
     \caption{Model configurations for MiniCPM. N (B), $d_m$, $d_{ff}$, $d_h$, $n_q$, $n_{kv}$, $L$, Batch size (M), Tokens (T) represents the number of non-embedding parameters of the model, model hidden dimension, feedforward layer bottleneck dimension, attention head dimension, number of queries, number key/values, number of layers, training batch size, total training tokens.}
     \label{tab:model_configs}
 \end{table}
-% \vspace{-5mm}
-
-\subsection{Model Details}
-\noindent\textbf{Vocabulary.} We use two tokenizers of 122,753 vocabulary size for MiniCPM-2.4B and 73,440 vocabulary for MiniCPM-1.2B.
-
-\noindent\textbf{Shared Input-output Layer.}
-For SLM, the embedding takes up a large parameter space. To make the model parameters smaller, we use the Embedding Sharing techniques for both MiniCPM-2.4B and MiniCPM-1.2B. 
-
-\noindent\textbf{Deep-and-thin Network.} We train MiniCPM-2.4B before training MiniCPM-1.2B. When training MiniCPM-2.4B, we adopt a deeper and thinner architecture compared to Phi-2~\citep{Javaheripi2023Phi2} (40 layers compared to 32 layers). Recently, ~\cite{liu2024mobilellm} propose to train deep and thin networks for SLMs, which aligns with our perspective. Therefore, we further make the architecture deeper and thinner for MiniCPM-1.2B. 
-
-\noindent\textbf{Group Query Attention.} We train MiniCPM-2.4B without modification on the attention layer. Whereas we apply Group Query Attention~\citep{ainslie-etal-2023-gqa} to MiniCPM-1.2B, inspired by~\cite{liu2024mobilellm}, to further reduce the parameters number.
 
 \subsection{Training Stages} 
 
@@ -49,7 +48,7 @@ We utilize \uline{around 1T data} (see Figure~\ref{fig:appdatamixture} for data 
 \end{figure}
 
 \textbf{Decay Stage.}
-\uline{We use a mixture of the pretraining data and high-quality SFT data.} For the specific annealing form of the WSD scheduler, we employ exponential annealing, i.e. $f(s-T)=  0.5^{(s-S)/T}$, in which $T$ is set to be 5000 steps (20B tokens).
+\uline{We use a mixture of the pretraining data and high-quality SFT data.} For the specific annealing form of the WSD scheduler, we employ exponential annealing, i.e. \uline{$f(s-T)=  0.5^{(s-S)/T}$}, in which $T$ is set to be 5000 steps (20B tokens).
 
 \textbf{SFT Stage.} We find it still necessary to conduct a separate SFT phase. We utilize SFT data similar to the annealing phase excluding pre-training data and train with approximately 6 billion tokens. \uline{The learning rate for SFT is aligned with the one at the end of annealing, and a WSD Scheduler with exponential decay is also employed.}
 
@@ -84,7 +83,7 @@ The overall training loss on the C4 dataset is shown in Figure~\ref{fig:loss_c4}
 \subsection{Evaluation}
 \label{sec:evaluation}
 
-The overall evaluation utilizes our open-source tool UltraEval\footnote{https://ultraeval.openbmb.cn/home}. UltraEval is an open-source framework for assessing the capabilities of foundation models. The underlying inference and acceleration use the open-source framework \uline{vLLM}~\citep{kwon2023efficient}, and the dataset includes commonly used datasets: \uline{MMLU}~\citep{hendrycks2020measuring} for English knowledge, \uline{CMMLU}~\citep{li2024cmmlu} and \uline{C-Eval}~\citep{huang2024c} for Chinese knowledge, \uline{HumanEval}~\citep{chen2021evaluating} and \uline{MBPP}~\citep{austin2021program} for coding, \uline{GSM8K}~\citep{cobbe2021training} and \uline{MATH}~\citep{hendrycks2021measuring} for mathematics, and \uline{HellaSwag}~\citep{zellers2019hellaswag}, \uline{ARC-e}~\citep{clark2018think}, \uline{ARC-c}~\citep{clark2018think} for commonsense reasoning, and \uline{BBH}~\citep{suzgun2022challenging} for logic reasoning.
+The overall evaluation utilizes our open-source tool UltraEval\footnote{\url{https://ultraeval.openbmb.cn/home}}. UltraEval is an open-source framework for assessing the capabilities of foundation models. The underlying inference and acceleration use the open-source framework \uline{vLLM}~\citep{kwon2023efficient}, and the dataset includes commonly used datasets: \uline{MMLU}~\citep{hendrycks2020measuring} for English knowledge, \uline{CMMLU}~\citep{li2024cmmlu} and \uline{C-Eval}~\citep{huang2024c} for Chinese knowledge, \uline{HumanEval}~\citep{chen2021evaluating} and \uline{MBPP}~\citep{austin2021program} for coding, \uline{GSM8K}~\citep{cobbe2021training} and \uline{MATH}~\citep{hendrycks2021measuring} for mathematics, and \uline{HellaSwag}~\citep{zellers2019hellaswag}, \uline{ARC-e}~\citep{clark2018think}, \uline{ARC-c}~\citep{clark2018think} for commonsense reasoning, and \uline{BBH}~\citep{suzgun2022challenging} for logic reasoning.
 
 When testing QA tasks (ARC-e, ARC-c, HellaSwag), two approaches are typically employed. The first involves using Perplexity (PPL): \uline{we extend each option as the continuation of the question and use the PPL of the option as the selection criterion.} The second is direct generation, where \uline{the model directly outputs answer options}. We observe significant differences in results obtained using these two methods. \uline{To address this phenomenon, when reporting the scores for each model, we adopt the score from the evaluation method that yields the highest score, ensuring fairness in comparison.}
 

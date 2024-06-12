@@ -2,7 +2,7 @@
 \label{sec:wsdlrs}
 \subsection{Analysing Cosine LRS}
 
-The current commonly used learning rate strategy is the Cosine LRS~\citep{kaplan2020scaling, hoffmann2022training, rae2021scaling, touvron2023llama, bai2023qwen, almazrouei2023falcon}, which gradually decreases the learning rate following a cosine curve after it reaches its maximum after the warmup stage. 
+The current commonly used learning rate strategy is the \uline{Cosine LRS}~\citep{kaplan2020scaling, hoffmann2022training, rae2021scaling, touvron2023llama, bai2023qwen, almazrouei2023falcon}, which gradually decreases the learning rate following a cosine curve after it reaches its maximum after the warmup stage. 
 
 A key hyper-parameter in the Cosine LRS is the step $T$ at which Cosine decreases to the minimum for the first time. \uline{Typically, $T$ is set to the total training step $S$ for training with a predefined training step.} Generally, it is believed that the learning rate should be high to enable sufficient exploration. We try $Cosine(T)$ and $CosineLoop(T)$ LRS, following the formula shown in Appendix~\ref{app:lrsequ}. The result can be seen in Figure~\ref{fig:cosine_lr}. We can see that when the training step is $S=20N, 40N, 60N, 80N$, the lowest loss is always achieved by the $Cosine(T)$ where $T = S$. Both $T<S$ and $T>S$ are not optimal. 
 
@@ -56,7 +56,7 @@ where $0< f(s-T)\leq 1$ is a decreasing function about $s$, $\eta$ is the maximu
 
 \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
 
-By optimal performance, we mean the loss of training token $D$ is achieved by ${WSD}(D, 0.1D)$. With a series of $D$, the losses will form the optimal loss envelope. Due to uncertainty about the function form of the loss envelope, we try two fitting formulas: (1) exponential: $L(C) = \alpha e^{-\beta C} + L_0$ and (2) power-law: $L(C) = \beta C^{-\alpha} + L_0$. We find that the power-law form fits better (similar to the Cosine LRS~\citep{kaplan2020scaling}). In Figure~\ref{fig:continuoustrain}, the fitted curve is shown in \textcolor{darkgreen}{green} dotted lines.
+By optimal performance, we mean the loss of training token $D$ is achieved by ${WSD}(D, 0.1D)$. With a series of $D$, the losses will form the optimal loss envelope. Due to uncertainty about the function form of the loss envelope, we try two fitting formulas: (1) exponential: $L(C) = \alpha e^{-\beta C} + L_0$ and (2) power-law: $L(C) = \beta C^{-\alpha} + L_0$. We find that the \uline{power-law} form fits better (similar to the Cosine LRS~\citep{kaplan2020scaling}). In Figure~\ref{fig:continuoustrain}, the fitted curve is shown in \textcolor{darkgreen}{green} dotted lines.
 
 To intuitively estimate and comprehend the effect of continuous training such a fixed-sized model, we also trained a 0.17B model with $WSD(40N, 4N)$, which is shown in \textcolor{pink}{pink} in Figure~\ref{fig:continuoustrain}. \uline{We can see that a 0.036B model can match the performance of a 0.17B model with an acceptable increase ($\sim 4$ times) in training compute while saving a lot of inference computation}~\citep{sardana2023beyond} (saving $\sim 5$ times per inference call), \uline{indicating a better inference-compute-optimal setting}~\citep{sardana2023beyond}.
 
@@ -100,7 +100,14 @@ We can see that the gradient norm diminishes during the decay phase, and upon co
 
 \uline{Since the WSD scheduler has the advantage of arriving at the optimal loss of Cosine LRS after decaying from stable stage checkpoints of any step, we are now able to precisely measure the optimal scaling properties without re-training the models from scratch to different amounts of tokens, thus making the scaling law measurement much more efficient along the data axis.}
 
-We measure the scaling law along the data and model axes by training SLMs of 6 sizes ranging from 0.04B to 2B, each with 6 decayed models starting from the checkpoint of $10N$ to $60N$ data during the stable training stage. The final loss of each pair of data size and model size is shown in the blue lines in Figure~\ref{fig:individual_task_datascalinglaw}. 
+We measure the scaling law along the data and model axes by training SLMs of 6 sizes ranging from 0.04B to 2B, each with 6 decayed models starting from the checkpoint of $10N$ to $60N$ data during the stable training stage. The final loss of each pair of data size and model size is shown in the blue lines in Figure~\ref{fig:individual_task_datascalinglaw}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{Fig/individual_task_datascalinglaw.pdf}
+    \caption{The fitted scaling law plotted along the data amount axis for each model and each task. The fitted result is satisfying except for the last checkpoints of the 0.11B and 0.25B model. }
+    \label{fig:individual_task_datascalinglaw}
+\end{figure}
 
 Then we fit the losses with model size $N$ and data size $D$ following ~\cite{hoffmann2022training} using scipy \uline{\texttt{curvefit}} function:
 
@@ -119,16 +126,14 @@ Then we have the optimal model size $N_{opt}$, dataset size $D_{opt}$, given a f
 
 where $K = (\frac{\alpha C_N}{\beta C_D})^{\frac{1}{\alpha + \beta}} $, and $\eta=\frac{\beta-\alpha}{\alpha+\beta}$. From Equation~\ref{equ:computeoptimal}, when $\alpha = \beta$, $N_{opt}/D_{opt}$ is a constant, supporting ~\cite{hoffmann2022training}'s claim, and when $\alpha < \beta$, we should emphasize more on parameter scaling~\citep{kaplan2020scaling}, and vise versa. 
 
-In our experiments, the fitted relationship between loss and $N, D$ is shown in the contour plot of equal loss in Figure~\ref{fig:wsd_optimalscalinglaw}. We can see that in all evaluation corpora, we have $\beta < \alpha$. More specifically, on average, we have $\alpha=0.29, \beta=0.23, K^2 = 0.01, \eta=-0.10$. Since $\alpha$ is slightly larger than $\beta$, this result shows that as the computation scale, \uline{we should slightly emphasize more on data scaling than model scaling}, which aligns with ~\cite{hoffmann2022training}.
+In our experiments, the fitted relationship between loss and $N, D$ is shown in the contour plot of equal loss in Figure~\ref{fig:wsd_optimalscalinglaw_text}. We can see that in all evaluation corpora, we have $\beta < \alpha$. More specifically, on average, we have $\alpha=0.29, \beta=0.23, K^2 = 0.01, \eta=-0.10$. Since $\alpha$ is slightly larger than $\beta$, this result shows that as the computation scale, \uline{we should slightly emphasize more on data scaling than model scaling}, which aligns with ~\cite{hoffmann2022training}.
 
 \begin{figure}[!t]
     \centering
     \includegraphics[width=1.0\textwidth]{Fig/wsd_optimal_scaling_law.pdf}
     \caption{The fit result of the scaling experiment with WSD Scheduler. The black dots in a horizontal line denote the decayed checkpoints in different compute within the same model size.}
-    \label{fig:wsd_optimalscalinglaw}
+    \label{fig:wsd_optimalscalinglaw_text}
 \end{figure}
-
-A larger data-to-model ratio means that we can absorb more data into a smaller model than we previously thought, which is more efficient for inference and deployment.
 
 \begin{figure}[!t]
     \centering
@@ -136,3 +141,5 @@ A larger data-to-model ratio means that we can absorb more data into a smaller m
     \caption{The result of scaling experiments with WSD Scheduler (above) and the fitted scaling curve (below). The x-axis is the computation Flops $C =6ND$, each color of the line represents the same model with different computation Flops. We can see that smaller models are better than larger models when the Flops are small and worse when the Flops are large. Thus models of different sizes will intersect with each other in the plot around the compute optimal regime.}
     \label{fig:wsd_optimalscalinglaw}
 \end{figure}
+
+\uline{A larger data-to-model ratio means that we can absorb more data into a smaller model than we previously thought, which is more efficient for inference and deployment.}
