@@ -1,5 +1,4 @@
 \documentclass[11pt]{article}
-\pdfoutput=1
 \usepackage[
   margin=0.83in,
   headheight=12pt,
@@ -98,6 +97,7 @@
 \usepackage{diagbox}
 \usepackage{mdframed}
 \usepackage{todonotes}
+\usepackage{ulem}
 \setuptodonotes{inline}
 \usepackage{tikz}
 \usetikzlibrary{shapes,calc,positioning}
@@ -146,19 +146,21 @@ boxrule=0pt,bottomrule=0pt,toprule=0pt}
 \title{Phi-3 Technical Report: \\
 A Highly Capable Language Model Locally on Your Phone}
 
-\author{Microsoft}
+\author{
+    XXX \thanks{The original paper is located at \url{https://arxiv.org/abs/2404.14219}. This version has been modified by LuYF-Lemon-love $\langle$ \url{luyanfeng_nlp@qq.com} $\rangle$ for personal study.}\\
+    Microsoft
+}
 \date{}
-
 
 \maketitle
 
 \begin{abstract}
-We introduce \textbf{phi-3-mini}, a 3.8 billion parameter language model trained on 3.3 trillion tokens, whose overall performance, as measured by both academic benchmarks and internal testing, rivals that of models such as Mixtral 8x7B and GPT-3.5 (e.g., \textbf{phi-3-mini} achieves 69\% on MMLU and 8.38 on MT-bench), despite being small enough to be deployed on a phone. The innovation lies entirely in our dataset for training, a scaled-up version of the one used for \textbf{phi-2}, composed of heavily filtered publicly available web data and synthetic data. The model is also further aligned for robustness, safety, and chat format.
-We also provide some initial parameter-scaling results with a 7B and 14B models trained for 4.8T tokens, called \textbf{phi-3-small} and \textbf{phi-3-medium}, both significantly more capable than \textbf{phi-3-mini} (e.g., respectively 75\% and 78\% on MMLU, and 8.7 and 8.9 on MT-bench). Moreover, we also introduce \textbf{phi-3-vision}, a 4.2 billion parameter model based on \textbf{phi-3-mini} with strong reasoning capabilities for image and text prompts.
+We introduce \textbf{phi-3-mini}, \uline{a 3.8 billion parameter language model} trained on \uline{3.3 trillion tokens}, whose overall performance, as measured by both academic benchmarks and internal testing, rivals that of models such as \uline{Mixtral 8x7B} and \uline{GPT-3.5} (e.g., \textbf{phi-3-mini} achieves 69\% on MMLU and 8.38 on MT-bench), despite being small enough to be deployed on a \uline{phone}. \uline{The innovation lies entirely in our dataset for training, a scaled-up version of the one used for \textbf{phi-2}, composed of heavily filtered publicly available web data and synthetic data.} The model is also further aligned for \uline{robustness}, \uline{safety}, and \uline{chat format}.
+We also provide some initial parameter-scaling results with a 7B and 14B models trained for 4.8T tokens, called \textbf{phi-3-small} and \textbf{phi-3-medium}, both significantly more capable than \textbf{phi-3-mini} (e.g., respectively 75\% and 78\% on MMLU, and 8.7 and 8.9 on MT-bench). \uline{Moreover, we also introduce \textbf{phi-3-vision}, a 4.2 billion parameter model based on \textbf{phi-3-mini} with strong reasoning capabilities for image and text prompts.}
 \end{abstract}
 
 \section{Introduction}
-The striking progress of AI in the last few years can be largely attributed to major efforts throughout the world towards {\em scaling-up} to ever-larger models and datasets. Large Language Models (LLMs) have steadily increased in size from a mere billion parameters just five years ago (GPT-2 had 1.5 billion parameters \cite{radford2019language}) to trillion parameters today. The impetus for this effort originates in the seemingly predictable improvement one obtains by training large models, the so-called {\em scaling laws} \cite{kaplan2020scaling, hoffmann2022training,muennighoff2023scaling}. However these laws assume a ``fixed'' data source. This assumption is now significantly disrupted by the existence of frontier LLMs themselves, which allow us to interact with data in novel ways. In our previous works on the phi models \cite{gunasekar2023textbooks,li2023textbooks, javaheripi2023phi} it was shown that a combination of LLM-based filtering of publicly available web data, and LLM-created synthetic data, enable performance in smaller language models that were typically seen only in much larger models. For example our previous model trained on this data recipe, \textbf{phi-2} (2.7B parameters), matched the performance of models $25$ times larger trained on regular data. In this report we present a new model, \textbf{phi-3-mini} (3.8B parameters), trained for 3.3T tokens on larger and more advanced versions of the datasets used in \textbf{phi-2}. With its small size, \textbf{phi-3-mini} can easily be inferenced locally on a modern phone (see Figure \ref{fig:1}), yet it achieves a quality that seems on-par with models such as Mixtral 8x7B \cite{jiang2024mixtral} and GPT-3.5.
+\uline{In our previous works on the phi models} \cite{gunasekar2023textbooks,li2023textbooks, javaheripi2023phi} \uline{it was shown that a combination of LLM-based filtering of publicly available web data, and LLM-created synthetic data, enable performance in smaller language models that were typically seen only in much larger models.} For example our previous model trained on this data recipe, \textbf{phi-2} (2.7B parameters), matched the performance of models $25$ times larger trained on regular data. \uline{In this report we present a new model, \textbf{phi-3-mini} (3.8B parameters), trained for 3.3T tokens on larger and more advanced versions of the datasets used in \textbf{phi-2}.} With its small size, \textbf{phi-3-mini} can easily be inferenced locally on \uline{a modern phone} (see Figure \ref{fig:1}), yet it achieves a quality that seems on-par with models such as \uline{Mixtral 8x7B} \cite{jiang2024mixtral} and \uline{GPT-3.5}.
 
 \begin{AIbox}{}
 \tt \footnotesize 
@@ -179,11 +181,19 @@ The striking progress of AI in the last few years can be largely attributed to m
 \end{minipage}
 \end{AIbox}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.30\textwidth]{iphone_song3.PNG}
+\includegraphics[width=0.30\textwidth]{iPhone_houston3.PNG}
+\includegraphics[width=0.30\textwidth]{iPhone_titlep.PNG}
+    \caption{4-bit quantized \textbf{phi-3-mini} running natively on an iPhone with A16 Bionic chip, generating \uline{over 12 tokens per second}.}
+    \label{fig:1}
+\end{figure}
 
 \section{Technical Specifications}
-The \textbf{phi-3-mini} model is a transformer decoder architecture \cite{Vas17}, with default context length $4K$. We also introduce a long context version via LongRope \cite{ding2024longrope} that extends the context length to $128K$, called \textbf{phi-3-mini-128K}. 
+The \textbf{phi-3-mini} model is \uline{a transformer decoder architecture} \cite{Vas17}, with \uline{default context length $4K$}. We also introduce a long context version via \uline{LongRope} \cite{ding2024longrope} that extends the context length to \uline{$128K$}, called \textbf{phi-3-mini-128K}. 
 
-To best benefit the open source community, \textbf{phi-3-mini} is built upon a similar block structure as Llama-2 \cite{touvron2023llama} and uses the same tokenizer with vocabulary size of 32064\footnote{We remove BoS tokens and add some additional tokens for chat template.}. {This means that all packages developed for Llama-2 family of models can be directly adapted to \textbf{phi-3-mini}}. The model uses $3072$ hidden dimension, $32$ heads and $32$ layers. We trained using bfloat16 for a total of 3.3T tokens. The model is already chat-finetuned, and the chat template is as follows:
+To best benefit the open source community, \textbf{phi-3-mini} is built upon a similar block structure as \uline{Llama-2} \cite{touvron2023llama} and uses the same tokenizer with vocabulary size of \uline{32064}\footnote{We remove BoS tokens and add some additional tokens for chat template.}. The model uses \uline{$3072$ hidden dimension}, \uline{$32$ heads} and \uline{$32$ layers}. We trained using bfloat16 for \uline{a total of 3.3T tokens}. The model is already chat-finetuned, and \uline{the chat template} is as follows:
 \begin{AIbox}{}
 \tt \footnotesize 
 <|user|>$\backslash$n
@@ -192,46 +202,29 @@ Question
 <|assistant|>
 \end{AIbox}
 
- 
-The \textbf{phi-3-small} model (7B parameters) leverages the tiktoken tokenizer (for better multilingual tokenization) with a vocabulary size of 100352\footnote{We remove unused tokens from the vocabulary.} and has default context length $8192$. 
-It follows the standard decoder architecture of a 7B model class, having $32$ heads, $32$ layers and a hidden size of $4096$. We switched from GELU activation to GEGLU and used Maximal Update Parametrization (muP) \cite{yang2022tensor} to tune hyperparameters on a small proxy model and transfer them to the target 7B model. Those helped ensure better performance and training stability. 
-Also, the model leverages a grouped-query attention, with $4$ queries sharing $1$ key. 
-To optimize the training and inference speed, we design a novel blocksparse attention module.
-For each attention head, the blocksparse attention enforces different sparsity patterns over KV cache. This ensures that all tokens are attended to on different heads for the given choice of sparsity.
-As illustrated in Figure \ref{fig:bs-atn-illustration}, the context is then efficiently divided and conquered among attention heads, with significant KV cache reduction.
-To achieve actual deployment speed-up from the blocksparse design, we implemented highly efficient, yet flexible kernels for both training and inference.
-For training, we build a triton kernel based on Flash Attention \cite{dao2022flashattention}.
-For inference, we implemented a kernel for the prefilling phase and extended the
-paged attention kernel in vLLM for the decoding phase \cite{kwon2023efficient}.
-%Both the training kernel and the inference kernel are implemented in a flexible way that allows users to freely conduct training and inference with arbitrary sparse patterns.
-%todo, maybe move flexibility part after this
-Lastly, in \textbf{phi-3-small} architecture, we alternate dense attention layers and blocksparse attention layers to optimize KV cache savings  while maintaining long context retrieval performance. 
-% Our blocksparse attention allows different sparsity patterns across heads, as compared to Sparse Transformer \cite{child2019generating} and Flash Attention \cite{dao2022flashattention},  where all heads share the same sparsity pattern. 
-% The implementation allows arbitrary patterns for each head, allowing users to explore and design patterns. In \textbf{phi-3-small}, we use a local-stride pattern shown as in Figure \ref{fig:bs-atn-illustration}. For inference, we implemented a kernel for the prefilling phase and modified the paged attention kernel for the decoding phase in vLLM \cite{kwon2023efficient}.
-An additional 10\% multilingual data was also used for this model.
+The \textbf{phi-3-small} model (\uline{7B parameters}) leverages the tiktoken tokenizer (for better multilingual tokenization) with a vocabulary size of \uline{100352}\footnote{We remove unused tokens from the vocabulary.} and has default context length \uline{$8192$}. It follows the standard decoder architecture of a 7B model class, having \uline{$32$} heads, \uline{$32$} layers and a hidden size of \uline{$4096$}. We switched from GELU activation to \uline{GEGLU} and used \uline{Maximal Update Parametrization} (muP) to tune hyperparameters on a small proxy model and transfer them to the target 7B model. Those helped ensure better performance and training stability.
+
+Also, the model leverages \uline{a grouped-query attention}, with \uline{$4$ queries} sharing \uline{$1$ key}. 
+
+To optimize the training and inference speed, we design \uline{a novel blocksparse attention module}. \uline{For each attention head, the blocksparse attention enforces different sparsity patterns over KV cache.} \uline{This ensures that all tokens are attended to on different heads for the given choice of sparsity.} As illustrated in Figure \ref{fig:bs-atn-illustration}, the context is then efficiently divided and conquered among attention heads, with significant KV cache reduction.
 
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.3]{figures/illustration-of-bs-attn.png}
-    \caption{Toy illustration of the blocksparse attention in phi-3-small with 2 local blocks and vertical stride of 3. The table shows the Keys/values a query token in block 8 attended to. \textcolor{blue}{Blue}=local blocks, \textcolor{orange}{orange}=remote/vertical blocks, \textcolor{gray}{gray}=blocks skipped.}
+    \caption{Toy illustration of the blocksparse attention in phi-3-small with 2 local blocks and vertical stride of 3. The table shows the Keys/values a query token in block 8 attended to. \textcolor{blue}{Blue}=\uline{local blocks}, \textcolor{orange}{orange}=\uline{remote/vertical blocks}, \textcolor{gray}{gray}=\uline{blocks skipped}.}
     \label{fig:bs-atn-illustration}
 \end{figure}
 
-\paragraph{Highly capable language model running locally on a cell-phone.} Thanks to its small size, \textbf{phi-3-mini} can be quantized to 4-bits so that it only occupies $\approx$ 1.8GB of memory. We tested the quantized model by deploying \textbf{phi-3-mini} on iPhone 14 with A16 Bionic chip running natively on-device and fully offline achieving more than $12$ tokens per second.
+To achieve actual deployment speed-up from the blocksparse design, we implemented highly efficient, yet flexible kernels for both training and inference. For training, we build a triton kernel based on \uline{Flash Attention} \cite{dao2022flashattention}. For inference, we implemented a kernel for the prefilling phase and extended the paged attention kernel in \uline{vLLM} for the decoding phase \cite{kwon2023efficient}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.30\textwidth]{iphone_song3.PNG}
-\includegraphics[width=0.30\textwidth]{iPhone_houston3.PNG}
-\includegraphics[width=0.30\textwidth]{iPhone_titlep.PNG}
-    \caption{4-bit quantized \textbf{phi-3-mini} running natively on an iPhone with A16 Bionic chip, generating over 12 tokens per second.}
-    \label{fig:1}
-\end{figure}
+Lastly, in \textbf{phi-3-small} architecture, we alternate \uline{dense attention layers} and \uline{blocksparse attention layers} to optimize KV cache savings  while maintaining long context retrieval performance. An additional \uline{10\% multilingual data} was also used for this model.
 
+\paragraph{Highly capable language model running locally on a cell-phone.} Thanks to its small size, \textbf{phi-3-mini} can be quantized to 4-bits so that it only occupies \uline{$\approx$ 1.8GB of memory}. We tested the quantized model by deploying \textbf{phi-3-mini} on iPhone 14 with A16 Bionic chip running natively on-device and fully offline achieving \uline{more than $12$ tokens per second}.
 
-\paragraph{Training Methodology.} We follow the sequence of works initiated in ``Textbooks Are All You Need''~\cite{gunasekar2023textbooks}, which utilize high quality training data to improve the performance of small language models and deviate from the standard {\em scaling-laws}. In this work we show that such method allows to reach the level of highly capable models such as GPT-3.5 or Mixtral with only 3.8B total parameters (while Mixtral has 45B total parameters for example). Our training data of consists of heavily filtered publicly available web data (according to the ``educational level'') from various open internet sources, as well as synthetic LLM-generated data. Pre-training is performed in two disjoint and sequential phases; phase-1 comprises mostly of web sources aimed at teaching the model general knowledge and language understanding. Phase-2 merges even more heavily filtered webdata (a subset used in Phase-1) with some synthetic data that teach the model logical reasoning and various niche skills. 
+\paragraph{Training Methodology.} \uline{We follow the sequence of works initiated in ``Textbooks Are All You Need''}~\cite{gunasekar2023textbooks}, \uline{which utilize high quality training data to improve the performance of small language models and deviate from the standard {\bf scaling-laws}.} Our training data of consists of \uline{heavily filtered publicly available web data} (according to the ``educational level'') from various open internet sources, as well as \uline{synthetic LLM-generated data}. Pre-training is performed in \uline{two disjoint and sequential phases}; \textbf{phase-1 comprises mostly of web sources aimed at teaching the model general knowledge and language understanding.} \textbf{Phase-2 merges even more heavily filtered webdata (a subset used in Phase-1) with some synthetic data that teach the model logical reasoning and various niche skills.} 
 
-\paragraph{Data Optimal Regime.} Unlike prior works that train language models in either ``compute optimal regime'' \cite{hoffmann2022training} or ``over-train regime'', we mainly focus on the quality of data for a {\em given scale}.\footnote{Just like for ``compute optimal regime", we use the term ``optimal" in an aspirational sense for ``data optimal regime". We are not implying that we actually found the provably ``optimal" data mixture for a given scale.} We try to calibrate the training data to be closer to the ``data optimal'' regime for small models. In particular, we filter the publicly available web data to contain the correct level of ``knowledge" and keep more web pages that could potentially improve the ``reasoning ability" for the model. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for ``reasoning'' for the mini size models. We compare our approach with Llama-2 in Figure~\ref{fig:enter-label}.
+\paragraph{Data Optimal Regime.} \uline{In particular, we filter the publicly available web data to contain the correct level of ``knowledge" and keep more web pages that could potentially improve the ``reasoning ability" for the model.} As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for ``reasoning'' for the mini size models. We compare our approach with Llama-2 in Figure~\ref{fig:enter-label}.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{scaling.png}
@@ -239,23 +232,22 @@ An additional 10\% multilingual data was also used for this model.
     \label{fig:enter-label}
 \end{figure}
 
-To test our data on larger size of models, we also trained \textbf{phi-3-medium}, a model with 14B parameters using the  same tokenizer and architecture of \textbf{phi-3-mini}, and trained on the same data for slightly more epochs (4.8T tokens total as for \textbf{phi-3-small}. The model has 40 heads and 40 layers, with embedding dimension 5120. We observe that some benchmarks improve much less from 7B to 14B than they do from 3.8B to 7B, perhaps indicating that our data mixture needs further work to be in the ``data optimal regime" for 14B parameters model.
+To test our data on larger size of models, we also trained \textbf{phi-3-medium}, a model with 14B parameters using the same tokenizer and architecture of \textbf{phi-3-mini}, and trained on the same data for slightly more epochs (\uline{4.8T tokens} total as for \textbf{phi-3-small}). The model has \uline{40 heads} and \uline{40 layers}, with \uline{embedding dimension 5120}.
+
+\uline{We observe that some benchmarks improve much less from 7B to 14B than they do from 3.8B to 7B, perhaps indicating that our data mixture needs further work to be in the "data optimal regime" for 14B parameters model.}
 
 \paragraph{Post-training.}
-Post-training of \textbf{phi-3-mini} went through  two stages, including supervised finetuning (SFT) and direct preference  optimization (DPO). SFT leverages highly curated  high-quality data across diverse domains, e.g., math, coding, reasoning, conversation, model identity, and safety. The SFT data mix starts with using English-only examples. DPO data covers chat format data, reasoning, and responsible AI (RAI) efforts. We use DPO to steer the model away from unwanted behavior, by using those outputs as “rejected” responses. Besides improvement in math, coding, reasoning, robustness, and safety, post-training transforms a language model to an AI assistant that users can efficiently and safely interact with.
+Post-training of \textbf{phi-3-mini} went through two stages, including \uline{supervised finetuning} (SFT) and \uline{direct preference  optimization} (DPO).
 
-As part of the post-training process, we  developed a long context version of \textbf{phi-3-mini} with context length limit enlarged to 128K instead of 4K. Across the  board, the 128K model quality is on par with the 4K length version, while being able to handle long context tasks. Long context extension has been done in two stages, including long context mid-training and long-short mixed post-training with both SFT and DPO. 
+SFT leverages highly curated  high-quality data across diverse domains, e.g., \uline{math}, \uline{coding}, \uline{reasoning}, \uline{conversation}, \uline{model identity}, and \uline{safety}. \uline{The SFT data mix starts with using English-only examples.}
 
+DPO data covers \uline{chat format data}, \uline{reasoning}, and \uline{responsible AI} (RAI) efforts. We use DPO to steer the model away from unwanted behavior, by using those outputs as “rejected” responses. \uline{Besides improvement in math, coding, reasoning, robustness, and safety, post-training transforms a language model to an AI assistant that users can efficiently and safely interact with.}
 
+As part of the post-training process, we  developed a long context version of \textbf{phi-3-mini} with context length limit enlarged to 128K instead of 4K. Across the  board, the 128K model quality is on par with the 4K length version, while being able to handle long context tasks. \uline{Long context extension has been done in two stages, including long context mid-training and long-short mixed post-training with both SFT and DPO.}
 
 \section{Academic benchmarks}
 
-On the next page we report the results for \textbf{phi-3-mini} on standard open-source benchmarks measuring the model's reasoning ability (both common sense reasoning and logical reasoning). We compare to phi-2 \cite{javaheripi2023phi}, Mistral-7b-v0.1 \cite{jiang2023mistral}, Mixtral-8x7b \cite{jiang2024mixtral}, Gemma 7B \cite{gemmateam2024gemma}, Llama-3-instruct-8b \cite{llama3}, and GPT-3.5. All the reported numbers are produced with the exact same pipeline to ensure that the numbers are comparable. These numbers might differ from other published numbers due to slightly different choices in the evaluation. As is now standard, we use few-shot prompts to evaluate the models, at temperature $0$. The prompts and number of shots are part of a Microsoft internal tool to evaluate language models, and in particular we did no optimization to the pipeline for the \textbf{phi-3} models.\footnote{For example, we found that using \#\# before the Question can lead to a noticeable improvement to \textbf{phi-3-mini}'s results across many benchmarks, but we did not do such changes in the prompts.} 
-The number of $k$--shot examples is listed per-benchmark. 
-An example of a 2-shot prompt is described in Appendix \ref{sec:prompt}.
-
-
-% \newcommand{\datasetcell}[3]{\makecell{ \large #1  \\  \tiny (#2) \tiny #3   }  }
+We compare to \uline{phi-2} \cite{javaheripi2023phi}, \uline{Mistral-7b-v0.1} \cite{jiang2023mistral}, \uline{Mixtral-8x7b} \cite{jiang2024mixtral}, \uline{Gemma 7B} \cite{gemmateam2024gemma}, \uline{Llama-3-instruct-8b} \cite{llama3}, and \uline{GPT-3.5}. As is now standard, we use few-shot prompts to evaluate the models, at temperature $0$. The number of $k$--shot examples is listed per-benchmark. An example of a \uline{2-shot} prompt is described in Appendix \ref{sec:prompt}.
 
 \begin{center}
 \begin{adjustbox}{width=0.95\textwidth,center}
@@ -332,7 +324,7 @@ llama-3-70b
 \end{center}
 
 \section{Safety}
-\textbf{Phi-3-mini} was developed in accordance with Microsoft’s responsible AI principles. The overall approach consisted of safety alignment in post-training, red-teaming, automated testing and evaluations across dozens of RAI harm categories. Helpfulness and harmlessness preference datasets \cite{bai2022training, ji2023beavertails} with modifications inspired by \cite{bianchi2024safetytuned} and multiple in-house generated datasets were leveraged to address the RAI harm categories in safety post-training. An independent red team at Microsoft iteratively examined \textbf{phi-3-mini} to further identify areas of improvement during the post-training process. Based on their feedback, we curated additional datasets tailored to address their insights, thereby refining the post-training dataset. This process resulted in significant decrease of harmful response rates, as shown in Figure \ref{fig:safety-pt}.
+\textbf{Phi-3-mini} was developed in accordance with Microsoft’s responsible AI principles. \textbf{Helpfulness and harmlessness preference datasets \cite{bai2022training, ji2023beavertails} with modifications inspired by \cite{bianchi2024safetytuned} and multiple in-house generated datasets were leveraged to address the RAI harm categories in safety post-training.} This process resulted in significant decrease of harmful response rates, as shown in Figure \ref{fig:safety-pt}.
 
 \begin{figure}[h]
     \centering
@@ -341,8 +333,9 @@ llama-3-70b
     \label{fig:safety-pt}
 \end{figure}
 
-The safety alignment of \textbf{phi-3-small} and \textbf{phi-3-medium} was conducted by undergoing the same red-teaming process, utilizing identical datasets, and incorporating a slightly larger number of samples. Table \ref{tab:rai-benchmarks} shows the results of in-house RAI benchmarks \cite{magooda2023framework} for \textbf{phi-3} models compared to phi-2 \cite{javaheripi2023phi}, Mistral-7b-v0.1 \cite{jiang2023mistral}, Gemma 7b \cite{gemmateam2024gemma}, and Llama-3-instruct-8b \cite{llama3}. This benchmark utilized GPT-4 to simulate multi-turn conversations in five different categories and to evaluate the model responses. Ungroundedness between 0 (fully grounded) and 4 (not grounded) measures if the information in a response is based on a given prompt. In other categories, responses were evaluated in terms of the severity of harmfulness from 0 (no harm) to 7 (extreme harm) and the defect rates (DR-$x$) were computed as the percentage of samples with the severity score being greater than or equal to $x$.
+The safety alignment of \textbf{phi-3-small} and \textbf{phi-3-medium} was conducted by undergoing the same red-teaming process, utilizing identical datasets, and incorporating a slightly larger number of samples. Table \ref{tab:rai-benchmarks} shows the results of in-house RAI benchmarks \cite{magooda2023framework} for \textbf{phi-3} models compared to phi-2 \cite{javaheripi2023phi}, Mistral-7b-v0.1 \cite{jiang2023mistral}, Gemma 7b \cite{gemmateam2024gemma}, and Llama-3-instruct-8b \cite{llama3}.
 
+This benchmark utilized GPT-4 to simulate multi-turn conversations in five different categories and to evaluate the model responses. \uline{Ungroundedness between 0 (fully grounded) and 4 (not grounded) measures if the information in a response is based on a given prompt.} In other categories, responses were evaluated in terms of the severity of harmfulness from 0 (no harm) to 7 (extreme harm) and \uline{the defect rates (DR-$x$) were computed as the percentage of samples with the severity score being greater than or equal to $x$.}
 
 \begin{table}
 \begin{center}
@@ -359,28 +352,9 @@ The safety alignment of \textbf{phi-3-small} and \textbf{phi-3-medium} was condu
         \end{tabular}
     \end{adjustbox}
 \end{center}
-\caption{Comparison of Microsoft internal multi-turn conversation RAI benchmark results of \textbf{phi-3} models and other models. Note that a lower value indicates a better performance for all metrics in the table.}
+\caption{Comparison of Microsoft internal multi-turn conversation RAI benchmark results of \textbf{phi-3} models and other models. \uline{Note that a lower value indicates a better performance for all metrics in the table.}}
 \label{tab:rai-benchmarks}
 \end{table}
-
-% \begin{table}
-% \begin{center}
-%     \begin{adjustbox}{width=0.95\textwidth,center}
-%     \setlength\extrarowheight{6pt}
-%         \begin{tabular}{ c||cccccc } 
-%         & \makecell{Phi-3-Mini-4k \\ \footnotesize 3.8b} & \makecell{Phi-3-Mini-128k \\ \footnotesize 3.8b} & \makecell{Phi-2 \\ \footnotesize 2.7b } & \makecell{Mistral\\ \footnotesize 7b } & \makecell{Gemma \\ \footnotesize 7b} & \makecell{Llama-3-In \\ \footnotesize 8b} \\
-%         \hline & \\[-3.5ex]
-%         Ungroundedness  & 0.603 & 0.637 & 1.481 & 0.935 & 0.679 & 0.328  \\
-%         Intellectual Property (DR-1) & 23.95\% & 21.50\% & 24.00\% & 56.20\% & 38.33\% & 37.30\% \\
-%         Harmful Content Continuation (DR-3) & 0.75\% & 1.08\% & 2.93\% & 2.58\% & 1.28\% & 1.30\% \\
-%         Harmful Content Summarization (DR-3) & 10.00\% & 10.20\% & 14.35\% & 22.33\% & 10.33\% & 8.20\% \\
-%         Jailbreak (DR-1) & 12.29\% & 12.57\% & 15.00\% & 15.57\% & 11.43\% & 13.00\% \\
-%         \end{tabular}
-%     \end{adjustbox}
-% \end{center}
-% \caption{Comparison of Microsoft internal multi-turn conversation RAI benchmark results of \textbf{phi-3-mini} and other models. Note that a lower value indicates a better performance for all metrics in the table.}
-% \label{tab:rai-benchmarks}
-% \end{table}
 
 \section{Weakness}
 In terms of LLM capabilities, while $\textbf{phi-3-mini}$ model achieves similar level of language understanding and reasoning ability as much larger models, it is still fundamentally limited by its size for certain tasks. The model simply does not have the capacity to store too much ``factual knowledge'', which can be seen for example with low performance on TriviaQA.
