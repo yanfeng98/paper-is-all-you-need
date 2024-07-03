@@ -1,0 +1,32 @@
+\section{Safety and Risks}
+
+We are committed to ensuring that GLM-4 operates as a safe, responsible, and unbiased model. 
+In addition to addressing common ethical and fairness concerns, we carefully assess and mitigate potential harms that the model may pose to users in real-world scenarios.
+
+\input{tables/safetytable}
+
+\vpara{Risk Mitigation.}
+We carefully clean data in the pre-training stage by removing text containing sensitive keywords and web pages from a pre-defined blacklist.
+In the alignment phase, we evaluate each training sample for safety and remove any that pose potential risks.
+Harmlessness is also an important criteria for preference alignment when comparing multiple model outputs.
+
+We have a red team that constantly challenges the model with tricky questions that tend to cause unsafe answers.
+We collect all harmful question-answer pairs from GLM-4 and improve them with human annotations for further model alignment.
+
+\newcommand{\safetyfont}[1]{{\emph{#1}}}
+
+\vpara{Safety Evaluation.}
+We evaluate the GLM-4 model on the SafetyBench \cite{zhang2023safetybench} dataset, which assesses the capability of each model from 7 dimensions: 
+\safetyfont{Ethics and Morality} (unethical behaviors), 
+\safetyfont{Illegal Activities} (basic knowledge of law), 
+\safetyfont{Mental Health} (adverse impacts on mental health), 
+\safetyfont{Offensiveness} (offensive behaviors), 
+\safetyfont{Physical Health} (dangerous behaviors that can cause physical harms), 
+\safetyfont{Privacy and Property} (privacy breach or property loss), 
+\safetyfont{Unfairness and Bias}.
+We evaluate different models on the Chinese subset of SafetyBench, which is created by removing highly sensitive questions that tend to be blocked, to mitigate interference from different API safety policies.
+
+Table \ref{tb:safety} shows the safety results of GLM-4 and SOTA models.
+On most dimensions GLM-4 (0520) shows competitive safety performance, and overall it achieves comparable performance with Claude 3 Opus.
+GLM-4 slightly falls behind the GPT-4 family of models, especially on the Physical Health dimension, which demands robust common sense knowledge about the physical world to avoid potential risks.
+More efforts have been put into this direction to develop a more capable and safe GLM model.

@@ -1,0 +1,32 @@
+\begin{table}[t]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\caption{Performance of Open ChatGLM-6B, ChatGLM2-6B, ChatGLM3-6B, and GLM-4-9B.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{}ll|rrrr@{}}
+\toprule[1.2pt]
+Language                  & Dataset          & ChatGLM-6B & ChatGLM2-6B & ChatGLM3-6B-Base & GLM-4-9B \\
+                          &                  & \small{(2023-03-14)} &
+\small{(2023-06-25)} & \small{(2023-10-27)} & \small{(2024-06-05)} \\
+\midrule
+\multirow{6}{*}{English} & GSM8K            & 1.5        & 25.9        & 72.3  & 84.0             \\
+                          & MATH             & 3.1        & 6.9         & 25.7  & 30.4           \\
+                          & BBH              & 0.0        & 29.2        & 66.1    & 76.3         \\
+                          & MMLU             & 25.2       & 45.2        & 61.4 & 74.7             \\
+                          & GPQA & - & - & 26.8 & 34.3 \\
+                          & HumanEval        & 0.0        & 9.8         & 58.5    & 70.1         \\
+                          & BoolQ            & 51.8       & 79.0        & 87.9   & 89.6          \\
+                          & CommonSenseQA    & 20.5       & 65.4        & 86.5  & 90.7           \\
+                          & HellaSwag        & 30.4       & 57.0        & 79.7  & 82.6           \\
+                          & PIQA             & 65.7       & 69.6        & 80.1  & 79.1           \\
+                          & DROP             & 3.9        & 25.6        & 70.9   & 77.2          \\ 
+                          \midrule
+\multirow{3}{*}{Chinese} & C-Eval           & 23.7       & 51.7        & 69.0  &     77.1    \\
+                          & CMMLU            & 25.3       & 50.0        & 67.5 & 75.1             \\
+                          & GAOKAO-Bench     & 26.8       & 46.4        & 67.3 & 74.5            \\
+                          & C3               & 35.1       & 58.6        & 73.9  & 77.2         \\
+                          \bottomrule[1.2pt]
+\end{tabular}
+}
+\label{tab:6b-performance}
+\end{table}
