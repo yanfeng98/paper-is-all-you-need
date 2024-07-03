@@ -1,6 +1,4 @@
-
- 
-
+\section{Introduction}
 
 \begin{figure}[tb]
     \centering
@@ -8,29 +6,6 @@
     \caption{The timeline of the GLM family of language, code, vision, and agent models. The focus of this report is primarily on the language models, i.e., ChatGLM. The APIs are publicly available at \url{https://bigmodel.cn} and open models can be accessed through \url{https://github.com/THUDM}.}
     \label{fig:timeline}
 \end{figure}
-
-\section{Introduction}
-
-ChatGPT has been phenomenal, whose capabilities was initially powered by the GPT-3.5 model~\cite{chatgpt} in November 2022 and subsequently upgraded to GPT-4~\cite{openai2023gpt} in March 2023. 
-According to OpenAI, the GPT-3.5 series improved upon GPT-3 by incorporating instruction tuning, supervised fine tuning (SFT), and/or reinforcement learning from human feedback (RLHF)~\cite{ouyang2022training}. 
-The original GPT-3 released in 2020~\cite{GPT3} marked a significant scale-up from GPT-1's 117 million parameters and GPT-2's 1.5 billion parameters, to 175 billion parameters. 
-This scale-up enables GPT-3 with in-context learning and generalized capabilities, spurring the emergence of large language models (LLMs)~\cite{chowdhery2022palm,touvron2023llama}. 
-
-Inspired by GPT-3, we proposed the General Language Model (GLM) architecture~\cite{du2022glm} featured with the autoregressive blank infilling objective and open-sourced the GLM-10B model in 2021 (See the GLM timeline in Figure \ref{fig:timeline}). 
-Starting in late 2021, we began pre-training GLM-130B~\cite{zeng2022glm}. 
-The goal was to train a 100B-scale model to match or surpass GPT-3 (davinci) while also verifying the techniques for successfully training models at this scale, along with  other efforts such as OPT-175B~\cite{zhang2022opt} and BLOOM-176B~\cite{scao2022bloom}. 
-We completed the 400B-token training and evaluation of GLM-130B in July, and subsequently released the model and pre-training details~\cite{zeng2022glm} in August 2022. 
-According to HELM in November 2022, GLM-130B matches GPT-3 (davinci) across various dimensions~\cite{liang2023holistic}. 
-
-
-Following this, we initiated instruction tuning on GLM-130B. 
-Later, ChatGPT further motivated us to align the base models with SFT and RLHF. 
-We created and crafted the prompt-response pairs from scratch and performed SFT, while also starting to examine how to effectively apply RLHF. 
-On March 14, 2023, the aligned model, ChatGLM-130B, went live on \url{https://chatglm.cn}. 
-In addition, a smaller version, ChatGLM-6B~\cite{github:chatglm-6b}, was open-sourced at the same day, attracting significantly more attention than anticipated. 
-It was designed to have 6.2 billion parameters for 1) facilitating fast iteration of pre-and post-training techniques as well as data selection, and 2) enabling local deployment on consumer-grade graphics cards using INT4 quantization. 
-Since then, we have been rapidly exploring and refining our pre-training and alignment techniques, leading to the second and third generations of ChatGLM series every other three months, both of which were pre-trained entirely from the beginning. 
-
 
 ChatGLM-6B was pre-trained on approximately one trillion tokens of Chinese and English corpus with a context length of 2,048 (2K), supplemented mostly by SFT.
 Released in June, ChatGLM2-6B was pre-trained and aligned with more and better data, leading to substantial improvements over its predecessor, including a 23\% improvement on MMLU, 571\% on GSM8K, and 60\% on BBH. 
