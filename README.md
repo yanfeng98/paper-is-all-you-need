@@ -11,6 +11,7 @@
 |[MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies](https://arxiv.org/abs/2404.06395)|2024|Tsinghua University|[./papers/00003-MiniCPM.pdf](./papers/00003-MiniCPM.pdf)|
 |[Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone](https://arxiv.org/abs/2404.14219)|2024|Microsoft|[./papers/00004-Phi-3.pdf](./papers/00004-Phi-3.pdf)|
 |[ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools](https://arxiv.org/abs/2406.12793)|2024|Tsinghua University|[./papers/00005-ChatGLM.pdf](./papers/00005-ChatGLM.pdf)|
+|[The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)|2024|Meta|[]()
 
 ## 工具
 
