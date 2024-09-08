@@ -13,6 +13,7 @@
 |[ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools](https://arxiv.org/abs/2406.12793)|2024|Tsinghua University|[./papers/00005-ChatGLM.pdf](./papers/00005-ChatGLM.pdf)|
 |[The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)|2024|Meta|[./papers/00006-Llama3.pdf](./papers/00006-Llama3.pdf)
 |[AlphaMath Almost Zero: process Supervision without process](https://arxiv.org/abs/2405.03553)|2024|Alibaba Group|[./papers/00007-AlphaMath.pdf](./papers/00007-AlphaMath.pdf)|
+|[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)|2022|Google|[./papers/00008-CoT.pdf](./papers/00008-CoT.pdf)|
 
 ## 工具
 
