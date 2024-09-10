@@ -14,6 +14,7 @@
 |[The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)|2024|Meta|[./papers/00006-Llama3.pdf](./papers/00006-Llama3.pdf)
 |[AlphaMath Almost Zero: process Supervision without process](https://arxiv.org/abs/2405.03553)|2024|Alibaba Group|[./papers/00007-AlphaMath.pdf](./papers/00007-AlphaMath.pdf)|
 |[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)|2022|Google|[./papers/00008-CoT.pdf](./papers/00008-CoT.pdf)|
+|[RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)|2021|Zhuiyi Technology|[./papers/00009-RoPE.pdf](./papers/00009-RoPE.pdf)|
 
 ## 工具
 
