@@ -16,6 +16,8 @@
 |[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)|2022|Google|[./papers/00008-CoT.pdf](./papers/00008-CoT.pdf)|
 |[RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)|2021|Zhuiyi Technology|[./papers/00009-RoPE.pdf](./papers/00009-RoPE.pdf)|
 |[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00010-Qwen2.5-Coder.pdf](./papers/00010-Qwen2.5-Coder.pdf)|
+|[Chinese Tiny LLM: Pretraining a Chinese-Centric Large Language Model](https://arxiv.org/abs/2404.04167)|2024|University of Waterloo|[./papers/00011-Chinese-Tiny-LLM.pdf](./papers/00011-Chinese-Tiny-LLM.pdf)|
+|[Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198)|2022|NVIDIA|[./papers/00012-selective-activation-recomputation.pdf](./papers/00012-selective-activation-recomputation.pdf)|
 
 ## 工具
 
