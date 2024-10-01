@@ -18,6 +18,10 @@
 |[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00010-Qwen2.5-Coder.pdf](./papers/00010-Qwen2.5-Coder.pdf)|
 |[Chinese Tiny LLM: Pretraining a Chinese-Centric Large Language Model](https://arxiv.org/abs/2404.04167)|2024|University of Waterloo|[./papers/00011-Chinese-Tiny-LLM.pdf](./papers/00011-Chinese-Tiny-LLM.pdf)|
 |[Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198)|2022|NVIDIA|[./papers/00012-selective-activation-recomputation.pdf](./papers/00012-selective-activation-recomputation.pdf)|
+|[DeepSpeed-Chat: Easy, Fast and Affordable RLHF Training of ChatGPT-like Models at All Scales](https://arxiv.org/abs/2308.01320)|2023|Microsoft|[./papers/00013-DeepSpeed-Chat.pdf](./papers/00013-DeepSpeed-Chat.pdf)|
+|[ZeroQuant(4+2): Redefining LLMs Quantization with a New FP6-Centric Strategy for Diverse Generative Tasks](https://arxiv.org/abs/2312.08583)|2023|Microsoft|[./papers/00014-ZeroQuant(4+2).pdf](./papers/00014-ZeroQuant(4+2).pdf)|
+|[DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale](https://arxiv.org/abs/2207.00032)|2022|Microsoft|[./papers/00015-DeepSpeed-Inference.pdf](./papers/00015-DeepSpeed-Inference.pdf)|
+|[DeepSpeed Ulysses: System Optimizations for Enabling Training of Extreme Long Sequence Transformer Models](https://arxiv.org/abs/2309.14509)|2023|Microsoft|[./papers/00016-DeepSpeed-Ulysses.pdf](./papers/00016-DeepSpeed-Ulysses.pdf)|
 
 ## 工具
 
