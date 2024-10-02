@@ -22,6 +22,16 @@
 |[ZeroQuant(4+2): Redefining LLMs Quantization with a New FP6-Centric Strategy for Diverse Generative Tasks](https://arxiv.org/abs/2312.08583)|2023|Microsoft|[./papers/00014-ZeroQuant(4+2).pdf](./papers/00014-ZeroQuant(4+2).pdf)|
 |[DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale](https://arxiv.org/abs/2207.00032)|2022|Microsoft|[./papers/00015-DeepSpeed-Inference.pdf](./papers/00015-DeepSpeed-Inference.pdf)|
 |[DeepSpeed Ulysses: System Optimizations for Enabling Training of Extreme Long Sequence Transformer Models](https://arxiv.org/abs/2309.14509)|2023|Microsoft|[./papers/00016-DeepSpeed-Ulysses.pdf](./papers/00016-DeepSpeed-Ulysses.pdf)|
+|[ZeRO-Offload: Democratizing Billion-Scale Model Training](https://arxiv.org/abs/2101.06840)|2021|Microsoft|[./papers/00017-ZeRO-Offload.pdf](./papers/00017-ZeRO-Offload.pdf)|
+|[1-bit Adam: Communication Efficient Large-Scale Training with Adam's Convergence Speed](https://arxiv.org/abs/2102.02888)|2021|Microsoft|[./papers/00018-1-bit-Adam.pdf](./papers/00018-1-bit-Adam.pdf)|
+|[ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning](https://arxiv.org/abs/2104.07857)|2021|Microsoft|[./papers/00019-ZeRO-Infinity.pdf](./papers/00019-ZeRO-Infinity.pdf)|
+|[1-bit LAMB: Communication Efficient Large-Scale Large-Batch Training with LAMB's Convergence Speed](https://arxiv.org/abs/2104.06069)|2021|Microsoft|[./papers/00020-1-bit-LAMB.pdf](./papers/00020-1-bit-LAMB.pdf)|
+|[The Stability-Efficiency Dilemma: Investigating Sequence Length Warmup for Training GPT Models](https://arxiv.org/abs/2108.06084)|2022|Microsoft|[./papers/00021-Sequence-Length-Warmup.pdf](./papers/00021-Sequence-Length-Warmup.pdf)|
+|[Maximizing Communication Efficiency for Large-scale Training via 0/1 Adam](https://arxiv.org/abs/2202.06009)|2022|Microsoft|[./papers/00023-0-1-Adam.pdf](./papers/00023-0-1-Adam.pdf)|
+|[]()|||[]()|
+|[]()|||[]()|
+|[]()|||[]()|
+|[]()|||[]()|
 
 ## 工具
 
