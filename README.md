@@ -32,8 +32,8 @@
 |[Using DeepSpeed and Megatron to Train Megatron-Turing NLG 530B, A Large-Scale Generative Language Model](https://arxiv.org/abs/2201.11990)|2022|Microsoft|[./papers/00024-Megatron-Turing.pdf](./papers/00024-Megatron-Turing.pdf)|
 |[Extreme Compression for Pre-trained Transformers Made Simple and Efficient](https://arxiv.org/abs/2206.01859)|2022|Microsoft|[./papers/00025-XTC.pdf](./papers/00025-XTC.pdf)|
 |[ZeroQuant: Efficient and Affordable Post-Training Quantization for Large-Scale Transformers](https://arxiv.org/abs/2206.01861)|2022|Microsoft|[./papers/00026-ZeroQuant.pdf](./papers/00026-ZeroQuant.pdf)|
-|[]()|||[]()|
-|[]()|||[]()|
+|[DeepSpeed Data Efficiency: Improving Deep Learning Model Quality and Training Efficiency via Efficient Data Sampling and Routing](https://arxiv.org/abs/2212.03597)|2024|Microsoft|[./papers/00027-DeepSpeed-Data-Efficiency.pdf](./papers/00027-DeepSpeed-Data-Efficiency.pdf)|
+|[Let's Verify Step by Step](https://arxiv.org/abs/2305.20050)|2023|OpenAI|[./papers/00028-Verify-Step-by-Step.pdf](./papers/00028-Verify-Step-by-Step.pdf)|
 |[]()|||[]()|
 |[]()|||[]()|
 |[]()|||[]()|
