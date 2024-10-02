@@ -27,7 +27,15 @@
 |[ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning](https://arxiv.org/abs/2104.07857)|2021|Microsoft|[./papers/00019-ZeRO-Infinity.pdf](./papers/00019-ZeRO-Infinity.pdf)|
 |[1-bit LAMB: Communication Efficient Large-Scale Large-Batch Training with LAMB's Convergence Speed](https://arxiv.org/abs/2104.06069)|2021|Microsoft|[./papers/00020-1-bit-LAMB.pdf](./papers/00020-1-bit-LAMB.pdf)|
 |[The Stability-Efficiency Dilemma: Investigating Sequence Length Warmup for Training GPT Models](https://arxiv.org/abs/2108.06084)|2022|Microsoft|[./papers/00021-Sequence-Length-Warmup.pdf](./papers/00021-Sequence-Length-Warmup.pdf)|
-|[Maximizing Communication Efficiency for Large-scale Training via 0/1 Adam](https://arxiv.org/abs/2202.06009)|2022|Microsoft|[./papers/00023-0-1-Adam.pdf](./papers/00023-0-1-Adam.pdf)|
+|[Maximizing Communication Efficiency for Large-scale Training via 0/1 Adam](https://arxiv.org/abs/2202.06009)|2022|Microsoft|[./papers/00023-0-1-Adam.pdf](./papers/00022-0-1-Adam.pdf)|
+|[DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training to Power Next-Generation AI Scale](https://arxiv.org/abs/2201.05596)|2022|Microsoft|[./papers/00023-DeepSpeed-MoE.pdf](./papers/00023-DeepSpeed-MoE.pdf)|
+|[Using DeepSpeed and Megatron to Train Megatron-Turing NLG 530B, A Large-Scale Generative Language Model](https://arxiv.org/abs/2201.11990)|2022|Microsoft|[./papers/00024-Megatron-Turing.pdf](./papers/00024-Megatron-Turing.pdf)|
+|[Extreme Compression for Pre-trained Transformers Made Simple and Efficient](https://arxiv.org/abs/2206.01859)|2022|Microsoft|[./papers/00025-XTC.pdf](./papers/00025-XTC.pdf)|
+|[ZeroQuant: Efficient and Affordable Post-Training Quantization for Large-Scale Transformers](https://arxiv.org/abs/2206.01861)|2022|Microsoft|[./papers/00026-ZeroQuant.pdf](./papers/00026-ZeroQuant.pdf)|
+|[]()|||[]()|
+|[]()|||[]()|
+|[]()|||[]()|
+|[]()|||[]()|
 |[]()|||[]()|
 |[]()|||[]()|
 |[]()|||[]()|
