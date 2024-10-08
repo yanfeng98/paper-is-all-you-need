@@ -34,7 +34,10 @@
 |[ZeroQuant: Efficient and Affordable Post-Training Quantization for Large-Scale Transformers](https://arxiv.org/abs/2206.01861)|2022|Microsoft|[./papers/00026-ZeroQuant.pdf](./papers/00026-ZeroQuant.pdf)|
 |[DeepSpeed Data Efficiency: Improving Deep Learning Model Quality and Training Efficiency via Efficient Data Sampling and Routing](https://arxiv.org/abs/2212.03597)|2024|Microsoft|[./papers/00027-DeepSpeed-Data-Efficiency.pdf](./papers/00027-DeepSpeed-Data-Efficiency.pdf)|
 |[Let's Verify Step by Step](https://arxiv.org/abs/2305.20050)|2023|OpenAI|[./papers/00028-Verify-Step-by-Step.pdf](./papers/00028-Verify-Step-by-Step.pdf)|
-|[]()|||[]()|
+|[Understanding INT4 Quantization for Transformer Models: Latency Speedup, Composability, and Failure Cases](https://arxiv.org/abs/2301.12017)|2023|Microsoft|[./papers/00029-INT4-Quantization.pdf](./papers/00029-INT4-Quantization.pdf)|
+|[ZeroQuant-FP: A Leap Forward in LLMs Post-Training W4A8 Quantization Using Floating-Point Formats](https://arxiv.org/abs/2307.09782)|2023|Microsoft|[./papers/00030-ZeroQuant-FP.pdf](./papers/00030-ZeroQuant-FP.pdf)|
+|[ZeRO++: Extremely Efficient Collective Communication for Giant Model Training](https://arxiv.org/abs/2306.10209)|2023|Microsoft|[./papers/00031-ZeRO++.pdf](./papers/00031-ZeRO++.pdf)|
+|[ZeroQuant-HERO: Hardware-Enhanced Robust Optimized Post-Training Quantization Framework for W8A8 Transformers](https://arxiv.org/abs/2310.17723)|2023|Microsoft|[./papers/00032-ZeroQuant-HERO.pdf](./papers/00032-ZeroQuant-HERO.pdf)|
 |[]()|||[]()|
 |[]()|||[]()|
 |[]()|||[]()|
