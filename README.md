@@ -39,8 +39,8 @@
 |[ZeroQuant-FP: A Leap Forward in LLMs Post-Training W4A8 Quantization Using Floating-Point Formats](https://arxiv.org/abs/2307.09782)|2023|Microsoft|[./papers/00030-ZeroQuant-FP.pdf](./papers/00030-ZeroQuant-FP.pdf)|
 |[ZeRO++: Extremely Efficient Collective Communication for Giant Model Training](https://arxiv.org/abs/2306.10209)|2023|Microsoft|[./papers/00031-ZeRO++.pdf](./papers/00031-ZeRO++.pdf)|
 |[ZeroQuant-HERO: Hardware-Enhanced Robust Optimized Post-Training Quantization Framework for W8A8 Transformers](https://arxiv.org/abs/2310.17723)|2023|Microsoft|[./papers/00032-ZeroQuant-HERO.pdf](./papers/00032-ZeroQuant-HERO.pdf)|
-|[]()|||[]()|
-|[]()|||[]()|
+|[YaRN: Efficient Context Window Extension of Large Language Models](https://arxiv.org/abs/2309.00071)|2023|EleutherAI|[./papers/00034-YaRN.pdf](./papers/00034-YaRN.pdf)|
+|[Efficient Training of Language Models to Fill in the Middle](https://arxiv.org/abs/2207.14255)|2022|OpenAI|[./papers/00035-fim.pdf](./papers/00035-fim.pdf)|
 |[]()|||[]()|
 |[]()|||[]()|
 |[]()|||[]()|
