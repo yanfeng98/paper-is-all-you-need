@@ -44,12 +44,14 @@
 |[Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314)|2024|DeepMind|[./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf](./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf)|
 |[Imitate, Explore, and Self-Improve: A Reproduction Report on Slow-thinking Reasoning Systems](https://arxiv.org/abs/2412.09413)|2024|Renmin University of China|[./papers/00037-o1-like.pdf](./papers/00037-o1-like.pdf)|
 |[LongWriter: Unleashing 10,000+ Word Generation from Long Context LLMs](https://arxiv.org/abs/2408.07055)|2024|Tsinghua University|[./papers/00038-LongWriter.pdf](./papers/00038-LongWriter.pdf)|
+|[Improve Mathematical Reasoning in Language Models by Automated Process Supervision](https://arxiv.org/abs/2406.06592)|2024|DeepMind|[./papers/00039-Automated-Process-Supervision.pdf](./papers/00039-Automated-Process-Supervision.pdf)|
+|[Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations](https://arxiv.org/abs/2312.08935)|2024|Peking University|[./papers/00040-Math-Shepherd.pdf](./papers/00040-Math-Shepherd.pdf)|
+|[OpenR: An Open Source Framework for Advanced Reasoning with Large Language Models](https://arxiv.org/abs/2410.09671)|2024|University College London|[./papers/00041-OpenR.pdf](./papers/00041-OpenR.pdf)|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
-|[]()|2024||[]()|
-|[]()|2024||[]()|
-|[]()|2024||[]()|
+
+
 
 ## 工具
 
