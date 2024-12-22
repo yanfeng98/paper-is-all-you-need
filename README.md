@@ -41,9 +41,15 @@
 |[ZeroQuant-HERO: Hardware-Enhanced Robust Optimized Post-Training Quantization Framework for W8A8 Transformers](https://arxiv.org/abs/2310.17723)|2023|Microsoft|[./papers/00032-ZeroQuant-HERO.pdf](./papers/00032-ZeroQuant-HERO.pdf)|
 |[YaRN: Efficient Context Window Extension of Large Language Models](https://arxiv.org/abs/2309.00071)|2023|EleutherAI|[./papers/00034-YaRN.pdf](./papers/00034-YaRN.pdf)|
 |[Efficient Training of Language Models to Fill in the Middle](https://arxiv.org/abs/2207.14255)|2022|OpenAI|[./papers/00035-fim.pdf](./papers/00035-fim.pdf)|
-|[]()|||[]()|
-|[]()|||[]()|
-|[]()|||[]()|
+|[Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314)|2024|DeepMind|[./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf](./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf)|
+|[Imitate, Explore, and Self-Improve: A Reproduction Report on Slow-thinking Reasoning Systems](https://arxiv.org/abs/2412.09413)|2024|Renmin University of China|[./papers/00037-o1-like.pdf](./papers/00037-o1-like.pdf)|
+|[LongWriter: Unleashing 10,000+ Word Generation from Long Context LLMs](https://arxiv.org/abs/2408.07055)|2024|Tsinghua University|[./papers/00038-LongWriter.pdf](./papers/00038-LongWriter.pdf)|
+|[]()|2024||[]()|
+|[]()|2024||[]()|
+|[]()|2024||[]()|
+|[]()|2024||[]()|
+|[]()|2024||[]()|
+|[]()|2024||[]()|
 
 ## 工具
 
