@@ -47,11 +47,13 @@
 |[Improve Mathematical Reasoning in Language Models by Automated Process Supervision](https://arxiv.org/abs/2406.06592)|2024|DeepMind|[./papers/00039-Automated-Process-Supervision.pdf](./papers/00039-Automated-Process-Supervision.pdf)|
 |[Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations](https://arxiv.org/abs/2312.08935)|2024|Peking University|[./papers/00040-Math-Shepherd.pdf](./papers/00040-Math-Shepherd.pdf)|
 |[OpenR: An Open Source Framework for Advanced Reasoning with Large Language Models](https://arxiv.org/abs/2410.09671)|2024|University College London|[./papers/00041-OpenR.pdf](./papers/00041-OpenR.pdf)|
+|[DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437)|2024|DeepSeek-AI|[./papers/00042-DeepSeek-V3.pdf](./papers/00042-DeepSeek-V3.pdf)|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
-
-
+|[]()|2024||[]()|
+|[]()|2024||[]()|
+|[]()|2024||[]()|
 
 ## 工具
 
