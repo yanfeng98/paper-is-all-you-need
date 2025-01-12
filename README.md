@@ -49,7 +49,7 @@
 |[OpenR: An Open Source Framework for Advanced Reasoning with Large Language Models](https://arxiv.org/abs/2410.09671)|2024|University College London|[./papers/00041-OpenR.pdf](./papers/00041-OpenR.pdf)|
 |[DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437)|2024|DeepSeek-AI|[./papers/00042-DeepSeek-V3.pdf](./papers/00042-DeepSeek-V3.pdf)|
 |[ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search](https://arxiv.org/abs/2406.03816)|2024|Tsinghua University|[./papers/00043-ReST-MCTS.pdf](./papers/00043-ReST-MCTS.pdf)|
-|[]()|2024||[]()|
+|[rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking](https://arxiv.org/abs/2501.04519)|2025|Microsoft|[./papers/00044-rStar-Math.pdf](./papers/00044-rStar-Math.pdf)|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
