@@ -50,7 +50,7 @@
 |[DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437)|2024|DeepSeek-AI|[./papers/00042-DeepSeek-V3.pdf](./papers/00042-DeepSeek-V3.pdf)|
 |[ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search](https://arxiv.org/abs/2406.03816)|2024|Tsinghua University|[./papers/00043-ReST-MCTS.pdf](./papers/00043-ReST-MCTS.pdf)|
 |[rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking](https://arxiv.org/abs/2501.04519)|2025|Microsoft|[./papers/00044-rStar-Math.pdf](./papers/00044-rStar-Math.pdf)|
-|[]()|2024||[]()|
+|[DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf)|2025|DeepSeek-AI|[./papers/00045-DeepSeek_R1.pdf](./papers/00045-DeepSeek_R1.pdf)|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
