@@ -51,7 +51,7 @@
 |[ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search](https://arxiv.org/abs/2406.03816)|2024|Tsinghua University|[./papers/00043-ReST-MCTS.pdf](./papers/00043-ReST-MCTS.pdf)|
 |[rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking](https://arxiv.org/abs/2501.04519)|2025|Microsoft|[./papers/00044-rStar-Math.pdf](./papers/00044-rStar-Math.pdf)|
 |[DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf)|2025|DeepSeek-AI|[./papers/00045-DeepSeek_R1.pdf](./papers/00045-DeepSeek_R1.pdf)|
-|[]()|2024||[]()|
+|[From Local to Global: A Graph RAG Approach to Query-Focused Summarization](https://arxiv.org/abs/2404.16130)|2024|Microsoft Research|[./papers/00046-GraphRAG.pdf](./papers/00046-GraphRAG.pdf)|
 |[]()|2024||[]()|
 |[]()|2024||[]()|
 
