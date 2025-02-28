@@ -52,7 +52,7 @@
 |[rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking](https://arxiv.org/abs/2501.04519)|2025|Microsoft|[./papers/00044-rStar-Math.pdf](./papers/00044-rStar-Math.pdf)|
 |[DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf)|2025|DeepSeek-AI|[./papers/00045-DeepSeek_R1.pdf](./papers/00045-DeepSeek_R1.pdf)|
 |[From Local to Global: A Graph RAG Approach to Query-Focused Summarization](https://arxiv.org/abs/2404.16130)|2024|Microsoft Research|[./papers/00046-GraphRAG.pdf](./papers/00046-GraphRAG.pdf)|
-|[]()|2024||[]()|
+|[LightRAG: Simple and Fast Retrieval-Augmented Generation](https://arxiv.org/abs/2410.05779)|2024|Beijing University of Posts and Telecommunications|[./papers/00047-LightRAG.pdf](./papers/00047-LightRAG.pdf)|
 |[]()|2024||[]()|
 
 ## 工具
