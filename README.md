@@ -56,6 +56,10 @@
 |[Understanding R1-Zero-Like Training: A Critical Perspective](https://github.com/sail-sg/understand-r1-zero/blob/main/understand-r1-zero.pdf)|2025|National University of Singapore|[./papers/00048-understand-r1-zero.pdf](./papers/00048-understand-r1-zero.pdf)|
 |[ChartMoE: Mixture of Diversely Aligned Expert Connector for Chart Understanding](https://arxiv.org/abs/2409.03277)|2024|Peking University|[./papers/00049-ChartMoE.pdf](./papers/00049-ChartMoE.pdf)|
 |[Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning](https://arxiv.org/abs/2502.14768)|2025|Microsoft Research Asia|[./papers/00050-Logic-RL.pdf](./papers/00050-Logic-RL.pdf)|
+|[LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387)|2025|Shanghai Jiao Tong University|[./papers/00051-LIMO.pdf](./papers/00051-LIMO.pdf)|
+|[]()|2025||[]()|
+|[]()|2025||[]()|
+|[]()|2025||[]()|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
 
