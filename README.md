@@ -57,8 +57,8 @@
 |[ChartMoE: Mixture of Diversely Aligned Expert Connector for Chart Understanding](https://arxiv.org/abs/2409.03277)|2024|Peking University|[./papers/00049-ChartMoE.pdf](./papers/00049-ChartMoE.pdf)|
 |[Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning](https://arxiv.org/abs/2502.14768)|2025|Microsoft Research Asia|[./papers/00050-Logic-RL.pdf](./papers/00050-Logic-RL.pdf)|
 |[LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387)|2025|Shanghai Jiao Tong University|[./papers/00051-LIMO.pdf](./papers/00051-LIMO.pdf)|
-|[]()|2025||[]()|
-|[]()|2025||[]()|
+|[Retrieval-Augmented Generation with Graphs (GraphRAG)](https://arxiv.org/abs/2501.00309)|2025|Michigan State University|[./papers/00052-GraphRAG-review.pdf](./papers/00052-GraphRAG-review.pdf)|
+|[Optimizing Test-Time Compute via Meta Reinforcement Fine-Tuning](https://arxiv.org/abs/2503.07572)|2025|Carnegie Mellon University|[./papers/00053-MRT.pdf](./papers/00053-MRT.pdf)|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
