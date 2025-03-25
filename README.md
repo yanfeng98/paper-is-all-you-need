@@ -59,7 +59,7 @@
 |[LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387)|2025|Shanghai Jiao Tong University|[./papers/00051-LIMO.pdf](./papers/00051-LIMO.pdf)|
 |[Retrieval-Augmented Generation with Graphs (GraphRAG)](https://arxiv.org/abs/2501.00309)|2025|Michigan State University|[./papers/00052-GraphRAG-review.pdf](./papers/00052-GraphRAG-review.pdf)|
 |[Optimizing Test-Time Compute via Meta Reinforcement Fine-Tuning](https://arxiv.org/abs/2503.07572)|2025|Carnegie Mellon University|[./papers/00053-MRT.pdf](./papers/00053-MRT.pdf)|
-|[]()|2025||[]()|
+|[HybridFlow: A Flexible and Efficient RLHF Framework](https://arxiv.org/abs/2409.19256)|2024|ByteDance|[]()|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
 
