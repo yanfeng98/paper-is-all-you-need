@@ -62,7 +62,7 @@
 |[HybridFlow: A Flexible and Efficient RLHF Framework](https://arxiv.org/abs/2409.19256)|2024|ByteDance|[./papers/00054-HybridFlow.pdf](./papers/00054-HybridFlow.pdf)|
 |[DAPO: An Open-Source LLM Reinforcement Learning System at Scale](https://arxiv.org/abs/2503.14476)|2025|ByteDance|[./papers/00055-DAPO.pdf](./papers/00055-DAPO.pdf)|
 |[Inference-Time Scaling for Generalist Reward Modeling](https://arxiv.org/abs/2504.02495)|2025|DeepSeek-AI|[./papers/00056-DeepSeek-GRM.pdf](./papers/00056-DeepSeek-GRM.pdf)|
-|[]()|2025||[]()|
+|[DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300)|2024|DeepSeek-AI|[./papers/00057-GRPO.pdf](./papers/00057-GRPO.pdf)|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
