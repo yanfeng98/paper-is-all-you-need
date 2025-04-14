@@ -134,19 +134,32 @@
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
-|[A Comprehensive Survey on Long Context Language Modeling](https://arxiv.org/abs/2503.17407)|2025|Nanjing University|[./papers/00051-LIMO.pdf](./papers/00051-LIMO.pdf)|
+|[A Comprehensive Survey on Long Context Language Modeling](https://arxiv.org/abs/2503.17407)|2025|Nanjing University|[./papers/00058-LCLM.pdf](./papers/00058-LCLM.pdf)|
+
+### Renmin University of China
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Imitate, Explore, and Self-Improve: A Reproduction Report on Slow-thinking Reasoning Systems](https://arxiv.org/abs/2412.09413)|2024|Renmin University of China|[./papers/00037-o1-like.pdf](./papers/00037-o1-like.pdf)|
+|[Search-o1: Agentic Search-Enhanced Large Reasoning Models](https://arxiv.org/abs/2501.05366)|2025|Renmin University of China|[./papers/00059-Search-o1.pdf](./papers/00059-Search-o1.pdf)|
+|[R1-Searcher: Incentivizing the Search Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2503.05592)|2025|Renmin University of China|[./papers/00062-R1-Searcher.pdf](./papers/00062-R1-Searcher.pdf)|
+
+### University of Illinois Urbana-Champaign
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[DeepRetrieval: Hacking Real Search Engines and Retrievers with Large Language Models via Reinforcement Learning](https://arxiv.org/abs/2503.00223)|2025|University of Illinois Urbana-Champaign|[./papers/00060-DeepRetrieval.pdf](./papers/00060-DeepRetrieval.pdf)|
+|[Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning](https://arxiv.org/abs/2503.09516)|2025|University of Illinois Urbana-Champaign|[./papers/00061-Search-R1.pdf](./papers/00061-Search-R1.pdf)|
 
 ### 其他
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
-|[Imitate, Explore, and Self-Improve: A Reproduction Report on Slow-thinking Reasoning Systems](https://arxiv.org/abs/2412.09413)|2024|Renmin University of China|[./papers/00037-o1-like.pdf](./papers/00037-o1-like.pdf)|
 |[LightRAG: Simple and Fast Retrieval-Augmented Generation](https://arxiv.org/abs/2410.05779)|2024|Beijing University of Posts and Telecommunications|[./papers/00047-LightRAG.pdf](./papers/00047-LightRAG.pdf)|
 |[Chinese Tiny LLM: Pretraining a Chinese-Centric Large Language Model](https://arxiv.org/abs/2404.04167)|2024|University of Waterloo|[./papers/00011-Chinese-Tiny-LLM.pdf](./papers/00011-Chinese-Tiny-LLM.pdf)|
 |[OpenR: An Open Source Framework for Advanced Reasoning with Large Language Models](https://arxiv.org/abs/2410.09671)|2024|University College London|[./papers/00041-OpenR.pdf](./papers/00041-OpenR.pdf)|
 |[Retrieval-Augmented Generation with Graphs (GraphRAG)](https://arxiv.org/abs/2501.00309)|2025|Michigan State University|[./papers/00052-GraphRAG-review.pdf](./papers/00052-GraphRAG-review.pdf)|
 |[RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)|2021|Zhuiyi Technology|[./papers/00009-RoPE.pdf](./papers/00009-RoPE.pdf)|
-|[]()|2025||[]()|
 |[]()|2025||[]()|
 |[]()|2025||[]()|
 
