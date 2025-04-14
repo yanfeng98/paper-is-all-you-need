@@ -81,7 +81,7 @@
 |:-:|:-:|:-:|:-:|
 |[AlphaMath Almost Zero: process Supervision without process](https://arxiv.org/abs/2405.03553)|2024|Alibaba Group|[./papers/00007-AlphaMath.pdf](./papers/00007-AlphaMath.pdf)|
 |[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00010-Qwen2.5-Coder.pdf](./papers/00010-Qwen2.5-Coder.pdf)|
-|[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|AlibabaGroup|[./papers/00033-Qwen2.5-Coder.pdf](./papers/00033-Qwen2.5-Coder.pdf)|
+|[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00033-Qwen2.5-Coder.pdf](./papers/00033-Qwen2.5-Coder.pdf)|
 
 ### ByteDance
 
