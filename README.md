@@ -51,6 +51,8 @@
 |[Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning](https://arxiv.org/abs/2502.14768)|2025|Microsoft|[./papers/00050-Logic-RL.pdf](./papers/00050-Logic-RL.pdf)|
 |[LongRoPE2: Near-Lossless LLM Context Window Scaling](https://arxiv.org/abs/2502.20082)|2025|Microsoft|[./papers/00063-LongRoPE2.pdf](./papers/00063-LongRoPE2.pdf)|
 |[BitNet b1.58 2B4T Technical Report](https://arxiv.org/abs/2504.12285)|2025|Microsoft|[./papers/00064-BitNet.pdf](./papers/00064-BitNet.pdf)|
+|[1-bit AI Infra: Part 1.1, Fast and Lossless BitNet b1.58 Inference on CPUs](https://arxiv.org/abs/2410.16144)|2024|Microsoft|[./papers/00065-1-bit.pdf](./papers/00065-1-bit.pdf)|
+|[Bitnet.cpp: Efficient Edge Inference for Ternary LLMs](https://arxiv.org/abs/2502.11880)|2025|Microsoft|[./papers/00066-Bitnet.cpp.pdf](./papers/00066-Bitnet.cpp.pdf)|
 
 ### Google
 
