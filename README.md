@@ -84,8 +84,8 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[AlphaMath Almost Zero: process Supervision without process](https://arxiv.org/abs/2405.03553)|2024|Alibaba Group|[./papers/00007-AlphaMath.pdf](./papers/00007-AlphaMath.pdf)|
-|[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00010-Qwen2.5-Coder.pdf](./papers/00010-Qwen2.5-Coder.pdf)|
 |[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00033-Qwen2.5-Coder.pdf](./papers/00033-Qwen2.5-Coder.pdf)|
+|[Qwen3 Technical Report](https://github.com/QwenLM/Qwen3/blob/main/Qwen3_Technical_Report.pdf)|2025|Alibaba Group|[./papers/00069-Qwen3_Technical_Report.pdf](./papers/00069-Qwen3_Technical_Report.pdf)|
 
 ### ByteDance
 
