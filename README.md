@@ -95,6 +95,7 @@
 |[DAPO: An Open-Source LLM Reinforcement Learning System at Scale](https://arxiv.org/abs/2503.14476)|2025|ByteDance|[./papers/00055-DAPO.pdf](./papers/00055-DAPO.pdf)|
 |[VAPO: Efficient and Reliable Reinforcement Learning for Advanced Reasoning Tasks](https://arxiv.org/abs/2504.05118)|2025|ByteDance|[./papers/00067-VAPO.pdf](./papers/00067-VAPO.pdf)|
 |[Seed1.5-Thinking: Advancing Superb Reasoning Models with Reinforcement Learning](https://arxiv.org/abs/2504.13914)|2025|ByteDance|[./papers/00068-Seed1.5-Thinking.pdf](./papers/00068-Seed1.5-Thinking.pdf)|
+|[Seed-Coder: Let the Code Model Curate Data for Itself](https://github.com/ByteDance-Seed/Seed-Coder/blob/master/Seed-Coder.pdf)|2025|ByteDance|[./papers/00070-Seed-Coder.pdf](./papers/00070-Seed-Coder.pdf)|
 
 ### EleutherAI
 
