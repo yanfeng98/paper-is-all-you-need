@@ -164,6 +164,7 @@
 |:-:|:-:|:-:|:-:|
 |[LightRAG: Simple and Fast Retrieval-Augmented Generation](https://arxiv.org/abs/2410.05779)|2024|Beijing University of Posts and Telecommunications|[./papers/00047-LightRAG.pdf](./papers/00047-LightRAG.pdf)|
 |[HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models](https://arxiv.org/abs/2405.14831)|2024| The Ohio State University|[./papers/00071-HippoRAG.pdf](./papers/00071-HippoRAG.pdf)|
+|[From RAG to Memory: Non-Parametric Continual Learning for Large Language Models](https://arxiv.org/abs/2502.14802)|2025| The Ohio State University|[./papers/00072-HippoRAG2.pdf](./papers/00072-HippoRAG2.pdf)|
 |[Chinese Tiny LLM: Pretraining a Chinese-Centric Large Language Model](https://arxiv.org/abs/2404.04167)|2024|University of Waterloo|[./papers/00011-Chinese-Tiny-LLM.pdf](./papers/00011-Chinese-Tiny-LLM.pdf)|
 |[OpenR: An Open Source Framework for Advanced Reasoning with Large Language Models](https://arxiv.org/abs/2410.09671)|2024|University College London|[./papers/00041-OpenR.pdf](./papers/00041-OpenR.pdf)|
 |[Retrieval-Augmented Generation with Graphs (GraphRAG)](https://arxiv.org/abs/2501.00309)|2025|Michigan State University|[./papers/00052-GraphRAG-review.pdf](./papers/00052-GraphRAG-review.pdf)|
