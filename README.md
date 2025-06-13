@@ -150,6 +150,7 @@
 |:-:|:-:|:-:|:-:|
 |[Imitate, Explore, and Self-Improve: A Reproduction Report on Slow-thinking Reasoning Systems](https://arxiv.org/abs/2412.09413)|2024|Renmin University of China|[./papers/00037-o1-like.pdf](./papers/00037-o1-like.pdf)|
 |[Search-o1: Agentic Search-Enhanced Large Reasoning Models](https://arxiv.org/abs/2501.05366)|2025|Renmin University of China|[./papers/00059-Search-o1.pdf](./papers/00059-Search-o1.pdf)|
+|[WebThinker: Empowering Large Reasoning Models with Deep Research Capability](https://arxiv.org/abs/2504.21776)|2025|Renmin University of China|[./papers/00074-WebThinker.pdf](./papers/00074-WebThinker.pdf)|
 |[R1-Searcher: Incentivizing the Search Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2503.05592)|2025|Renmin University of China|[./papers/00062-R1-Searcher.pdf](./papers/00062-R1-Searcher.pdf)|
 
 ### University of Illinois Urbana-Champaign
