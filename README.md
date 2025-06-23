@@ -53,12 +53,14 @@
 |[BitNet b1.58 2B4T Technical Report](https://arxiv.org/abs/2504.12285)|2025|Microsoft|[./papers/00064-BitNet.pdf](./papers/00064-BitNet.pdf)|
 |[1-bit AI Infra: Part 1.1, Fast and Lossless BitNet b1.58 Inference on CPUs](https://arxiv.org/abs/2410.16144)|2024|Microsoft|[./papers/00065-1-bit.pdf](./papers/00065-1-bit.pdf)|
 |[Bitnet.cpp: Efficient Edge Inference for Ternary LLMs](https://arxiv.org/abs/2502.11880)|2025|Microsoft|[./papers/00066-Bitnet.cpp.pdf](./papers/00066-Bitnet.cpp.pdf)|
+|[MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543)|2023|Microsoft|[./papers/00075-MiniLLM.pdf](./papers/00075-MiniLLM.pdf)|
 
 ### Google
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)|2022|Google|[./papers/00008-CoT.pdf](./papers/00008-CoT.pdf)|
+|[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531)|2015|Google|[./papers/00076-distill-model.pdf](./papers/00076-distill-model.pdf)|
 
 ### Meta
 
