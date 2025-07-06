@@ -61,6 +61,7 @@
 |:-:|:-:|:-:|:-:|
 |[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)|2022|Google|[./papers/00008-CoT.pdf](./papers/00008-CoT.pdf)|
 |[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531)|2015|Google|[./papers/00076-distill-model.pdf](./papers/00076-distill-model.pdf)|
+|[STaR: Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465)|2022|Google|[./papers/00077-STaR.pdf](./papers/00077-STaR.pdf)|
 
 ### Meta
 
