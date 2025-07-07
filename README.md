@@ -62,6 +62,7 @@
 |[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)|2022|Google|[./papers/00008-CoT.pdf](./papers/00008-CoT.pdf)|
 |[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531)|2015|Google|[./papers/00076-distill-model.pdf](./papers/00076-distill-model.pdf)|
 |[STaR: Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465)|2022|Google|[./papers/00077-STaR.pdf](./papers/00077-STaR.pdf)|
+|[ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)|2022|Google|[./papers/00078-ReAct.pdf](./papers/00078-ReAct.pdf)|
 
 ### Meta
 
@@ -174,7 +175,7 @@
 |[OpenR: An Open Source Framework for Advanced Reasoning with Large Language Models](https://arxiv.org/abs/2410.09671)|2024|University College London|[./papers/00041-OpenR.pdf](./papers/00041-OpenR.pdf)|
 |[Retrieval-Augmented Generation with Graphs (GraphRAG)](https://arxiv.org/abs/2501.00309)|2025|Michigan State University|[./papers/00052-GraphRAG-review.pdf](./papers/00052-GraphRAG-review.pdf)|
 |[RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)|2021|Zhuiyi Technology|[./papers/00009-RoPE.pdf](./papers/00009-RoPE.pdf)|
-|[]()|2025||[]()|
+|[Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions](https://arxiv.org/abs/2212.10509)|2022|Allen Institute for AI|[./papers/00079-IRCoT.pdf](./papers/00079-IRCoT.pdf)|
 |[]()|2025||[]()|
 
 ## 工具
