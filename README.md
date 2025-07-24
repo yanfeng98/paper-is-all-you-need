@@ -63,6 +63,8 @@
 |[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531)|2015|Google|[./papers/00076-distill-model.pdf](./papers/00076-distill-model.pdf)|
 |[STaR: Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465)|2022|Google|[./papers/00077-STaR.pdf](./papers/00077-STaR.pdf)|
 |[ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)|2022|Google|[./papers/00078-ReAct.pdf](./papers/00078-ReAct.pdf)|
+|[Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context, and Next Generation Agentic Capabilities](https://arxiv.org/abs/2507.06261)|2025|Google|[./papers/00080-Gemini-2.5.pdf](./papers/00080-Gemini-2.5.pdf)|
+|[Gemma 3 Technical Report](https://arxiv.org/abs/2503.19786)|2025|Google|[./papers/00081-Gemma-3.pdf](./papers/00081-Gemma-3.pdf)|
 
 ### Meta
 
