@@ -105,6 +105,12 @@
 |[Seed1.5-Thinking: Advancing Superb Reasoning Models with Reinforcement Learning](https://arxiv.org/abs/2504.13914)|2025|ByteDance|[./papers/00068-Seed1.5-Thinking.pdf](./papers/00068-Seed1.5-Thinking.pdf)|
 |[Seed-Coder: Let the Code Model Curate Data for Itself](https://github.com/ByteDance-Seed/Seed-Coder/blob/master/Seed-Coder.pdf)|2025|ByteDance|[./papers/00070-Seed-Coder.pdf](./papers/00070-Seed-Coder.pdf)|
 
+### KimiTeam
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534)|2025|KimiTeam|[./papers/00083-Kimi-K2.pdf](./papers/00083-Kimi-K2.pdf)|
+
 ### EleutherAI
 
 |论文|年份|论文单位|笔记地址|
