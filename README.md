@@ -71,6 +71,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)|2024|Meta|[./papers/00006-Llama3.pdf](./papers/00006-Llama3.pdf)|
+|[Deep Think with Confidence](https://arxiv.org/abs/2508.15260)|2025|Meta|[./papers/00084-DeepConf.pdf](./papers/00084-DeepConf.pdf)|
 
 ### DeepMind
 
@@ -165,6 +166,7 @@
 |[Search-o1: Agentic Search-Enhanced Large Reasoning Models](https://arxiv.org/abs/2501.05366)|2025|Renmin University of China|[./papers/00059-Search-o1.pdf](./papers/00059-Search-o1.pdf)|
 |[WebThinker: Empowering Large Reasoning Models with Deep Research Capability](https://arxiv.org/abs/2504.21776)|2025|Renmin University of China|[./papers/00074-WebThinker.pdf](./papers/00074-WebThinker.pdf)|
 |[R1-Searcher: Incentivizing the Search Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2503.05592)|2025|Renmin University of China|[./papers/00062-R1-Searcher.pdf](./papers/00062-R1-Searcher.pdf)|
+|[From Trial-and-Error to Improvement: A Systematic Analysis of LLM Exploration Mechanisms in RLVR](https://arxiv.org/abs/2508.07534)|2025|Renmin University of China|[./papers/00085-RLVR.pdf](./papers/00085-RLVR.pdf)|
 
 ### University of Illinois Urbana-Champaign
 
