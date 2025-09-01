@@ -140,6 +140,12 @@
 |:-:|:-:|:-:|:-:|
 |[Optimizing Test-Time Compute via Meta Reinforcement Fine-Tuning](https://arxiv.org/abs/2503.07572)|2025|Carnegie Mellon University|[./papers/00053-MRT.pdf](./papers/00053-MRT.pdf)|
 
+### University of California, Berkeley
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180)|2023|University of California, Berkeley|[./papers/00086-vllm.pdf](./papers/00086-vllm.pdf)|
+
 ### National University of Singapore
 
 |论文|年份|论文单位|笔记地址|
