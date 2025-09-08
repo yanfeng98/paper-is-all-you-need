@@ -145,6 +145,8 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180)|2023|University of California, Berkeley|[./papers/00086-vllm.pdf](./papers/00086-vllm.pdf)|
+|[Ring Attention with Blockwise Transformers for Near-Infinite Context](https://arxiv.org/abs/2310.01889)|2023|University of California, Berkeley|[./papers/00087-RingAttention.pdf](./papers/00087-RingAttention.pdf)|
+|[Blockwise Parallel Transformer for Large Context Models](https://arxiv.org/abs/2305.19370)|2023|University of California, Berkeley|[./papers/00088-BPT.pdf](./papers/00088-BPT.pdf)|
 
 ### National University of Singapore
 
