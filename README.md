@@ -54,6 +54,7 @@
 |[1-bit AI Infra: Part 1.1, Fast and Lossless BitNet b1.58 Inference on CPUs](https://arxiv.org/abs/2410.16144)|2024|Microsoft|[./papers/00065-1-bit.pdf](./papers/00065-1-bit.pdf)|
 |[Bitnet.cpp: Efficient Edge Inference for Ternary LLMs](https://arxiv.org/abs/2502.11880)|2025|Microsoft|[./papers/00066-Bitnet.cpp.pdf](./papers/00066-Bitnet.cpp.pdf)|
 |[MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543)|2023|Microsoft|[./papers/00075-MiniLLM.pdf](./papers/00075-MiniLLM.pdf)|
+|[rStar2-Agent: Agentic Reasoning Technical Report](https://arxiv.org/abs/2508.20722)|2025|Microsoft|[./papers/00092-rStar.pdf](./papers/00092-rStar.pdf)|
 
 ### Google
 
@@ -72,6 +73,7 @@
 |:-:|:-:|:-:|:-:|
 |[The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)|2024|Meta|[./papers/00006-Llama3.pdf](./papers/00006-Llama3.pdf)|
 |[Deep Think with Confidence](https://arxiv.org/abs/2508.15260)|2025|Meta|[./papers/00084-DeepConf.pdf](./papers/00084-DeepConf.pdf)|
+|[REFRAG: Rethinking RAG based Decoding](https://arxiv.org/abs/2509.01092)|2025|Meta|[./papers/00090-REFRAG.pdf](./papers/00090-REFRAG.pdf)|
 
 ### DeepMind
 
@@ -95,6 +97,7 @@
 |[Qwen3 Technical Report](https://github.com/QwenLM/Qwen3/blob/main/Qwen3_Technical_Report.pdf)|2025|Alibaba Group|[./papers/00069-Qwen3_Technical_Report.pdf](./papers/00069-Qwen3_Technical_Report.pdf)|
 |[Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models](https://arxiv.org/abs/2506.05176)|2025|Alibaba Group|[./papers/00073-Qwen3-Embedding.pdf](./papers/00073-Qwen3-Embedding.pdf)|
 |[WebSailor: Navigating Super-human Reasoning for Web Agent](https://arxiv.org/abs/2507.02592)|2025|Alibaba Group|[./papers/00082-WebSailor.pdf](./papers/00082-WebSailor.pdf)|
+|[On-Policy RL Meets Off-Policy Experts: Harmonizing Supervised Fine-Tuning and Reinforcement Learning via Dynamic Weighting](https://arxiv.org/abs/2508.11408)|2025|Alibaba Group|[./papers/00094-CHORD.pdf](./papers/00094-CHORD.pdf)|
 
 ### ByteDance
 
@@ -105,6 +108,7 @@
 |[VAPO: Efficient and Reliable Reinforcement Learning for Advanced Reasoning Tasks](https://arxiv.org/abs/2504.05118)|2025|ByteDance|[./papers/00067-VAPO.pdf](./papers/00067-VAPO.pdf)|
 |[Seed1.5-Thinking: Advancing Superb Reasoning Models with Reinforcement Learning](https://arxiv.org/abs/2504.13914)|2025|ByteDance|[./papers/00068-Seed1.5-Thinking.pdf](./papers/00068-Seed1.5-Thinking.pdf)|
 |[Seed-Coder: Let the Code Model Curate Data for Itself](https://github.com/ByteDance-Seed/Seed-Coder/blob/master/Seed-Coder.pdf)|2025|ByteDance|[./papers/00070-Seed-Coder.pdf](./papers/00070-Seed-Coder.pdf)|
+|[Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory](https://arxiv.org/abs/2508.09736)|2025|ByteDance|[./papers/00091-M3-Agent.pdf](./papers/00091-M3-Agent.pdf)|
 
 ### KimiTeam
 
@@ -112,11 +116,23 @@
 |:-:|:-:|:-:|:-:|
 |[Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534)|2025|KimiTeam|[./papers/00083-Kimi-K2.pdf](./papers/00083-Kimi-K2.pdf)|
 
+### Meituan LongCat Team
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[LongCat-Flash Technical Report](https://arxiv.org/abs/2509.01322)|2025|Meituan LongCat Team|[./papers/00093-LongCat-Flash.pdf](./papers/00093-LongCat-Flash.pdf)|
+
 ### EleutherAI
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[YaRN: Efficient Context Window Extension of Large Language Models](https://arxiv.org/abs/2309.00071)|2023|EleutherAI|[./papers/00034-YaRN.pdf](./papers/00034-YaRN.pdf)|
+
+### Huawei Noah’s Ark Lab
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Memento: Fine-tuning LLM Agents without Fine-tuning LLMs](https://arxiv.org/abs/2508.16153)|2025|Huawei Noah’s Ark Lab|[./papers/00089-Memento.pdf](./papers/00089-Memento.pdf)|
 
 ### Tsinghua University
 
