@@ -18,6 +18,7 @@
 |:-:|:-:|:-:|:-:|
 |[DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437)|2024|DeepSeek-AI|[./papers/00042-DeepSeek-V3.pdf](./papers/00042-DeepSeek-V3.pdf)|
 |[DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf)|2025|DeepSeek-AI|[./papers/00045-DeepSeek_R1.pdf](./papers/00045-DeepSeek_R1.pdf)|
+|[DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning](https://www.nature.com/articles/s41586-025-09422-z)|2025|DeepSeek-AI|[./papers/00095-DeepSeek_R1.pdf](./papers/00095-DeepSeek_R1.pdf)|
 |[Inference-Time Scaling for Generalist Reward Modeling](https://arxiv.org/abs/2504.02495)|2025|DeepSeek-AI|[./papers/00056-DeepSeek-GRM.pdf](./papers/00056-DeepSeek-GRM.pdf)|
 |[DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300)|2024|DeepSeek-AI|[./papers/00057-GRPO.pdf](./papers/00057-GRPO.pdf)|
 
@@ -163,6 +164,12 @@
 |[Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180)|2023|University of California, Berkeley|[./papers/00086-vllm.pdf](./papers/00086-vllm.pdf)|
 |[Ring Attention with Blockwise Transformers for Near-Infinite Context](https://arxiv.org/abs/2310.01889)|2023|University of California, Berkeley|[./papers/00087-RingAttention.pdf](./papers/00087-RingAttention.pdf)|
 |[Blockwise Parallel Transformer for Large Context Models](https://arxiv.org/abs/2305.19370)|2023|University of California, Berkeley|[./papers/00088-BPT.pdf](./papers/00088-BPT.pdf)|
+
+### MIT
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Striped Attention: Faster Ring Attention for Causal Transformers](https://arxiv.org/abs/2311.09431)|2023|MIT|[./papers/00096-Striped-Attention.pdf](./papers/00096-Striped-Attention.pdf)|
 
 ### National University of Singapore
 
