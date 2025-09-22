@@ -97,7 +97,17 @@
 |[Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)|2024|Alibaba Group|[./papers/00033-Qwen2.5-Coder.pdf](./papers/00033-Qwen2.5-Coder.pdf)|
 |[Qwen3 Technical Report](https://github.com/QwenLM/Qwen3/blob/main/Qwen3_Technical_Report.pdf)|2025|Alibaba Group|[./papers/00069-Qwen3_Technical_Report.pdf](./papers/00069-Qwen3_Technical_Report.pdf)|
 |[Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models](https://arxiv.org/abs/2506.05176)|2025|Alibaba Group|[./papers/00073-Qwen3-Embedding.pdf](./papers/00073-Qwen3-Embedding.pdf)|
+|[WebWalker: Benchmarking LLMs in Web Traversal](https://arxiv.org/abs/2501.07572)|2025|Alibaba Group|[./papers/00097-WebWalker.pdf](./papers/00097-WebWalker.pdf)|
+|[WebDancer: Towards Autonomous Information Seeking Agency](https://arxiv.org/abs/2505.22648)|2025|Alibaba Group|[./papers/00098-WebDancer.pdf](./papers/00098-WebDancer.pdf)|
 |[WebSailor: Navigating Super-human Reasoning for Web Agent](https://arxiv.org/abs/2507.02592)|2025|Alibaba Group|[./papers/00082-WebSailor.pdf](./papers/00082-WebSailor.pdf)|
+|[WebShaper: Agentically Data Synthesizing via Information-Seeking Formalization](https://arxiv.org/abs/2507.15061)|2025|Alibaba Group|[./papers/00099-WebShaper.pdf](./papers/00099-WebShaper.pdf)|
+|[WebWatcher: Breaking New Frontier of Vision-Language Deep Research Agent](https://arxiv.org/abs/2508.05748)|2025|Alibaba Group|[./papers/00100-WebWatcher.pdf](./papers/00100-WebWatcher.pdf)|
+|[WebResearcher: Unleashing unbounded reasoning capability in Long-Horizon Agents](https://arxiv.org/abs/2509.13309)|2025|Alibaba Group|[./papers/00101-WebResearcher.pdf](./papers/00101-WebResearcher.pdf)|
+|[ReSum: Unlocking Long-Horizon Search Intelligence via Context Summarization](https://arxiv.org/abs/2509.13313)|2025|Alibaba Group|[./papers/00102-ReSum.pdf](./papers/00102-ReSum.pdf)|
+|[WebWeaver: Structuring Web-Scale Evidence with Dynamic Outlines for Open-Ended Deep Research](https://arxiv.org/abs/2509.13312)|2025|Alibaba Group|[./papers/00103-WebWeaver.pdf](./papers/00103-WebWeaver.pdf)|
+|[WebSailor-V2: Bridging the Chasm to Proprietary Agents via Synthetic Data and Scalable Reinforcement Learning](https://arxiv.org/abs/2509.13305)|2025|Alibaba Group|[./papers/00104-WebSailor-V2.pdf](./papers/00104-WebSailor-V2.pdf)|
+|[Scaling Agents via Continual Pre-training](https://arxiv.org/abs/2509.13310)|2025|Alibaba Group|[./papers/00105-AgentFounder.pdf](./papers/00105-AgentFounder.pdf)|
+|[Towards General Agentic Intelligence via Environment Scaling](https://arxiv.org/abs/2509.13311)|2025|Alibaba Group|[./papers/00106-AgentScaler.pdf](./papers/00106-AgentScaler.pdf)|
 |[On-Policy RL Meets Off-Policy Experts: Harmonizing Supervised Fine-Tuning and Reinforcement Learning via Dynamic Weighting](https://arxiv.org/abs/2508.11408)|2025|Alibaba Group|[./papers/00094-CHORD.pdf](./papers/00094-CHORD.pdf)|
 
 ### ByteDance
@@ -222,7 +232,7 @@
 
 ## 工具
 
-1. Overleaf: https://www.overleaf.com/
+1. [Overleaf](https://www.overleaf.com/)
 
 ## 论文集
 
