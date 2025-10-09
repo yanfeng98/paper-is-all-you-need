@@ -109,6 +109,7 @@
 |[Scaling Agents via Continual Pre-training](https://arxiv.org/abs/2509.13310)|2025|Alibaba Group|[./papers/00105-AgentFounder.pdf](./papers/00105-AgentFounder.pdf)|
 |[Towards General Agentic Intelligence via Environment Scaling](https://arxiv.org/abs/2509.13311)|2025|Alibaba Group|[./papers/00106-AgentScaler.pdf](./papers/00106-AgentScaler.pdf)|
 |[On-Policy RL Meets Off-Policy Experts: Harmonizing Supervised Fine-Tuning and Reinforcement Learning via Dynamic Weighting](https://arxiv.org/abs/2508.11408)|2025|Alibaba Group|[./papers/00094-CHORD.pdf](./papers/00094-CHORD.pdf)|
+|[Group Sequence Policy Optimization](https://www.arxiv.org/abs/2507.18071)|2025|Alibaba Group|[./papers/00107-GSPO.pdf](./papers/00107-GSPO.pdf)|
 
 ### ByteDance
 
