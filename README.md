@@ -56,6 +56,7 @@
 |[Bitnet.cpp: Efficient Edge Inference for Ternary LLMs](https://arxiv.org/abs/2502.11880)|2025|Microsoft|[./papers/00066-Bitnet.cpp.pdf](./papers/00066-Bitnet.cpp.pdf)|
 |[MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543)|2023|Microsoft|[./papers/00075-MiniLLM.pdf](./papers/00075-MiniLLM.pdf)|
 |[rStar2-Agent: Agentic Reasoning Technical Report](https://arxiv.org/abs/2508.20722)|2025|Microsoft|[./papers/00092-rStar.pdf](./papers/00092-rStar.pdf)|
+|[RPG: A Repository Planning Graph for Unified and Scalable Codebase Generation](https://arxiv.org/abs/2509.16198)|2025|Microsoft|[./papers/00111-RPG.pdf](./papers/00111-RPG.pdf)|
 
 ### Google
 
@@ -121,6 +122,13 @@
 |[Seed1.5-Thinking: Advancing Superb Reasoning Models with Reinforcement Learning](https://arxiv.org/abs/2504.13914)|2025|ByteDance|[./papers/00068-Seed1.5-Thinking.pdf](./papers/00068-Seed1.5-Thinking.pdf)|
 |[Seed-Coder: Let the Code Model Curate Data for Itself](https://github.com/ByteDance-Seed/Seed-Coder/blob/master/Seed-Coder.pdf)|2025|ByteDance|[./papers/00070-Seed-Coder.pdf](./papers/00070-Seed-Coder.pdf)|
 |[Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory](https://arxiv.org/abs/2508.09736)|2025|ByteDance|[./papers/00091-M3-Agent.pdf](./papers/00091-M3-Agent.pdf)|
+|[MemAgent: Reshaping Long-Context LLM with Multi-Conv RL-based Memory Agent](https://arxiv.org/abs/2507.02259)|2025|ByteDance|[./papers/00109-MemAgent.pdf](./papers/00109-MemAgent.pdf)|
+
+### Tencent
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Training-Free Group Relative Policy Optimization](https://arxiv.org/abs/2510.08191)|2025|Tencent|[./papers/00108-Training-Free-GRPO.pdf](./papers/00108-Training-Free-GRPO.pdf)|
 
 ### KimiTeam
 
@@ -154,6 +162,7 @@
 |[ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools](https://arxiv.org/abs/2406.12793)|2024|Tsinghua University|[./papers/00005-ChatGLM.pdf](./papers/00005-ChatGLM.pdf)|
 |[LongWriter: Unleashing 10,000+ Word Generation from Long Context LLMs](https://arxiv.org/abs/2408.07055)|2024|Tsinghua University|[./papers/00038-LongWriter.pdf](./papers/00038-LongWriter.pdf)|
 |[ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search](https://arxiv.org/abs/2406.03816)|2024|Tsinghua University|[./papers/00043-ReST-MCTS.pdf](./papers/00043-ReST-MCTS.pdf)|
+|[GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models](https://arxiv.org/abs/2508.06471)|2025|Tsinghua University|[./papers/00113-GLM-4.5.pdf](./papers/00113-GLM-4.5.pdf)|
 
 ### Peking University
 
@@ -209,6 +218,7 @@
 |[WebThinker: Empowering Large Reasoning Models with Deep Research Capability](https://arxiv.org/abs/2504.21776)|2025|Renmin University of China|[./papers/00074-WebThinker.pdf](./papers/00074-WebThinker.pdf)|
 |[R1-Searcher: Incentivizing the Search Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2503.05592)|2025|Renmin University of China|[./papers/00062-R1-Searcher.pdf](./papers/00062-R1-Searcher.pdf)|
 |[From Trial-and-Error to Improvement: A Systematic Analysis of LLM Exploration Mechanisms in RLVR](https://arxiv.org/abs/2508.07534)|2025|Renmin University of China|[./papers/00085-RLVR.pdf](./papers/00085-RLVR.pdf)|
+|[DeepCritic: Deliberate Critique with Large Language Models](https://arxiv.org/abs/2505.00662)|2025|Renmin University of China|[./papers/00114-DeepCritic.pdf](./papers/00114-DeepCritic.pdf)|
 
 ### University of Illinois Urbana-Champaign
 
@@ -229,7 +239,8 @@
 |[Retrieval-Augmented Generation with Graphs (GraphRAG)](https://arxiv.org/abs/2501.00309)|2025|Michigan State University|[./papers/00052-GraphRAG-review.pdf](./papers/00052-GraphRAG-review.pdf)|
 |[RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)|2021|Zhuiyi Technology|[./papers/00009-RoPE.pdf](./papers/00009-RoPE.pdf)|
 |[Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions](https://arxiv.org/abs/2212.10509)|2022|Allen Institute for AI|[./papers/00079-IRCoT.pdf](./papers/00079-IRCoT.pdf)|
-|[]()|2025||[]()|
+|[Memory as Action: Autonomous Context Curation for Long-Horizon Agentic Tasks](https://arxiv.org/abs/2510.12635)|2025|Beijing Jiaotong University|[./papers/00110-MemAct.pdf](./papers/00110-MemAct.pdf)|
+|[Scientific Algorithm Discovery by Augmenting AlphaEvolve with Deep Research](https://arxiv.org/abs/2510.06056)|2025|IBM Research|[./papers/00112-DeepEvolve.pdf](./papers/00112-DeepEvolve.pdf)|
 
 ## 工具
 
