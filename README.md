@@ -21,6 +21,7 @@
 |[DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning](https://www.nature.com/articles/s41586-025-09422-z)|2025|DeepSeek-AI|[./papers/00095-DeepSeek_R1.pdf](./papers/00095-DeepSeek_R1.pdf)|
 |[Inference-Time Scaling for Generalist Reward Modeling](https://arxiv.org/abs/2504.02495)|2025|DeepSeek-AI|[./papers/00056-DeepSeek-GRM.pdf](./papers/00056-DeepSeek-GRM.pdf)|
 |[DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300)|2024|DeepSeek-AI|[./papers/00057-GRPO.pdf](./papers/00057-GRPO.pdf)|
+|[DeepSeek-OCR: Contexts Optical Compression](https://arxiv.org/abs/2510.18234)|2025|DeepSeek-AI|[./papers/00116-DeepSeek-OCR.pdf](./papers/00116-DeepSeek-OCR.pdf)|
 
 ### Microsoft
 
@@ -76,6 +77,7 @@
 |[The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)|2024|Meta|[./papers/00006-Llama3.pdf](./papers/00006-Llama3.pdf)|
 |[Deep Think with Confidence](https://arxiv.org/abs/2508.15260)|2025|Meta|[./papers/00084-DeepConf.pdf](./papers/00084-DeepConf.pdf)|
 |[REFRAG: Rethinking RAG based Decoding](https://arxiv.org/abs/2509.01092)|2025|Meta|[./papers/00090-REFRAG.pdf](./papers/00090-REFRAG.pdf)|
+|[The Art of Scaling Reinforcement Learning Compute for LLMs](https://arxiv.org/abs/2510.13786)|2025|Meta|[./papers/00121-ScaleRL.pdf](./papers/00121-ScaleRL.pdf)|
 
 ### DeepMind
 
@@ -130,6 +132,12 @@
 |:-:|:-:|:-:|:-:|
 |[Training-Free Group Relative Policy Optimization](https://arxiv.org/abs/2510.08191)|2025|Tencent|[./papers/00108-Training-Free-GRPO.pdf](./papers/00108-Training-Free-GRPO.pdf)|
 
+### OPPO AI Agent Team
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Chain-of-Agents: End-to-End Agent Foundation Models via Multi-Agent Distillation and Agentic RL](https://arxiv.org/abs/2508.13167)|2025|OPPO AI Agent Team|[./papers/00118-Chain-of-Agents.pdf](./papers/00118-Chain-of-Agents.pdf)|
+
 ### KimiTeam
 
 |论文|年份|论文单位|笔记地址|
@@ -141,6 +149,12 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[LongCat-Flash Technical Report](https://arxiv.org/abs/2509.01322)|2025|Meituan LongCat Team|[./papers/00093-LongCat-Flash.pdf](./papers/00093-LongCat-Flash.pdf)|
+
+### Xiaohongshu
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[LongMagpie: A Self-synthesis Method for Generating Large-scale Long-context Instructions](https://arxiv.org/abs/2505.17134)|2025|Xiaohongshu|[./papers/00117-LongMagpie.pdf](./papers/00117-LongMagpie.pdf)|
 
 ### EleutherAI
 
@@ -184,6 +198,7 @@
 |[Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180)|2023|University of California, Berkeley|[./papers/00086-vllm.pdf](./papers/00086-vllm.pdf)|
 |[Ring Attention with Blockwise Transformers for Near-Infinite Context](https://arxiv.org/abs/2310.01889)|2023|University of California, Berkeley|[./papers/00087-RingAttention.pdf](./papers/00087-RingAttention.pdf)|
 |[Blockwise Parallel Transformer for Large Context Models](https://arxiv.org/abs/2305.19370)|2023|University of California, Berkeley|[./papers/00088-BPT.pdf](./papers/00088-BPT.pdf)|
+|[RL Grokking Recipe: How Does RL Unlock and Transfer New Algorithms in LLMs?](https://arxiv.org/abs/2509.21016)|2025|University of California, Berkeley|[./papers/00115-grokking.pdf](./papers/00115-grokking.pdf)|
 
 ### MIT
 
@@ -191,11 +206,23 @@
 |:-:|:-:|:-:|:-:|
 |[Striped Attention: Faster Ring Attention for Causal Transformers](https://arxiv.org/abs/2311.09431)|2023|MIT|[./papers/00096-Striped-Attention.pdf](./papers/00096-Striped-Attention.pdf)|
 
+### Princeton University
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Skill-Targeted Adaptive Training](https://arxiv.org/abs/2510.10023)|2025|Princeton University|[./papers/00119-STAT.pdf](./papers/00119-STAT.pdf)|
+
 ### National University of Singapore
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Understanding R1-Zero-Like Training: A Critical Perspective](https://arxiv.org/abs/2503.20783)|2025|National University of Singapore|[./papers/00048-understand-r1-zero.pdf](./papers/00048-understand-r1-zero.pdf)|
+
+### Fudan University
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[EvoSyn: Generalizable Evolutionary Data Synthesis for Verifiable Learning](https://arxiv.org/abs/2510.17928)|2025|Fudan University|[./papers/00120-EvoSyn.pdf](./papers/00120-EvoSyn.pdf)|
 
 ### Shanghai Jiao Tong University
 
