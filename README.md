@@ -58,6 +58,7 @@
 |[MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543)|2023|Microsoft|[./papers/00075-MiniLLM.pdf](./papers/00075-MiniLLM.pdf)|
 |[rStar2-Agent: Agentic Reasoning Technical Report](https://arxiv.org/abs/2508.20722)|2025|Microsoft|[./papers/00092-rStar.pdf](./papers/00092-rStar.pdf)|
 |[RPG: A Repository Planning Graph for Unified and Scalable Codebase Generation](https://arxiv.org/abs/2509.16198)|2025|Microsoft|[./papers/00111-RPG.pdf](./papers/00111-RPG.pdf)|
+|[Agent Lightning: Train ANY AI Agents with Reinforcement Learning](https://arxiv.org/abs/2508.03680)|2025|Microsoft|[./papers/00124-agent-lightning.pdf](./papers/00124-agent-lightning.pdf)|
 
 ### Google
 
@@ -85,6 +86,7 @@
 |:-:|:-:|:-:|:-:|
 |[Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314)|2024|DeepMind|[./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf](./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf)|
 |[Improve Mathematical Reasoning in Language Models by Automated Process Supervision](https://arxiv.org/abs/2406.06592)|2024|DeepMind|[./papers/00039-Automated-Process-Supervision.pdf](./papers/00039-Automated-Process-Supervision.pdf)|
+|[Extracting alignment data in open models](https://arxiv.org/abs/2510.18554)|2025|DeepMind|[./papers/00126-extracting-alignment-data.pdf](./papers/00126-extracting-alignment-data.pdf)|
 
 ### NVIDIA
 
@@ -113,6 +115,8 @@
 |[Towards General Agentic Intelligence via Environment Scaling](https://arxiv.org/abs/2509.13311)|2025|Alibaba Group|[./papers/00106-AgentScaler.pdf](./papers/00106-AgentScaler.pdf)|
 |[On-Policy RL Meets Off-Policy Experts: Harmonizing Supervised Fine-Tuning and Reinforcement Learning via Dynamic Weighting](https://arxiv.org/abs/2508.11408)|2025|Alibaba Group|[./papers/00094-CHORD.pdf](./papers/00094-CHORD.pdf)|
 |[Group Sequence Policy Optimization](https://www.arxiv.org/abs/2507.18071)|2025|Alibaba Group|[./papers/00107-GSPO.pdf](./papers/00107-GSPO.pdf)|
+|[Tree Search for LLM Agent Reinforcement Learning](https://arxiv.org/abs/2509.21240)|2025|Alibaba Group|[./papers/00127-Tree-GRPO.pdf](./papers/00127-Tree-GRPO.pdf)|
+|[Search Self-play: Pushing the Frontier of Agent Capability without Supervision](https://arxiv.org/abs/2510.18821)|2025|Alibaba Group|[./papers/00129-SSP.pdf](./papers/00129-SSP.pdf)|
 
 ### ByteDance
 
@@ -125,6 +129,8 @@
 |[Seed-Coder: Let the Code Model Curate Data for Itself](https://github.com/ByteDance-Seed/Seed-Coder/blob/master/Seed-Coder.pdf)|2025|ByteDance|[./papers/00070-Seed-Coder.pdf](./papers/00070-Seed-Coder.pdf)|
 |[Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory](https://arxiv.org/abs/2508.09736)|2025|ByteDance|[./papers/00091-M3-Agent.pdf](./papers/00091-M3-Agent.pdf)|
 |[MemAgent: Reshaping Long-Context LLM with Multi-Conv RL-based Memory Agent](https://arxiv.org/abs/2507.02259)|2025|ByteDance|[./papers/00109-MemAgent.pdf](./papers/00109-MemAgent.pdf)|
+|[Scaling Latent Reasoning via Looped Language Models](https://arxiv.org/abs/2510.25741)|2025|ByteDance|[./papers/00122-Ouro.pdf](./papers/00122-Ouro.pdf)|
+|[Scaling Long-Horizon LLM Agent via Context-Folding](https://arxiv.org/abs/2510.11967)|2025|ByteDance|[./papers/00128-context-folding.pdf](./papers/00128-context-folding.pdf)|
 
 ### Tencent
 
@@ -155,6 +161,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[LongMagpie: A Self-synthesis Method for Generating Large-scale Long-context Instructions](https://arxiv.org/abs/2505.17134)|2025|Xiaohongshu|[./papers/00117-LongMagpie.pdf](./papers/00117-LongMagpie.pdf)|
+|[DeepAgent: A General Reasoning Agent with Scalable Toolsets](https://arxiv.org/abs/2510.21618)|2025|Xiaohongshu|[./papers/00123-DeepAgent.pdf](./papers/00123-DeepAgent.pdf)|
 
 ### EleutherAI
 
@@ -205,6 +212,12 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Striped Attention: Faster Ring Attention for Causal Transformers](https://arxiv.org/abs/2311.09431)|2023|MIT|[./papers/00096-Striped-Attention.pdf](./papers/00096-Striped-Attention.pdf)|
+
+### Stanford University
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[In-the-Flow Agentic System Optimization for Effective Planning and Tool Use](https://arxiv.org/abs/2510.05592)|2025|Stanford University|[./papers/00125-in-the-flow.pdf](./papers/00125-in-the-flow.pdf)|
 
 ### Princeton University
 
@@ -268,6 +281,7 @@
 |[Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions](https://arxiv.org/abs/2212.10509)|2022|Allen Institute for AI|[./papers/00079-IRCoT.pdf](./papers/00079-IRCoT.pdf)|
 |[Memory as Action: Autonomous Context Curation for Long-Horizon Agentic Tasks](https://arxiv.org/abs/2510.12635)|2025|Beijing Jiaotong University|[./papers/00110-MemAct.pdf](./papers/00110-MemAct.pdf)|
 |[Scientific Algorithm Discovery by Augmenting AlphaEvolve with Deep Research](https://arxiv.org/abs/2510.06056)|2025|IBM Research|[./papers/00112-DeepEvolve.pdf](./papers/00112-DeepEvolve.pdf)|
+|[Liger-Kernel: Efficient Triton Kernels for LLM Training](https://openreview.net/forum?id=36SjAIT42G)|2025|LinkedIn|[./papers/00130-Liger-Kernel.pdf](./papers/00130-Liger-Kernel.pdf)|
 
 ## 工具
 
