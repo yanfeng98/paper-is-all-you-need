@@ -149,6 +149,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534)|2025|KimiTeam|[./papers/00083-Kimi-K2.pdf](./papers/00083-Kimi-K2.pdf)|
+|[Kimi Linear: An Expressive, Efficient Attention Architecture](https://arxiv.org/abs/2510.26692)|2025|KimiTeam|[./papers/00132-Kimi-Linear.pdf](./papers/00132-Kimi-Linear.pdf)|
 
 ### Meituan LongCat Team
 
@@ -242,6 +243,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387)|2025|Shanghai Jiao Tong University|[./papers/00051-LIMO.pdf](./papers/00051-LIMO.pdf)|
+|[Context Engineering 2.0: The Context of Context Engineering](https://arxiv.org/abs/2510.26493)|2025|Shanghai Jiao Tong University|[./papers/00131-Context-Engineering-2.0.pdf](./papers/00131-Context-Engineering-2.0.pdf)|
 
 ### Nanjing University
 
