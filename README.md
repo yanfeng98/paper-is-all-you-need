@@ -22,6 +22,8 @@
 |[Inference-Time Scaling for Generalist Reward Modeling](https://arxiv.org/abs/2504.02495)|2025|DeepSeek-AI|[./papers/00056-DeepSeek-GRM.pdf](./papers/00056-DeepSeek-GRM.pdf)|
 |[DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300)|2024|DeepSeek-AI|[./papers/00057-GRPO.pdf](./papers/00057-GRPO.pdf)|
 |[DeepSeek-OCR: Contexts Optical Compression](https://arxiv.org/abs/2510.18234)|2025|DeepSeek-AI|[./papers/00116-DeepSeek-OCR.pdf](./papers/00116-DeepSeek-OCR.pdf)|
+|[DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models](https://huggingface.co/deepseek-ai/DeepSeek-V3.2/blob/main/assets/paper.pdf)|2025|DeepSeek-AI|[./papers/00133-DeepSeek-V3.2.pdf](./papers/00133-DeepSeek-V3.2.pdf)|
+|[DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning](https://github.com/deepseek-ai/DeepSeek-Math-V2/blob/main/DeepSeekMath_V2.pdf)|2025|DeepSeek-AI|[./papers/00136-DeepSeekMath_V2.pdf](./papers/00136-DeepSeekMath_V2.pdf)|
 
 ### Microsoft
 
@@ -117,6 +119,7 @@
 |[Group Sequence Policy Optimization](https://www.arxiv.org/abs/2507.18071)|2025|Alibaba Group|[./papers/00107-GSPO.pdf](./papers/00107-GSPO.pdf)|
 |[Tree Search for LLM Agent Reinforcement Learning](https://arxiv.org/abs/2509.21240)|2025|Alibaba Group|[./papers/00127-Tree-GRPO.pdf](./papers/00127-Tree-GRPO.pdf)|
 |[Search Self-play: Pushing the Frontier of Agent Capability without Supervision](https://arxiv.org/abs/2510.18821)|2025|Alibaba Group|[./papers/00129-SSP.pdf](./papers/00129-SSP.pdf)|
+|[Soft Adaptive Policy Optimization](https://arxiv.org/abs/2511.20347)|2025|Alibaba Group|[./papers/00134-SAPO.pdf](./papers/00134-SAPO.pdf)|
 
 ### ByteDance
 
@@ -237,6 +240,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[EvoSyn: Generalizable Evolutionary Data Synthesis for Verifiable Learning](https://arxiv.org/abs/2510.17928)|2025|Fudan University|[./papers/00120-EvoSyn.pdf](./papers/00120-EvoSyn.pdf)|
+|[AgentPRM: Process Reward Models for LLM Agents via Step-Wise Promise and Progress](https://arxiv.org/abs/2511.08325)|2025|Fudan University|[./papers/00135-AgentPRM.pdf](./papers/00135-AgentPRM.pdf)|
 
 ### Shanghai Jiao Tong University
 
