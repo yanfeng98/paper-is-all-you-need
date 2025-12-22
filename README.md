@@ -89,12 +89,14 @@
 |[Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314)|2024|DeepMind|[./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf](./papers/00036-Scaling-LLM-Test-Time-Compute-Optimally.pdf)|
 |[Improve Mathematical Reasoning in Language Models by Automated Process Supervision](https://arxiv.org/abs/2406.06592)|2024|DeepMind|[./papers/00039-Automated-Process-Supervision.pdf](./papers/00039-Automated-Process-Supervision.pdf)|
 |[Extracting alignment data in open models](https://arxiv.org/abs/2510.18554)|2025|DeepMind|[./papers/00126-extracting-alignment-data.pdf](./papers/00126-extracting-alignment-data.pdf)|
+|[Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory](https://arxiv.org/abs/2511.20857)|2025|DeepMind|[./papers/00139-Evo-Memory.pdf](./papers/00139-Evo-Memory.pdf)|
 
 ### NVIDIA
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198)|2022|NVIDIA|[./papers/00012-selective-activation-recomputation.pdf](./papers/00012-selective-activation-recomputation.pdf)|
+|[ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration](https://arxiv.org/abs/2511.21689)|2025|NVIDIA|[./papers/00140-ToolOrchestra.pdf](./papers/00140-ToolOrchestra.pdf)|
 
 ### Alibaba Group
 
@@ -120,6 +122,7 @@
 |[Tree Search for LLM Agent Reinforcement Learning](https://arxiv.org/abs/2509.21240)|2025|Alibaba Group|[./papers/00127-Tree-GRPO.pdf](./papers/00127-Tree-GRPO.pdf)|
 |[Search Self-play: Pushing the Frontier of Agent Capability without Supervision](https://arxiv.org/abs/2510.18821)|2025|Alibaba Group|[./papers/00129-SSP.pdf](./papers/00129-SSP.pdf)|
 |[Soft Adaptive Policy Optimization](https://arxiv.org/abs/2511.20347)|2025|Alibaba Group|[./papers/00134-SAPO.pdf](./papers/00134-SAPO.pdf)|
+|[AgentEvolver: Towards Efficient Self-Evolving Agent System](https://arxiv.org/abs/2511.10395)|2025|Alibaba Group|[./papers/00138-AgentEvolver.pdf](./papers/00138-AgentEvolver.pdf)|
 
 ### ByteDance
 
@@ -166,6 +169,19 @@
 |:-:|:-:|:-:|:-:|
 |[LongMagpie: A Self-synthesis Method for Generating Large-scale Long-context Instructions](https://arxiv.org/abs/2505.17134)|2025|Xiaohongshu|[./papers/00117-LongMagpie.pdf](./papers/00117-LongMagpie.pdf)|
 |[DeepAgent: A General Reasoning Agent with Scalable Toolsets](https://arxiv.org/abs/2510.21618)|2025|Xiaohongshu|[./papers/00123-DeepAgent.pdf](./papers/00123-DeepAgent.pdf)|
+|[PretrainZero: Reinforcement Active Pretraining](https://arxiv.org/abs/2512.03442)|2025|Xiaohongshu|[./papers/00141-PretrainZero.pdf](./papers/00141-PretrainZero.pdf)|
+
+### Sina Weibo
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Tiny Model, Big Logic: Diversity-Driven Optimization Elicits Large-Model Reasoning Ability in VibeThinker-1.5B](https://arxiv.org/abs/2511.06221)|2025|Sina Weibo|[./papers/00137-VibeThinker-1.5B.pdf](./papers/00137-VibeThinker-1.5B.pdf)|
+
+### Shanghai Artificial Intelligence Laboratory
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[FlowSearch: Advancing deep research with dynamic structured knowledge flow](https://arxiv.org/abs/2510.08521)|2025|Shanghai Artificial Intelligence Laboratory|[./papers/00142-FlowSearch.pdf](./papers/00142-FlowSearch.pdf)|
 
 ### EleutherAI
 
