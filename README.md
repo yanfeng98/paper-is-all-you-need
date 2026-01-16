@@ -24,6 +24,8 @@
 |[DeepSeek-OCR: Contexts Optical Compression](https://arxiv.org/abs/2510.18234)|2025|DeepSeek-AI|[./papers/00116-DeepSeek-OCR.pdf](./papers/00116-DeepSeek-OCR.pdf)|
 |[DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models](https://huggingface.co/deepseek-ai/DeepSeek-V3.2/blob/main/assets/paper.pdf)|2025|DeepSeek-AI|[./papers/00133-DeepSeek-V3.2.pdf](./papers/00133-DeepSeek-V3.2.pdf)|
 |[DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning](https://github.com/deepseek-ai/DeepSeek-Math-V2/blob/main/DeepSeekMath_V2.pdf)|2025|DeepSeek-AI|[./papers/00136-DeepSeekMath_V2.pdf](./papers/00136-DeepSeekMath_V2.pdf)|
+|[mHC: Manifold-Constrained Hyper-Connections](https://arxiv.org/abs/2512.24880)|2025|DeepSeek-AI|[./papers/00148-mHC.pdf](./papers/00148-mHC.pdf)|
+|[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](https://arxiv.org/abs/2601.07372)|2026|DeepSeek-AI|[./papers/00150-Engram.pdf](./papers/00150-Engram.pdf)|
 
 ### Microsoft
 
@@ -97,6 +99,7 @@
 |:-:|:-:|:-:|:-:|
 |[Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198)|2022|NVIDIA|[./papers/00012-selective-activation-recomputation.pdf](./papers/00012-selective-activation-recomputation.pdf)|
 |[ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration](https://arxiv.org/abs/2511.21689)|2025|NVIDIA|[./papers/00140-ToolOrchestra.pdf](./papers/00140-ToolOrchestra.pdf)|
+|[GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization](https://arxiv.org/abs/2601.05242)|2026|NVIDIA|[./papers/00144-GDPO.pdf](./papers/00144-GDPO.pdf)|
 
 ### Alibaba Group
 
@@ -123,6 +126,8 @@
 |[Search Self-play: Pushing the Frontier of Agent Capability without Supervision](https://arxiv.org/abs/2510.18821)|2025|Alibaba Group|[./papers/00129-SSP.pdf](./papers/00129-SSP.pdf)|
 |[Soft Adaptive Policy Optimization](https://arxiv.org/abs/2511.20347)|2025|Alibaba Group|[./papers/00134-SAPO.pdf](./papers/00134-SAPO.pdf)|
 |[AgentEvolver: Towards Efficient Self-Evolving Agent System](https://arxiv.org/abs/2511.10395)|2025|Alibaba Group|[./papers/00138-AgentEvolver.pdf](./papers/00138-AgentEvolver.pdf)|
+|[ArenaRL: Scaling RL for Open-Ended Agents via Tournament-based Relative Ranking](https://arxiv.org/abs/2601.06487)|2026|Alibaba Group|[./papers/00143-ArenaRL.pdf](./papers/00143-ArenaRL.pdf)|
+|[AMAP Agentic Planning Technical Report](https://arxiv.org/abs/2512.24957)|2025|Alibaba Group|[./papers/00151-AMAP.pdf](./papers/00151-AMAP.pdf)|
 
 ### ByteDance
 
@@ -143,6 +148,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Training-Free Group Relative Policy Optimization](https://arxiv.org/abs/2510.08191)|2025|Tencent|[./papers/00108-Training-Free-GRPO.pdf](./papers/00108-Training-Free-GRPO.pdf)|
+|[HY-MT1.5 Technical Report](https://arxiv.org/abs/2512.24092)|2025|Tencent|[./papers/00152-HY-MT1.5.pdf](./papers/00152-HY-MT1.5.pdf)|
 
 ### OPPO AI Agent Team
 
@@ -226,6 +232,7 @@
 |[Ring Attention with Blockwise Transformers for Near-Infinite Context](https://arxiv.org/abs/2310.01889)|2023|University of California, Berkeley|[./papers/00087-RingAttention.pdf](./papers/00087-RingAttention.pdf)|
 |[Blockwise Parallel Transformer for Large Context Models](https://arxiv.org/abs/2305.19370)|2023|University of California, Berkeley|[./papers/00088-BPT.pdf](./papers/00088-BPT.pdf)|
 |[RL Grokking Recipe: How Does RL Unlock and Transfer New Algorithms in LLMs?](https://arxiv.org/abs/2509.21016)|2025|University of California, Berkeley|[./papers/00115-grokking.pdf](./papers/00115-grokking.pdf)|
+|[SimpleMem: Efficient Lifelong Memory for LLM Agents](https://arxiv.org/abs/2601.02553)|2026|University of California, Berkeley|[./papers/00145-SimpleMem.pdf](./papers/00145-SimpleMem.pdf)|
 
 ### MIT
 
@@ -281,6 +288,9 @@
 |[R1-Searcher: Incentivizing the Search Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2503.05592)|2025|Renmin University of China|[./papers/00062-R1-Searcher.pdf](./papers/00062-R1-Searcher.pdf)|
 |[From Trial-and-Error to Improvement: A Systematic Analysis of LLM Exploration Mechanisms in RLVR](https://arxiv.org/abs/2508.07534)|2025|Renmin University of China|[./papers/00085-RLVR.pdf](./papers/00085-RLVR.pdf)|
 |[DeepCritic: Deliberate Critique with Large Language Models](https://arxiv.org/abs/2505.00662)|2025|Renmin University of China|[./papers/00114-DeepCritic.pdf](./papers/00114-DeepCritic.pdf)|
+|[ET-Agent: Incentivizing Effective Tool-Integrated Reasoning Agent via Behavior Calibration](https://arxiv.org/abs/2601.06860)|2026|Renmin University of China|[./papers/00146-ET-Agent.pdf](./papers/00146-ET-Agent.pdf)|
+|[SmartSearch: Process Reward-Guided Query Refinement for Search Agents](https://arxiv.org/abs/2601.04888)|2026|Renmin University of China|[./papers/00147-SmartSearch.pdf](./papers/00147-SmartSearch.pdf)|
+|[EnvScaler: Scaling Tool-Interactive Environments for LLM Agent via Programmatic Synthesis](https://arxiv.org/abs/2601.05808)|2026|Renmin University of China|[./papers/00149-EnvScaler.pdf](./papers/00149-EnvScaler.pdf)|
 
 ### University of Illinois Urbana-Champaign
 
