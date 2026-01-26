@@ -83,6 +83,7 @@
 |[Deep Think with Confidence](https://arxiv.org/abs/2508.15260)|2025|Meta|[./papers/00084-DeepConf.pdf](./papers/00084-DeepConf.pdf)|
 |[REFRAG: Rethinking RAG based Decoding](https://arxiv.org/abs/2509.01092)|2025|Meta|[./papers/00090-REFRAG.pdf](./papers/00090-REFRAG.pdf)|
 |[The Art of Scaling Reinforcement Learning Compute for LLMs](https://arxiv.org/abs/2510.13786)|2025|Meta|[./papers/00121-ScaleRL.pdf](./papers/00121-ScaleRL.pdf)|
+|[Dr. Zero: Self-Evolving Search Agents without Training Data](https://arxiv.org/abs/2601.07055)|2026|Meta|[./papers/00155-Dr.Zero.pdf](./papers/00155-Dr.Zero.pdf)|
 
 ### DeepMind
 
@@ -128,6 +129,7 @@
 |[AgentEvolver: Towards Efficient Self-Evolving Agent System](https://arxiv.org/abs/2511.10395)|2025|Alibaba Group|[./papers/00138-AgentEvolver.pdf](./papers/00138-AgentEvolver.pdf)|
 |[ArenaRL: Scaling RL for Open-Ended Agents via Tournament-based Relative Ranking](https://arxiv.org/abs/2601.06487)|2026|Alibaba Group|[./papers/00143-ArenaRL.pdf](./papers/00143-ArenaRL.pdf)|
 |[AMAP Agentic Planning Technical Report](https://arxiv.org/abs/2512.24957)|2025|Alibaba Group|[./papers/00151-AMAP.pdf](./papers/00151-AMAP.pdf)|
+|[Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning](https://arxiv.org/abs/2601.09088v1)|2026|Alibaba Group|[./papers/00153-DASD.pdf](./papers/00153-DASD.pdf)|
 
 ### ByteDance
 
@@ -155,6 +157,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Chain-of-Agents: End-to-End Agent Foundation Models via Multi-Agent Distillation and Agentic RL](https://arxiv.org/abs/2508.13167)|2025|OPPO AI Agent Team|[./papers/00118-Chain-of-Agents.pdf](./papers/00118-Chain-of-Agents.pdf)|
+|[O-Researcher: An Open Ended Deep Research Model via Multi-Agent Distillation and Agentic RL](https://arxiv.org/abs/2601.03743)|2026|OPPO AI Agent Team|[./papers/00154-O-Researcher.pdf](./papers/00154-O-Researcher.pdf)|
 
 ### KimiTeam
 
