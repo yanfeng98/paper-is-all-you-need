@@ -165,7 +165,7 @@
 |:-:|:-:|:-:|:-:|
 |[Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534)|2025|KimiTeam|[./papers/00083-Kimi-K2.pdf](./papers/00083-Kimi-K2.pdf)|
 |[Kimi Linear: An Expressive, Efficient Attention Architecture](https://arxiv.org/abs/2510.26692)|2025|KimiTeam|[./papers/00132-Kimi-Linear.pdf](./papers/00132-Kimi-Linear.pdf)|
-|[Kimi K2.5: Visual Agentic Intelligence](https://github.com/MoonshotAI/Kimi-K2.5/blob/master/tech_report.pdf)|2026|KimiTeam|[./papers/00156-kimi-k2.5.pdf](./papers/00156-kimi-k2.5.pdf)|
+|[Kimi K2.5: Visual Agentic Intelligence](https://arxiv.org/abs/2602.02276)|2026|KimiTeam|[./papers/00156-kimi-k2.5.pdf](./papers/00156-kimi-k2.5.pdf)|
 
 ### Meituan LongCat Team
 
