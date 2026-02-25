@@ -101,6 +101,7 @@
 |[Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198)|2022|NVIDIA|[./papers/00012-selective-activation-recomputation.pdf](./papers/00012-selective-activation-recomputation.pdf)|
 |[ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration](https://arxiv.org/abs/2511.21689)|2025|NVIDIA|[./papers/00140-ToolOrchestra.pdf](./papers/00140-ToolOrchestra.pdf)|
 |[GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization](https://arxiv.org/abs/2601.05242)|2026|NVIDIA|[./papers/00144-GDPO.pdf](./papers/00144-GDPO.pdf)|
+|[ACE-RTL: When Agentic Context Evolution Meets RTL-Specialized LLMs](https://arxiv.org/abs/2602.10218)|2026|NVIDIA|[./papers/00158-ACE-RTL.pdf](./papers/00158-ACE-RTL.pdf)|
 
 ### Alibaba Group
 
@@ -214,6 +215,7 @@
 |[LongWriter: Unleashing 10,000+ Word Generation from Long Context LLMs](https://arxiv.org/abs/2408.07055)|2024|Tsinghua University|[./papers/00038-LongWriter.pdf](./papers/00038-LongWriter.pdf)|
 |[ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search](https://arxiv.org/abs/2406.03816)|2024|Tsinghua University|[./papers/00043-ReST-MCTS.pdf](./papers/00043-ReST-MCTS.pdf)|
 |[GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models](https://arxiv.org/abs/2508.06471)|2025|Tsinghua University|[./papers/00113-GLM-4.5.pdf](./papers/00113-GLM-4.5.pdf)|
+|[GLM-5: from Vibe Coding to Agentic Engineering](https://arxiv.org/abs/2602.15763)|2026|Tsinghua University|[./papers/00157-GLM-5.pdf](./papers/00157-GLM-5.pdf)|
 
 ### Peking University
 
