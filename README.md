@@ -27,6 +27,14 @@
 |[mHC: Manifold-Constrained Hyper-Connections](https://arxiv.org/abs/2512.24880)|2025|DeepSeek-AI|[./papers/00148-mHC.pdf](./papers/00148-mHC.pdf)|
 |[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](https://arxiv.org/abs/2601.07372)|2026|DeepSeek-AI|[./papers/00150-Engram.pdf](./papers/00150-Engram.pdf)|
 
+### KimiTeam
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534)|2025|KimiTeam|[./papers/00083-Kimi-K2.pdf](./papers/00083-Kimi-K2.pdf)|
+|[Kimi Linear: An Expressive, Efficient Attention Architecture](https://arxiv.org/abs/2510.26692)|2025|KimiTeam|[./papers/00132-Kimi-Linear.pdf](./papers/00132-Kimi-Linear.pdf)|
+|[Kimi K2.5: Visual Agentic Intelligence](https://arxiv.org/abs/2602.02276)|2026|KimiTeam|[./papers/00156-kimi-k2.5.pdf](./papers/00156-kimi-k2.5.pdf)|
+
 ### Microsoft
 
 |论文|年份|论文单位|笔记地址|
@@ -63,6 +71,7 @@
 |[rStar2-Agent: Agentic Reasoning Technical Report](https://arxiv.org/abs/2508.20722)|2025|Microsoft|[./papers/00092-rStar.pdf](./papers/00092-rStar.pdf)|
 |[RPG: A Repository Planning Graph for Unified and Scalable Codebase Generation](https://arxiv.org/abs/2509.16198)|2025|Microsoft|[./papers/00111-RPG.pdf](./papers/00111-RPG.pdf)|
 |[Agent Lightning: Train ANY AI Agents with Reinforcement Learning](https://arxiv.org/abs/2508.03680)|2025|Microsoft|[./papers/00124-agent-lightning.pdf](./papers/00124-agent-lightning.pdf)|
+|[X-Coder: Advancing Competitive Programming with Fully Synthetic Tasks, Solutions, and Tests](https://arxiv.org/abs/2601.06953)|2026|Microsoft|[./papers/00161-X-Coder.pdf](./papers/00161-X-Coder.pdf)|
 
 ### Google
 
@@ -103,6 +112,12 @@
 |[GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization](https://arxiv.org/abs/2601.05242)|2026|NVIDIA|[./papers/00144-GDPO.pdf](./papers/00144-GDPO.pdf)|
 |[ACE-RTL: When Agentic Context Evolution Meets RTL-Specialized LLMs](https://arxiv.org/abs/2602.10218)|2026|NVIDIA|[./papers/00158-ACE-RTL.pdf](./papers/00158-ACE-RTL.pdf)|
 
+### Hugging Face
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model](https://arxiv.org/abs/2502.02737)|2025|Hugging Face|[./papers/00159-SmolLM2.pdf](./papers/00159-SmolLM2.pdf)|
+
 ### Alibaba Group
 
 |论文|年份|论文单位|笔记地址|
@@ -131,6 +146,7 @@
 |[ArenaRL: Scaling RL for Open-Ended Agents via Tournament-based Relative Ranking](https://arxiv.org/abs/2601.06487)|2026|Alibaba Group|[./papers/00143-ArenaRL.pdf](./papers/00143-ArenaRL.pdf)|
 |[AMAP Agentic Planning Technical Report](https://arxiv.org/abs/2512.24957)|2025|Alibaba Group|[./papers/00151-AMAP.pdf](./papers/00151-AMAP.pdf)|
 |[Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning](https://arxiv.org/abs/2601.09088v1)|2026|Alibaba Group|[./papers/00153-DASD.pdf](./papers/00153-DASD.pdf)|
+|[Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem](https://arxiv.org/abs/2512.24873)|2025|Alibaba Group|[./papers/00165-ALE.pdf](./papers/00165-ALE.pdf)|
 
 ### ByteDance
 
@@ -153,20 +169,18 @@
 |[Training-Free Group Relative Policy Optimization](https://arxiv.org/abs/2510.08191)|2025|Tencent|[./papers/00108-Training-Free-GRPO.pdf](./papers/00108-Training-Free-GRPO.pdf)|
 |[HY-MT1.5 Technical Report](https://arxiv.org/abs/2512.24092)|2025|Tencent|[./papers/00152-HY-MT1.5.pdf](./papers/00152-HY-MT1.5.pdf)|
 
+### Xiaomi
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[ThinkOmni: Lifting Textual Reasoning to Omni-modal Scenarios via Guidance Decoding](https://arxiv.org/abs/2602.23306)|2026|Xiaomi|[./papers/00162-ThinkOmni.pdf](./papers/00162-ThinkOmni.pdf)|
+
 ### OPPO AI Agent Team
 
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Chain-of-Agents: End-to-End Agent Foundation Models via Multi-Agent Distillation and Agentic RL](https://arxiv.org/abs/2508.13167)|2025|OPPO AI Agent Team|[./papers/00118-Chain-of-Agents.pdf](./papers/00118-Chain-of-Agents.pdf)|
 |[O-Researcher: An Open Ended Deep Research Model via Multi-Agent Distillation and Agentic RL](https://arxiv.org/abs/2601.03743)|2026|OPPO AI Agent Team|[./papers/00154-O-Researcher.pdf](./papers/00154-O-Researcher.pdf)|
-
-### KimiTeam
-
-|论文|年份|论文单位|笔记地址|
-|:-:|:-:|:-:|:-:|
-|[Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534)|2025|KimiTeam|[./papers/00083-Kimi-K2.pdf](./papers/00083-Kimi-K2.pdf)|
-|[Kimi Linear: An Expressive, Efficient Attention Architecture](https://arxiv.org/abs/2510.26692)|2025|KimiTeam|[./papers/00132-Kimi-Linear.pdf](./papers/00132-Kimi-Linear.pdf)|
-|[Kimi K2.5: Visual Agentic Intelligence](https://arxiv.org/abs/2602.02276)|2026|KimiTeam|[./papers/00156-kimi-k2.5.pdf](./papers/00156-kimi-k2.5.pdf)|
 
 ### Meituan LongCat Team
 
@@ -216,6 +230,7 @@
 |[ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search](https://arxiv.org/abs/2406.03816)|2024|Tsinghua University|[./papers/00043-ReST-MCTS.pdf](./papers/00043-ReST-MCTS.pdf)|
 |[GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models](https://arxiv.org/abs/2508.06471)|2025|Tsinghua University|[./papers/00113-GLM-4.5.pdf](./papers/00113-GLM-4.5.pdf)|
 |[GLM-5: from Vibe Coding to Agentic Engineering](https://arxiv.org/abs/2602.15763)|2026|Tsinghua University|[./papers/00157-GLM-5.pdf](./papers/00157-GLM-5.pdf)|
+|[AReaL: A Large-Scale Asynchronous Reinforcement Learning System for Language Reasoning](https://arxiv.org/abs/2505.24298)|2025|Tsinghua University|[./papers/00160-AReaL.pdf](./papers/00160-AReaL.pdf)|
 
 ### Peking University
 
@@ -235,6 +250,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180)|2023|University of California, Berkeley|[./papers/00086-vllm.pdf](./papers/00086-vllm.pdf)|
+|[SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104)|2024|University of California, Berkeley|[./papers/00164-SGLang.pdf](./papers/00164-SGLang.pdf)|
 |[Ring Attention with Blockwise Transformers for Near-Infinite Context](https://arxiv.org/abs/2310.01889)|2023|University of California, Berkeley|[./papers/00087-RingAttention.pdf](./papers/00087-RingAttention.pdf)|
 |[Blockwise Parallel Transformer for Large Context Models](https://arxiv.org/abs/2305.19370)|2023|University of California, Berkeley|[./papers/00088-BPT.pdf](./papers/00088-BPT.pdf)|
 |[RL Grokking Recipe: How Does RL Unlock and Transfer New Algorithms in LLMs?](https://arxiv.org/abs/2509.21016)|2025|University of California, Berkeley|[./papers/00115-grokking.pdf](./papers/00115-grokking.pdf)|
@@ -304,6 +320,7 @@
 |:-:|:-:|:-:|:-:|
 |[DeepRetrieval: Hacking Real Search Engines and Retrievers with Large Language Models via Reinforcement Learning](https://arxiv.org/abs/2503.00223)|2025|University of Illinois Urbana-Champaign|[./papers/00060-DeepRetrieval.pdf](./papers/00060-DeepRetrieval.pdf)|
 |[Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning](https://arxiv.org/abs/2503.09516)|2025|University of Illinois Urbana-Champaign|[./papers/00061-Search-R1.pdf](./papers/00061-Search-R1.pdf)|
+|[Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)|2024|University of Illinois Urbana-Champaign|[./papers/00166-CodeAct.pdf](./papers/00166-CodeAct.pdf)|
 
 ### 其他
 
@@ -320,6 +337,7 @@
 |[Memory as Action: Autonomous Context Curation for Long-Horizon Agentic Tasks](https://arxiv.org/abs/2510.12635)|2025|Beijing Jiaotong University|[./papers/00110-MemAct.pdf](./papers/00110-MemAct.pdf)|
 |[Scientific Algorithm Discovery by Augmenting AlphaEvolve with Deep Research](https://arxiv.org/abs/2510.06056)|2025|IBM Research|[./papers/00112-DeepEvolve.pdf](./papers/00112-DeepEvolve.pdf)|
 |[Liger-Kernel: Efficient Triton Kernels for LLM Training](https://openreview.net/forum?id=36SjAIT42G)|2025|LinkedIn|[./papers/00130-Liger-Kernel.pdf](./papers/00130-Liger-Kernel.pdf)|
+|[HyperRAG: Reasoning N-ary Facts over Hypergraphs for Retrieval Augmented Generation](https://arxiv.org/abs/2602.14470)|2026|National Yang Ming Chiao Tung University|[./papers/00163-HyperRAG.pdf](./papers/00163-HyperRAG.pdf)|
 
 ## 工具
 
