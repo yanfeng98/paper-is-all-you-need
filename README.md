@@ -111,6 +111,7 @@
 |[ToolOrchestra: Elevating Intelligence via Efficient Model and Tool Orchestration](https://arxiv.org/abs/2511.21689)|2025|NVIDIA|[./papers/00140-ToolOrchestra.pdf](./papers/00140-ToolOrchestra.pdf)|
 |[GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization](https://arxiv.org/abs/2601.05242)|2026|NVIDIA|[./papers/00144-GDPO.pdf](./papers/00144-GDPO.pdf)|
 |[ACE-RTL: When Agentic Context Evolution Meets RTL-Specialized LLMs](https://arxiv.org/abs/2602.10218)|2026|NVIDIA|[./papers/00158-ACE-RTL.pdf](./papers/00158-ACE-RTL.pdf)|
+|[Autonomous Evolution of EDA Tools: Multi-Agent Self-Evolved ABC](https://arxiv.org/abs/2604.15082)|2026|NVIDIA|[./papers/00168-self-evolving.pdf](./papers/00168-self-evolving.pdf)|
 
 ### Hugging Face
 
@@ -147,6 +148,7 @@
 |[AMAP Agentic Planning Technical Report](https://arxiv.org/abs/2512.24957)|2025|Alibaba Group|[./papers/00151-AMAP.pdf](./papers/00151-AMAP.pdf)|
 |[Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning](https://arxiv.org/abs/2601.09088v1)|2026|Alibaba Group|[./papers/00153-DASD.pdf](./papers/00153-DASD.pdf)|
 |[Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem](https://arxiv.org/abs/2512.24873)|2025|Alibaba Group|[./papers/00165-ALE.pdf](./papers/00165-ALE.pdf)|
+|[SkillClaw: Let Skills Evolve Collectively with Agentic Evolver](https://arxiv.org/abs/2604.08377)|2026|Alibaba Group|[./papers/00167-SkillClaw.pdf](./papers/00167-SkillClaw.pdf)|
 
 ### ByteDance
 
@@ -321,6 +323,12 @@
 |[DeepRetrieval: Hacking Real Search Engines and Retrievers with Large Language Models via Reinforcement Learning](https://arxiv.org/abs/2503.00223)|2025|University of Illinois Urbana-Champaign|[./papers/00060-DeepRetrieval.pdf](./papers/00060-DeepRetrieval.pdf)|
 |[Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning](https://arxiv.org/abs/2503.09516)|2025|University of Illinois Urbana-Champaign|[./papers/00061-Search-R1.pdf](./papers/00061-Search-R1.pdf)|
 |[Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)|2024|University of Illinois Urbana-Champaign|[./papers/00166-CodeAct.pdf](./papers/00166-CodeAct.pdf)|
+
+### Hong Kong University of Science and Technology
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement](https://arxiv.org/abs/2604.14989)|2026|Hong Kong University of Science and Technology|[./papers/00169-Dr.RTL.pdf](./papers/00169-Dr.RTL.pdf)|
 
 ### 其他
 
