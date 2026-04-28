@@ -347,6 +347,10 @@
 |[Liger-Kernel: Efficient Triton Kernels for LLM Training](https://openreview.net/forum?id=36SjAIT42G)|2025|LinkedIn|[./papers/00130-Liger-Kernel.pdf](./papers/00130-Liger-Kernel.pdf)|
 |[HyperRAG: Reasoning N-ary Facts over Hypergraphs for Retrieval Augmented Generation](https://arxiv.org/abs/2602.14470)|2026|National Yang Ming Chiao Tung University|[./papers/00163-HyperRAG.pdf](./papers/00163-HyperRAG.pdf)|
 
+## 书籍
+
+1. [./books/00001-Claude-Code-Harness-Engineering-Book.pdf](./books/00001-Claude-Code-Harness-Engineering-Book.pdf)
+
 ## 工具
 
 1. [Overleaf](https://www.overleaf.com/)
