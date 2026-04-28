@@ -26,6 +26,7 @@
 |[DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning](https://github.com/deepseek-ai/DeepSeek-Math-V2/blob/main/DeepSeekMath_V2.pdf)|2025|DeepSeek-AI|[./papers/00136-DeepSeekMath_V2.pdf](./papers/00136-DeepSeekMath_V2.pdf)|
 |[mHC: Manifold-Constrained Hyper-Connections](https://arxiv.org/abs/2512.24880)|2025|DeepSeek-AI|[./papers/00148-mHC.pdf](./papers/00148-mHC.pdf)|
 |[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](https://arxiv.org/abs/2601.07372)|2026|DeepSeek-AI|[./papers/00150-Engram.pdf](./papers/00150-Engram.pdf)|
+|[DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf)|2026|DeepSeek-AI|[./papers/00172-DeepSeek_V4.pdf](./papers/00172-DeepSeek_V4.pdf)|
 
 ### KimiTeam
 
@@ -275,6 +276,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Skill-Targeted Adaptive Training](https://arxiv.org/abs/2510.10023)|2025|Princeton University|[./papers/00119-STAT.pdf](./papers/00119-STAT.pdf)|
+|[OpenClaw-RL: Train Any Agent Simply by Talking](https://arxiv.org/abs/2603.10165)|2026|Princeton University|[./papers/00171-OpenClaw-RL.pdf](./papers/00171-OpenClaw-RL.pdf)|
 
 ### National University of Singapore
 
@@ -323,6 +325,7 @@
 |[DeepRetrieval: Hacking Real Search Engines and Retrievers with Large Language Models via Reinforcement Learning](https://arxiv.org/abs/2503.00223)|2025|University of Illinois Urbana-Champaign|[./papers/00060-DeepRetrieval.pdf](./papers/00060-DeepRetrieval.pdf)|
 |[Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning](https://arxiv.org/abs/2503.09516)|2025|University of Illinois Urbana-Champaign|[./papers/00061-Search-R1.pdf](./papers/00061-Search-R1.pdf)|
 |[Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)|2024|University of Illinois Urbana-Champaign|[./papers/00166-CodeAct.pdf](./papers/00166-CodeAct.pdf)|
+|[CoRNStack: High-Quality Contrastive Data for Better Code Retrieval and Reranking](https://arxiv.org/abs/2412.01007)|2024|University of Illinois Urbana-Champaign|[./papers/00170-CoRNStack.pdf](./papers/00170-CoRNStack.pdf)|
 
 ### Hong Kong University of Science and Technology
 
