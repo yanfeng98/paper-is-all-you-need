@@ -27,6 +27,7 @@
 |[mHC: Manifold-Constrained Hyper-Connections](https://arxiv.org/abs/2512.24880)|2025|DeepSeek-AI|[./papers/00148-mHC.pdf](./papers/00148-mHC.pdf)|
 |[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](https://arxiv.org/abs/2601.07372)|2026|DeepSeek-AI|[./papers/00150-Engram.pdf](./papers/00150-Engram.pdf)|
 |[DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf)|2026|DeepSeek-AI|[./papers/00172-DeepSeek_V4.pdf](./papers/00172-DeepSeek_V4.pdf)|
+|[DSpark: Confidence-Scheduled Speculative Decoding with Semi-Autoregressive Generation](https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf)|2026|DeepSeek-AI|[./papers/00174-DSpark_paper.pdf](./papers/00174-DSpark_paper.pdf)|
 
 ### KimiTeam
 
@@ -205,6 +206,12 @@
 |:-:|:-:|:-:|:-:|
 |[Tiny Model, Big Logic: Diversity-Driven Optimization Elicits Large-Model Reasoning Ability in VibeThinker-1.5B](https://arxiv.org/abs/2511.06221)|2025|Sina Weibo|[./papers/00137-VibeThinker-1.5B.pdf](./papers/00137-VibeThinker-1.5B.pdf)|
 
+### Baidu
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[Unlimited OCR Works](https://arxiv.org/abs/2606.23050)|2026|Baidu|[./papers/00176-Unlimited-OCR.pdf](./papers/00176-Unlimited-OCR.pdf)|
+
 ### Shanghai Artificial Intelligence Laboratory
 
 |论文|年份|论文单位|笔记地址|
@@ -303,6 +310,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[A Comprehensive Survey on Long Context Language Modeling](https://arxiv.org/abs/2503.17407)|2025|Nanjing University|[./papers/00058-LCLM.pdf](./papers/00058-LCLM.pdf)|
+|[DART: Diffusion-Inspired Speculative Decoding for Fast LLM Inference](https://arxiv.org/abs/2601.19278)|2026|Nanjing University|[./papers/00175-DART.pdf](./papers/00175-DART.pdf)|
 
 ### Renmin University of China
 
@@ -332,6 +340,13 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement](https://arxiv.org/abs/2604.14989)|2026|Hong Kong University of Science and Technology|[./papers/00169-Dr.RTL.pdf](./papers/00169-Dr.RTL.pdf)|
+
+### Institute of Computing Technology, Chinese Academy of Sciences
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[AssertMiner: Module-Level Spec Generation and Assertion Mining using Static Analysis Guided LLMs](https://arxiv.org/abs/2511.10007)|2025|Institute of Computing Technology, Chinese Academy of Sciences|[./papers/00173-AssertMiner.pdf](./papers/00173-AssertMiner.pdf)|
+|[AssertMiner-pro: Enhanced module-level spec generation and assertion mining with LLM guided by top-down hierarchical strategies](https://www.sciencedirect.com/science/article/abs/pii/S0167926026001525)|2026|Institute of Computing Technology, Chinese Academy of Sciences|[./papers/00177-AssertMiner-pro.pdf](./papers/00177-AssertMiner-pro.pdf)|
 
 ### 其他
 
