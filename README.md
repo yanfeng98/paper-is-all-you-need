@@ -37,6 +37,12 @@
 |[Kimi Linear: An Expressive, Efficient Attention Architecture](https://arxiv.org/abs/2510.26692)|2025|KimiTeam|[./papers/00132-Kimi-Linear.pdf](./papers/00132-Kimi-Linear.pdf)|
 |[Kimi K2.5: Visual Agentic Intelligence](https://arxiv.org/abs/2602.02276)|2026|KimiTeam|[./papers/00156-kimi-k2.5.pdf](./papers/00156-kimi-k2.5.pdf)|
 
+### MiniMax
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[MiniMax Sparse Attention](https://arxiv.org/abs/2606.13392)|2026|MiniMax|[./papers/00179-MSA.pdf](./papers/00179-MSA.pdf)|
+
 ### Microsoft
 
 |论文|年份|论文单位|笔记地址|
@@ -211,6 +217,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[Unlimited OCR Works](https://arxiv.org/abs/2606.23050)|2026|Baidu|[./papers/00176-Unlimited-OCR.pdf](./papers/00176-Unlimited-OCR.pdf)|
+|[PaddleOCR-VL-1.6: Expanding the Frontier of Document Parsing with Under-Optimized Region Refinement and Progressive Post-Training](https://arxiv.org/abs/2606.03264)|2026|Baidu|[./papers/00181-PaddleOCR-VL-1.6.pdf](./papers/00181-PaddleOCR-VL-1.6.pdf)|
 
 ### Shanghai Artificial Intelligence Laboratory
 
@@ -265,6 +272,7 @@
 |[Blockwise Parallel Transformer for Large Context Models](https://arxiv.org/abs/2305.19370)|2023|University of California, Berkeley|[./papers/00088-BPT.pdf](./papers/00088-BPT.pdf)|
 |[RL Grokking Recipe: How Does RL Unlock and Transfer New Algorithms in LLMs?](https://arxiv.org/abs/2509.21016)|2025|University of California, Berkeley|[./papers/00115-grokking.pdf](./papers/00115-grokking.pdf)|
 |[SimpleMem: Efficient Lifelong Memory for LLM Agents](https://arxiv.org/abs/2601.02553)|2026|University of California, Berkeley|[./papers/00145-SimpleMem.pdf](./papers/00145-SimpleMem.pdf)|
+|[From Model Scaling to System Scaling: Scaling the Harness in Agentic AI](https://arxiv.org/abs/2605.26112)|2026|University of California, Berkeley|[./papers/00182-CheetahClaws.pdf](./papers/00182-CheetahClaws.pdf)|
 
 ### MIT
 
@@ -325,6 +333,7 @@
 |[ET-Agent: Incentivizing Effective Tool-Integrated Reasoning Agent via Behavior Calibration](https://arxiv.org/abs/2601.06860)|2026|Renmin University of China|[./papers/00146-ET-Agent.pdf](./papers/00146-ET-Agent.pdf)|
 |[SmartSearch: Process Reward-Guided Query Refinement for Search Agents](https://arxiv.org/abs/2601.04888)|2026|Renmin University of China|[./papers/00147-SmartSearch.pdf](./papers/00147-SmartSearch.pdf)|
 |[EnvScaler: Scaling Tool-Interactive Environments for LLM Agent via Programmatic Synthesis](https://arxiv.org/abs/2601.05808)|2026|Renmin University of China|[./papers/00149-EnvScaler.pdf](./papers/00149-EnvScaler.pdf)|
+|[Toward Generalist Autonomous Research via Hypothesis-Tree Refinement](https://arxiv.org/abs/2606.11926)|2026|Renmin University of China|[./papers/00178-Arbor.pdf](./papers/00178-Arbor.pdf)|
 
 ### University of Illinois Urbana-Champaign
 
@@ -364,6 +373,7 @@
 |[Scientific Algorithm Discovery by Augmenting AlphaEvolve with Deep Research](https://arxiv.org/abs/2510.06056)|2025|IBM Research|[./papers/00112-DeepEvolve.pdf](./papers/00112-DeepEvolve.pdf)|
 |[Liger-Kernel: Efficient Triton Kernels for LLM Training](https://openreview.net/forum?id=36SjAIT42G)|2025|LinkedIn|[./papers/00130-Liger-Kernel.pdf](./papers/00130-Liger-Kernel.pdf)|
 |[HyperRAG: Reasoning N-ary Facts over Hypergraphs for Retrieval Augmented Generation](https://arxiv.org/abs/2602.14470)|2026|National Yang Ming Chiao Tung University|[./papers/00163-HyperRAG.pdf](./papers/00163-HyperRAG.pdf)|
+|[Dive into Claude Code: The Design Space of Today's and Future AI Agent Systems](https://arxiv.org/abs/2604.14228)|2026|VILA Lab|[./papers/00180-Dive-into-Claude-Code.pdf](./papers/00180-Dive-into-Claude-Code.pdf)|
 
 ## 书籍
 
