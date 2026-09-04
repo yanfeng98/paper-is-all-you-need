@@ -157,6 +157,7 @@
 |[Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning](https://arxiv.org/abs/2601.09088v1)|2026|Alibaba Group|[./papers/00153-DASD.pdf](./papers/00153-DASD.pdf)|
 |[Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem](https://arxiv.org/abs/2512.24873)|2025|Alibaba Group|[./papers/00165-ALE.pdf](./papers/00165-ALE.pdf)|
 |[SkillClaw: Let Skills Evolve Collectively with Agentic Evolver](https://arxiv.org/abs/2604.08377)|2026|Alibaba Group|[./papers/00167-SkillClaw.pdf](./papers/00167-SkillClaw.pdf)|
+|[LongHorizon-Harness: Advancing Long-Horizon Agents for Real-World Tasks](https://arxiv.org/abs/2608.01964)|2026|Alibaba Group|[./papers/00185-LongHorizon-Harness.pdf](./papers/00185-LongHorizon-Harness.pdf)|
 
 ### ByteDance
 
@@ -312,6 +313,7 @@
 |:-:|:-:|:-:|:-:|
 |[LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387)|2025|Shanghai Jiao Tong University|[./papers/00051-LIMO.pdf](./papers/00051-LIMO.pdf)|
 |[Context Engineering 2.0: The Context of Context Engineering](https://arxiv.org/abs/2510.26493)|2025|Shanghai Jiao Tong University|[./papers/00131-Context-Engineering-2.0.pdf](./papers/00131-Context-Engineering-2.0.pdf)|
+|[Repo0: Design-Driven Zero-to-All Code Generation](https://arxiv.org/abs/2608.19854)|2026|Shanghai Jiao Tong University|[./papers/00184-Repo0.pdf](./papers/00184-Repo0.pdf)|
 
 ### Nanjing University
 
@@ -356,6 +358,12 @@
 |:-:|:-:|:-:|:-:|
 |[AssertMiner: Module-Level Spec Generation and Assertion Mining using Static Analysis Guided LLMs](https://arxiv.org/abs/2511.10007)|2025|Institute of Computing Technology, Chinese Academy of Sciences|[./papers/00173-AssertMiner.pdf](./papers/00173-AssertMiner.pdf)|
 |[AssertMiner-pro: Enhanced module-level spec generation and assertion mining with LLM guided by top-down hierarchical strategies](https://www.sciencedirect.com/science/article/abs/pii/S0167926026001525)|2026|Institute of Computing Technology, Chinese Academy of Sciences|[./papers/00177-AssertMiner-pro.pdf](./papers/00177-AssertMiner-pro.pdf)|
+
+### Columbia University
+
+|论文|年份|论文单位|笔记地址|
+|:-:|:-:|:-:|:-:|
+|[NoTB: Oracle-Free Triage of LLM-Generated RTL via Cross-Model Formal Consensus](https://arxiv.org/abs/2608.21962)|2026|Columbia University|[./papers/00183-NoTB.pdf](./papers/00183-NoTB.pdf)|
 
 ### 其他
 
