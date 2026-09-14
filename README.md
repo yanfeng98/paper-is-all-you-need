@@ -28,6 +28,7 @@
 |[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](https://arxiv.org/abs/2601.07372)|2026|DeepSeek-AI|[./papers/00150-Engram.pdf](./papers/00150-Engram.pdf)|
 |[DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf)|2026|DeepSeek-AI|[./papers/00172-DeepSeek_V4.pdf](./papers/00172-DeepSeek_V4.pdf)|
 |[DSpark: Confidence-Scheduled Speculative Decoding with Semi-Autoregressive Generation](https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf)|2026|DeepSeek-AI|[./papers/00174-DSpark_paper.pdf](./papers/00174-DSpark_paper.pdf)|
+|[DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf)|2026|DeepSeek-AI|[./papers/00191-DeepSeek_V41.pdf](./papers/00191-DeepSeek_V41.pdf)|
 
 ### KimiTeam
 
@@ -158,6 +159,7 @@
 |[Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem](https://arxiv.org/abs/2512.24873)|2025|Alibaba Group|[./papers/00165-ALE.pdf](./papers/00165-ALE.pdf)|
 |[SkillClaw: Let Skills Evolve Collectively with Agentic Evolver](https://arxiv.org/abs/2604.08377)|2026|Alibaba Group|[./papers/00167-SkillClaw.pdf](./papers/00167-SkillClaw.pdf)|
 |[LongHorizon-Harness: Advancing Long-Horizon Agents for Real-World Tasks](https://arxiv.org/abs/2608.01964)|2026|Alibaba Group|[./papers/00185-LongHorizon-Harness.pdf](./papers/00185-LongHorizon-Harness.pdf)|
+|[Context as an Environment: Programmatic Context Management for Long-Horizon Agents](https://arxiv.org/abs/2608.21690)|2026|Alibaba Group|[./papers/00186-Scroll.pdf](./papers/00186-Scroll.pdf)|
 
 ### ByteDance
 
@@ -172,6 +174,7 @@
 |[MemAgent: Reshaping Long-Context LLM with Multi-Conv RL-based Memory Agent](https://arxiv.org/abs/2507.02259)|2025|ByteDance|[./papers/00109-MemAgent.pdf](./papers/00109-MemAgent.pdf)|
 |[Scaling Latent Reasoning via Looped Language Models](https://arxiv.org/abs/2510.25741)|2025|ByteDance|[./papers/00122-Ouro.pdf](./papers/00122-Ouro.pdf)|
 |[Scaling Long-Horizon LLM Agent via Context-Folding](https://arxiv.org/abs/2510.11967)|2025|ByteDance|[./papers/00128-context-folding.pdf](./papers/00128-context-folding.pdf)|
+|[HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?](https://arxiv.org/abs/2609.01437)|2026|ByteDance|[./papers/00189-HarnessDev.pdf](./papers/00189-HarnessDev.pdf)|
 
 ### Tencent
 
@@ -225,6 +228,7 @@
 |论文|年份|论文单位|笔记地址|
 |:-:|:-:|:-:|:-:|
 |[FlowSearch: Advancing deep research with dynamic structured knowledge flow](https://arxiv.org/abs/2510.08521)|2025|Shanghai Artificial Intelligence Laboratory|[./papers/00142-FlowSearch.pdf](./papers/00142-FlowSearch.pdf)|
+|[Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement](https://arxiv.org/abs/2609.01481)|2026|Shanghai Artificial Intelligence Laboratory|[./papers/00188-Harness-of-Harness.pdf](./papers/00188-Harness-of-Harness.pdf)|
 
 ### EleutherAI
 
@@ -382,6 +386,8 @@
 |[Liger-Kernel: Efficient Triton Kernels for LLM Training](https://openreview.net/forum?id=36SjAIT42G)|2025|LinkedIn|[./papers/00130-Liger-Kernel.pdf](./papers/00130-Liger-Kernel.pdf)|
 |[HyperRAG: Reasoning N-ary Facts over Hypergraphs for Retrieval Augmented Generation](https://arxiv.org/abs/2602.14470)|2026|National Yang Ming Chiao Tung University|[./papers/00163-HyperRAG.pdf](./papers/00163-HyperRAG.pdf)|
 |[Dive into Claude Code: The Design Space of Today's and Future AI Agent Systems](https://arxiv.org/abs/2604.14228)|2026|VILA Lab|[./papers/00180-Dive-into-Claude-Code.pdf](./papers/00180-Dive-into-Claude-Code.pdf)|
+|[Miles v0.1: Production-Level Post-Training](https://arxiv.org/abs/2609.08368)|2026|Miles Team|[./papers/00187-Miles.pdf](./papers/00187-Miles.pdf)|
+|[MechMem-RTL: Reusing Verified Mechanism Memories for LLM-Based RTL Repair](https://arxiv.org/abs/2607.17053)|2026|Hunan University|[./papers/00190-MechMem-RTL.pdf](./papers/00190-MechMem-RTL.pdf)|
 
 ## 书籍
 
