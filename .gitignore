@@ -1,3 +1,4 @@
+# LaTeX build artifacts (from downloaded paper sources)
 *.brf
 *.synctex.gz
 *.aux
@@ -7,3 +8,39 @@
 *.out
 *.toc
 *.blg
+*.fls
+*.fdb_latexmk
+*.xdv
+*.nav
+*.snm
+*.vrb
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# AI agent runtime config (generated at runtime)
+.claude/
+.ralph/
+
+# Python bytecode (for any helper scripts)
+__pycache__/
+*.py[cod]
+
+# Temporary files
+*.tmp
